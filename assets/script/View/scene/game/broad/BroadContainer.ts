@@ -1,42 +1,57 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
-import { Utils } from "../../../../component/component/Utils";
+import { Utils } from '../../../../component/component/Utils';
 import { SIZE, TOTALBALL } from "../../../../component/constant/constant";
 import MainData from "../../../../component/storage/MainData";
 import GameController from "../GameController";
-import Pooling from "../Pooling";
+import Pooling from "../CreateBubble";
 import Bubble from '../item/Bubble';
+import CreateBubble from "../CreateBubble";
+import CreateConnect from "../CreateConnect";
 
 const { ccclass, property } = cc._decorator;
 
-const speedBall = 0.2;
+const speedBall = 0.1;
 @ccclass
 export default class BroadContainer extends cc.Component {
 
     _gameController: GameController;
 
 
-    @property(Pooling)
-    pooling: Pooling = null;
-
-
 
     @property(cc.Node)
     content: cc.Node = null;
+    @property(cc.Node)
+    connect: cc.Node = null;
+    @property(cc.Node)
+    overlay: cc.Node = null;
+
+    @property(cc.Node)
+    itemCheck: cc.Node = null;
+
+
+    isQuadrilateral: boolean = false;
+    isPlay: boolean = false;
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad() {
+        this.onEventTouch();
+    }
 
     arrBubble: [Bubble[]] = [[]];
     listBubbleSelect: Bubble[] = [];
+    listBubbleSelectQuadrilateral: Bubble[] = [];
+    listConnect: cc.Node[] = [];
     listColorGroup1: number[] = [];
     listColorGroup2: number[] = [];
+
+
+    onEventTouch() {
+        let canvas = cc.find('Canvas');
+        canvas.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+        canvas.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        canvas.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        canvas.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+    }
     start() {
     }
     init(game: GameController) {
@@ -45,14 +60,24 @@ export default class BroadContainer extends cc.Component {
         this.setUpBubble();
 
     }
-    reset() { }
+    reset() {
+        this.isPlay = false;
+        this.isQuadrilateral = false;
+
+        this.arrBubble = [[]];
+        this.listBubbleSelect = [];
+        this.listBubbleSelectQuadrilateral = [];
+        this.listConnect = [];
+        this.listColorGroup1 = [];
+        this.listColorGroup2 = [];
+
+        this.generateGroupColor();
+        this.itemCheck.setPosition(-100, -100)
+    }
 
     // update (dt) {}
 
     setUpBubble() {
-
-        this.generateGroupColor();
-
         let tempAmountDefaultGroupColor = this.getAmountDefaultGroupColor();
 
         for (let row = 0; row < 6; row++) {
@@ -78,12 +103,11 @@ export default class BroadContainer extends cc.Component {
                     tempAmountDefaultGroupColor.groupB--;
                 }
 
-                let bubble: cc.Node = this.pooling.createBubble();
+                let bubble: cc.Node = CreateBubble.instance().createItem();
                 let pos: cc.Vec2 = this.getPosition(row, col);
                 // console.log(pos);
 
                 bubble.setPosition(pos);
-                bubble.setScale(0.8);
                 bubble.setParent(this.content);
                 bubble.name = row + "_" + col;
                 bubble.active = true;
@@ -142,8 +166,7 @@ export default class BroadContainer extends cc.Component {
 
     }
     touchEnd() {
-        console.log("user touch End");
-
+        this.hideAllConnect();
         if (this.listBubbleSelect.length < 2) {
             this.clearBubbleSelected()
             // console.log("RESUME ======    touchEnd");
@@ -156,11 +179,11 @@ export default class BroadContainer extends cc.Component {
     }
 
     liberate(isBooster: boolean = false) {
-        // console.log("liberate");
+        this.isPlay = true;
 
         // if (!isBooster) this._gameController.endMove(this.listDotSelect.length)
         // this.hideAllHighlight();
-        // if (this.listDotSelectQuadrilateral.length > 0) this.listDotSelect = this.mergeListDotSelect();
+        if (this.isQuadrilateral) this.listBubbleSelect = this.mergeListDotSelect();
 
         // this.countBubbleCollectEstimate += this.listDotSelect.length;
         // if (isBooster) this.countBubbleCollectEstimate--;
@@ -179,18 +202,27 @@ export default class BroadContainer extends cc.Component {
         //     })
         //     .start()
     }
+    mergeListDotSelect(): Bubble[] {
+        let arr: Bubble[] = this.listBubbleSelect.concat(this.listBubbleSelectQuadrilateral);
+        arr = Array.from(new Set(arr));
+        this.listBubbleSelectQuadrilateral = [];
+        return arr;
+    }
 
     clearDot(isBooster: boolean = false) {
-        // console.log("clearDot");
         let touches = this.listBubbleSelect.concat();
-
+        let delay = 0.07;
+        let time = 0;
         for (let i = 0; i < touches.length; i++) {
             const bubble = touches[i];
+            if (i > 0) time = i % 2 == 0 ? time + delay : time;
+            else if (i == touches.length - 1) time += delay;
             cc.tween(bubble.node)
-                .delay(0.1 * i)
+                .delay(time)
                 .call(() => {
                     bubble.nonSelect();
-                    this.pooling.onBubbleKilled(bubble.node)
+                    bubble.node.parent = this.overlay;
+                    CreateBubble.instance().activeRigidBody(bubble.node, i % 2 == 0);
                     this.arrBubble[bubble.row][bubble.col] = null;
                     if (i == touches.length - 1) {
                         this.reSetUpBubble()
@@ -200,12 +232,12 @@ export default class BroadContainer extends cc.Component {
         }
     }
     reSetUpBubble() {
-        console.log("reSetUpBubble");
 
-        var amountDefaultGroupColor = this.getAmountDefaultGroupColor();
+        let amountDefaultGroupColor = this.getAmountDefaultGroupColor();
         let existGroupColor1: number = 0;
         let existGroupColor2: number = 0;
         let maxTime = 0;
+        let countMore = [];
         for (let col = 0; col < 6; col++) {
             let count = 0;
             for (let row = 5; row >= 0; row--) {
@@ -220,24 +252,28 @@ export default class BroadContainer extends cc.Component {
                     this.arrBubble[row][col] = null;
                     this.arrBubble[idxRow][col] = bubble;
                     let pos: cc.Vec2 = this.getPosition(idxRow, col);
+                    // console.log("idxRow: " + idxRow + "  col: " + col + " posX: " + pos.x + "  poxY: " + pos.y);
+
                     bubble.updateIndex(idxRow, col, pos.x, pos.y);
                     let kc = idxRow - row;
-                    maxTime = Math.max(speedBall * kc);
+                    maxTime = Math.max(maxTime, speedBall * kc);
+                    bubble.node.stopAllActions();
                     cc.tween(bubble.node).to(speedBall * kc, { x: pos.x, y: pos.y }).start();
                 }
             }
+            countMore[col] = count;
         }
         let freeColorGroup1 = amountDefaultGroupColor.groupA - existGroupColor1;
         let freeColorGroup2 = amountDefaultGroupColor.groupB - existGroupColor2;
-
-        for (let i = 5; i >= 0; i--) {
-            const row = this.arrBubble[i];
-            for (let j = 0; j < 6; j++) {
-                const bubble = row[j];
-                if (bubble == null) {
-                    console.log("row: " + i + "  col: " + j);
-                    
-                    var color = 0;
+        let kc = 0;
+        for (let col = 0; col < countMore.length; col++) {
+            let count = countMore[col];
+            let tempRow = -1;
+            if (count > 0) {
+                kc = count;
+                while (count > 0) {
+                    let row = count - 1;
+                    let color = 0;
                     if (amountDefaultGroupColor.groupA == TOTALBALL * 0.5 && Utils.randomInt(0, 1) == 0) {
                         color = Math.floor(Math.random() * 5);
                     }
@@ -259,95 +295,158 @@ export default class BroadContainer extends cc.Component {
                             freeColorGroup2--;
                         }
                     }
+                    let bubble: cc.Node = CreateBubble.instance().createItem();
 
-                    let bubble: cc.Node = this.pooling.createBubble();
+                    let posBegin: cc.Vec2 = this.getPosition(tempRow, col);
 
-                    let posBegin: cc.Vec2 = this.getPosition(-1, j);
-                    // console.log(pos);
-                    console.log(posBegin);
-                    
+                    // console.log("row: " + (tempRow) + "  col: " + col);
+                    // console.log("posBegin: " + posBegin);
+
                     bubble.setPosition(posBegin);
                     bubble.setScale(0.8);
                     bubble.setParent(this.content);
-                    bubble.name = i + "_" + j;
+                    bubble.name = row + "_" + col;
                     bubble.active = true;
-                    
+
                     bubble.on("CollisionEnter", this.collisionEnter.bind(this), this)
                     let bubbleScript = bubble.getComponent(Bubble);
 
 
-                    this.arrBubble[i][j] = bubbleScript;
-                    let kc = i+1;
-                    maxTime = Math.max(speedBall * (i + 1));
-                    let pos: cc.Vec2 = this.getPosition(i, j);
-                    bubbleScript.setData(i, j, pos.x, pos.y, color)
+                    this.arrBubble[row][col] = bubbleScript;
+                    let pos: cc.Vec2 = this.getPosition(row, col);
+                    bubbleScript.setData(row, col, pos.x, pos.y, color);
+
+                    maxTime = Math.max(maxTime, speedBall * (row + 1));
+                    bubble.stopAllActions();
                     cc.tween(bubble).to(speedBall * kc, { x: pos.x, y: pos.y }).start();
-
-
-
+                    count--;
+                    tempRow--;
                 }
-
             }
         }
+        // this.node.stopAllActions();
+        // console.log('maxTime: ' + maxTime);
+        maxTime = maxTime + speedBall;
+        cc.tween(this.node)
+            .delay(maxTime)
+            .call(() => {
+                this.clearBubbleSelected()
+            })
+            .start()
 
     }
+
+
 
     pushBubble(bubble: Bubble) {
         // console.log("pushDot");
 
-        // if (!dot || this.isQuadrilateral) return;
-        // if (this.listDotSelect.indexOf(dot) >= 0) {
-        //     this.isQuadrilateral = true;
-        // }
+        // console.log("isQuadrilateral 0 : " + this.isQuadrilateral);
+        // console.log(this.listBubbleSelect);
+
+        if (!bubble || this.isQuadrilateral) return;
+        for (let i = 0; i < this.listBubbleSelect.length; i++) {
+            let bubbleSelect = this.listBubbleSelect[i];
+            if (bubbleSelect.row == bubble.row && bubbleSelect.col == bubble.col) {
+                this.isQuadrilateral = true;
+                break;
+            }
+        }
         this.listBubbleSelect.push(bubble)
         bubble.select();
+        // console.log("isQuadrilateral 1 : " + this.isQuadrilateral);
+        // console.log(this.listBubbleSelect);
 
-        // if (this.listDotSelect.length > 1) {
-        //     let startDot = this.listDotSelect[this.listDotSelect.length - 2];
-        //     let highlight = this.createHighlight(startDot, dot)
-        //     this.listHighlight.push(highlight);
-        // }
-        // if (this.isQuadrilateral) {
-        //     this.listDotSelectQuadrilateral = this.pushAllDotColor1(dot.colorHex);
-        // }
+
+        if (this.listBubbleSelect.length > 1) {
+            let startBubble = this.listBubbleSelect[this.listBubbleSelect.length - 2];
+            let connect = this.createConnect(startBubble, bubble)
+            this.listConnect.push(connect);
+        }
+        if (this.isQuadrilateral) {
+            this.listBubbleSelectQuadrilateral = this.pushAllBubbleColor(bubble.getColor());
+        }
         // this.progressBubble.show(this.isQuadrilateral ? 8 : this.listDotSelect.length);
         // let count = this.listDotSelect.length - 1 <= 0 ? 0 : this.listDotSelect.length - 1 >= 11 ? 11 : this.listDotSelect.length - 1;
         // SoundManager.instance().playEffect("Colloect _Bubble_" + count);
     }
 
+    pushAllBubbleColor(color: number) {
+        let arr: Bubble[] = []
+        for (let i = 0; i < this.arrBubble.length; i++) {
+            const row = this.arrBubble[i];
+            for (let j = 0; j < row.length; j++) {
+                const bubble = row[j];
+                if (bubble.getColor() == color && !bubble.isSelect) {
+                    arr.push(bubble)
+                    bubble.select();
+                }
+            }
+        }
+        return arr;
+    }
+
+    createConnect(startDot: Bubble, toDot: Bubble): cc.Node {
+        // console.log("createConnect");
+        let connect = CreateConnect.instance().createItem();
+        // highlight.parent = this.isPlayTutorial ? this.parentHighlighTutorial : this.underlayContainer.node;
+        connect.parent = this.connect;
+
+        connect.position = startDot.node.position;
+        connect.width = Utils.getDistance(startDot.node.position, toDot.node.position);
+        connect.angle = Utils.getAngle(startDot, toDot);
+        connect.active = true;
+        return connect;
+    }
+    hideOneConnect() {
+        if (this.listConnect.length <= 0) return;
+        var connect = this.listConnect.pop()
+        if (connect) {
+            CreateConnect.instance().removeItem(connect)
+        }
+    }
+    hideAllConnect() {
+        this.listConnect.forEach(connect => {
+            CreateConnect.instance().removeItem(connect);
+        })
+        this.listConnect = [];
+    }
     cutDot(bubble: Bubble) {
 
         // console.log("cutDot");
         let dataEnd = this.listBubbleSelect[this.listBubbleSelect.length - 1];
-        this.arrBubble[dataEnd.row][dataEnd.col].getComponent(Bubble).nonSelect();
+        if (this.isQuadrilateral) {
+            this.unQuadrilateral();
+        } else {
+            this.arrBubble[dataEnd.row][dataEnd.col].getComponent(Bubble).nonSelect();
+        }
         this.listBubbleSelect.splice(this.listBubbleSelect.length - 1, 1);
-        // var index = this.listDotSelect.indexOf(dot)
-        // if (index == this.listDotSelect.length - 1 || index < 0) return false;
-        // if (index == this.listDotSelect.length - 2) {
-        //     let listDotCancel: Dot[] = this.listDotSelect.splice(index + 1, this.listDotSelect.length);
-        //     for (let i = 0; i < listDotCancel.length; i++) {
-        //         if (this.listDotSelect.indexOf(listDotCancel[i]) == this.listDotSelect.length - 1 ||
-        //             this.listDotSelect.indexOf(listDotCancel[i]) < 0) listDotCancel[i].nonSelect();
-        //     }
-        //     // this.hideOneHighlight();
-        // }
 
-        // if (this.isQuadrilateral) this.unQuadrilateral();
-
+        this.hideOneConnect();
 
         // this.progressBubble.show(this.isQuadrilateral ? 8 : this.listDotSelect.length);
-        // var count = this.listDotSelect.length - 1 <= 0 ? 0 : this.listDotSelect.length - 1 >= 11 ? 11 : this.listDotSelect.length - 1;
+        // let count = this.listDotSelect.length - 1 <= 0 ? 0 : this.listDotSelect.length - 1 >= 11 ? 11 : this.listDotSelect.length - 1;
         // count = this.isQuadrilateral ? 11 : count;
         // SoundManager.instance().playEffect("Colloect _Bubble_" + count);
 
     }
 
-    clearBubbleSelected() {
-        this.listBubbleSelect.forEach(bubble => { bubble.nonSelect(); });
+    unQuadrilateral() {
+        for (let i = 0; i < this.listBubbleSelectQuadrilateral.length; i++) {
+            const bubble = this.listBubbleSelectQuadrilateral[i];
+            bubble.nonSelect();
+        }
+        this.listBubbleSelectQuadrilateral = [];
+        this.isQuadrilateral = false;
+    }
 
-        // this.hideAllHighlight();
-        // this.listHighlight = [];
+    clearBubbleSelected() {
+        for (let i = 0; i < this.listBubbleSelect.length; i++) {
+            const bubble = this.listBubbleSelect[i];
+            bubble.nonSelect();
+        }
         this.listBubbleSelect = [];
+        this.isPlay = false;
     }
     checkCollect(bubble: Bubble) {
         // console.log("checkCollect");
@@ -382,9 +481,31 @@ export default class BroadContainer extends cc.Component {
 
 
 
+    onTouchStart(event) {
+        if (this.isPlay == true) return;
+        this.isQuadrilateral = false;
+        let currentTouch = event.touch.getLocation();
+        this.itemCheck.setPosition(currentTouch)
+
+
+    }
+    onTouchMove(event) {
+        if (this.isPlay == true) return;
+        let currentTouch = event.touch.getLocation();
+        this.itemCheck.setPosition(currentTouch)
+        // console.log("x: " + currentTouch.x + "y: " + currentTouch.y);
+    }
+    onTouchEnd(event) {
+        if (this.isPlay == true) return;
+        this.touchEnd();
+        this.itemCheck.setPosition(-100, -100)
+    }
+
+
 
 
     getPosition(row: number, col: number) {
+
         return new cc.Vec2(SIZE.beginX + SIZE.spaceX * col, SIZE.beginY - SIZE.spaceY * row);
     }
 

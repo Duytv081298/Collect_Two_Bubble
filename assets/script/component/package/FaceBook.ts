@@ -1,6 +1,4 @@
 import { Utils } from "../component/Utils";
-
-
 export default class FaceBook {
     static getPhoto() {
         if (window["FBInstant"] !== undefined) {

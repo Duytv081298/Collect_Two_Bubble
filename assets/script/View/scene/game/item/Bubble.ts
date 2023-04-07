@@ -97,6 +97,7 @@ export default class Bubble extends cc.Component {
 
     onCollisionEnter(other: cc.Node, self: cc.Node) {
         // console.log('onCollisionEnter row: ' + this.row + " col: " + this.col);
+        // console.log('onCollisionEnte  name: ' + other.name );
         this.node.emit("CollisionEnter", this);
     }
 

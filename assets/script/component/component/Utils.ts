@@ -1,3 +1,4 @@
+import Bubble from "../../View/scene/game/item/Bubble";
 
 
 export class Utils {
@@ -9,6 +10,26 @@ export class Utils {
             arr[rd1] = arr[rd2];
             arr[rd2] = temp;
         }
+    }
+    
+
+    static getDistance(p1: cc.Vec3, p2: cc.Vec3) {
+        var a = p1.x - p2.x;
+        var b = p1.y - p2.y;
+        return Math.sqrt(a * a + b * b);
+    }
+    static getAngle(dot0: Bubble, dot1: Bubble): number {
+        let x = dot1.col - dot0.col;
+        let y = dot1.row - dot0.row;
+        if (x == 1 && y == 0) return 0;
+        else if (x == 1 && y == -1) return 45;
+        else if (x == 0 && y == -1) return 90;
+        else if (x == -1 && y == -1) return 135;
+        else if (x == -1 && y == 0) return 180;
+        else if (x == -1 && y == 1) return 225;
+        else if (x == 0 && y == 1) return 270;
+        else if (x == 1 && y == 1) return 317;
+        else return 0;
     }
     static randomInt(low: number, high: number): number {
         return Math.floor(Math.random() * (1 + high - low) + low);

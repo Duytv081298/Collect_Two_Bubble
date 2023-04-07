@@ -1,6 +1,3 @@
-// import { game } from "cc";
-import LocalStorage from "./LocalStorage";
-
 export default class MainData {
     private static mainData: MainData;
     public static instance(): MainData {

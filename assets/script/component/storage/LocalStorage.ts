@@ -47,37 +47,37 @@ export default class LocalStorage {
 
     static setItem(name: string, params: any) {
         // console.log(name, " : ", params);
-        if (name == LocalStorage.COUNT_PLAY_FRIEND) {
-            MainData.instance().countPlayFriends = params;
-        }
-        if (name == LocalStorage.DAILY_COLLECT) {
-            MainData.instance().dailyInfo.collected = params;
-        }
-        if (name == LocalStorage.CURRENT_DAILY_COLLECT) {
-            if (params < 1) params = 1;
-            MainData.instance().dailyInfo.day = params;
-        }
-        if (name == LocalStorage.CURRENT_GOLD) {
-            MainData.instance().goldPlayer = params;
-        }
-        if (name == LocalStorage.CURRENT_SPIN) {
-            MainData.instance().currentSpin = params;
-        }
-        if (name == LocalStorage.TOTAL_COLLECT_SPIN) {
-            MainData.instance().total_collect_spin = params;
-        }
-        if (name == LocalStorage.DATA_GET_MORE_SPIN) {
-            MainData.instance().dataGetMoreSpin = params;
-        }
-        if (name == LocalStorage.DATA_INVITE_FRIEND) {
-            MainData.instance().dataInviteFriend = params;
-        }
-        if (name == LocalStorage.TIME_GET_SPIN) {
-            MainData.instance().totalTimeGetSpin = 1800;
-        }
+        // if (name == LocalStorage.COUNT_PLAY_FRIEND) {
+        //     MainData.instance().countPlayFriends = params;
+        // }
+        // if (name == LocalStorage.DAILY_COLLECT) {
+        //     MainData.instance().dailyInfo.collected = params;
+        // }
+        // if (name == LocalStorage.CURRENT_DAILY_COLLECT) {
+        //     if (params < 1) params = 1;
+        //     MainData.instance().dailyInfo.day = params;
+        // }
+        // if (name == LocalStorage.CURRENT_GOLD) {
+        //     MainData.instance().goldPlayer = params;
+        // }
+        // if (name == LocalStorage.CURRENT_SPIN) {
+        //     MainData.instance().currentSpin = params;
+        // }
+        // if (name == LocalStorage.TOTAL_COLLECT_SPIN) {
+        //     MainData.instance().total_collect_spin = params;
+        // }
+        // if (name == LocalStorage.DATA_GET_MORE_SPIN) {
+        //     MainData.instance().dataGetMoreSpin = params;
+        // }
+        // if (name == LocalStorage.DATA_INVITE_FRIEND) {
+        //     MainData.instance().dataInviteFriend = params;
+        // }
+        // if (name == LocalStorage.TIME_GET_SPIN) {
+        //     MainData.instance().totalTimeGetSpin = 1800;
+        // }
 
-        dataGame.set(name, params);
-        FaceBook.setDataAsync(name, params);
+        // dataGame.set(name, params);
+        // FaceBook.setDataAsync(name, params);
         //cc.sys.localStorage.setItem(name, String(params));
     }
     static setSound(isOn: boolean) {
