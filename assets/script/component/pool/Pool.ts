@@ -1,17 +1,11 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
+import CreateBubble from "./CreateBubble";
+import CreateConnect from "./CreateConnect";
 
-import CreateBubble from "../../View/scene/game/CreateBubble";
-import CreateConnect from "../../View/scene/game/CreateConnect";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class Pool extends cc.Component {
 
 
     @property(cc.Prefab)

@@ -9,6 +9,8 @@
  * Top level namespace for the Instant Games SDK.
  */
 declare namespace FBInstant {
+
+
     /**
      * Contains functions and properties related to the current player.
      */
@@ -23,6 +25,18 @@ declare namespace FBInstant {
      * Contains functions and properties related to payments and purchases of game products.
      */
     let payments: Payments;
+
+
+    let graphApi: any;
+
+
+
+
+
+
+
+
+
 
     /**
      * The current locale. Use this to determine what language the current game should be localized with.

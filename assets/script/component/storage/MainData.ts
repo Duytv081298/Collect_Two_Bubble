@@ -10,19 +10,20 @@ export default class MainData {
     isTest: boolean = true;
 
     score: number = 0;
+    move: number = 0;
     // ktJoinTour: boolean = false;
     // isFistJoinTour: boolean = true;
-    // ktFistLogin: boolean = true;
-    // countEndGame: number = 0;
-    // idTour: string = "5859813670806859";
-    // friends = [];
-    // goldPlayer: number = 0;
+    ktFistLogin: boolean = true;
+    countEndGame: number = 0;
+    idTour: string = "5859813670806859";
+    friends = [];
+    goldPlayer: number = 0;
     // currentSpin: number = 0;
     // total_collect_spin: number = 3;
     // countPlayFriends: number = 0;
     // maxCountPlayFriends: number = 5;
     // idxPlayFriends: number = 0;
-    // dataFriendPlay = null;
+    dataFriendPlay = null;
     // ktGenDataScore: boolean = false;
     // ktGetFriends: boolean = false;
     // getScoreFriendComplete: boolean = false;

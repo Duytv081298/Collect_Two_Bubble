@@ -1,11 +1,10 @@
 import { Utils } from '../../../../component/component/Utils';
-import { SIZE, TOTALBALL } from "../../../../component/constant/constant";
+import { SIZE, TOTAL_BALL } from "../../../../component/constant/constant";
+import CreateBubble from '../../../../component/pool/CreateBubble';
+import CreateConnect from '../../../../component/pool/CreateConnect';
 import MainData from "../../../../component/storage/MainData";
 import GameController from "../GameController";
-import Pooling from "../CreateBubble";
 import Bubble from '../item/Bubble';
-import CreateBubble from "../CreateBubble";
-import CreateConnect from "../CreateConnect";
 
 const { ccclass, property } = cc._decorator;
 
@@ -133,8 +132,8 @@ export default class BroadContainer extends cc.Component {
         else if (score < 15000) percentage = 60 / 100;
         else percentage = 50 / 100;
 
-        let amountGroupA = Math.floor(TOTALBALL * percentage);
-        let amountGroupB = TOTALBALL - amountGroupA;
+        let amountGroupA = Math.floor(TOTAL_BALL * percentage);
+        let amountGroupB = TOTAL_BALL - amountGroupA;
         return { groupA: amountGroupA, groupB: amountGroupB }
 
     }
@@ -274,7 +273,7 @@ export default class BroadContainer extends cc.Component {
                 while (count > 0) {
                     let row = count - 1;
                     let color = 0;
-                    if (amountDefaultGroupColor.groupA == TOTALBALL * 0.5 && Utils.randomInt(0, 1) == 0) {
+                    if (amountDefaultGroupColor.groupA == TOTAL_BALL * 0.5 && Utils.randomInt(0, 1) == 0) {
                         color = Math.floor(Math.random() * 5);
                     }
                     else {
