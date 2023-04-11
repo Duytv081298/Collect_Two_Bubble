@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "3189aaa9-90ee-4280-bac1-9cc94acbb220",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Amanda Hayden Powell": {
+      "ver": "1.0.6",
+      "uuid": "966e507f-28e9-4ff6-b362-b129a5dba8bf",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "3189aaa9-90ee-4280-bac1-9cc94acbb220",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

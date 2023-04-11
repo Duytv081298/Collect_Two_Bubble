@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "96671dc7-1df2-42cc-9fc8-9a48bf9050e2",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Danielle West": {
+      "ver": "1.0.6",
+      "uuid": "626fd3df-71dd-463f-a3d3-999cddefc0e0",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "96671dc7-1df2-42cc-9fc8-9a48bf9050e2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "98bf3d8e-1ec4-4c4d-aee7-71df3d504d71",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Mckenzie Mattingly": {
+      "ver": "1.0.6",
+      "uuid": "311c0235-a56f-42e9-9715-b140ebbbb81a",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "98bf3d8e-1ec4-4c4d-aee7-71df3d504d71",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

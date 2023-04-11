@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "a440fdc9-bb37-4ebc-a38d-83cee7bd7aea",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "David Smith": {
+      "ver": "1.0.6",
+      "uuid": "f27be1f8-67b6-4762-ac74-0a963f0fd595",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "a440fdc9-bb37-4ebc-a38d-83cee7bd7aea",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -9,8 +9,6 @@
  * Top level namespace for the Instant Games SDK.
  */
 declare namespace FBInstant {
-
-
     /**
      * Contains functions and properties related to the current player.
      */
@@ -26,18 +24,7 @@ declare namespace FBInstant {
      */
     let payments: Payments;
 
-
-    let graphApi: any;
-
-
-
-
-
-
-
-
-
-
+    let tournament: any;
     /**
      * The current locale. Use this to determine what language the current game should be localized with.
      * The value will not be accurate until FBInstant.startGameAsync() resolves.
@@ -213,8 +200,6 @@ declare namespace FBInstant {
      */
     function getInterstitialAdAsync(placementID: string): Promise<AdInstance>;
 
-    function getRewardedInterstitialAsync(placementID: string): Promise<AdInstance>;
-
     /**
      * Attempt to create an instance of rewarded video. This instance can then be preloaded and presented.
      * @param placementID The placement ID that's been setup in your Audience Network settings.
@@ -223,11 +208,6 @@ declare namespace FBInstant {
      * @throws CLIENT_UNSUPPORTED_OPERATION
      */
     function getRewardedVideoAsync(placementID: string): Promise<AdInstance>;
-
-
-    function loadBannerAdAsync(placementID: string): Promise<void>;
-
-    function hideBannerAdAsync(): Promise<void>;
 
     /**
      * Attempts to match the current player with other users looking for people to play with. If successful, a new Messenger group
@@ -314,13 +294,6 @@ declare namespace FBInstant {
          * @returns Whether a player can subscribe to the game bot or not.
          */
         canSubscribeBotAsync(): Promise<boolean>;
-
-        /**
-         * A unique identifier for the player. This is the standard Facebook Application-Scoped ID which is used for all Graph API calls. If your game shares an AppID with a native game this is the ID you will see in the native game too.
-         * 
-         * Returns Promise<string?> A unique identifier for the player.
-         */
-        getASIDAsync(): Promise<string>;
 
         /**
          * Request that the player subscribe the bot associated to the game. The API will reject if the subscription
@@ -942,7 +915,7 @@ declare namespace FBInstant {
         /**
          * Indicates the intent of the share.
          */
-        intent: Intent;
+        switchContext: boolean;
 
         /**
          * A base64 encoded image to be shared.

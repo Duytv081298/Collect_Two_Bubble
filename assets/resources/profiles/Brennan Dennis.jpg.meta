@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "eb42c8b3-6e91-4a95-b4b9-5d658cd3f4ef",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Brennan Dennis": {
+      "ver": "1.0.6",
+      "uuid": "2b605b0b-385f-4f0b-b1e7-047063462088",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "eb42c8b3-6e91-4a95-b4b9-5d658cd3f4ef",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

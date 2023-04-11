@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "67c2eaf1-11bb-4488-9d31-c88c60b0b71f",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Wes Drummond": {
+      "ver": "1.0.6",
+      "uuid": "ef9b00da-86b1-4764-8f22-7d46eea1de5b",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "67c2eaf1-11bb-4488-9d31-c88c60b0b71f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

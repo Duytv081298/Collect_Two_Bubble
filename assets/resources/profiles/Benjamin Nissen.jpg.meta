@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "93136196-a93f-41c2-8d3d-59cd311f42e9",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Benjamin Nissen": {
+      "ver": "1.0.6",
+      "uuid": "516d5e7e-def6-4de9-a46b-8b0972319bd9",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "93136196-a93f-41c2-8d3d-59cd311f42e9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

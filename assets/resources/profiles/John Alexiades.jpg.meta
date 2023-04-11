@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "a27874a5-e85d-41f0-96b0-f8b5a3f3a1b2",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "John Alexiades": {
+      "ver": "1.0.6",
+      "uuid": "f3cc04be-65a5-4ded-817d-02a01ea5bc23",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "a27874a5-e85d-41f0-96b0-f8b5a3f3a1b2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

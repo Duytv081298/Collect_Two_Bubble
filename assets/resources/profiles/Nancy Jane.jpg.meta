@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "18c85875-f5d0-48d1-ab25-70af71156ad2",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Nancy Jane": {
+      "ver": "1.0.6",
+      "uuid": "191f0ea4-aab4-462e-83ef-54f0852fcb2f",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "18c85875-f5d0-48d1-ab25-70af71156ad2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

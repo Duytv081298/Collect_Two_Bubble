@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "839d2a55-1ba6-4487-9eb5-1d3ea86f61c4",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Mary Oerther": {
+      "ver": "1.0.6",
+      "uuid": "b30a4375-8bca-4683-bb64-bd0ac97ad556",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "839d2a55-1ba6-4487-9eb5-1d3ea86f61c4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

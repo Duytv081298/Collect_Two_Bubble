@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "af7cfb4e-fb32-407b-8524-b94f9186f35b",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Drew Lockyer": {
+      "ver": "1.0.6",
+      "uuid": "1491a6f8-536a-4813-9bc1-14a7e71d30db",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "af7cfb4e-fb32-407b-8524-b94f9186f35b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

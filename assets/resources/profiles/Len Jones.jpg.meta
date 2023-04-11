@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "5c04aefe-e277-4044-b888-a84892d38508",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Len Jones": {
+      "ver": "1.0.6",
+      "uuid": "f1a9e2ac-076d-485d-8ac5-f95d16b4e3e9",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "5c04aefe-e277-4044-b888-a84892d38508",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "60ab37e6-c5bb-4d51-8a0d-6a278a8d6817",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Mike Streltsov": {
+      "ver": "1.0.6",
+      "uuid": "2f225ef0-1e53-498f-85e5-586b41e89bdc",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "60ab37e6-c5bb-4d51-8a0d-6a278a8d6817",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

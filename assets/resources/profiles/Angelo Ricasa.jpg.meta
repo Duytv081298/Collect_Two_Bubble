@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "f384e0f1-4d4c-4a91-926e-68e055db54b1",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Angelo Ricasa": {
+      "ver": "1.0.6",
+      "uuid": "955adaa7-8fc6-4406-b313-7abab9b4e320",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f384e0f1-4d4c-4a91-926e-68e055db54b1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

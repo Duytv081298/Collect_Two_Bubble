@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "1f238d18-f790-4141-a3a7-71d6277382e9",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Lola Beckman": {
+      "ver": "1.0.6",
+      "uuid": "487729e8-d3bf-4dd4-8fd6-71cfb48f079c",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "1f238d18-f790-4141-a3a7-71d6277382e9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

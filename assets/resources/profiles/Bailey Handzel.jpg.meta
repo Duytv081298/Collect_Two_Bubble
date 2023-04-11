@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "361af0ac-baf5-4a57-b387-a8cc5c839d0f",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Bailey Handzel": {
+      "ver": "1.0.6",
+      "uuid": "bfe8e189-45b3-4a8e-82a8-45751c9b9eb6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "361af0ac-baf5-4a57-b387-a8cc5c839d0f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

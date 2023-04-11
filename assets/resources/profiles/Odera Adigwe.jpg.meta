@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "9e49a11d-a0d2-461d-bd35-7a27f190e695",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Odera Adigwe": {
+      "ver": "1.0.6",
+      "uuid": "0ec5fe42-760f-4c61-98df-4e5998dcb2d6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "9e49a11d-a0d2-461d-bd35-7a27f190e695",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

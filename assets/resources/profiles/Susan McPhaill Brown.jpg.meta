@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "475c11eb-b37f-406d-b1f1-6813c8278c8a",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Susan McPhaill Brown": {
+      "ver": "1.0.6",
+      "uuid": "94ff836f-d241-4ead-8cc3-6f886e5e214d",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "475c11eb-b37f-406d-b1f1-6813c8278c8a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

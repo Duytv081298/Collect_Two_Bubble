@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "bf560996-99f2-46c2-8c5b-ec4ca2db7c25",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 478,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Kiarra Goldberg": {
+      "ver": "1.0.6",
+      "uuid": "7f2d18aa-b7f7-4caf-b44d-c89214d914a4",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "bf560996-99f2-46c2-8c5b-ec4ca2db7c25",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 478,
+      "height": 480,
+      "rawWidth": 478,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

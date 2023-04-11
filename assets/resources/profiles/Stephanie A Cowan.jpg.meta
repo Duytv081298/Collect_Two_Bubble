@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "c53081a1-8362-4e1f-ac84-787efed36174",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Stephanie A Cowan": {
+      "ver": "1.0.6",
+      "uuid": "be4ee153-4763-4a6b-9d85-cd51ac148dd6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "c53081a1-8362-4e1f-ac84-787efed36174",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

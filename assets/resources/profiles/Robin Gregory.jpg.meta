@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "dea28c8e-6d35-4a00-a411-f9cb561f4075",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Robin Gregory": {
+      "ver": "1.0.6",
+      "uuid": "16be2c1f-caf9-457e-8321-f49f04c17178",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "dea28c8e-6d35-4a00-a411-f9cb561f4075",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

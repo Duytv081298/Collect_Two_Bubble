@@ -16,6 +16,7 @@ export enum BOOSTER {
 export const TOTAL_BALL = 36;
 export const MAX_MOVE = 20;
 export const GOLD_DEFAULT = 300;
+export const GOLD_USE_BOOSTER = 300;
 export const MAXCOLUMNBOARD = 6;
 export const MAXROWBOARD = 6;
 export const DEFAULT_MAP = [

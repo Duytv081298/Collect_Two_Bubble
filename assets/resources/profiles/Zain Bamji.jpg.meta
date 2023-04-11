@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "92d9bdcb-db0b-4702-b060-fd8faf14b631",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Zain Bamji": {
+      "ver": "1.0.6",
+      "uuid": "0650a3ed-48b4-4f56-b0a1-1e7635fe53d6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "92d9bdcb-db0b-4702-b060-fd8faf14b631",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -27,8 +27,16 @@ export default class GlobalEvent extends BaseEvent {
     static SHOW_ANI_BOOSTER: string = "GlobalEvent.SHOW_ANI_BOOSTER";
     static CLEAR_BOOSTER: string = "GlobalEvent.CLEAR_BOOSTER";
     static UPDATE_AMOUNT_BOOSTER: string = "GlobalEvent.UPDATE_AMOUNT_BOOSTER";
+    static UPDATE_UI_BOOSTER: string = "GlobalEvent.UPDATE_UI_BOOSTER";
 
     static SHOW_ANI_HOLE: string = "GlobalEvent.SHOW_ANI_HOLE";
+
+    static TWEEN_PLAYER_RANKING: string = "GlobalEvent.TWEEN_PLAYER_RANKING";
+    
+    static SHOW_LOADING: string = "GlobalEvent.SHOW_LOADING";
+    static HIDE_LOADING: string = "GlobalEvent.HIDE_LOADING";
+
+    
 
 
 

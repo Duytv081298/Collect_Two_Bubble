@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "afb5ecaa-f1cd-4977-b441-1019e03c7483",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 482,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Hannah Griffin": {
+      "ver": "1.0.6",
+      "uuid": "120aaa24-ed54-4fb5-a6f2-fce7fc572894",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "afb5ecaa-f1cd-4977-b441-1019e03c7483",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 482,
+      "height": 480,
+      "rawWidth": 482,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

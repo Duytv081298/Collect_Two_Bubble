@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "5847a433-9176-4077-b3d3-37964b193262",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "John August": {
+      "ver": "1.0.6",
+      "uuid": "c399eb68-6b1b-4538-8b7a-3b949760fcc6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "5847a433-9176-4077-b3d3-37964b193262",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

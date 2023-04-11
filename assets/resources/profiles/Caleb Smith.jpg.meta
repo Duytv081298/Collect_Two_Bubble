@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "f426063e-203f-4fd1-9242-406e84201474",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Caleb Smith": {
+      "ver": "1.0.6",
+      "uuid": "e40d3bfa-17dd-48ff-aa76-dbe6234099d0",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f426063e-203f-4fd1-9242-406e84201474",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

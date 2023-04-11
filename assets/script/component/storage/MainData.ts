@@ -8,7 +8,7 @@ export default class MainData {
         }
         return MainData.mainData;
     }
-    isLocal: boolean = false;
+    isLocal: boolean = true;
     isTest: boolean = true;
 
     score: number = 0;
@@ -16,9 +16,11 @@ export default class MainData {
 
     keyBooster: BOOSTER = null;
     isUseBooster: boolean = false;
-    isHandlerReverse : boolean = false;
-    
-    // ktJoinTour: boolean = false;
+    isHandlerReverse: boolean = false;
+
+    amountBooster: number[] = [0,0,0,0];
+
+    ktJoinTour: boolean = false;
     // isFistJoinTour: boolean = true;
     ktFistLogin: boolean = true;
     countEndGame: number = 0;

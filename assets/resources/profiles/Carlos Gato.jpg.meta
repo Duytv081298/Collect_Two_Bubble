@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "f2021d80-20bc-4ae0-8f09-73b8b501579a",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Carlos Gato": {
+      "ver": "1.0.6",
+      "uuid": "d1a51e09-750b-47b1-93dd-df74c9036cba",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f2021d80-20bc-4ae0-8f09-73b8b501579a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

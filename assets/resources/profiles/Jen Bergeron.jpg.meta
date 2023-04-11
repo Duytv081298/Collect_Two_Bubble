@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "26ed131c-e9c3-4015-8e94-51d296654674",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Jen Bergeron": {
+      "ver": "1.0.6",
+      "uuid": "bedba8bf-097e-41a4-8578-01495de62988",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "26ed131c-e9c3-4015-8e94-51d296654674",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

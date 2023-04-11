@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "f8c07ccf-b672-476d-81ec-06f406ca0048",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 478,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Susan Sawyer-Foster": {
+      "ver": "1.0.6",
+      "uuid": "53114f68-3f99-4a7e-ae4d-7c1e0c0c3955",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f8c07ccf-b672-476d-81ec-06f406ca0048",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 478,
+      "height": 480,
+      "rawWidth": 478,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

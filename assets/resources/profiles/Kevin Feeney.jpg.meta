@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "eab29d48-276f-40be-8d03-0e4123e42e6a",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Kevin Feeney": {
+      "ver": "1.0.6",
+      "uuid": "f1b67b9f-b0fd-407e-a952-dc493543f01f",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "eab29d48-276f-40be-8d03-0e4123e42e6a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

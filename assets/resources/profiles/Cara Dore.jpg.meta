@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "ea582c06-8ae3-47ac-8c66-c2ed949d6c66",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Cara Dore": {
+      "ver": "1.0.6",
+      "uuid": "dce84370-5c70-4530-82d1-31735cf5f126",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "ea582c06-8ae3-47ac-8c66-c2ed949d6c66",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

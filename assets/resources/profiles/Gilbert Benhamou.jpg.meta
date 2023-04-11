@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "2c78fe3d-02b8-4e2b-a7e7-8b76142aa00c",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Gilbert Benhamou": {
+      "ver": "1.0.6",
+      "uuid": "7c1abdbf-d4a3-4246-8688-20d328c37ba8",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "2c78fe3d-02b8-4e2b-a7e7-8b76142aa00c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

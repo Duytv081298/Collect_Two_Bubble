@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "918afd64-f68c-4e13-854e-7da4cd87d44d",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Diana Giraldo": {
+      "ver": "1.0.6",
+      "uuid": "76e6c1e2-b2a3-44fd-b6f7-688ec92ba39f",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "918afd64-f68c-4e13-854e-7da4cd87d44d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

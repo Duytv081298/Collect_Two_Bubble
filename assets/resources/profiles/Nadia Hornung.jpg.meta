@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "51690f25-def9-427a-a98e-5563852875bb",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Nadia Hornung": {
+      "ver": "1.0.6",
+      "uuid": "0cb57226-9b08-4399-bec9-9f109645ccb6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "51690f25-def9-427a-a98e-5563852875bb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

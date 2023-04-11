@@ -7,6 +7,7 @@ import CreateConnect from '../../../../component/pool/CreateConnect';
 import MainData from "../../../../component/storage/MainData";
 import GameController from "../GameController";
 import Bubble from '../item/Bubble';
+const blockSpace = [[0, -1], [1, 0], [0, 1], [-1, 0]];
 
 const { ccclass, property } = cc._decorator;
 
@@ -46,6 +47,7 @@ export default class BroadContainer extends cc.Component {
     listConnect: cc.Node[] = [];
     listColorGroup1: number[] = [];
     listColorGroup2: number[] = [];
+    arrPathBubble = [];
 
 
     onEventTouch() {
@@ -155,10 +157,14 @@ export default class BroadContainer extends cc.Component {
 
     boardReady() {
         this.isPlay = false;
+        this.arrPathBubble = [];
         if (MainData.instance().keyBooster != null || MainData.instance().isUseBooster) {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: MainData.instance().keyBooster, amount: -1 });
             GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BOOSTER);
-
         }
+        console.log("checkEndGame");
+        
+        this.checkEndGame(0, 0);
     }
     collisionEnter(bubble: Bubble) {
         // console.log(this.listBubbleSelect);
@@ -502,8 +508,6 @@ export default class BroadContainer extends cc.Component {
         this.listBubbleSelect = [];
     }
     checkCollect(bubble: Bubble) {
-        // console.log("checkCollect");
-
         let curDot: Bubble = this.listBubbleSelect[this.listBubbleSelect.length - 1];
         let oldDot: Bubble = this.listBubbleSelect.length >= 2 ? this.listBubbleSelect[this.listBubbleSelect.length - 2] : null;
         if (!bubble || bubble == curDot || !curDot) return null;
@@ -650,11 +654,7 @@ export default class BroadContainer extends cc.Component {
 
     reverse() {
 
-        // MainData.instance().isUseBooster = true;
         MainData.instance().isHandlerReverse = true;
-        // SoundManager.instance().playEffect("booster_chance_color");
-        // FaceBook.logEvent(LogEventName.useBoosterReverse)
-
 
         let index0: cc.Vec3 = this.bubbleReverseA.node.position;
         let index1: cc.Vec3 = this.bubbleReverseB.node.position;
@@ -699,6 +699,126 @@ export default class BroadContainer extends cc.Component {
 
 
 
+    checkEndGame(row: number, col: number, arrPath = []) {
+        let item: Bubble = null;
+        if (arrPath.length == 0) {
+            item = this.arrBubble[row][col];
+            let idx = 0;
+            for (let i = 0; i < blockSpace.length; i++) {
+                var space = blockSpace[i];
+                let tCol = col + space[0];
+                let tRow = row + space[1];
+                if (tCol == col && tRow == row) continue;
+                if (tCol < 0 || tRow < 0) continue;
+                if (this.arrBubble[tRow] == undefined) continue;
+                if (this.arrBubble[tRow][tCol] == undefined) continue;
+                let itemCheck: Bubble = this.arrBubble[tRow][tCol];
+                if (item.getColor() == itemCheck.getColor()) {
+                    arrPath[idx] = [item, itemCheck];
+                    idx++;
+                }
+            }
+            if (idx == 0) {
+                this.checkNextEndGame(col, row, arrPath);
+            } else {
+                this.checkEndGame(row, col, arrPath);
+            }
+        } else {
+            let idx = 0;
+            let arrPathNew = [];
+            for (let l = 0; l < arrPath.length; l++) {
+                item = arrPath[l][arrPath[l].length - 1];
+                for (let i = 0; i < blockSpace.length; i++) {
+                    var space = blockSpace[i];
+                    let tCol = item.col + space[0];
+                    let tRow = item.row + space[1];
+
+                    if (tCol == item.col && tRow == item.row) continue;
+                    if (tCol < 0 || tRow < 0) continue;
+                    if (this.arrBubble[tRow] == undefined) continue;
+                    if (this.arrBubble[tRow][tCol] == undefined) continue;
+                    let itemCheck: Bubble = this.arrBubble[tRow][tCol];
+                    if (item.row == itemCheck.row && item.col == itemCheck.col) continue;
+
+                    if (item.getColor() == itemCheck.getColor()) {
+                        let ktExist = false;
+                        for (let m = 0; m < arrPath[l].length - 1; m++) {
+                            let itemExist: Bubble = arrPath[l][m];
+                            if (itemExist.row == itemCheck.row && itemExist.col == itemCheck.col) {
+                                ktExist = true;
+                                break;
+                            }
+                        }
+                        if (ktExist == false) {
+                            arrPathNew[idx] = arrPath[l].concat(itemCheck);
+                            idx++;
+                        }
+                    }
+
+                }
+            }
+            if (idx == 0) {
+                this.checkNextEndGame(col, row, arrPath);
+            } else {
+                this.checkEndGame(row, col, arrPathNew);
+            }
+        }
+    }
+    checkNextEndGame(row: number, col: number, arrPath = []) {
+        let idxJNext = row + 1;
+        if (idxJNext == 6) {
+            idxJNext = 0;
+            col += 1;
+        }
+        if (col < 6) {
+            this.arrPathBubble = this.arrPathBubble.concat(arrPath);
+            this.checkEndGame(col, idxJNext, []);
+        } else {
+            // console.log("arrPathBlock: " + this.arrPathBlock);
+
+            this.arrPathBubble.sort((a, b) => {
+                if (a.length > b.length) return -1;
+                if (a.length < b.length) return 1;
+                return 0;
+            })
+
+            // console.log("arrPathBlock: " + this.arrPathBubble);
+            if (this.arrPathBubble.length > 0) {
+                let pathBlock = this.arrPathBubble[0];
+                // console.log("Duong dai nhat");
+
+                // console.log(pathBlock);
+
+                if (pathBlock.length < 2) {
+                    console.log("GameOVer");
+                } else {
+                    // this.indexDot = 0;
+                    // this.showTut(pathBlock)
+                }
+            } else {
+                console.log("GameOVer");
+                // this.gameOver.active = true;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     onTouchStart(event) {
         if (this.isPlay == true) return;
         if (MainData.instance().move <= 0) return;
@@ -733,9 +853,6 @@ export default class BroadContainer extends cc.Component {
             this.itemCheck.setPosition(-100, -100)
         }
     }
-
-
-
 
     getPosition(row: number, col: number) {
 

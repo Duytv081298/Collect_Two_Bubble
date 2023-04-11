@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "b091c6a3-d0e6-4254-9d1d-f373356d3faf",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Scott Parker": {
+      "ver": "1.0.6",
+      "uuid": "f0a084fa-e8f7-4958-9261-a5f1ddc55303",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "b091c6a3-d0e6-4254-9d1d-f373356d3faf",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

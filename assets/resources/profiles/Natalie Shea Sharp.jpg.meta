@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "1789d296-b0d8-4f64-a9cf-192fb47db41c",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Natalie Shea Sharp": {
+      "ver": "1.0.6",
+      "uuid": "0ba13097-125c-48e7-99cd-975359cf2106",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "1789d296-b0d8-4f64-a9cf-192fb47db41c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

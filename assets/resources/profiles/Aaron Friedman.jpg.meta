@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "faa20d36-4500-4aaf-a056-3de1ca1a0208",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Aaron Friedman": {
+      "ver": "1.0.6",
+      "uuid": "38d11679-0fde-44d2-a6a4-79225f88a212",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "faa20d36-4500-4aaf-a056-3de1ca1a0208",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

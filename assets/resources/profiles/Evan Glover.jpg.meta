@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "50b87ea8-72c7-4cc5-9f97-7a1d48cf7fd1",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Evan Glover": {
+      "ver": "1.0.6",
+      "uuid": "926f12f3-8d84-49c7-9971-01cae8a75ecf",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "50b87ea8-72c7-4cc5-9f97-7a1d48cf7fd1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

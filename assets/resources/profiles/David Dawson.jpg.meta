@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "77cc462e-ab5f-44a9-abf3-724b1cda7a89",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "David Dawson": {
+      "ver": "1.0.6",
+      "uuid": "30d5c539-b1ad-4078-917d-eea11158f2f0",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "77cc462e-ab5f-44a9-abf3-724b1cda7a89",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

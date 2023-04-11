@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "ac17acf2-fbf3-42fc-8ce6-72033a94bbe4",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "John Lockwood": {
+      "ver": "1.0.6",
+      "uuid": "2f13d0f3-d908-4fdb-bb3d-bf1fa47166b3",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "ac17acf2-fbf3-42fc-8ce6-72033a94bbe4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

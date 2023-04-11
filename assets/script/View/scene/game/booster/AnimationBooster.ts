@@ -97,8 +97,9 @@ export default class NewClass extends cc.Component {
                     anim.skeletonData = this.skeletonData_Rocket;
                     anim.timeScale = 1.5;
                     anim.defaultSkin = "default";
-                    anim.setCompleteListener(() => { child.active = false })
+                    anim.animation = "anim-tenlua-cong";
                     anim.setAnimation(0, "anim-tenlua-cong", false);
+                    anim.setCompleteListener(() => { child.active = false })
                     break;
                 } else break;
 
@@ -109,8 +110,9 @@ export default class NewClass extends cc.Component {
                     anim.skeletonData = this.skeletonData_Bomb;
                     anim.timeScale = 1;
                     anim.defaultSkin = "default";
-                    anim.setCompleteListener(() => { child.active = false })
+                    anim.animation = "boomno";
                     anim.setAnimation(0, "boomno", false);
+                    anim.setCompleteListener(() => { child.active = false })
                     break;
                 } else break;
 
@@ -122,7 +124,9 @@ export default class NewClass extends cc.Component {
                     anim.skeletonData = this.skeletonData_Reverse;
                     anim.timeScale = 1;
                     anim.setSkin("default");
+                    anim.animation = name;
                     anim.setAnimation(0, name, true);
+                    anim.setCompleteListener(()=>{})
                     break;
                 } else break;
 
@@ -132,8 +136,9 @@ export default class NewClass extends cc.Component {
                     anim.skeletonData = this.skeletonData_Hammer;
                     anim.timeScale = 1;
                     anim.setSkin("default");
-                    anim.setCompleteListener(() => { child.active = false })
+                    anim.animation = "animation";
                     anim.setAnimation(0, "animation", false);
+                    anim.setCompleteListener(() => { child.active = false })
                     child.active = true;
                     break;
                 } else break;

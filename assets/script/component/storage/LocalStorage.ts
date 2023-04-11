@@ -1,3 +1,4 @@
+import { BOOSTER } from "../constant/constant";
 import FaceBook from "../package/FaceBook";
 import MainData from "./MainData";
 
@@ -58,9 +59,18 @@ export default class LocalStorage {
         if (name == LocalStorage.CURRENT_GOLD) {
             MainData.instance().goldPlayer = params;
         }
-        // if (name == LocalStorage.CURRENT_SPIN) {
-        //     MainData.instance().currentSpin = params;
-        // }
+        if (name == LocalStorage.BOOSTER_ROCKET) {
+            MainData.instance().amountBooster[BOOSTER.rocket] = params;
+        }
+        if (name == LocalStorage.BOOSTER_BOMB) {
+            MainData.instance().amountBooster[BOOSTER.bomb] = params;
+        }
+        if (name == LocalStorage.BOOSTER_REVERSE) {
+            MainData.instance().amountBooster[BOOSTER.reverse] = params;
+        }
+        if (name == LocalStorage.BOOSTER_HAMMER) {
+            MainData.instance().amountBooster[BOOSTER.hammer] = params;
+        }
         // if (name == LocalStorage.TOTAL_COLLECT_SPIN) {
         //     MainData.instance().total_collect_spin = params;
         // }

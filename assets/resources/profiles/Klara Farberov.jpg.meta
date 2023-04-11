@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "cba13f23-a3d6-44f2-823d-dabcf625cae5",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Klara Farberov": {
+      "ver": "1.0.6",
+      "uuid": "b6a040aa-a31b-49df-8ae3-04c4b8e1fdd8",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "cba13f23-a3d6-44f2-823d-dabcf625cae5",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

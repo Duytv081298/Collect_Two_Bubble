@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "10f96ea8-615f-4126-879b-0830970b6daa",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 479,
+  "height": 481,
+  "platformSettings": {},
+  "subMetas": {
+    "Elizabeth Morgan Johnson": {
+      "ver": "1.0.6",
+      "uuid": "eb6bb4dd-57cf-48c8-ab74-7a30d8d3bf1f",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "10f96ea8-615f-4126-879b-0830970b6daa",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 479,
+      "height": 481,
+      "rawWidth": 479,
+      "rawHeight": 481,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

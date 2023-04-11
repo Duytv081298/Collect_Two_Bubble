@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "7e3ccbed-e2e2-4dd8-a6d9-d01e80762488",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 478,
+  "platformSettings": {},
+  "subMetas": {
+    "Chloe Crager": {
+      "ver": "1.0.6",
+      "uuid": "a6046bc7-4261-4729-a814-2b6f5935bf7a",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "7e3ccbed-e2e2-4dd8-a6d9-d01e80762488",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 478,
+      "rawWidth": 480,
+      "rawHeight": 478,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

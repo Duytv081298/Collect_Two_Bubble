@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "b1229ffa-055f-4150-b2cc-95f589254f1a",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Tonya Davenport": {
+      "ver": "1.0.6",
+      "uuid": "109b4eb5-a109-4e43-a315-87f642ca3259",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "b1229ffa-055f-4150-b2cc-95f589254f1a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

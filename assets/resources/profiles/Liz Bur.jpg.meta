@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "edda142d-dad5-4bcb-a4e2-bb68ed5113f6",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Liz Bur": {
+      "ver": "1.0.6",
+      "uuid": "912bad57-ea50-4931-9681-9f77fa410170",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "edda142d-dad5-4bcb-a4e2-bb68ed5113f6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "0b187506-ce5b-4ed9-a601-2b9d1189e4ab",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Rebekah Nash": {
+      "ver": "1.0.6",
+      "uuid": "e03f989a-43e3-4837-b9b7-d74950bc0e38",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "0b187506-ce5b-4ed9-a601-2b9d1189e4ab",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

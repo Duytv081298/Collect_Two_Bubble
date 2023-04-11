@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "0617e76e-d0d6-4644-a408-c23fe5991f04",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Victor Pham": {
+      "ver": "1.0.6",
+      "uuid": "80e2f25c-2267-4d01-a3eb-b50510fe058a",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "0617e76e-d0d6-4644-a408-c23fe5991f04",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

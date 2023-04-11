@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "f69a2d9e-2be0-4e9e-83ed-1db80b7b878c",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Brian Almond": {
+      "ver": "1.0.6",
+      "uuid": "00e8fb1e-a1ff-4c60-b11d-f2a367b315f5",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f69a2d9e-2be0-4e9e-83ed-1db80b7b878c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "340f6dcf-5b7a-470d-af64-fcd70a8c1174",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Van Quang": {
+      "ver": "1.0.6",
+      "uuid": "53a86a78-5e32-4c87-acc1-c49060a2ba94",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "340f6dcf-5b7a-470d-af64-fcd70a8c1174",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

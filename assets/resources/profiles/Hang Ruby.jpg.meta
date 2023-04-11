@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "90cc0b42-27df-4637-b552-fcbda3e99824",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 483,
+  "height": 478,
+  "platformSettings": {},
+  "subMetas": {
+    "Hang Ruby": {
+      "ver": "1.0.6",
+      "uuid": "3ed51467-59ad-41c4-870d-9a0be93ab74e",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "90cc0b42-27df-4637-b552-fcbda3e99824",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 483,
+      "height": 478,
+      "rawWidth": 483,
+      "rawHeight": 478,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

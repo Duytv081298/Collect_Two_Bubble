@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "f913dc96-1c8d-433d-90eb-42fc02d0907c",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Ramiro Paez": {
+      "ver": "1.0.6",
+      "uuid": "c50a7a7e-edc4-457b-b2f9-ab5a59e10998",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f913dc96-1c8d-433d-90eb-42fc02d0907c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

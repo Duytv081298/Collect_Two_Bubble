@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "bfaa10cd-94a4-4141-8620-bb49d5ed279a",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Bryan Sysko": {
+      "ver": "1.0.6",
+      "uuid": "bbcb5b71-8daf-4c19-9933-317df5d3cef4",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "bfaa10cd-94a4-4141-8620-bb49d5ed279a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

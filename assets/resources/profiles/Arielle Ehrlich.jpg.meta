@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "42e056d2-a3c9-46a1-b6cd-1d857f553d15",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Arielle Ehrlich": {
+      "ver": "1.0.6",
+      "uuid": "fff9755a-266f-478f-a1ce-84dd63e300b1",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "42e056d2-a3c9-46a1-b6cd-1d857f553d15",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

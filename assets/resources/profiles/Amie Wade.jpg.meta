@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "74daea83-21c8-410a-a67f-4b63e407a931",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Amie Wade": {
+      "ver": "1.0.6",
+      "uuid": "db1786f1-1050-4ea3-9aea-114e342af160",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "74daea83-21c8-410a-a67f-4b63e407a931",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

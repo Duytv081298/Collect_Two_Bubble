@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "f305bbc2-0145-4ee4-96d1-4a210eb46beb",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Brandy Lynn Burkeen": {
+      "ver": "1.0.6",
+      "uuid": "ad744d2a-1da5-448e-89bf-1754625d0925",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f305bbc2-0145-4ee4-96d1-4a210eb46beb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

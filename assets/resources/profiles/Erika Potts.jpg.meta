@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "461fd00a-c22a-4471-a749-4f6f56a7e725",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Erika Potts": {
+      "ver": "1.0.6",
+      "uuid": "0ae0c1b6-c877-4a4e-9457-55f34bd671f3",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "461fd00a-c22a-4471-a749-4f6f56a7e725",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

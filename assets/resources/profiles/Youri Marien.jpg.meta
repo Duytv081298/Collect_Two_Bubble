@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "2e52d380-75c4-4c4a-bad6-8ad174bf0f8e",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 199,
+  "platformSettings": {},
+  "subMetas": {
+    "Youri Marien": {
+      "ver": "1.0.6",
+      "uuid": "2766e9bf-d58f-48e3-b3c9-dcae4e44f185",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "2e52d380-75c4-4c4a-bad6-8ad174bf0f8e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 199,
+      "rawWidth": 200,
+      "rawHeight": 199,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

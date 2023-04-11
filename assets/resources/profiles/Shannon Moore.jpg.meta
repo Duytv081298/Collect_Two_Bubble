@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "a83f390e-0fc2-4d06-90e7-ba3669b70d7b",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Shannon Moore": {
+      "ver": "1.0.6",
+      "uuid": "a5b7061c-3a67-4ca4-9037-f5da1404adf3",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "a83f390e-0fc2-4d06-90e7-ba3669b70d7b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

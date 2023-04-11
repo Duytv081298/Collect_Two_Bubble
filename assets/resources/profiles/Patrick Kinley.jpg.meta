@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "beeac234-ae5a-43bd-a394-548884ff90e1",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Patrick Kinley": {
+      "ver": "1.0.6",
+      "uuid": "2dbcf675-25cf-4d04-adf2-94d0e412fb96",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "beeac234-ae5a-43bd-a394-548884ff90e1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

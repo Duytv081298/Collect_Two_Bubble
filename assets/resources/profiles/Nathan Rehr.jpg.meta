@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "4bce8820-c9d1-407e-b65d-5ad6f96322f6",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Nathan Rehr": {
+      "ver": "1.0.6",
+      "uuid": "e4260fcb-4204-4d1e-bbe2-52c3c65beabb",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "4bce8820-c9d1-407e-b65d-5ad6f96322f6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

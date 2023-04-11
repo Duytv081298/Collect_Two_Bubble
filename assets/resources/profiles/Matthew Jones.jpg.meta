@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "dd385087-c3ec-4855-aa0c-4d49e41d1d77",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Matthew Jones": {
+      "ver": "1.0.6",
+      "uuid": "4863f1a3-3f3c-469d-bafd-85997741a83c",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "dd385087-c3ec-4855-aa0c-4d49e41d1d77",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

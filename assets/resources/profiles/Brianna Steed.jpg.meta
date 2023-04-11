@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "2f03f2c7-5c77-455d-b90b-d1f6b8474e90",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Brianna Steed": {
+      "ver": "1.0.6",
+      "uuid": "bf6ab489-ba75-430e-af11-e7d0793f3798",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "2f03f2c7-5c77-455d-b90b-d1f6b8474e90",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

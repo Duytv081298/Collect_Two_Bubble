@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "dce995bb-ea2f-46c3-a9c9-ab3087f5317e",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Phan Bich Loan": {
+      "ver": "1.0.6",
+      "uuid": "eb2ba56f-8ccb-4545-9a17-286a040dcfea",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "dce995bb-ea2f-46c3-a9c9-ab3087f5317e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

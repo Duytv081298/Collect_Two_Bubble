@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "4547017c-9e51-4970-9258-e4ed41f97caa",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Danniyal Ahmed": {
+      "ver": "1.0.6",
+      "uuid": "d1811f71-147a-4fd4-8eed-41543d45e8d9",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "4547017c-9e51-4970-9258-e4ed41f97caa",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

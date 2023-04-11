@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "e744662a-40c4-41eb-a09f-7615f3e36b8a",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Tiffany Bricker": {
+      "ver": "1.0.6",
+      "uuid": "f205110f-3a2e-49bc-9617-9968e207fd4b",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "e744662a-40c4-41eb-a09f-7615f3e36b8a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

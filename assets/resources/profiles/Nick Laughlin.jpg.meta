@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "0c37e970-0b6c-4866-bf38-5d5b48c1bb75",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Nick Laughlin": {
+      "ver": "1.0.6",
+      "uuid": "14d1f81c-25f2-4dbf-88fa-2774f8cffa44",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "0c37e970-0b6c-4866-bf38-5d5b48c1bb75",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

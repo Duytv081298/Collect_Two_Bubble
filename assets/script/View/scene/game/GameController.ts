@@ -1,4 +1,4 @@
-import { MAX_MOVE } from "../../../component/constant/constant";
+import { GOLD_USE_BOOSTER, MAX_MOVE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
@@ -83,6 +83,7 @@ export default class GameController extends cc.Component {
         let score = parseInt(data.score);
 
         MainData.instance().score += score;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.TWEEN_PLAYER_RANKING);
 
     }
     updateMove(data) {
@@ -95,6 +96,10 @@ export default class GameController extends cc.Component {
         let gold = parseInt(data.gold);
         if (data.gold == 0) return;
         LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
+        if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER)
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_UI_BOOSTER);
     }
+
+
 
 }

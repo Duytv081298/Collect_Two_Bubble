@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "95e8b279-4110-489a-818b-d58988b48a9b",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Dave Edmonds": {
+      "ver": "1.0.6",
+      "uuid": "49992453-872f-4bc8-ba94-f7d925134b83",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "95e8b279-4110-489a-818b-d58988b48a9b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

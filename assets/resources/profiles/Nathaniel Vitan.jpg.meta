@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "12afc345-29dc-4dd2-9a68-dd3da9bb66be",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Nathaniel Vitan": {
+      "ver": "1.0.6",
+      "uuid": "db63ea32-34aa-4cee-adc6-d4e000bd03b4",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "12afc345-29dc-4dd2-9a68-dd3da9bb66be",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

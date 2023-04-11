@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "25829e38-8829-4dbe-a5ce-3f693a7a5506",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Tara Winston": {
+      "ver": "1.0.6",
+      "uuid": "af2f87a8-4315-4d02-9862-81c1b0c206f8",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "25829e38-8829-4dbe-a5ce-3f693a7a5506",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 200,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

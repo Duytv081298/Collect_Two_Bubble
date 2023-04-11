@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "2e7e25ea-e771-4cfe-aca4-403b461cb235",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Jamie Thomason-Allen": {
+      "ver": "1.0.6",
+      "uuid": "a8ce4192-4376-425b-baec-c83e0b2b32f9",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "2e7e25ea-e771-4cfe-aca4-403b461cb235",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 480,
+      "rawWidth": 480,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
