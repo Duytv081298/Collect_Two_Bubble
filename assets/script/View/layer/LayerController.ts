@@ -5,22 +5,25 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class FitScene extends cc.Component {
+export default class NewClass extends cc.Component {
 
-    onLoad () {
-        cc.view.setResizeCallback( () =>{
+
+    onLoad() {
+        cc.view.setResizeCallback(() => {
             this.setFit();
         });
     }
 
     setFit() {
+        console.log("setfix");
+        
         let viewport = cc.view.getViewportRect();
         let viewportGame = this.node.getComponent(cc.Canvas).designResolution;
-       // //cc.log("viewport: ", viewport);
-       // //cc.log("viewportGame: ", viewportGame);
+        //cc.log("viewport: ", viewport);
+        //cc.log("viewportGame: ", viewportGame);
         let scaleX = viewport.width / viewportGame.width;
         let scaleY = viewport.height / viewportGame.height;
 
@@ -37,5 +40,6 @@ export default class FitScene extends cc.Component {
         this.setFit();
     }
 
+    // update (dt) {}
     // update (dt) {}
 }

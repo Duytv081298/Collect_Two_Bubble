@@ -1,0 +1,3559 @@
+{
+    "skeleton": {
+        "hash": "IEQPOAUXGhw",
+        "spine": "3.8-from-4.0-from-4.1.19",
+        "x": -79.41,
+        "y": -79.41,
+        "width": 158.83,
+        "height": 158.83,
+        "images": "./filecat/",
+        "audio": "C:/Users/tgbla/Downloads/Game Puzzle 2023/edit-tg/anim-swap/filecat"
+    },
+    "bones": [
+        {
+            "name": "root"
+        },
+        {
+            "name": "muiten",
+            "parent": "root",
+            "length": 50
+        },
+        {
+            "name": "vong",
+            "parent": "root",
+            "length": 30
+        },
+        {
+            "name": "ten",
+            "parent": "root",
+            "length": 71.38,
+            "rotation": 180
+        },
+        {
+            "name": "ten2",
+            "parent": "ten",
+            "length": 30,
+            "x": 53.43
+        },
+        {
+            "name": "ten11",
+            "parent": "ten",
+            "length": 35,
+            "x": 71.38
+        },
+        {
+            "name": "ten3",
+            "parent": "root",
+            "length": 71.38,
+            "rotation": 90
+        },
+        {
+            "name": "ten4",
+            "parent": "ten3",
+            "length": 30,
+            "x": 53.43
+        },
+        {
+            "name": "ten12",
+            "parent": "ten3",
+            "length": 35,
+            "x": 71.38
+        },
+        {
+            "name": "ten5",
+            "parent": "root",
+            "length": 71.38
+        },
+        {
+            "name": "ten6",
+            "parent": "ten5",
+            "length": 30,
+            "x": 53.43
+        },
+        {
+            "name": "ten13",
+            "parent": "ten5",
+            "length": 35,
+            "x": 71.38
+        },
+        {
+            "name": "ten7",
+            "parent": "root",
+            "length": 71.38,
+            "rotation": -90
+        },
+        {
+            "name": "ten8",
+            "parent": "ten7",
+            "length": 30,
+            "x": 53.43
+        },
+        {
+            "name": "ten14",
+            "parent": "ten7",
+            "length": 35,
+            "x": 71.38
+        }
+    ],
+    "slots": [
+        {
+            "name": "muiten",
+            "bone": "muiten",
+            "attachment": "muiten"
+        },
+        {
+            "name": "vong",
+            "bone": "vong",
+            "attachment": "vong"
+        },
+        {
+            "name": "ten1",
+            "bone": "ten11",
+            "attachment": "ten1"
+        },
+        {
+            "name": "ten4",
+            "bone": "ten12",
+            "attachment": "ten1"
+        },
+        {
+            "name": "ten6",
+            "bone": "ten13",
+            "attachment": "ten1"
+        },
+        {
+            "name": "ten8",
+            "bone": "ten14",
+            "attachment": "ten1"
+        },
+        {
+            "name": "ten2",
+            "bone": "ten2",
+            "attachment": "ten2"
+        },
+        {
+            "name": "ten3",
+            "bone": "ten4",
+            "attachment": "ten2"
+        },
+        {
+            "name": "ten5",
+            "bone": "ten6",
+            "attachment": "ten2"
+        },
+        {
+            "name": "ten7",
+            "bone": "ten8",
+            "attachment": "ten2"
+        }
+    ],
+    "skins": [
+        {
+            "name": "default",
+            "attachments": {
+                "muiten": {
+                    "muiten": {
+                        "x": -0.07,
+                        "y": 0.09,
+                        "width": 71,
+                        "height": 65
+                    }
+                },
+                "ten1": {
+                    "ten1": {
+                        "x": -6.97,
+                        "y": 0.43,
+                        "rotation": 90,
+                        "width": 80,
+                        "height": 30
+                    }
+                },
+                "ten2": {
+                    "ten2": {
+                        "x": -10.01,
+                        "y": 0.43,
+                        "rotation": 90,
+                        "width": 80,
+                        "height": 30
+                    }
+                },
+                "ten3": {
+                    "ten2": {
+                        "x": -10.01,
+                        "y": 0.43,
+                        "rotation": 90,
+                        "width": 80,
+                        "height": 30
+                    }
+                },
+                "ten4": {
+                    "ten1": {
+                        "x": -6.97,
+                        "y": 0.43,
+                        "rotation": 90,
+                        "width": 80,
+                        "height": 30
+                    }
+                },
+                "ten5": {
+                    "ten2": {
+                        "x": -10.01,
+                        "y": 0.43,
+                        "rotation": 90,
+                        "width": 80,
+                        "height": 30
+                    }
+                },
+                "ten6": {
+                    "ten1": {
+                        "x": -6.97,
+                        "y": 0.43,
+                        "rotation": 90,
+                        "width": 80,
+                        "height": 30
+                    }
+                },
+                "ten7": {
+                    "ten2": {
+                        "x": -10.01,
+                        "y": 0.43,
+                        "rotation": 90,
+                        "width": 80,
+                        "height": 30
+                    }
+                },
+                "ten8": {
+                    "ten1": {
+                        "x": -6.97,
+                        "y": 0.43,
+                        "rotation": 90,
+                        "width": 80,
+                        "height": 30
+                    }
+                },
+                "vong": {
+                    "vong": {
+                        "x": -0.07,
+                        "y": 0.09,
+                        "width": 93,
+                        "height": 93
+                    }
+                }
+            }
+        }
+    ],
+    "animations": {
+        "swap1": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten6": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten8": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "swap2": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten2": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten6": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten8": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "swap3": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten2": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten8": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "swap4": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten4": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten6": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten8": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "swap5": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten2": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten4": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten6": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten8": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "swap6": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten2": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten4": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten8": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "swap7": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten4": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten6": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "swap8": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten2": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten4": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten6": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "swap9": {
+            "slots": {
+                "muiten": {
+                    "color": [
+                        {
+                            "color": "ffffff5b"
+                        },
+                        {
+                            "time": 0.5,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6667,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff5b"
+                        }
+                    ]
+                },
+                "ten1": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten2": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten3": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1667,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6333,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten4": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.1,
+                            "color": "ffffffff",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffffff"
+                        },
+                        {
+                            "time": 0.8333,
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten5": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten6": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten7": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "ten8": {
+                    "color": [
+                        {
+                            "color": "ffffff00"
+                        }
+                    ]
+                },
+                "vong": {
+                    "color": [
+                        {
+                            "color": "ffffff00",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2667,
+                            "color": "ffffff00"
+                        },
+                        {
+                            "time": 0.6,
+                            "color": "ffffff44",
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "color": "ffffff44"
+                        },
+                        {
+                            "time": 0.9,
+                            "color": "ffffff00"
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "muiten": {
+                    "rotate": [
+                        {
+                            "time": 0.0667,
+                            "angle": 1
+                        },
+                        {
+                            "time": 0.7,
+                            "angle": 180
+                        },
+                        {
+                            "time": 0.7333,
+                            "angle": 190.8
+                        },
+                        {
+                            "time": 0.8,
+                            "angle": 180
+                        }
+                    ]
+                },
+                "vong": {
+                    "scale": [
+                        {
+                            "x": 0.8,
+                            "y": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.3333,
+                            "x": 0.8,
+                            "y": 0.8
+                        },
+                        {
+                            "time": 0.9
+                        }
+                    ]
+                },
+                "ten": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten2": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten11": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten4": {
+                    "translate": [
+                        {
+                            "time": 0.1333
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 4.98
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -6.66
+                        }
+                    ]
+                },
+                "ten12": {
+                    "translate": [
+                        {
+                            "x": -5.72,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.2,
+                            "x": -5.72
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 1.74
+                        },
+                        {
+                            "time": 0.9,
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten3": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten13": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten5": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                },
+                "ten14": {
+                    "translate": [
+                        {
+                            "x": -5.72
+                        }
+                    ]
+                },
+                "ten7": {
+                    "scale": [
+                        {
+                            "x": 0.9,
+                            "y": 0.6
+                        },
+                        {
+                            "time": 0.9,
+                            "x": 1.2,
+                            "y": 0.6
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

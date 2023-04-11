@@ -1,3 +1,5 @@
+import { BOOSTER } from "../constant/constant";
+
 export default class MainData {
     private static mainData: MainData;
     public static instance(): MainData {
@@ -11,6 +13,11 @@ export default class MainData {
 
     score: number = 0;
     move: number = 0;
+
+    keyBooster: BOOSTER = null;
+    isUseBooster: boolean = false;
+    isHandlerReverse : boolean = false;
+    
     // ktJoinTour: boolean = false;
     // isFistJoinTour: boolean = true;
     ktFistLogin: boolean = true;
@@ -24,6 +31,7 @@ export default class MainData {
     // maxCountPlayFriends: number = 5;
     // idxPlayFriends: number = 0;
     dataFriendPlay = null;
+
     // ktGenDataScore: boolean = false;
     // ktGetFriends: boolean = false;
     // getScoreFriendComplete: boolean = false;
@@ -64,7 +72,6 @@ export default class MainData {
 
     // isShowNoMove: boolean = false;
     // isShowEndGame: boolean = false;
-    // isUseBooster: boolean = false;
 
 
 }

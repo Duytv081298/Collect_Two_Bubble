@@ -26,8 +26,6 @@ export default class GameController extends cc.Component {
         // cc.director.getPhysicsManager().gravity = new cc.Vec2(10, 10);
         // manager.enabledDebugDraw = true;
         // manager.enabledDrawBoundingBox = true;
-
-        this.setUpEmit();
         try {
             FBInstant.startGameAsync()
                 .then(() => {
@@ -69,6 +67,10 @@ export default class GameController extends cc.Component {
         MainData.instance().move = MAX_MOVE;
 
 
+
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 0 });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 0, status: true });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 0 });
         this.broadContainer.init(this)
     }
     setUp() {
@@ -79,11 +81,13 @@ export default class GameController extends cc.Component {
 
     updateScore(data) {
         let score = parseInt(data.score);
+
         MainData.instance().score += score;
-        console.log(MainData.instance().score);
 
     }
     updateMove(data) {
+        // console.log("update move: " + data.move);
+
         let move = parseInt(data.move);
         MainData.instance().move += move;
     }

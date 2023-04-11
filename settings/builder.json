@@ -2,7 +2,9 @@
   "title": "Collect_Two_Bubble",
   "packageName": "org.cocos2d.demo",
   "startScene": "c5bc5bef-0f6b-41d5-b77b-563c2fe99867",
-  "excludeScenes": [],
+  "excludeScenes": [
+    "7ca22a7d-18a5-4605-bac5-d800dd3ca507"
+  ],
   "orientation": {
     "landscapeRight": true,
     "landscapeLeft": true,

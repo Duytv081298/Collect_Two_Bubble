@@ -1,0 +1,111 @@
+
+item-bom.png
+size: 1063, 297
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+bom 1
+  rotate: false
+  xy: 571, 126
+  size: 169, 169
+  orig: 171, 171
+  offset: 1, 1
+  index: -1
+bom2
+  rotate: false
+  xy: 742, 126
+  size: 169, 169
+  orig: 171, 171
+  offset: 1, 1
+  index: -1
+cuong
+  rotate: true
+  xy: 863, 77
+  size: 47, 45
+  orig: 49, 47
+  offset: 1, 1
+  index: -1
+daychay1
+  rotate: true
+  xy: 1025, 85
+  size: 61, 36
+  orig: 63, 38
+  offset: 1, 1
+  index: -1
+daychay2
+  rotate: true
+  xy: 1025, 44
+  size: 39, 26
+  orig: 42, 29
+  offset: 1, 1
+  index: -1
+daychay3
+  rotate: true
+  xy: 863, 51
+  size: 24, 22
+  orig: 26, 25
+  offset: 1, 1
+  index: -1
+flare
+  rotate: false
+  xy: 2, 2
+  size: 293, 293
+  orig: 304, 305
+  offset: 5, 6
+  index: -1
+flare 2
+  rotate: true
+  xy: 887, 57
+  size: 18, 17
+  orig: 20, 19
+  offset: 1, 1
+  index: -1
+no 1
+  rotate: false
+  xy: 297, 24
+  size: 272, 271
+  orig: 318, 318
+  offset: 24, 22
+  index: -1
+radian
+  rotate: false
+  xy: 913, 148
+  size: 147, 147
+  orig: 151, 151
+  offset: 2, 2
+  index: -1
+vun1
+  rotate: true
+  xy: 910, 18
+  size: 58, 70
+  orig: 60, 72
+  offset: 1, 1
+  index: -1
+vun2
+  rotate: false
+  xy: 676, 45
+  size: 80, 79
+  orig: 82, 81
+  offset: 1, 1
+  index: -1
+vun3
+  rotate: true
+  xy: 758, 52
+  size: 72, 103
+  orig: 74, 105
+  offset: 1, 1
+  index: -1
+vun4
+  rotate: false
+  xy: 913, 78
+  size: 110, 68
+  orig: 113, 70
+  offset: 2, 1
+  index: -1
+vun5
+  rotate: false
+  xy: 571, 24
+  size: 103, 100
+  orig: 105, 102
+  offset: 1, 1
+  index: -1

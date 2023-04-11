@@ -21,37 +21,26 @@ export default class Bubble extends cc.Component {
     // onLoad () {}
     row: number = 0;
     col: number = 0;
-    localX: number = 0;
-    localY: number = 0;
 
     isSelect: boolean = false;
     private color: number = 0;
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
-
-    start() {
-
-    }
-
-
-    setData(row: number, col: number, localX: number, localY: number, color: number, coefficients: number = 1) {
+    setData(row: number, col: number, color: number, coefficients: number = 1) {
         // console.log("setData: row: " + row + "  col: " + col + "  name " + this.node.name);
+        this.deActiveRigidBody();
+        this.reSetData(row, col, color, coefficients);
+        this.upDateUI();
+    }
+    reSetData(row: number, col: number, color: number, coefficients: number = 1) {
         
         this.row = row;
         this.col = col;
-        this.localX = localX;
-        this.localY = localY;
         this.color = color;
         this.coefficients = coefficients;
-        this.upDateUI();
     }
-    updateIndex(row: number, col: number, localX: number, localY: number) {
-        this.row= row;
+    updateIndex(row: number, col: number) {
+        this.row = row;
         this.col = col;
-        this.localX = localX;
-        this.localY = localY;        
     }
     upDateUI() {
         this.item.spriteFrame = this.getSpriteFrame();
@@ -92,20 +81,49 @@ export default class Bubble extends cc.Component {
     getColor() {
         return this.color;
     }
-    // update (dt) {}
-
 
     onCollisionEnter(other: cc.Node, self: cc.Node) {
-        // console.log('onCollisionEnter row: ' + this.row + " col: " + this.col);
-        // console.log('onCollisionEnte  name: ' + other.name );
         this.node.emit("CollisionEnter", this);
     }
 
-    onCollisionStay(other: cc.Node, self: cc.Node) {
-        //console.log('onCollisionStay');
+    activeRigidBody(status: boolean = false) {
+
+        let rigidBody = this.node.getComponent(cc.RigidBody)
+        rigidBody.active = true;
+        rigidBody.awake = true;
+        rigidBody.enabledContactListener = true;
+
+        let physicsCircleCollider = this.node.getComponent(cc.PhysicsCircleCollider)
+        physicsCircleCollider.enabled = true;
+
+        // itemNode.setSiblingIndex(itemNode.parent.children.length - 1);
+
+        this.randomLinearVelocity(status);
+
     }
-    onCollisionExit(other: cc.Node, self: cc.Node) {
-        //console.log('onCollisionExit');
+    deActiveRigidBody() {
+        let rigidBody = this.node.getComponent(cc.RigidBody);
+        rigidBody.active = false;
+        rigidBody.awake = false;
+        rigidBody.enabledContactListener = false;
+
+        let physicsCircleCollider = this.node.getComponent(cc.PhysicsCircleCollider)
+        physicsCircleCollider.enabled = false;
+    }
+
+    randomLinearVelocity(status: boolean) {
+        let rigidBody = this.node.getComponent(cc.RigidBody);
+        rigidBody.gravityScale = 50;
+        if (rigidBody) {
+            var randomX = Math.random() * 51
+            if (status) randomX += 250
+            else {
+                randomX *= (-1)
+                randomX -= 250
+            }
+            rigidBody.linearVelocity = new cc.Vec2(randomX, (Math.random() * 301 + 2200))
+        }
+
     }
 
 }

@@ -1,0 +1,20 @@
+
+item-bua.png
+size: 166, 105
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+bua-1
+  rotate: true
+  xy: 2, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: -1
+star1
+  rotate: true
+  xy: 112, 49
+  size: 54, 52
+  orig: 58, 55
+  offset: 2, 1
+  index: -1

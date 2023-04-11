@@ -1,0 +1,111 @@
+
+anim-tenlua.png
+size: 666, 261
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+fire
+  rotate: true
+  xy: 253, 55
+  size: 204, 102
+  orig: 239, 121
+  offset: 34, 9
+  index: -1
+flare 1
+  rotate: false
+  xy: 2, 10
+  size: 249, 249
+  orig: 258, 259
+  offset: 4, 5
+  index: -1
+flare 2
+  rotate: false
+  xy: 417, 21
+  size: 53, 53
+  orig: 61, 60
+  offset: 4, 3
+  index: -1
+giua
+  rotate: false
+  xy: 253, 2
+  size: 80, 51
+  orig: 82, 53
+  offset: 1, 1
+  index: -1
+giua 2-1
+  rotate: true
+  xy: 554, 3
+  size: 31, 26
+  orig: 33, 28
+  offset: 1, 1
+  index: -1
+giua 2-2
+  rotate: true
+  xy: 554, 36
+  size: 41, 37
+  orig: 43, 39
+  offset: 1, 1
+  index: -1
+giua 2-3
+  rotate: false
+  xy: 582, 4
+  size: 37, 30
+  orig: 39, 32
+  offset: 1, 1
+  index: -1
+giua 2-4
+  rotate: true
+  xy: 593, 41
+  size: 36, 25
+  orig: 38, 27
+  offset: 1, 1
+  index: -1
+giua 2-5
+  rotate: true
+  xy: 621, 8
+  size: 33, 25
+  orig: 35, 27
+  offset: 1, 1
+  index: -1
+giua 2-6
+  rotate: true
+  xy: 620, 43
+  size: 34, 28
+  orig: 36, 30
+  offset: 1, 1
+  index: -1
+giua1
+  rotate: false
+  xy: 335, 2
+  size: 80, 51
+  orig: 82, 53
+  offset: 1, 1
+  index: -1
+no 1
+  rotate: true
+  xy: 357, 76
+  size: 183, 182
+  orig: 214, 214
+  offset: 16, 15
+  index: -1
+phai
+  rotate: true
+  xy: 472, 25
+  size: 49, 80
+  orig: 51, 82
+  offset: 1, 1
+  index: -1
+smoke
+  rotate: true
+  xy: 541, 130
+  size: 129, 123
+  orig: 145, 143
+  offset: 7, 10
+  index: -1
+trai
+  rotate: true
+  xy: 541, 79
+  size: 49, 80
+  orig: 54, 82
+  offset: 4, 1
+  index: -1

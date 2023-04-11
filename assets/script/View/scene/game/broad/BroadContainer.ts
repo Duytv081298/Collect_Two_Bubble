@@ -1,5 +1,7 @@
 import { Utils } from '../../../../component/component/Utils';
-import { SIZE, TOTAL_BALL } from "../../../../component/constant/constant";
+import { BOOSTER, MAXCOLUMNBOARD, MAXROWBOARD, SIZE, TOTAL_BALL } from "../../../../component/constant/constant";
+import GlobalEvent from '../../../../component/event/GlobalEvent';
+import CreateAnimationBubble from '../../../../component/pool/CreateAnimationBubble';
 import CreateBubble from '../../../../component/pool/CreateBubble';
 import CreateConnect from '../../../../component/pool/CreateConnect';
 import MainData from "../../../../component/storage/MainData";
@@ -22,6 +24,8 @@ export default class BroadContainer extends cc.Component {
     connect: cc.Node = null;
     @property(cc.Node)
     overlay: cc.Node = null;
+    @property(cc.Node)
+    aniBubbleContainer: cc.Node = null;
 
     @property(cc.Node)
     itemCheck: cc.Node = null;
@@ -104,7 +108,7 @@ export default class BroadContainer extends cc.Component {
 
                 let bubble: cc.Node = CreateBubble.instance().createItem();
                 let pos: cc.Vec2 = this.getPosition(row, col);
-                // console.log(pos);
+                //  console.log(pos);
 
                 bubble.setPosition(pos);
                 bubble.setParent(this.content);
@@ -113,7 +117,7 @@ export default class BroadContainer extends cc.Component {
                 bubble.on("CollisionEnter", this.collisionEnter.bind(this), this)
 
                 let bubbleScript = bubble.getComponent(Bubble);
-                bubbleScript.setData(row, col, pos.x, pos.y, color)
+                bubbleScript.setData(row, col, color)
 
                 this.arrBubble[row].push(bubbleScript);
 
@@ -148,26 +152,62 @@ export default class BroadContainer extends cc.Component {
             if (this.listColorGroup1.indexOf(i) < 0) this.listColorGroup2.push(i);
         }
     }
+
+    boardReady() {
+        this.isPlay = false;
+        if (MainData.instance().keyBooster != null || MainData.instance().isUseBooster) {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BOOSTER);
+
+        }
+    }
     collisionEnter(bubble: Bubble) {
         // console.log(this.listBubbleSelect);
-        // console.log("collisionEnter row: " + bubble.row + "  col : " + bubble.col );
+        // console.log("collisionEnter row: " + bubble.row + "  col : " + bubble.col);
+        if (MainData.instance().keyBooster != null) {
+            this.itemCheck.setPosition(-100, -100)
+            if (MainData.instance().keyBooster == BOOSTER.reverse) {
+                this.reverseBroad(bubble);
+                MainData.instance().isUseBooster = true;
+            } else if (!MainData.instance().isUseBooster) {
+                MainData.instance().isUseBooster = true;
+                let timeDelay = this.useBooster(bubble);
+                cc.tween(bubble.node)
+                    .delay(timeDelay)
+                    .call(() => {
+                        this.touchEnd();
+                    })
+                    .start();
+            }
 
-
-        if (this.listBubbleSelect.length == 0) {
-            this.pushBubble(bubble)
         } else {
-            let bubbleCheck = this.checkCollect(bubble);
-            if (bubbleCheck == null) return; // = vs bubble chon gan nhat, khong phu hop dieu kien
-            else if (bubbleCheck == true) this.cutDot(bubble); // quay tro lai 1 bubble
-            else this.pushBubble(bubble);
+            // console.log("bubble row: " + bubble.row + "  col: " + bubble.col + "  color: " + bubble.getColor());
+            if (this.listBubbleSelect.length == 0) {
+                this.pushBubble(bubble)
+            } else {
+                let bubbleCheck = this.checkCollect(bubble);
+                if (bubbleCheck == null) return; // = vs bubble chon gan nhat, khong phu hop dieu kien
+                else if (bubbleCheck == true) this.cutDot(bubble); // quay tro lai 1 bubble
+                else this.pushBubble(bubble);
+            }
         }
+
 
 
     }
     touchEnd() {
         this.hideAllConnect();
+
+        // GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: -1, status: false });
+        if (this.listBubbleSelect.length > 1) {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: -1, status: false });
+        }
+        if (MainData.instance().keyBooster != null) {
+            this.liberate();
+            return;
+        }
         if (this.listBubbleSelect.length < 2) {
-            this.clearBubbleSelected()
+            this.clearBubbleSelected();
+            this.boardReady();
             // console.log("RESUME ======    touchEnd");
             // game.emit("RESUME_LISTEN_EVENT");
         } else {
@@ -216,12 +256,24 @@ export default class BroadContainer extends cc.Component {
             const bubble = touches[i];
             if (i > 0) time = i % 2 == 0 ? time + delay : time;
             else if (i == touches.length - 1) time += delay;
+
+            let aniBubble = CreateAnimationBubble.instance().createItem(bubble.getColor())
+
+            if (aniBubble) {
+                aniBubble.setParent(this.aniBubbleContainer);
+                aniBubble.setPosition(bubble.node.position);
+            }
             cc.tween(bubble.node)
+                // .delay(0)
+                // .call(() => {
+
+                // })
                 .delay(time)
                 .call(() => {
                     bubble.nonSelect();
                     bubble.node.parent = this.overlay;
-                    CreateBubble.instance().activeRigidBody(bubble.node, i % 2 == 0);
+                    bubble.activeRigidBody(i % 2 == 0);
+                    // CreateBubble.instance().activeRigidBody(bubble.node, i % 2 == 0);
                     this.arrBubble[bubble.row][bubble.col] = null;
                     if (i == touches.length - 1) {
                         this.reSetUpBubble()
@@ -253,7 +305,7 @@ export default class BroadContainer extends cc.Component {
                     let pos: cc.Vec2 = this.getPosition(idxRow, col);
                     // console.log("idxRow: " + idxRow + "  col: " + col + " posX: " + pos.x + "  poxY: " + pos.y);
 
-                    bubble.updateIndex(idxRow, col, pos.x, pos.y);
+                    bubble.updateIndex(idxRow, col);
                     let kc = idxRow - row;
                     maxTime = Math.max(maxTime, speedBall * kc);
                     bubble.node.stopAllActions();
@@ -313,7 +365,7 @@ export default class BroadContainer extends cc.Component {
 
                     this.arrBubble[row][col] = bubbleScript;
                     let pos: cc.Vec2 = this.getPosition(row, col);
-                    bubbleScript.setData(row, col, pos.x, pos.y, color);
+                    bubbleScript.setData(row, col, color);
 
                     maxTime = Math.max(maxTime, speedBall * (row + 1));
                     bubble.stopAllActions();
@@ -329,11 +381,14 @@ export default class BroadContainer extends cc.Component {
         cc.tween(this.node)
             .delay(maxTime)
             .call(() => {
-                this.clearBubbleSelected()
+                this.clearBubbleSelected();
+                this.boardReady();
             })
             .start()
 
     }
+
+
 
 
 
@@ -399,7 +454,7 @@ export default class BroadContainer extends cc.Component {
     }
     hideOneConnect() {
         if (this.listConnect.length <= 0) return;
-        var connect = this.listConnect.pop()
+        let connect = this.listConnect.pop()
         if (connect) {
             CreateConnect.instance().removeItem(connect)
         }
@@ -445,7 +500,6 @@ export default class BroadContainer extends cc.Component {
             bubble.nonSelect();
         }
         this.listBubbleSelect = [];
-        this.isPlay = false;
     }
     checkCollect(bubble: Bubble) {
         // console.log("checkCollect");
@@ -463,18 +517,183 @@ export default class BroadContainer extends cc.Component {
         else return null;
     }
 
+    useBooster(bubble: Bubble): number {
+        switch (MainData.instance().keyBooster) {
+            case BOOSTER.rocket:
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
+                this.listBubbleSelect = this.getBubbleRocket(bubble);
+                return 0.3;
+            case BOOSTER.bomb:
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
+                this.listBubbleSelect = this.getDotBomb(bubble);
+                return 0.6;
+            case BOOSTER.reverse:
+                this.reverseBroad(bubble);
+                return 0;
+            case BOOSTER.hammer:
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
+                this.listBubbleSelect = this.getBubbleHammer(bubble);
+                return 0.45;
+            default:
+                break;
+        }
+    }
+
+    getBubbleRocket(bubble: Bubble): Bubble[] {
+        var row = bubble.row;
+        var col = bubble.col;
+        bubble.isSelect = true;
+
+        var listBubble: Bubble[] = [];
+        listBubble.push(bubble);
 
 
+        let left: boolean = col > 0;
+        let right: boolean = col < MAXCOLUMNBOARD - 1;
+        let top: boolean = row > 0;
+        let bottom: boolean = row < MAXROWBOARD - 1;
+
+        var index = 1;
+
+        while (right || left || top || bottom) {
+            if (right) {
+                var newCol = col + index
+                if (newCol == MAXCOLUMNBOARD - 1) right = false
+                let tempDot = this.arrBubble[row][newCol];
+                if (listBubble.indexOf(tempDot) < 0) {
+                    listBubble.push(tempDot);
+                    tempDot.isSelect = true;
+                }
+            }
+            if (top) {
+                var newRow = row - index
+                if (newRow == 0) top = false
+                let tempDot = this.arrBubble[newRow][col];
+                if (listBubble.indexOf(tempDot) < 0) {
+                    listBubble.push(tempDot);
+                    tempDot.isSelect = true;
+                }
+            }
+            if (left) {
+                var newCol = col - index
+                if (newCol == 0) left = false
+                let tempDot = this.arrBubble[row][newCol];
+                if (listBubble.indexOf(tempDot) < 0) {
+                    listBubble.push(tempDot);
+                    tempDot.isSelect = true;
+                }
+            }
+            if (bottom) {
+                var newRow = row + index
+                if (newRow == MAXROWBOARD - 1) bottom = false
+                let tempDot = this.arrBubble[newRow][col];
+                if (listBubble.indexOf(tempDot) < 0) {
+                    listBubble.push(tempDot);
+                    tempDot.isSelect = true;
+                }
+            }
+            index++;
+
+        }
+        return listBubble;
+    }
+    getBubbleHammer(bubble: Bubble): Bubble[] {
+        bubble.isSelect = true;
+        return [bubble]
+    }
+    getDotBomb(bubble: Bubble): Bubble[] {
+
+        var tempListStepX: number[] = [-1, 0, 1, 0, -1, 1, 1, -1]
+        var tempListStepY: number[] = [0, -1, 0, 1, -1, -1, 1, +1]
+        bubble.isSelect = true;
+        var listDot: Bubble[] = [bubble];
+        var row = bubble.row;
+        var col = bubble.col;
+
+        for (let i = 0; i < tempListStepX.length; i++) {
+            let x = col + tempListStepX[i];
+            let y = row + tempListStepY[i];
+            x = x < 0 ? x = 0 : x > this.arrBubble[0].length - 1 ? x = this.arrBubble[0].length - 1 : x;
+            y = y < 0 ? y = 0 : y > this.arrBubble.length - 1 ? y = this.arrBubble.length - 1 : y;
+            let tempDot = this.arrBubble[y][x]
+            if (listDot.indexOf(tempDot) < 0) {
+                listDot.push(tempDot);
+                tempDot.isSelect = true;
+            }
+        }
+        return listDot;
+    }
 
 
+    bubbleReverseA: Bubble = null;
+    bubbleReverseB: Bubble = null;
+
+    reverseBroad(bubble: Bubble): boolean {
+        if (MainData.instance().isHandlerReverse) return;
+
+        if (!this.bubbleReverseA) {
+            this.bubbleReverseA = bubble;
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
+        }
+        else {
+            var x = bubble.col - this.bubbleReverseA.col;
+            let y = bubble.row - this.bubbleReverseA.row;
+            if (bubble != this.bubbleReverseA && Math.abs(x - y) == 1 && Math.abs(x) <= 1 && Math.abs(y) <= 1) {
+                this.bubbleReverseB = bubble;
+            }
+        }
+
+        if (this.bubbleReverseA && this.bubbleReverseB) this.reverse();
+        if (this.bubbleReverseA && !this.bubbleReverseB) return true;
+        else return false;
+    }
+
+    reverse() {
+
+        // MainData.instance().isUseBooster = true;
+        MainData.instance().isHandlerReverse = true;
+        // SoundManager.instance().playEffect("booster_chance_color");
+        // FaceBook.logEvent(LogEventName.useBoosterReverse)
 
 
+        let index0: cc.Vec3 = this.bubbleReverseA.node.position;
+        let index1: cc.Vec3 = this.bubbleReverseB.node.position;
+
+        let coefficient0 = this.bubbleReverseA.coefficients;
+        let row0 = this.bubbleReverseA.row;
+        let col0 = this.bubbleReverseA.col;
+        let color0 = this.bubbleReverseA.getColor();
 
 
+        let coefficient1 = this.bubbleReverseB.coefficients;
+        let row1 = this.bubbleReverseB.row;
+        let col1 = this.bubbleReverseB.col;
+        let color1 = this.bubbleReverseB.getColor();
+
+        let a = this.bubbleReverseA;
+        let b = this.bubbleReverseB;
+
+        b.reSetData(row0, col0, color1, coefficient0);
+        a.reSetData(row1, col1, color0, coefficient1);
+        cc.tween(this.bubbleReverseA.node)
+            .to(speedBall * 2, { position: index1 }, { easing: "cubicOut" })
+            .call(() => {
+                MainData.instance().isHandlerReverse = false;
 
 
+                this.arrBubble[row0][col0] = b;
+                this.arrBubble[row1][col1] = a;
 
+                this.bubbleReverseA = null;
+                this.bubbleReverseB = null;
+                this.boardReady();
+            })
+            .start();
 
+        cc.tween(this.bubbleReverseB.node)
+            .to(speedBall * 2, { position: index0 }, { easing: "cubicOut" })
+            .start();
+    }
 
 
 
@@ -482,22 +701,37 @@ export default class BroadContainer extends cc.Component {
 
     onTouchStart(event) {
         if (this.isPlay == true) return;
+        if (MainData.instance().move <= 0) return;
+        if (MainData.instance().keyBooster != null && MainData.instance().keyBooster != BOOSTER.reverse) return;
         this.isQuadrilateral = false;
         let currentTouch = event.touch.getLocation();
         this.itemCheck.setPosition(currentTouch)
-
-
     }
     onTouchMove(event) {
         if (this.isPlay == true) return;
+        if (MainData.instance().move <= 0) return;
+        if (MainData.instance().keyBooster != null && MainData.instance().keyBooster != BOOSTER.reverse) return;
         let currentTouch = event.touch.getLocation();
         this.itemCheck.setPosition(currentTouch)
         // console.log("x: " + currentTouch.x + "y: " + currentTouch.y);
     }
     onTouchEnd(event) {
         if (this.isPlay == true) return;
-        this.touchEnd();
-        this.itemCheck.setPosition(-100, -100)
+        if (MainData.instance().move <= 0) return;
+        if (MainData.instance().isHandlerReverse) {
+
+            let currentTouch = event.touch.getLocation();
+            this.itemCheck.setPosition(currentTouch);
+            return;
+        }
+        if (MainData.instance().isUseBooster) return;
+        if (MainData.instance().keyBooster != null) {
+            let currentTouch = event.touch.getLocation();
+            this.itemCheck.setPosition(currentTouch);
+        } else {
+            this.touchEnd();
+            this.itemCheck.setPosition(-100, -100)
+        }
     }
 
 
