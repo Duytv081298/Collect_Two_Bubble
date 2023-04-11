@@ -1,4 +1,5 @@
 
+import RankController from "../View/Ranking/RankController";
 import { BOOSTER, GOLD_USE_BOOSTER } from "../component/constant/constant";
 import GlobalEvent from "../component/event/GlobalEvent";
 import MainData from "../component/storage/MainData";
@@ -8,6 +9,8 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class Test extends cc.Component {
 
+    @property(RankController)
+    rankController: RankController = null;
     amountPress: number = 0;
 
     countdown: boolean = false;
@@ -28,9 +31,19 @@ export default class Test extends cc.Component {
     updateGold() {
         let status = this.startCheck();
         console.log("status: " + status);
-        
+
         if (status)
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: GOLD_USE_BOOSTER });
+    }
+
+    updateScore() {
+
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 1000 });
+        // console.log(this.rankController.listScorePlayer);
+        
+        // console.log("score up: " + (this.rankController.listScorePlayer[this.rankController.listScorePlayer.length - 1] - 100));
+
+        // GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: (this.rankController.listScorePlayer[0] + 300) });
     }
 
     startCheck() {

@@ -1,10 +1,3 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
 import { BOOSTER, MAXCOLUMNBOARD } from "../../../../component/constant/constant";
 import GlobalEvent from "../../../../component/event/GlobalEvent";
 import MainData from "../../../../component/storage/MainData";
@@ -13,7 +6,7 @@ import Bubble from '../item/Bubble';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class AnimationBooster extends cc.Component {
     skeletonData_Rocket: sp.SkeletonData = null;
     skeletonData_Bomb: sp.SkeletonData = null;
     skeletonData_Reverse: sp.SkeletonData = null;

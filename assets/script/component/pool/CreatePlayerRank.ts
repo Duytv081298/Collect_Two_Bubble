@@ -27,7 +27,7 @@ export default class CreatePlayerRank {
             itemNode = cc.instantiate(this.itemPrefab);
         }
         itemNode.active = true;
-        itemNode.setScale(0.8);
+        itemNode.setScale(0.85);
         itemNode.setPosition(0, 0);
         itemNode.angle = 0;
         itemNode.opacity = 255;
