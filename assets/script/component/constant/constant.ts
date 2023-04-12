@@ -1,3 +1,9 @@
+
+
+export enum SCENE {
+    game = "game",
+    home = "home"
+};
 export enum SIZE {
     widthDot = 79,
     heightDot = 82,
@@ -14,7 +20,7 @@ export enum BOOSTER {
 
 };
 export const TOTAL_BALL = 36;
-export const MAX_MOVE = 20;
+export const MAX_MOVE = 2;
 export const GOLD_DEFAULT = 300;
 export const GOLD_USE_BOOSTER = 300;
 export const MAXCOLUMNBOARD = 6;

@@ -1,4 +1,6 @@
 import { Utils } from "../component/Utils";
+import SharePictureScore1 from "../share/SharePictureScore1";
+import MainData from "../storage/MainData";
 export default class FaceBook {
     static getPhoto() {
         if (window["FBInstant"] !== undefined) {
@@ -45,7 +47,7 @@ export default class FaceBook {
         return canvas.toDataURL('image/png');
     }
     static getImageShareFacebook(): string {
-        let arrShare = ["image/banner_share_tour_1/texture", "image/banner_share_tour_2/texture"];
+        let arrShare = ["image/banner_share_tour_1", "image/banner_share_tour_2"];
         return arrShare[Utils.randomInt(0, arrShare.length - 1)]
     }
 
@@ -104,38 +106,64 @@ export default class FaceBook {
         }
     }
 
-    static shareScore(score: number) {
-        // if (window["FBInstant"] !== undefined) {
-        //     let arrStr = [
-        //         FBInstant.player.getName() + " got " + score + " score. Can you beat them",
-        //         FBInstant.player.getName() + "/'s score is unbeatable. Want to give it a try",
-        //         FBInstant.player.getName() + " get " + score + " score ! so easy! play it again.",
-        //         FBInstant.player.getName() + " get " + score + " scores! So easy! Can you?"
-        //     ]
-        //     let shareImage = new SharePictureScore1(score, (dataImage) => {
-        //         if (dataImage == null) {
-        //             return;
-        //         }
-        //         FBInstant.updateAsync({
-        //             action: 'CUSTOM',
-        //             cta: 'Play',
-        //             image: dataImage,
-        //             text: arrStr[Utils.randomInt(0, arrStr.length - 1)],
-        //             template: 'challenge',
-        //             data: {
-        //                 challenge: true,
-        //                 id: FBInstant.player.getID(),
-        //                 score: score,
-        //                 avatar: FBInstant.player.getPhoto(),
-        //                 name: FBInstant.player.getName()
-        //             },
-        //             strategy: 'IMMEDIATE'
-        //         }).then(() => {
-        //         }).catch(() => {
-        //         });
 
-        //     })
-        // }
+
+    static showAvatarMe(avatar: cc.Sprite) {
+        if (MainData.instance().avatarMe) {
+            avatar.getComponent(cc.Sprite).spriteFrame = MainData.instance().avatarMe;
+            return;
+        }
+
+        let urlImage = FaceBook.getPhoto();
+
+        if (urlImage == "" || urlImage == null) {
+        } else {
+            cc.assetManager.loadRemote(urlImage, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
+                if (imageAsset == null) {
+                    return;
+                }
+                if (err) {
+                    return;
+                }
+                const spriteFrame = new cc.SpriteFrame(imageAsset);
+                avatar.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                MainData.instance().avatarMe = spriteFrame;
+            });
+        }
+    }
+
+    static shareScore(score: number) {
+        if (window["FBInstant"] !== undefined) {
+            let arrStr = [
+                FBInstant.player.getName() + " got " + score + " score. Can you beat them",
+                FBInstant.player.getName() + "/'s score is unbeatable. Want to give it a try",
+                FBInstant.player.getName() + " get " + score + " score ! so easy! play it again.",
+                FBInstant.player.getName() + " get " + score + " scores! So easy! Can you?"
+            ]
+            let shareImage = new SharePictureScore1(score, (dataImage) => {
+                if (dataImage == null) {
+                    return;
+                }
+                FBInstant.updateAsync({
+                    action: 'CUSTOM',
+                    cta: 'Play',
+                    image: dataImage,
+                    text: arrStr[Utils.randomInt(0, arrStr.length - 1)],
+                    template: 'challenge',
+                    data: {
+                        challenge: true,
+                        id: FBInstant.player.getID(),
+                        score: score,
+                        avatar: FBInstant.player.getPhoto(),
+                        name: FBInstant.player.getName()
+                    },
+                    strategy: 'IMMEDIATE'
+                }).then(() => {
+                }).catch(() => {
+                });
+
+            })
+        }
     }
 
 
@@ -209,8 +237,7 @@ export default class FaceBook {
             }
         });
     }
-    static logEvent(eventName:string, valueToSum:number = 1)
-    {
+    static logEvent(eventName: string, valueToSum: number = 1) {
         if (window["FBInstant"] == undefined) return;
         FBInstant.logEvent(
             eventName,

@@ -7,10 +7,6 @@ export default class RankOther extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
     // onLoad () {}
 
-    start () {
-
-    }
-
     setData(data:any)
     {
         this.data = data;

@@ -17,8 +17,18 @@ export default class MainData {
     keyBooster: BOOSTER = null;
     isUseBooster: boolean = false;
     isHandlerReverse: boolean = false;
+    amountBooster: number[] = [0, 0, 0, 0];
 
-    amountBooster: number[] = [0,0,0,0];
+    realityBubble: number = 0
+    estimateBubble: number = 0
+
+
+
+    indexHoleCoin: number = null;
+    
+    rankMe: number = 0;
+    avatarMe: cc.SpriteFrame= null;
+    arrDataRank: any[] = [];
 
     ktJoinTour: boolean = false;
     // isFistJoinTour: boolean = true;
@@ -31,7 +41,7 @@ export default class MainData {
     // total_collect_spin: number = 3;
     // countPlayFriends: number = 0;
     // maxCountPlayFriends: number = 5;
-    // idxPlayFriends: number = 0;
+    idxPlayFriends: number = 0;
     dataFriendPlay = null;
 
     // ktGenDataScore: boolean = false;
@@ -72,8 +82,8 @@ export default class MainData {
     //     }
     // }
 
-    // isShowNoMove: boolean = false;
-    // isShowEndGame: boolean = false;
+    isShowNoMove: boolean = false;
+    isShowEndGame: boolean = false;
 
 
 }

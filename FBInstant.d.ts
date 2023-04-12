@@ -25,6 +25,7 @@ declare namespace FBInstant {
     let payments: Payments;
 
     let tournament: any;
+    let loadBannerAdAsync: any;
     /**
      * The current locale. Use this to determine what language the current game should be localized with.
      * The value will not be accurate until FBInstant.startGameAsync() resolves.

@@ -1,3 +1,6 @@
+import FaceBook from '../../component/package/FaceBook';
+import MainData from "../../component/storage/MainData";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -14,5 +17,6 @@ export default class User extends cc.Component {
     setUp(avatar: cc.SpriteFrame, rank: number) {
         this.avatar.spriteFrame = avatar ? avatar : this.avatarDefault;
         this.txtRank.string = rank >= 0 ? rank.toString() : "";
+        FaceBook.showAvatarMe(this.avatar);
     }
 }

@@ -31,8 +31,13 @@ export default class Booster extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_AMOUNT_BOOSTER, this.updateAmountBooster, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_UI_BOOSTER, this.updateAllUiBooster, this);
 
+        
+        GlobalEvent.instance().addEventListener(GlobalEvent.START_GAME, this.reset, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
+
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.showReadyAds, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.viewAdsComplete, this);
+        
     }
     protected onDisable(): void {
 
@@ -42,6 +47,9 @@ export default class Booster extends cc.Component {
 
         GlobalEvent.instance().removeEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.showReadyAds, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.viewAdsComplete, this);
+
+        GlobalEvent.instance().removeEventListener(GlobalEvent.START_GAME, this.reset, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
     }
 
     showReadyAds() {
@@ -82,9 +90,6 @@ export default class Booster extends cc.Component {
             this.setOpacityBoosterChoose(this.keyBoosterAds);
             // this.tooltip.showTooltipBomb();
         }
-    }
-    start() {
-        this.reset();
     }
 
     reset() {

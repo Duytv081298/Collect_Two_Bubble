@@ -14,9 +14,6 @@ export default class AnimationHole extends cc.Component {
     @property(cc.ParticleSystem)
     holeParticle: cc.ParticleSystem[] = [];
 
-    start() {
-
-    }
     protected onLoad(): void {
         this.reset();
     }

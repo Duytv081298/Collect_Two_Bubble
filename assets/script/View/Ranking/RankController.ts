@@ -1,6 +1,7 @@
 import NameBot from "../../component/component/NameBot";
 import { Utils } from "../../component/component/Utils";
 import GlobalEvent from "../../component/event/GlobalEvent";
+import FaceBook from "../../component/package/FaceBook";
 import CreatePlayerRank from "../../component/pool/CreatePlayerRank";
 import MainData from "../../component/storage/MainData";
 import User from "./User";
@@ -29,7 +30,7 @@ export default class RankController extends cc.Component {
 
     backScorePlay: number = 0;
     arrPlayerRank = [];
-    playerRank: number = 0;
+    playerRank: number = 99;
     idxRank: number = 0;
     idxSpeedScore = 0;
     arrOtherPlayer: any[] = [];
@@ -39,22 +40,46 @@ export default class RankController extends cc.Component {
     listScorePlayer: number[] = [];
 
     protected onEnable(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.START_GAME, this.reset, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.TWEEN_PLAYER_RANKING, this.tweenSpinScore, this);
     }
     protected onDisable(): void {
 
+        GlobalEvent.instance().removeEventListener(GlobalEvent.START_GAME, this.reset, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.TWEEN_PLAYER_RANKING, this.tweenSpinScore, this);
     }
 
     protected onLoad(): void {
-        this.createDataRank();
-
-        // console.log(this.user.node.getPosition());
     }
+    reset() {
+        this.node.stopAllActions();
+        this.backScorePlay = 0;
+        this.arrPlayerRank = [];
+        this.playerRank = 99;
+        this.idxRank = 0;
+        this.idxSpeedScore = 0;
+        this.arrOtherPlayer = [];
+        this.listNames = [];
+        this.listPositionPlayer = [];
+        this.listScorePlayer = [];
 
-    protected start(): void {
+        while (this.node.childrenCount > 0) {
+            CreatePlayerRank.instance().removeItemRank(this.node.children[0]);
+        }
+        this.node.x = -widthScreen / 2;
+
+
+
+        this.createDataRank();
+        MainData.instance().rankMe = this.playerRank;
+        MainData.instance().arrDataRank = this.arrPlayerRank;
+
         this.showPlayerDefault();
+        CreatePlayerRank.instance().defaultAvatar = this.defaultAvatar;
 
+        // GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GAME_OVER_POPUP);
     }
 
     createDataRank() {
@@ -95,7 +120,7 @@ export default class RankController extends cc.Component {
 
         itemRank.x = beginXRank + beginSpaceLeftMeRank + beginXSpaceRank * idxRankCopy;
         itemRank.y = beginYPlayerRank;
-        itemRank.getChildByName("txtRank").getComponent(cc.Label).string = (this.arrPlayerRank[idxRankCopy].rank + 1) + '';
+        itemRank.getChildByName("txtRank").getComponent(cc.Label).string = (this.arrPlayerRank[idxRankCopy].rank+1) + '';
         itemRank.getChildByName("txtScore").getComponent(cc.Label).string = this.arrPlayerRank[idxRankCopy].score;
         itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = this.defaultAvatar;
 
@@ -129,6 +154,7 @@ export default class RankController extends cc.Component {
 
 
     tweenSpinScore() {
+        if (MainData.instance().score == 0) return;
         if (this.playerRank == 0) return;
         let scorePlay = MainData.instance().score;
 
@@ -195,6 +221,10 @@ export default class RankController extends cc.Component {
         this.playerRank -= totalPlayerPass;
         this.idxSpeedScore += totalPlayerPass;
         this.backScorePlay = scorePlay;
+
+        MainData.instance().rankMe = this.playerRank;
+        MainData.instance().arrDataRank = this.arrPlayerRank;
+
         this.showRankMe();
 
     }
@@ -211,8 +241,8 @@ export default class RankController extends cc.Component {
     }
     showRankMe() {
         this.user.setUp(null, this.playerRank + 1)
-    }
 
+    }
 
 
 

@@ -38,7 +38,7 @@ var FBInstant = {
       return FBInstant.__utils.returnUserData(name);
     },
     getPhoto: function () {      
-      let name = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1618164218586883&gaming_photo_type=unified_picture&ext=1672565415&hash=AeRGF4XYdp7zKswko3E";
+      let name = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1662674000802571&gaming_photo_type=unified_picture&ext=1681635219&hash=AeQiGcP8RrSGos1cni0";
       if (isFirefox)
         name = "https://platform-lookaside.fbsbx.com/platform/instantgames/profile_pic.jpg?igpid=3283919521624928&height=256&width=256&ext=1649924022&hash=AeS_vdPWY6S9jtbHufs";
       else if (isEdg)
@@ -201,7 +201,7 @@ var FBInstant = {
       return new Promise(function (resolve, reject) {
         var signedPlayerInfo = {
           getSignature: function () {
-            let playerId = "b1xBUzbVzpZmzgqtR13iDmB7olBZPhc9GrunxbOuBJc.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImlzc3VlZF9hdCI6MTY3MDU2Njc1OSwicGxheWVyX2lkIjoiNDQwMzg1Nzg3MzA0OTA4NiIsInJlcXVlc3RfcGF5bG9hZCI6bnVsbH0";
+            let playerId = "XoIc7oPJykH-CQ4nxntXSSPdR_w4mSd86OmKwu6fcas.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImlzc3VlZF9hdCI6MTY3ODk1MjU0MCwicGxheWVyX2lkIjoiNTk0NTE5NDYxMjIwMzYzMiIsInJlcXVlc3RfcGF5bG9hZCI6bnVsbH0";
             if (isFirefox)
               playerId = "5VuNi89nyCFHrKuJJIlGXlslYKb2QTFwQqqXtWYYHn8.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImlzc3VlZF9hdCI6MTY0NzMzMjAyOCwicGxheWVyX2lkIjoiMzI4MzkxOTUyMTYyNDkyOCIsInJlcXVlc3RfcGF5bG9hZCI6bnVsbH0";
             else if (isEdg)
