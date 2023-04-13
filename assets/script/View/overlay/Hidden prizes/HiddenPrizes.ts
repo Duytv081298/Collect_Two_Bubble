@@ -105,39 +105,37 @@ export default class HiddenPrizes extends cc.Component {
         this.posMove.active = true;
         this.plusMove.active = true;
         let posEnd = this.posMove.getPosition()
-        let posStart = cc.Vec2.ZERO;
+        let posStart = new cc.Vec2(0, 70);
+        this.plusMove.opacity = 0;
         this.plusMove.stopAllActions()
         this.plusMove.setPosition(posStart)
         cc.tween(this.plusMove)
-            .to(0.2, { scale: 1.5 }, { easing: "cubicOut" })
-            .bezierTo(0.5,
-                posStart,
-                cc.v2(Utils.randomInt(posStart.x - 400, posStart.x + 400), Utils.randomInt(posStart.y + 200, posStart.y + 400)),
-                cc.v2(posEnd)
-            )
-            .start();
-        cc.tween(this.plusMove)
-            .delay(0.2)
+            .to(0.3, { scale: 2, opacity: 255 }, { easing: "cubicOut" })
             .to(0.5, { scale: 0.3 }, { easing: "cubicIn" })
             .call(() => {
                 this.plusMove.setPosition(posStart)
                 this.plusMove.active = false;
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 1 });
-                // this.updateMove(1);
             })
+            .start();
+        cc.tween(this.plusMove)
+            .bezierTo(0.8,
+                posStart,
+                cc.v2(Utils.randomInt(posStart.x - 300, posStart.x + 300), Utils.randomInt(posStart.y + 200, posStart.y + 400)),
+                cc.v2(posEnd)
+            )
             .start();
     }
 
 
     showUserBount() {
         console.log("showUserBount");
-        
+
         this.playerSp.spriteFrame = this.spfPlayer;
         this.player.active = true;
         this.player.setScale(cc.Vec2.ZERO);
         this.player.opacity = 255;
         this.player.stopAllActions();
-        this.player.setScale(2);
 
         cc.tween(this.player)
             .to(0.4, { scale: 2 }, { easing: "backOut" })
