@@ -1,11 +1,9 @@
-import InterstitialManager from "../../../component/ads/InterstitialManager";
 import RewardAds from "../../../component/ads/RewardAds";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
 import CreatePlayerRank from "../../../component/pool/CreatePlayerRank";
 import RankOther from "../../../component/pool/RankOther";
-import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
@@ -63,12 +61,7 @@ export default class GameOver extends cc.Component {
         if (this.ktShow == true) {
             this.show();
         }
-        // GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ADS_INTER_COMPLETE, this.showAdsComplete, this);
     }
-    onDestroy(): void {
-        // GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ADS_INTER_COMPLETE, this.showAdsComplete, this);
-    }
-
     onEnable() {
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.readyAds, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.adsReward, this);
@@ -115,22 +108,6 @@ export default class GameOver extends cc.Component {
         var maxCoin = this.amountReward * 3;
         var minCoin = this.amountReward;
 
-
-        // var header = this.node.parent.getChildByName("header");
-        // var bg = null;
-        // var bg_coin = null;
-        // if (header) bg = header.getChildByName("bg");
-        // if (bg) bg_coin = bg.getChildByName("coin-bg");
-        // if (bg_coin) {
-
-        //     var pos = bg_coin.parent.getComponent(UITransform).convertToWorldSpaceAR(bg_coin.position)
-        //     this.pos1 = this.aniCoin.getComponent(UITransform).convertToNodeSpaceAR(pos);
-        // } else {
-        //     this.pos1 = this.nodeToCoin.position;;
-        // }
-        // this.aniCoin.play()
-        // this.aniCoin.on(Animation.EventType.FINISHED, this.onAnimationEvent, this)
-
         this.aniUpCoin(minCoin, maxCoin);
         this.isClaimX3 = true;
         this.activeBtnClaimX3(false);
@@ -154,10 +131,10 @@ export default class GameOver extends cc.Component {
     show() {
         console.log("showEndGame------------")
         this.reset();
-        
+
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_HIGHT_SCORE);
         // let backHightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
-        // this.score = MainData.instance().score;
+        this.score = MainData.instance().score;
         // if (backHightScore < this.score) {
         //     LocalStorage.setItem(LocalStorage.HIGHT_SCORE, this.score);
         // }
@@ -177,10 +154,17 @@ export default class GameOver extends cc.Component {
         this.bgRotation.active = false;
         this.star.active = false;
         this.readyAds();
+
+        this.nodeRankMe.active = false;
+        this.nodeRankMe.stopAllActions();
         this.removeAllPlayerRank();
+        this.node.stopAllActions();
+        this.layoutRank.stopAllActions();
+        if (this.itemRankMe) this.itemRankMe.stopAllActions();
+        this.layoutRank.off(cc.Node.EventType.SIZE_CHANGED);
     }
     showRank() {
-        console.log("this.rankMe: " + this.rankMe);
+        // console.log("this.rankMe: " + this.rankMe);
 
         let contextId = FBInstant.context.getID();
         if (contextId != null) {
@@ -212,15 +196,16 @@ export default class GameOver extends cc.Component {
                 this.nodeRankMe.getChildByName("txtScore").getComponent(cc.Label).string = Math.round(ratio * this.score) + "";
             }
         }).call(() => {
-
-            // SoundManager.instance().playEffect("end_game");
             this.txtScore.string = this.score + "";
             this.nodeRankMe.getChildByName("txtScore").getComponent(cc.Label).string = this.score + "";
-            this.bgRotation.active = true;
-            this.star.active = true;
+        }).delay(0.5).call(() => {
+            this.btnShare.node.active = true;
+            this.btnHome.node.active = true;
+            this.btnPlayFriends.node.active = true;
+            this.btnPlayAgain.node.active = true;
         }).start();
         let rankOut = this.arrDataRank.length - this.rankMe;
-        console.log("rankOut: " + rankOut);
+        // console.log("rankOut: " + rankOut);
 
         if (rankOut > 0) {
             if (rankOut < this.arrDataRank.length) {
@@ -285,20 +270,7 @@ export default class GameOver extends cc.Component {
 
         }
         if (this.itemRankMe) {
-            let urlImage = FaceBook.getPhoto();
-            if (urlImage == "" || urlImage == null) {
-            } else {
-                cc.assetManager.loadRemote(urlImage, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
-                    if (imageAsset == null) {
-                        return;
-                    }
-                    if (err) {
-                        return;
-                    }
-                    const spriteFrame = new cc.SpriteFrame(imageAsset);
-                    this.itemRankMe.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                });
-            }
+            FaceBook.showAvatarMe(this.itemRankMe.getChildByName("avatar").getComponent(cc.Sprite));
             this.itemRankMe.getChildByName("txtScore").getComponent(cc.Label).string = this.score + "";
         }
         let itemRank4 = CreatePlayerRank.instance().createItemRank();
@@ -320,8 +292,8 @@ export default class GameOver extends cc.Component {
             this.listScroll.scrollToRight(0);
         }
 
-        this.listScroll.scrollToOffset(new cc.Vec2(abc.x - 45, abc.y), 3);
-        cc.tween(this.node).delay(2.5).call(() => {
+        this.listScroll.scrollToOffset(new cc.Vec2(abc.x - 45, abc.y), 1.5);
+        cc.tween(this.node).delay(1).call(() => {
             this.itemRankMe.y = 0;
             this.itemRankMe.opacity = 0;
             cc.tween(this.itemRankMe).to(0.5, { opacity: 255 }).call(() => {
@@ -333,19 +305,7 @@ export default class GameOver extends cc.Component {
                 this.nodeRankMe.active = false;
             }).start();
 
-        }).delay(1).call(() => {
-
-            this.btnShare.node.active = true;
-            this.btnHome.node.active = true;
-            this.btnPlayFriends.node.active = true;
-            this.btnPlayAgain.node.active = true;
-
-            for (let i = 0; i < this.layoutRank.childrenCount; i++) {
-                let iconChallenge = this.layoutRank.children[i].getChildByName("iconChallenge");
-                if (iconChallenge) iconChallenge.active = true;
-            }
-
-
+        }).delay(0.5).call(() => {
             this.autoShareScore();
         }).start();
     }
@@ -455,11 +415,13 @@ export default class GameOver extends cc.Component {
 
     onHandlerReplay() {
         // SoundManager.instance().playEffect("button");
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.REPLAY_GAME);
         this.hide();
     }
     hide() {
         this.claimCoin();
+        this.reset();
         this.node.active = false;
     }
     activeBtnClaimX3(status: boolean) {

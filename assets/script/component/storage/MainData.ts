@@ -1,4 +1,4 @@
-import { BOOSTER } from "../constant/constant";
+import { BOOSTER, SCENE } from "../constant/constant";
 
 export default class MainData {
     private static mainData: MainData;
@@ -8,8 +8,10 @@ export default class MainData {
         }
         return MainData.mainData;
     }
-    isLocal: boolean = true;
+    isLocal: boolean = false;
     isTest: boolean = true;
+
+    currentIdScene: SCENE = null;
 
     score: number = 0;
     move: number = 0;

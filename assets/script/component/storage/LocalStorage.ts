@@ -84,9 +84,9 @@ export default class LocalStorage {
         //     MainData.instance().totalTimeGetSpin = 1800;
         // }
 
-        // dataGame.set(name, params);
-        // FaceBook.setDataAsync(name, params);
-        //cc.sys.localStorage.setItem(name, String(params));
+        dataGame.set(name, params);
+        FaceBook.setDataAsync(name, params);
+        cc.sys.localStorage.setItem(name, String(params));
     }
     static setSound(isOn: boolean) {
         LocalStorage.setItem(LocalStorage.SOUND, isOn);

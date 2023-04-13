@@ -12,10 +12,6 @@ export default class GameController extends cc.Component {
     @property(BroadContainer)
     broadContainer: BroadContainer = null;
 
-
-
-
-
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
@@ -26,15 +22,6 @@ export default class GameController extends cc.Component {
         // cc.director.getPhysicsManager().gravity = new cc.Vec2(10, 10);
         // manager.enabledDebugDraw = true;
         // manager.enabledDrawBoundingBox = true;
-        try {
-            FBInstant.startGameAsync()
-                .then(() => {
-
-                });
-        } catch (error) {
-
-        }
-
 
     }
     onEnable(): void {
@@ -76,6 +63,10 @@ export default class GameController extends cc.Component {
         console.log("GameController setUp: ");
 
         this.reset();
+    }
+
+    clickSetting() {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SETTING);
     }
 
     // updateScore(data) {

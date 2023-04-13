@@ -120,7 +120,7 @@ export default class RankController extends cc.Component {
 
         itemRank.x = beginXRank + beginSpaceLeftMeRank + beginXSpaceRank * idxRankCopy;
         itemRank.y = beginYPlayerRank;
-        itemRank.getChildByName("txtRank").getComponent(cc.Label).string = (this.arrPlayerRank[idxRankCopy].rank+1) + '';
+        itemRank.getChildByName("txtRank").getComponent(cc.Label).string = (this.arrPlayerRank[idxRankCopy].rank + 1) + '';
         itemRank.getChildByName("txtScore").getComponent(cc.Label).string = this.arrPlayerRank[idxRankCopy].score;
         itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = this.defaultAvatar;
 
@@ -212,7 +212,11 @@ export default class RankController extends cc.Component {
         for (let i = 0; i < totalPlayerPass; i++) {
             let item: cc.Node = this.arrOtherPlayer[i];
             cc.tween(item).to(0.3, { scaleY: 1.2 }).delay(0.1).to(0.3, { scale: 0, opacity: 0, y: item.y - 65 }).call(() => {
+                let sp = item.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame;
                 CreatePlayerRank.instance().removeItemRank(item);
+                if (i == totalPlayerPass - 1) GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_HIDDEN_PRIZES, { spfPlayer: sp });
+                console.log(i);
+
             }).start();
             this.showRankPlayer();
         }

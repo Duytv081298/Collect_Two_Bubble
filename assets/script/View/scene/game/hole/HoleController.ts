@@ -1,16 +1,9 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
 import GlobalEvent from "../../../../component/event/GlobalEvent";
 import MainData from "../../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
 
-const DEFAULTAMOUNTCOIN = 1000;
+const DEFAULTAMOUNTCOIN = 5000;
 @ccclass
 export default class HoleController extends cc.Component {
 
@@ -66,7 +59,7 @@ export default class HoleController extends cc.Component {
         this.animationCoin.node.active = false;
         this.animationBG.node.active = false;
 
-        this.amountMove = DEFAULTAMOUNTCOIN;
+        this.amountScore = DEFAULTAMOUNTCOIN;
         this.listScore = [DEFAULTAMOUNTCOIN];
         this.listplus = [0];
         this.amountIsPlus = 0;
@@ -183,7 +176,6 @@ export default class HoleController extends cc.Component {
     upDateAmountMove() {
         if (!this.isActiveCoin) return;
         this.amountMove += 1;
-        console.log("move: " + this.amountMove);
 
         this.showAnimationCoin();
         if (this.amountMove == 6) {

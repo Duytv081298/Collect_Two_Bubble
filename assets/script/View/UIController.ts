@@ -30,13 +30,13 @@ export default class UIController extends cc.Component {
     // onLoad () {}
 
     protected onEnable(): void {
-        // GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_SCORE_GAME, this.updateScore, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_MOVE_GAME, this.updateMove, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
     }
     protected onDisable(): void {
-        // GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_SCORE_GAME, this.updateScore, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_MOVE_GAME, this.updateMove, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);

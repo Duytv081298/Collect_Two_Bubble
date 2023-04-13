@@ -11,6 +11,7 @@ const blockSpace = [[0, -1], [1, 0], [0, 1], [-1, 0]];
 const { ccclass, property } = cc._decorator;
 
 const speedBall = 0.1;
+const MAXTIME = 0.4;
 @ccclass
 export default class BroadContainer extends cc.Component {
     @property(cc.Node)
@@ -18,7 +19,7 @@ export default class BroadContainer extends cc.Component {
     @property(cc.Node)
     connect: cc.Node = null;
     @property(cc.Node)
-    overlay: cc.Node = null;
+    bubbleDieContainer: cc.Node = null;
     @property(cc.Node)
     aniBubbleContainer: cc.Node = null;
 
@@ -32,8 +33,15 @@ export default class BroadContainer extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+    }
+    protected onEnable(): void {
+
         this.onEventTouch();
     }
+    protected onDisable(): void {
+        this.offEventTouch();
+    }
+
 
     arrBubble: [Bubble[]] = [[]];
     listBubbleSelect: Bubble[] = [];
@@ -49,6 +57,13 @@ export default class BroadContainer extends cc.Component {
         canvas.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
         canvas.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
         canvas.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+    }
+    offEventTouch() {
+        let canvas = cc.find('Canvas');
+        canvas.off(cc.Node.EventType.TOUCH_START);
+        canvas.off(cc.Node.EventType.TOUCH_MOVE);
+        canvas.off(cc.Node.EventType.TOUCH_END);
+        canvas.off(cc.Node.EventType.TOUCH_CANCEL);
     }
     init() {
         this.reset();
@@ -189,7 +204,7 @@ export default class BroadContainer extends cc.Component {
             } else {
                 let bubbleCheck = this.checkCollect(bubble);
                 if (bubbleCheck == null) return; // = vs bubble chon gan nhat, khong phu hop dieu kien
-                else if (bubbleCheck == true) this.cutDot(bubble); // quay tro lai 1 bubble
+                else if (bubbleCheck == true) this.cutBubble(bubble); // quay tro lai 1 bubble
                 else this.pushBubble(bubble);
             }
         }
@@ -199,11 +214,6 @@ export default class BroadContainer extends cc.Component {
     }
     touchEnd() {
         this.hideAllConnect();
-
-        // GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: -1, status: false });
-        // console.log(MainData.instance().keyBooster );
-        // console.log("this.listBubbleSelect.length: " + this.listBubbleSelect.length);
-
 
         if (this.listBubbleSelect.length > 1 && MainData.instance().keyBooster == null) {
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: -1, status: false });
@@ -215,14 +225,12 @@ export default class BroadContainer extends cc.Component {
         if (this.listBubbleSelect.length < 2) {
             this.clearBubbleSelected();
             this.boardReady();
-            // console.log("RESUME ======    touchEnd");
-            // game.emit("RESUME_LISTEN_EVENT");
         } else {
-            // this.holeController.upDateAmountMove();
             this.liberate();
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD);
         }
-        // this.progressBubble.clear();
+
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BUBBLE_PROGRESS);
     }
 
     liberate() {
@@ -230,6 +238,13 @@ export default class BroadContainer extends cc.Component {
 
         // if (!isBooster) this._gameController.endMove(this.listDotSelect.length)
         // this.hideAllHighlight();
+
+
+        if (this.listBubbleSelect.length >= 8 && MainData.instance().keyBooster == null || this.isQuadrilateral && MainData.instance().keyBooster == null) {
+
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 2, status: false });
+        }
+
         if (this.isQuadrilateral) this.listBubbleSelect = this.mergeListDotSelect();
 
         MainData.instance().estimateBubble += this.listBubbleSelect.length;
@@ -285,9 +300,8 @@ export default class BroadContainer extends cc.Component {
                 .delay(time)
                 .call(() => {
                     bubble.nonSelect();
-                    bubble.node.parent = this.overlay;
+                    bubble.node.parent = this.bubbleDieContainer;
                     bubble.activeRigidBody(i % 2 == 0);
-                    // CreateBubble.instance().activeRigidBody(bubble.node, i % 2 == 0);
                     this.arrBubble[bubble.row][bubble.col] = null;
                     if (i == touches.length - 1) {
                         this.reSetUpBubble()
@@ -302,6 +316,7 @@ export default class BroadContainer extends cc.Component {
         let existGroupColor1: number = 0;
         let existGroupColor2: number = 0;
         let maxTime = 0;
+        let maxTime1 = 0;
         let countMore = [];
         for (let col = 0; col < 6; col++) {
             let count = 0;
@@ -320,22 +335,26 @@ export default class BroadContainer extends cc.Component {
                     // console.log("idxRow: " + idxRow + "  col: " + col + " posX: " + pos.x + "  poxY: " + pos.y);
 
                     bubble.updateIndex(idxRow, col);
-                    let kc = idxRow - row;
+                    let kc = (idxRow - row) > 1 ? (idxRow - row) * 0.8 : (idxRow - row);
                     maxTime = Math.max(maxTime, speedBall * kc);
+                    maxTime = Math.min(MAXTIME, maxTime)
+
                     bubble.node.stopAllActions();
-                    cc.tween(bubble.node).to(speedBall * kc, { x: pos.x, y: pos.y }).start();
+                    cc.tween(bubble.node).to(maxTime, { x: pos.x, y: pos.y }).start();
                 }
             }
             countMore[col] = count;
         }
         let freeColorGroup1 = amountDefaultGroupColor.groupA - existGroupColor1;
         let freeColorGroup2 = amountDefaultGroupColor.groupB - existGroupColor2;
-        let kc = 0;
         for (let col = 0; col < countMore.length; col++) {
             let count = countMore[col];
             let tempRow = -1;
             if (count > 0) {
-                kc = count;
+                let maxKc = count > 1 ? count * 0.8 : count;
+                maxTime1 = Math.max(maxTime1, speedBall * maxKc);
+                maxTime1 = Math.min(MAXTIME, maxTime1)
+
                 while (count > 0) {
                     let row = count - 1;
                     let color = 0;
@@ -381,9 +400,13 @@ export default class BroadContainer extends cc.Component {
                     let pos: cc.Vec2 = this.getPosition(row, col);
                     bubbleScript.setData(row, col, color);
 
-                    maxTime = Math.max(maxTime, speedBall * (row + 1));
                     bubble.stopAllActions();
-                    cc.tween(bubble).to(speedBall * kc, { x: pos.x, y: pos.y }).start();
+                    // console.log("new kc: " + (row + 1));
+                    // kc = row + 1;
+
+                    // console.log("kc:  " + kc + "  time: " + (kc/speedBall));
+
+                    cc.tween(bubble).to(maxTime1, { x: pos.x, y: pos.y }).start();
                     count--;
                     tempRow--;
                 }
@@ -391,9 +414,11 @@ export default class BroadContainer extends cc.Component {
         }
         // this.node.stopAllActions();
         // console.log('maxTime: ' + maxTime);
-        maxTime = maxTime + speedBall;
+        let maxTimeDelay = Math.max(maxTime, maxTime1) + speedBall;
+        // console.log("maxTimeDelay: " + maxTimeDelay);
+        
         cc.tween(this.node)
-            .delay(maxTime)
+            .delay(maxTimeDelay)
             .call(() => {
                 this.clearBubbleSelected();
                 this.boardReady();
@@ -401,7 +426,6 @@ export default class BroadContainer extends cc.Component {
             .start()
 
     }
-
 
 
 
@@ -434,6 +458,8 @@ export default class BroadContainer extends cc.Component {
         if (this.isQuadrilateral) {
             this.listBubbleSelectQuadrilateral = this.pushAllBubbleColor(bubble.getColor());
         }
+
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_BUBBLE_PROGRESS, { count: this.isQuadrilateral ? 8 : this.listBubbleSelect.length });
         // this.progressBubble.show(this.isQuadrilateral ? 8 : this.listDotSelect.length);
         // let count = this.listDotSelect.length - 1 <= 0 ? 0 : this.listDotSelect.length - 1 >= 11 ? 11 : this.listDotSelect.length - 1;
         // SoundManager.instance().playEffect("Colloect _Bubble_" + count);
@@ -479,7 +505,7 @@ export default class BroadContainer extends cc.Component {
         })
         this.listConnect = [];
     }
-    cutDot(bubble: Bubble) {
+    cutBubble(bubble: Bubble) {
 
         // console.log("cutDot");
         let dataEnd = this.listBubbleSelect[this.listBubbleSelect.length - 1];
@@ -491,6 +517,8 @@ export default class BroadContainer extends cc.Component {
         this.listBubbleSelect.splice(this.listBubbleSelect.length - 1, 1);
 
         this.hideOneConnect();
+
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_BUBBLE_PROGRESS, { count: this.isQuadrilateral ? 8 : this.listBubbleSelect.length });
 
         // this.progressBubble.show(this.isQuadrilateral ? 8 : this.listDotSelect.length);
         // let count = this.listDotSelect.length - 1 <= 0 ? 0 : this.listDotSelect.length - 1 >= 11 ? 11 : this.listDotSelect.length - 1;

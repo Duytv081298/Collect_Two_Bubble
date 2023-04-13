@@ -1,6 +1,7 @@
-import A2UController from "../../component/a2u/A2UController";
+// import A2UController from "../../component/a2u/A2UController";
 import RewardAds from "../../component/ads/RewardAds";
 import { Utils } from "../../component/component/Utils";
+import GlobalEvent from "../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../component/package/PlayfabManager";
 import LocalStorage from "../../component/storage/LocalStorage";
 import MainData from "../../component/storage/MainData";
@@ -11,6 +12,8 @@ const { ccclass, property } = cc._decorator;
 export default class Loading extends cc.Component {
 
     start() {
+        console.log("loading: start");
+
         FBInstant.onPause(() => { });
         FBInstant.startGameAsync()
             .then(() => {
@@ -29,7 +32,7 @@ export default class Loading extends cc.Component {
         FBInstant.player
             .getDataAsync([
                 LocalStorage.SOUND, LocalStorage.MUSIC,
-                LocalStorage.IS_NEW, 
+                LocalStorage.IS_NEW,
                 LocalStorage.HIGHT_SCORE,
                 LocalStorage.CURRENT_GOLD,
                 LocalStorage.BOOSTER_ROCKET,
@@ -50,11 +53,15 @@ export default class Loading extends cc.Component {
                 // LocalStorage.DATA_INVITE_FRIEND
             ])
             .then((data) => {
-                if (data.hasOwnProperty(LocalStorage.SOUND)) {
+                if (data.hasOwnProperty(LocalStorage.SOUND) && data[LocalStorage.SOUND] != undefined) {
                     LocalStorage.setItem(LocalStorage.SOUND, data[LocalStorage.SOUND])
+                } else {
+                    LocalStorage.setItem(LocalStorage.SOUND, true);
                 }
-                if (data.hasOwnProperty(LocalStorage.MUSIC)) {
+                if (data.hasOwnProperty(LocalStorage.MUSIC) && data[LocalStorage.MUSIC] != undefined) {
                     LocalStorage.setItem(LocalStorage.MUSIC, data[LocalStorage.MUSIC])
+                } else {
+                    LocalStorage.setItem(LocalStorage.MUSIC, true);
                 }
                 if (data.hasOwnProperty(LocalStorage.IS_NEW)) {
                     // LocalStorage.setItem(LocalStorage.IS_NEW, true);                
@@ -182,7 +189,7 @@ export default class Loading extends cc.Component {
                     // LocalStorage.setItem(LocalStorage.DATA_GET_MORE_SPIN, {});
                     // LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
 
-                    if (!MainData.instance().isLocal)A2UController.instance.sendNotification()
+                    // if (!MainData.instance().isLocal) A2UController.instance.sendNotification()
                 }
                 this.hideLoading();
                 this.checkFistLogin();
@@ -236,7 +243,7 @@ export default class Loading extends cc.Component {
 
         }
         // cc.tween(this.node).delay(1).call(() => {
-            
+
         //     let currentTime = new Date().getTime();
         //     // console.log("currentTime: ", currentTime);
         //     let timeBeginGetSpin = LocalStorage.getItem(LocalStorage.TIME_GET_SPIN);
@@ -249,16 +256,15 @@ export default class Loading extends cc.Component {
         //     } else {
         //         MainData.instance().totalTimeGetSpin = 1800 - space;
         //     }
-            
-            
+
+
         // }).start();
 
 
         // if (!MainData.instance().isLocal)A2UController.instance.sendNotification()
-
     }
 
-    hideLoading(){
+    hideLoading() {
 
     }
     showLoading() {

@@ -93,7 +93,9 @@ export default class Booster extends cc.Component {
     }
 
     reset() {
+        this.clearBooster();
         this.updateAllUiBooster();
+
     }
     updateAllUiBooster() {
         for (let i = 0; i < this.amount.length; i++) {
@@ -212,6 +214,7 @@ export default class Booster extends cc.Component {
 
         MainData.instance().isUseBooster = false;
         MainData.instance().keyBooster = null;
+        MainData.instance().isHandlerReverse = null;
         // this.keyBooster = null;
         this.keyBoosterAds = null;
         // this.tooltip.hide();

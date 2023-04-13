@@ -1,5 +1,6 @@
 import { SCENE } from "../../component/constant/constant";
 import GlobalEvent from "../../component/event/GlobalEvent";
+import MainData from "../../component/storage/MainData";
 import GameController from "./game/GameController";
 import HomeController from "./main/HomeController";
 
@@ -17,8 +18,6 @@ export default class SceneController extends cc.Component {
     @property(HomeController)
     homeController: HomeController = null;
 
-    currentIdScene: SCENE = null;
-
     // LIFE-CYCLE CALLBACKS:
 
 
@@ -34,13 +33,18 @@ export default class SceneController extends cc.Component {
     }
     switchScene(data) {
         let id = data.idScene
+        // console.log("id: " + id);
+        // console.log("MainData.instance().currentIdScene: " + MainData.instance().currentIdScene);
+        
         if (id == null) {
             this.gameController.node.active = false;
             this.homeController.node.active = false;
+            MainData.instance().currentIdScene = id;
             return;
-        } else if (this.currentIdScene == id) {
+        } else if (MainData.instance().currentIdScene == id) {
             return;
         } else {
+// console.log(111111);
 
             switch (id) {
                 case SCENE.game:
@@ -57,8 +61,10 @@ export default class SceneController extends cc.Component {
                 default:
                     break;
             }
-            this.currentIdScene = id;
+            MainData.instance().currentIdScene = id;
         }
+        
+        // MainData.instance().currentIdScene = id;
     }
 
     // update (dt) {}

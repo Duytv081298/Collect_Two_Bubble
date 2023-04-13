@@ -28,6 +28,11 @@ export default class GlobalEvent extends BaseEvent {
     static UPDATE_AMOUNT_BOOSTER: string = "GlobalEvent.UPDATE_AMOUNT_BOOSTER";
     static UPDATE_UI_BOOSTER: string = "GlobalEvent.UPDATE_UI_BOOSTER";
 
+
+
+    static SHOW_BUBBLE_PROGRESS: string = "GlobalEvent.SHOW_BUBBLE_PROGRESS";
+    static CLEAR_BUBBLE_PROGRESS: string = "GlobalEvent.CLEAR_BUBBLE_PROGRESS";
+
     static SHOW_ANI_HOLE: string = "GlobalEvent.SHOW_ANI_HOLE";
     static SHOW_ANI_COIN_HOLE: string = "GlobalEvent.SHOW_ANI_COIN_HOLE";
     static HIDE_ANI_COIN_HOLE: string = "GlobalEvent.HIDE_ANI_COIN_HOLE";
@@ -41,10 +46,12 @@ export default class GlobalEvent extends BaseEvent {
 
     static SHOW_NO_MOVE_POPUP: string = "GlobalEvent.SHOW_NO_MOVE_POPUP";
     static SHOW_GAME_OVER_POPUP: string = "GlobalEvent.SHOW_GAME_OVER_POPUP";
+    static SHOW_SETTING: string = "GlobalEvent.SHOW_SETTING";
+
+
+    static SHOW_HIDDEN_PRIZES: string = "GlobalEvent.SHOW_HIDDEN_PRIZES";
 
     
-
-
 
     static REWARD_ADS_ON_READY: string = "GlobalEvent.rewardads.onready";
     static REWARD_ADS_ON_REWARD: string = "GlobalEvent.rewardads.onreward";
