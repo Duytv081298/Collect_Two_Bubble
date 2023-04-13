@@ -77,7 +77,7 @@ export default class HiddenPrizes extends cc.Component {
         if (spf) this.spfPlayer = spf;
         let rd = Utils.randomInt(0, 3);
 
-        rd = 0;
+        // rd = 1;
         switch (rd) {
             case HIDDEN_PRIZES.bonus_Moves:
                 console.log("case bonus Moves");
@@ -147,17 +147,91 @@ export default class HiddenPrizes extends cc.Component {
         var coefficient = Utils.randomInt(2, 3)
         if (coefficient == 2) this.giftSp.spriteFrame = this.spf_Multi_Bubbles_X2;
         else this.giftSp.spriteFrame = this.spf_Multi_Bubbles_X3;
-        for (let i = 0; i < 3; i++) {
 
-        }
+
+        let posStart = new cc.Vec3(0, -100, 0);
+        let posEnd = new cc.Vec3(0, 200, 0);
+
+        this.giftSp.node.opacity = 0;
+        this.giftSp.node.setScale(0);
+        this.giftSp.node.stopAllActions()
+        this.giftSp.node.setPosition(posStart)
+
+        cc.tween(this.giftSp.node)
+            .to(0.6, { scale: 1.5, opacity: 255, position: posEnd }, { easing: "cubicOut" })
+            .call(() => {
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES, { coefficient: coefficient });
+
+            })
+            .to(0.3, { opacity: 0 }, { easing: "cubicIn" })
+            .call(() => {
+                this.giftSp.node.setPosition(posStart)
+                this.giftSp.node.active = false;
+            })
+            .start();
+
     }
     hPBubblesBonus() {
         this.giftSp.node.active = true;
+        this.giftSp.spriteFrame = this.spf_Bubbles_Bonus;
+
+        let posStart = new cc.Vec3(0, -100, 0);
+
+        let posEnd = new cc.Vec3(0, 100, 0);
+        this.giftSp.node.opacity = 0;
+        this.giftSp.node.setScale(0);
+        this.giftSp.node.stopAllActions()
+        this.giftSp.node.setPosition(posStart)
+
+
+        cc.tween(this.giftSp.node)
+            .to(0.5, { scale: 1.5, opacity: 255, position: posEnd }, { easing: "cubicOut" })
+
+            .to(0.2, { opacity: 0 }, { easing: "cubicIn" })
+            .call(() => {
+                this.giftSp.node.setPosition(posStart)
+                this.giftSp.node.active = false;
+            })
+            .start();
+
+
+        cc.tween(this.giftSp.node)
+            .delay(0.3)
+            .call(() => {
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDDEN_PRIZES_BUBBLE_BONUS, { parent: this.node });
+            })
+
+            .start();
 
     }
     hPBonusCoin() {
         this.giftSp.node.active = true;
+        this.giftSp.spriteFrame = this.spf_Bonus_Coin;
 
+        let posEnd = this.posGold.getPosition()
+        let posStart = new cc.Vec2(0, 70);
+
+        this.giftSp.node.opacity = 0;
+        this.giftSp.node.setScale(0);
+        this.giftSp.node.stopAllActions()
+        this.giftSp.node.setPosition(posStart)
+
+        cc.tween(this.giftSp.node)
+            .to(0.3, { scale: 1.5, opacity: 255 }, { easing: "cubicOut" })
+            .to(0.5, { scale: 0.3 }, { easing: "cubicIn" })
+            .call(() => {
+                this.giftSp.node.setPosition(posStart)
+                this.giftSp.node.active = false;
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 1 });
+            })
+            .start();
+        cc.tween(this.giftSp.node)
+            .bezierTo(0.8,
+                posStart,
+                cc.v2(Utils.randomInt(posStart.x - 300, posStart.x + 300), Utils.randomInt(posStart.y + 200, posStart.y + 400)),
+                cc.v2(posEnd)
+            )
+            .start();
     }
 
 }

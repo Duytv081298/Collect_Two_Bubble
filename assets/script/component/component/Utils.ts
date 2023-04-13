@@ -119,4 +119,15 @@ export class Utils {
         const date = new Date();
         return date.getHours() * 3600 + date.getMinutes() * 60;
     }
+
+    static  shortenLargeNumber(num: number, digits: number): any {
+        var units = ['K', 'M'],
+            decimal: number;
+        for (var i = units.length - 1; i >= 0; i--) {
+            decimal = Math.pow(1000, i + 1);
+            if (num <= -decimal || num >= decimal)
+                return +(num / decimal).toFixed(digits) + units[i];
+        }
+        return num;
+    }
 }

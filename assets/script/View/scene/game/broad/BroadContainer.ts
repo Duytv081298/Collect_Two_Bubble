@@ -35,11 +35,14 @@ export default class BroadContainer extends cc.Component {
     onLoad() {
     }
     protected onEnable(): void {
-
         this.onEventTouch();
+        GlobalEvent.instance().addEventListener(GlobalEvent.HIDDEN_PRIZES_BUBBLE_BONUS, this.hPBubblesBonus, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES, this.hPMultiBubblesX, this);
     }
     protected onDisable(): void {
         this.offEventTouch();
+        GlobalEvent.instance().removeEventListener(GlobalEvent.HIDDEN_PRIZES_BUBBLE_BONUS, this.hPBubblesBonus, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES, this.hPMultiBubblesX, this);
     }
 
 
@@ -416,7 +419,7 @@ export default class BroadContainer extends cc.Component {
         // console.log('maxTime: ' + maxTime);
         let maxTimeDelay = Math.max(maxTime, maxTime1) + speedBall;
         // console.log("maxTimeDelay: " + maxTimeDelay);
-        
+
         cc.tween(this.node)
             .delay(maxTimeDelay)
             .call(() => {
@@ -580,11 +583,11 @@ export default class BroadContainer extends cc.Component {
     }
 
     getBubbleRocket(bubble: Bubble): Bubble[] {
-        var row = bubble.row;
-        var col = bubble.col;
+        let row = bubble.row;
+        let col = bubble.col;
         bubble.isSelect = true;
 
-        var listBubble: Bubble[] = [];
+        let listBubble: Bubble[] = [];
         listBubble.push(bubble);
 
 
@@ -593,11 +596,11 @@ export default class BroadContainer extends cc.Component {
         let top: boolean = row > 0;
         let bottom: boolean = row < MAXROWBOARD - 1;
 
-        var index = 1;
+        let index = 1;
 
         while (right || left || top || bottom) {
             if (right) {
-                var newCol = col + index
+                let newCol = col + index
                 if (newCol == MAXCOLUMNBOARD - 1) right = false
                 let tempDot = this.arrBubble[row][newCol];
                 if (listBubble.indexOf(tempDot) < 0) {
@@ -606,7 +609,7 @@ export default class BroadContainer extends cc.Component {
                 }
             }
             if (top) {
-                var newRow = row - index
+                let newRow = row - index
                 if (newRow == 0) top = false
                 let tempDot = this.arrBubble[newRow][col];
                 if (listBubble.indexOf(tempDot) < 0) {
@@ -615,7 +618,7 @@ export default class BroadContainer extends cc.Component {
                 }
             }
             if (left) {
-                var newCol = col - index
+                let newCol = col - index
                 if (newCol == 0) left = false
                 let tempDot = this.arrBubble[row][newCol];
                 if (listBubble.indexOf(tempDot) < 0) {
@@ -624,7 +627,7 @@ export default class BroadContainer extends cc.Component {
                 }
             }
             if (bottom) {
-                var newRow = row + index
+                let newRow = row + index
                 if (newRow == MAXROWBOARD - 1) bottom = false
                 let tempDot = this.arrBubble[newRow][col];
                 if (listBubble.indexOf(tempDot) < 0) {
@@ -643,12 +646,12 @@ export default class BroadContainer extends cc.Component {
     }
     getDotBomb(bubble: Bubble): Bubble[] {
 
-        var tempListStepX: number[] = [-1, 0, 1, 0, -1, 1, 1, -1]
-        var tempListStepY: number[] = [0, -1, 0, 1, -1, -1, 1, +1]
+        let tempListStepX: number[] = [-1, 0, 1, 0, -1, 1, 1, -1]
+        let tempListStepY: number[] = [0, -1, 0, 1, -1, -1, 1, +1]
         bubble.isSelect = true;
-        var listDot: Bubble[] = [bubble];
-        var row = bubble.row;
-        var col = bubble.col;
+        let listDot: Bubble[] = [bubble];
+        let row = bubble.row;
+        let col = bubble.col;
 
         for (let i = 0; i < tempListStepX.length; i++) {
             let x = col + tempListStepX[i];
@@ -676,7 +679,7 @@ export default class BroadContainer extends cc.Component {
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
         }
         else {
-            var x = bubble.col - this.bubbleReverseA.col;
+            let x = bubble.col - this.bubbleReverseA.col;
             let y = bubble.row - this.bubbleReverseA.row;
             if (bubble != this.bubbleReverseA && Math.abs(x - y) == 1 && Math.abs(x) <= 1 && Math.abs(y) <= 1) {
                 this.bubbleReverseB = bubble;
@@ -709,8 +712,8 @@ export default class BroadContainer extends cc.Component {
         let a = this.bubbleReverseA;
         let b = this.bubbleReverseB;
 
-        b.reSetData(row0, col0, color1, coefficient0);
-        a.reSetData(row1, col1, color0, coefficient1);
+        b.reSetData(row0, col0, color1, coefficient1);
+        a.reSetData(row1, col1, color0, coefficient0);
         cc.tween(this.bubbleReverseA.node)
             .to(speedBall * 2, { position: index1 }, { easing: "cubicOut" })
             .call(() => {
@@ -741,7 +744,7 @@ export default class BroadContainer extends cc.Component {
             item = this.arrBubble[row][col];
             let idx = 0;
             for (let i = 0; i < blockSpace.length; i++) {
-                var space = blockSpace[i];
+                let space = blockSpace[i];
                 let tCol = col + space[0];
                 let tRow = row + space[1];
                 if (tCol == col && tRow == row) continue;
@@ -765,7 +768,7 @@ export default class BroadContainer extends cc.Component {
             for (let l = 0; l < arrPath.length; l++) {
                 item = arrPath[l][arrPath[l].length - 1];
                 for (let i = 0; i < blockSpace.length; i++) {
-                    var space = blockSpace[i];
+                    let space = blockSpace[i];
                     let tCol = item.col + space[0];
                     let tRow = item.row + space[1];
 
@@ -842,8 +845,43 @@ export default class BroadContainer extends cc.Component {
 
 
 
+    hPBubblesBonus(data) {
+        let parent = data.parent;
+        for (let i = 0; i < 8; i++) {
+            let bubble = CreateBubble.instance().createItem();
+
+            bubble.setPosition(-100 + i * 25, 100);
+            bubble.setScale(0.8);
+            bubble.setParent(parent);
+            bubble.active = true;
+            let color = Math.floor(Math.random() * 5)
 
 
+            let bubbleScript = bubble.getComponent(Bubble);
+            bubbleScript.setColor(color);
+            bubbleScript.activeRigidBody(Utils.randomInt(0, 1) == 0, true)
+        }
+    }
+    hPMultiBubblesX(data) {
+        let coefficient = data.coefficient;
+        if (coefficient) {
+            for (let i = 0; i < 3; i++) {
+                this.randomBubblesX(coefficient);
+            }
+        }
+    }
+    randomBubblesX(coefficient: number | null) {
+        var index = 1;
+        var bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
+        while (bubble.coefficients > 1 && index < 100) {
+            var bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
+            index++;
+        }
+        if (bubble.coefficients > 1) return false;
+        
+        var tempCoefficient = coefficient ? coefficient : Math.floor(Math.random() * 4) + 2;
+        bubble.coefficients = tempCoefficient;
+    }
 
 
 

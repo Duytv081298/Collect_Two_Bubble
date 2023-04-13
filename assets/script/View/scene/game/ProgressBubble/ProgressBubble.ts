@@ -2,7 +2,7 @@ import GlobalEvent from "../../../../component/event/GlobalEvent";
 
 const { ccclass, property } = cc._decorator;
 
-@ccclass()
+@ccclass
 export class ProgressBubble extends cc.Component {
     @property(cc.Node)
     bottom: cc.Node = null;

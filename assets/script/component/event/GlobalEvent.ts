@@ -50,6 +50,8 @@ export default class GlobalEvent extends BaseEvent {
 
 
     static SHOW_HIDDEN_PRIZES: string = "GlobalEvent.SHOW_HIDDEN_PRIZES";
+    static HIDDEN_PRIZES_BUBBLE_BONUS: string = "GlobalEvent.HIDDEN_PRIZES_BUBBLE_BONUS";
+    static HIDDEN_PRIZES_MULTI_BUBBLES: string = "GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES";
 
     
 

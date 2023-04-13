@@ -215,7 +215,6 @@ export default class RankController extends cc.Component {
                 let sp = item.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame;
                 CreatePlayerRank.instance().removeItemRank(item);
                 if (i == totalPlayerPass - 1) GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_HIDDEN_PRIZES, { spfPlayer: sp });
-                console.log(i);
 
             }).start();
             this.showRankPlayer();

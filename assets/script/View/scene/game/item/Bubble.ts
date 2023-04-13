@@ -1,6 +1,8 @@
+import { Utils } from "../../../../component/component/Utils";
+
 const { ccclass, property } = cc._decorator;
 
-@ccclass()
+@ccclass
 export default class Bubble extends cc.Component {
     @property(cc.Sprite)
     item: cc.Sprite = null;
@@ -16,6 +18,8 @@ export default class Bubble extends cc.Component {
     }
     public set coefficients(value: number) {
         this._coefficients = value;
+        this.upDateUI();
+
     }
     // LIFE-CYCLE CALLBACKS:
     // onLoad () {}
@@ -32,7 +36,7 @@ export default class Bubble extends cc.Component {
         this.upDateUI();
     }
     reSetData(row: number, col: number, color: number, coefficients: number = 1) {
-        
+
         this.row = row;
         this.col = col;
         this.color = color;
@@ -77,6 +81,7 @@ export default class Bubble extends cc.Component {
     }
     setColor(color: number) {
         this.color = color;
+        this.upDateUI();
     }
     getColor() {
         return this.color;
@@ -86,7 +91,7 @@ export default class Bubble extends cc.Component {
         this.node.emit("CollisionEnter", this);
     }
 
-    activeRigidBody(status: boolean = false) {
+    activeRigidBody(status: boolean = false, isBonus: boolean = false) {
 
         let rigidBody = this.node.getComponent(cc.RigidBody)
         rigidBody.active = true;
@@ -98,7 +103,7 @@ export default class Bubble extends cc.Component {
 
         // itemNode.setSiblingIndex(itemNode.parent.children.length - 1);
 
-        this.randomLinearVelocity(status);
+        this.randomLinearVelocity(status, isBonus);
 
     }
     deActiveRigidBody() {
@@ -111,17 +116,22 @@ export default class Bubble extends cc.Component {
         physicsCircleCollider.enabled = false;
     }
 
-    randomLinearVelocity(status: boolean) {
+    randomLinearVelocity(status: boolean, isBonus: boolean = false) {
+        // console.log("status:  " + status + "   isBonus: " + isBonus);
+
         let rigidBody = this.node.getComponent(cc.RigidBody);
         rigidBody.gravityScale = 50;
         if (rigidBody) {
-            var randomX = Math.random() * 51
-            if (status) randomX += 250
+            var randomX = isBonus ? Utils.randomInt(0, 7) * 50 :Utils.randomInt(3, 7) * 15
+            if (!status) randomX += 200
             else {
                 randomX *= (-1)
-                randomX -= 250
+                randomX -= 200
             }
-            rigidBody.linearVelocity = new cc.Vec2(randomX, (Math.random() * 301 + 2200))
+            let randomY = isBonus ? Utils.randomInt(0, 10) * 100 + 2000 : Utils.randomInt(0, 5) * 100 + 2000;
+            // console.log("randomX: " + randomX + "   randomY: " + randomY);
+
+            rigidBody.linearVelocity = new cc.Vec2(randomX, randomY)
         }
 
     }

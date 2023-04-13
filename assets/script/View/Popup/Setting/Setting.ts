@@ -5,7 +5,7 @@ import MainData from "../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
 
-@ccclass()
+@ccclass
 export class Setting extends cc.Component {
 
     @property(cc.Toggle)

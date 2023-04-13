@@ -76,8 +76,9 @@ export default class UIController extends cc.Component {
             .start();
     }
     updateGold(data) {
+        console.log("update gold");
+        
         let gold = parseInt(data.gold);
-        if (data.gold == 0) return;
         LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
         if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER)
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_UI_BOOSTER);
