@@ -54,7 +54,7 @@ export default class MainData {
     //     collected: false
     // }
     // dataGetMoreSpin = {};
-    // dataInviteFriend = {};
+    dataInviteFriend = {};
     // private _totalTimeGetSpin = 1800;
     // private idTimeGetSpin = null;
     // public get totalTimeGetSpin() {
@@ -83,6 +83,9 @@ export default class MainData {
     //         }, 1000)
     //     }
     // }
+    isRunPlayer: boolean = false;
+    isHiddenPrizes: boolean = false;
+    isOpenGift: boolean = false;
 
     isShowNoMove: boolean = false;
     isShowEndGame: boolean = false;

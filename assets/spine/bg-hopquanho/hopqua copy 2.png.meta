@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "7fa508f5-154d-49a8-b8ab-0a9aa4046434",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 124,
+  "height": 79,
+  "platformSettings": {},
+  "subMetas": {
+    "hopqua copy 2": {
+      "ver": "1.0.6",
+      "uuid": "167be803-3394-4917-b7a2-bdaaabeb5216",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "7fa508f5-154d-49a8-b8ab-0a9aa4046434",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 3,
+      "width": 120,
+      "height": 73,
+      "rawWidth": 124,
+      "rawHeight": 79,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

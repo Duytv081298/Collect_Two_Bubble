@@ -1,0 +1,20 @@
+
+hopqua copy 2.png
+size: 124,79
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hopqua1
+  rotate: false
+  xy: 2, 2
+  size: 62, 75
+  orig: 64, 75
+  offset: 1, 0
+  index: -1
+hopqua2
+  rotate: false
+  xy: 66, 8
+  size: 56, 69
+  orig: 58, 69
+  offset: 1, 0
+  index: -1

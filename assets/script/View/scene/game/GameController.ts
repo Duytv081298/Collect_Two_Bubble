@@ -16,9 +16,10 @@ export default class GameController extends cc.Component {
 
     onLoad() {
 
-        var manager = cc.director.getCollisionManager();
+        let manager = cc.director.getCollisionManager();
         manager.enabled = true;
         cc.director.getPhysicsManager().enabled = true;
+        cc.macro.ENABLE_MULTI_TOUCH = false;
         // cc.director.getPhysicsManager().gravity = new cc.Vec2(10, 10);
         // manager.enabledDebugDraw = true;
         // manager.enabledDrawBoundingBox = true;
@@ -54,6 +55,10 @@ export default class GameController extends cc.Component {
         MainData.instance().score = 0;
         MainData.instance().move = MAX_MOVE;
 
+        MainData.instance().isRunPlayer = false;
+        MainData.instance().isOpenGift = false;
+        MainData.instance().isHiddenPrizes = false;
+
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 0 });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 0, status: true });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 0 });
@@ -66,7 +71,7 @@ export default class GameController extends cc.Component {
     }
 
     clickSetting() {
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SETTING);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SETTING_POPUP);
     }
 
     // updateScore(data) {

@@ -50,6 +50,8 @@ export default class SceneController extends cc.Component {
                 case SCENE.game:
                     this.bg_home.active = true;
                     this.gameController.node.active = true;
+                    console.log("GlobalEvent.START_GAME");
+                    
                     GlobalEvent.instance().dispatchEvent(GlobalEvent.START_GAME);
                     this.homeController.node.active = false;
                     break;

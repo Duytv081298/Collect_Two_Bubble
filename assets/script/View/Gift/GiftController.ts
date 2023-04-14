@@ -1,5 +1,6 @@
 import PopupController from "../../../script/View/Popup/PopupController";
 import { Utils } from "../../../script/component/component/Utils";
+import GlobalEvent from "../../../script/component/event/GlobalEvent";
 import MainData from "../../../script/component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
@@ -11,9 +12,6 @@ const DICSHOWANI: number = 2000;
 export class GiftController extends cc.Component {
 
 
-    @property(PopupController)
-    popupController: PopupController = null;
-
     @property(cc.Node)
     giftDefault: cc.Node = null;
     @property(sp.Skeleton)
@@ -23,37 +21,38 @@ export class GiftController extends cc.Component {
     lbTarget: cc.Label = null;
 
     amountTarget: number = MINTARGET;
-    scoreUser: number = 0;
-    isShow: boolean = false;
+    // isShow: boolean = false;
     isPlayAni: boolean = false;
 
+
     protected onEnable(): void {
-        // game.on("SUCCESSFULLY_RECEIVED_GIFTS", () => { this.isShow = false; }, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.START_GAME, this.reset, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.CHECK_SHOW_GIFT, this.upScore, this);
     }
     protected onDisable(): void {
-        // game.off("SUCCESSFULLY_RECEIVED_GIFTS");
+
+        GlobalEvent.instance().removeEventListener(GlobalEvent.START_GAME, this.reset, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.CHECK_SHOW_GIFT, this.upScore, this);
     }
 
-    init() {
-
+    reset() {
         this.amountTarget = MINTARGET;
-        this.scoreUser = 0;
         this.lbTarget.string = Utils.shortenLargeNumber(this.amountTarget, 0);
         this.giftDefault.active = true;
         this.aniGift.node.active = false;
-
     }
     upScore() {
-        this.scoreUser = MainData.instance().score;
-        if (this.amountTarget - this.scoreUser <= DICSHOWANI && !this.isPlayAni) {
+        if (this.amountTarget - MainData.instance().score <= DICSHOWANI && !this.isPlayAni) {
             this.giftDefault.active = false;
             this.aniGift.node.active = true;
-            this.aniGift.setAnimation(0, "animation", true);
+            this.aniGift.clearTrack(0);
             this.aniGift.setSkin("default");
+            this.aniGift.setAnimation(0, "animation", true);
             this.isPlayAni = true;
         }
-        if (this.amountTarget - this.scoreUser <= 0 && !this.isShow) {
-
+        if (this.amountTarget - MainData.instance().score <= 0) {
             // SoundManager.instance().playEffect("TargetComplete");
             this.showReceiveGift();
         }
@@ -64,8 +63,7 @@ export class GiftController extends cc.Component {
         this.giftDefault.active = true;
         this.aniGift.node.active = false;
 
-        this.isShow = true;
-
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GIFT);
         // this.popupController.showPopupGift();
     }
 

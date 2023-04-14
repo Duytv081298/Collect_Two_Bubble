@@ -40,7 +40,7 @@ export default class AnimationHole extends cc.Component {
         let particle = this.holeParticle[indexHole];
         if (bg.active == true) return;
 
-        var anim = bg.getComponent(cc.Animation);
+        let anim = bg.getComponent(cc.Animation);
         anim.on(cc.Animation.EventType.FINISHED, () => {
             bg.active = false;
             particle.stopSystem();

@@ -55,6 +55,7 @@ export default class UIController extends cc.Component {
         let score = parseInt(data.score);
         MainData.instance().score += score;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.TWEEN_PLAYER_RANKING);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CHECK_SHOW_GIFT);
         this.score_game.string = MainData.instance().score.toString();
     }
     updateMove(data) {
@@ -63,7 +64,7 @@ export default class UIController extends cc.Component {
         MainData.instance().move += move;
 
         let status = data.status;
-        var time = 0.2;
+        let time = 0.2;
         cc.tween(this.move_game.node)
             .to(time,
                 { position: new cc.Vec3(0, status ? -this.move_game.node.height : this.move_game.node.height, 0) })

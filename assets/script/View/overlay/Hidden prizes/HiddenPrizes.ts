@@ -9,6 +9,7 @@
 import { Utils } from "../../../component/component/Utils";
 import { HIDDEN_PRIZES } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
+import MainData from "../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
 @ccclass
@@ -69,6 +70,7 @@ export default class HiddenPrizes extends cc.Component {
     }
 
     show(data) {
+        MainData.instance().isHiddenPrizes = true;
         for (let i = 0; i < this.node.children.length; i++) {
             this.node.children[i].active = false;
         }
@@ -97,7 +99,7 @@ export default class HiddenPrizes extends cc.Component {
                 this.hPBonusCoin();
                 break;
             default:
-                break;
+                return;
         }
         this.showUserBount();
     }
@@ -116,6 +118,7 @@ export default class HiddenPrizes extends cc.Component {
                 this.plusMove.setPosition(posStart)
                 this.plusMove.active = false;
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 1 });
+                MainData.instance().isHiddenPrizes = false;
             })
             .start();
         cc.tween(this.plusMove)
@@ -144,7 +147,7 @@ export default class HiddenPrizes extends cc.Component {
     }
     hPMultiBubbles() {
         this.giftSp.node.active = true;
-        var coefficient = Utils.randomInt(2, 3)
+        let coefficient = Utils.randomInt(2, 3)
         if (coefficient == 2) this.giftSp.spriteFrame = this.spf_Multi_Bubbles_X2;
         else this.giftSp.spriteFrame = this.spf_Multi_Bubbles_X3;
 
@@ -167,6 +170,7 @@ export default class HiddenPrizes extends cc.Component {
             .call(() => {
                 this.giftSp.node.setPosition(posStart)
                 this.giftSp.node.active = false;
+                MainData.instance().isHiddenPrizes = false;
             })
             .start();
 
@@ -191,16 +195,14 @@ export default class HiddenPrizes extends cc.Component {
             .call(() => {
                 this.giftSp.node.setPosition(posStart)
                 this.giftSp.node.active = false;
+                MainData.instance().isHiddenPrizes = false;
             })
             .start();
-
-
         cc.tween(this.giftSp.node)
             .delay(0.3)
             .call(() => {
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDDEN_PRIZES_BUBBLE_BONUS, { parent: this.node });
             })
-
             .start();
 
     }
@@ -223,6 +225,7 @@ export default class HiddenPrizes extends cc.Component {
                 this.giftSp.node.setPosition(posStart)
                 this.giftSp.node.active = false;
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 1 });
+                MainData.instance().isHiddenPrizes = false;
             })
             .start();
         cc.tween(this.giftSp.node)

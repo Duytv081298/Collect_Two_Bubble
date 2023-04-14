@@ -14,8 +14,8 @@ export class Utils {
     
 
     static getDistance(p1: cc.Vec3, p2: cc.Vec3) {
-        var a = p1.x - p2.x;
-        var b = p1.y - p2.y;
+        let a = p1.x - p2.x;
+        let b = p1.y - p2.y;
         return Math.sqrt(a * a + b * b);
     }
     static getAngle(dot0: Bubble, dot1: Bubble): number {
@@ -121,9 +121,9 @@ export class Utils {
     }
 
     static  shortenLargeNumber(num: number, digits: number): any {
-        var units = ['K', 'M'],
+        let units = ['K', 'M'],
             decimal: number;
-        for (var i = units.length - 1; i >= 0; i--) {
+        for (let i = units.length - 1; i >= 0; i--) {
             decimal = Math.pow(1000, i + 1);
             if (num <= -decimal || num >= decimal)
                 return +(num / decimal).toFixed(digits) + units[i];

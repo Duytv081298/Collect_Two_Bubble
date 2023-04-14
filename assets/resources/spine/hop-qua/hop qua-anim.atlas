@@ -1,0 +1,76 @@
+
+hop qua-anim.png
+size: 1911,852
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+canh 2
+  rotate: true
+  xy: 600, 3
+  size: 156, 121
+  orig: 156, 122
+  offset: 0, 1
+  index: -1
+canh1
+  rotate: true
+  xy: 2, 11
+  size: 79, 94
+  orig: 80, 95
+  offset: 0, 1
+  index: -1
+canh3
+  rotate: true
+  xy: 832, 14
+  size: 145, 91
+  orig: 146, 92
+  offset: 1, 1
+  index: -1
+canh4
+  rotate: false
+  xy: 723, 14
+  size: 107, 145
+  orig: 109, 145
+  offset: 1, 0
+  index: -1
+glow1
+  rotate: true
+  xy: 600, 161
+  size: 689, 531
+  orig: 753, 531
+  offset: 33, 0
+  index: -1
+glow2
+  rotate: true
+  xy: 1133, 247
+  size: 603, 391
+  orig: 634, 391
+  offset: 15, 0
+  index: -1
+glow3
+  rotate: true
+  xy: 2, 92
+  size: 758, 596
+  orig: 815, 596
+  offset: 13, 0
+  index: -1
+light-ray
+  rotate: false
+  xy: 1526, 294
+  size: 383, 556
+  orig: 410, 556
+  offset: 14, 0
+  index: -1
+nap
+  rotate: false
+  xy: 1133, 54
+  size: 337, 191
+  orig: 339, 191
+  offset: 1, 0
+  index: -1
+than
+  rotate: true
+  xy: 1526, 2
+  size: 290, 282
+  orig: 293, 282
+  offset: 1, 0
+  index: -1

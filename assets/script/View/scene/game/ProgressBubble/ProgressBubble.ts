@@ -78,13 +78,13 @@ export class ProgressBubble extends cc.Component {
         this.sang1.active = true;
         this.sang2.active = true;
 
-        var newCount = count >= 8 ? 8 : count;
+        let newCount = count >= 8 ? 8 : count;
         if (newCount <= 3) {
             this.sang1.angle = 0;
             this.sang2.angle = 180;
             this.bottom.setScale(new cc.Vec3(newCount * (1 / 3), 1, 1))
 
-            var x = (this.bottom.scaleX * this.bottom.width) * 0.5;
+            let x = (this.bottom.scaleX * this.bottom.width) * 0.5;
 
             this.sang1.setPosition(x, this.bottom.position.y)
             this.sang2.setPosition(-x, this.bottom.position.y)
@@ -117,7 +117,7 @@ export class ProgressBubble extends cc.Component {
             this.right.setScale(new cc.Vec3((newCount - 3) * (1 / 3), 1, 1))
 
 
-            var y = (this.left.scaleX * this.bottom.width);
+            let y = (this.left.scaleX * this.bottom.width);
 
             this.sang1.setPosition(this.right.position.x, this.right.position.y + y)
             this.sang2.setPosition(this.left.position.x, this.left.position.y + y)
@@ -154,7 +154,7 @@ export class ProgressBubble extends cc.Component {
             this.topRight.setScale(new cc.Vec3((newCount - 6) * (1 / 2), 1, 1))
 
 
-            var x = (this.topLeft.scaleX * this.topLeft.width);
+            let x = (this.topLeft.scaleX * this.topLeft.width);
 
             this.sang1.setPosition(this.topRight.position.x - x, this.topRight.position.y)
             this.sang2.setPosition(this.topLeft.position.x + x, this.topLeft.position.y)

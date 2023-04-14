@@ -20,12 +20,10 @@ export default class AnimationBooster extends cc.Component {
     }
 
     protected onEnable(): void {
-
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ANI_BOOSTER, this.show, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.CLEAR_BOOSTER, this.hideAll, this);
     }
     protected onDisable(): void {
-
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ANI_BOOSTER, this.show, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.CLEAR_BOOSTER, this.hideAll, this);
     }

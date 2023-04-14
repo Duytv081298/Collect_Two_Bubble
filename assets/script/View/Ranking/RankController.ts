@@ -156,6 +156,8 @@ export default class RankController extends cc.Component {
     tweenSpinScore() {
         if (MainData.instance().score == 0) return;
         if (this.playerRank == 0) return;
+
+        MainData.instance().isRunPlayer = true;
         let scorePlay = MainData.instance().score;
 
         let listIndexPlayerPass = this.getIndexPlayerPass()
@@ -194,7 +196,7 @@ export default class RankController extends cc.Component {
                 let vx1 = vx - ((scoreKc1 / maxScoreKc1) * maxKc1);
 
                 cc.tween(this.node).to(0.2, { x: vx1 }).call(() => {
-
+                    MainData.instance().isRunPlayer = false;
                 }).start()
             }
 
@@ -206,7 +208,9 @@ export default class RankController extends cc.Component {
             let maxScoreKc = scoreEnd - this.backScorePlay;
             let scoreKc = scorePlay - this.backScorePlay;
             let vx: number = this.node.position.x - ((scoreKc / maxScoreKc) * maxKc);
-            cc.tween(this.node).to(0.2, { x: vx }).call(() => { }).start()
+            cc.tween(this.node).to(0.2, { x: vx }).call(() => { 
+                MainData.instance().isRunPlayer = false;
+            }).start()
         }
 
         for (let i = 0; i < totalPlayerPass; i++) {
@@ -215,7 +219,7 @@ export default class RankController extends cc.Component {
                 let sp = item.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame;
                 CreatePlayerRank.instance().removeItemRank(item);
                 if (i == totalPlayerPass - 1) GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_HIDDEN_PRIZES, { spfPlayer: sp });
-
+                MainData.instance().isRunPlayer = false;
             }).start();
             this.showRankPlayer();
         }
@@ -263,7 +267,7 @@ export default class RankController extends cc.Component {
 
     getNameUser() {
         let arrName = NameBot.getArrName();
-        var name = arrName[Math.floor(Math.random() * arrName.length)];
+        let name = arrName[Math.floor(Math.random() * arrName.length)];
         while (this.listNames.indexOf(name) >= 0) {
             name = arrName[Math.floor(Math.random() * arrName.length)]
         }

@@ -17,7 +17,7 @@ export default class ScoreBubble extends cc.Component {
         this.aniScore();
     }
     aniScore() {
-        var newPos = new cc.Vec3(this.node.position.x, this.node.position.y + 120, 0)
+        let newPos = new cc.Vec3(this.node.position.x, this.node.position.y + 120, 0)
         cc.tween(this.node)
             .to(0.5, { position: newPos }, { easing: "cubicOut" })
             .call(() => {

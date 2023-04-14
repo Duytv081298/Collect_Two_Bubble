@@ -25,7 +25,7 @@ export default class LocalStorage {
     // static TOOLTIP_REVERSE: string = "tooltipReverse"
     // static TOOLTIP_HAMMER: string = "tooltipHammer"
 
-    // static COUNT_FREE_GIFT: string = "countFreeGift"
+    static COUNT_FREE_GIFT: string = "countFreeGift"
 
     // static COUNT_PLAY_FRIEND: string = "countPlayFriend"
     // static COUNT_ITEM_HAMMER: string = "countItemHammer"
@@ -39,7 +39,7 @@ export default class LocalStorage {
     // static CURRENT_SPIN: string = "current_spin";
     // static TIME_GET_SPIN: string = "time_get_spin";
     // static DATA_GET_MORE_SPIN: string = "data_get_more_spin";
-    // static DATA_INVITE_FRIEND: string = "data_invite_friend";
+    static DATA_INVITE_FRIEND: string = "data_invite_friend";
     static getItem(name: string) {
         return dataGame.get(name);
     }

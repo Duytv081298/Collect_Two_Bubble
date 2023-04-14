@@ -5,6 +5,7 @@ import GlobalEvent from "../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../component/package/PlayfabManager";
 import LocalStorage from "../../component/storage/LocalStorage";
 import MainData from "../../component/storage/MainData";
+import { VideoRewards } from "../Popup/Video Rewards/VideoRewards";
 
 const { ccclass, property } = cc._decorator;
 
@@ -49,7 +50,7 @@ export default class Loading extends cc.Component {
                 // LocalStorage.CURRENT_SPIN,
                 // LocalStorage.TIME_GET_SPIN,
                 // LocalStorage.DATA_GET_MORE_SPIN,
-                // LocalStorage.COUNT_FREE_GIFT,
+                LocalStorage.COUNT_FREE_GIFT,
                 // LocalStorage.DATA_INVITE_FRIEND
             ])
             .then((data) => {
@@ -164,12 +165,12 @@ export default class Loading extends cc.Component {
                 // }
 
 
-                // if (data.hasOwnProperty(LocalStorage.COUNT_FREE_GIFT)) {
-                //     // LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
-                //     LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, data[LocalStorage.COUNT_FREE_GIFT])
-                // } else {
-                //     LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
-                // }
+                if (data.hasOwnProperty(LocalStorage.COUNT_FREE_GIFT) && data[LocalStorage.COUNT_FREE_GIFT] != undefined) {
+                    // LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
+                    LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, data[LocalStorage.COUNT_FREE_GIFT])
+                } else {
+                    LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
+                }
 
                 // if (data.hasOwnProperty(LocalStorage.DATA_INVITE_FRIEND)) {
                 //     LocalStorage.setItem(LocalStorage.DATA_INVITE_FRIEND, data[LocalStorage.DATA_INVITE_FRIEND])
@@ -187,7 +188,7 @@ export default class Loading extends cc.Component {
                     // LocalStorage.setItem(LocalStorage.CURRENT_SPIN, MainData.instance().currentSpin + 2);
                     // LocalStorage.setItem(LocalStorage.TIME_GET_SPIN, currentTime);
                     // LocalStorage.setItem(LocalStorage.DATA_GET_MORE_SPIN, {});
-                    // LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
+                    LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
 
                     // if (!MainData.instance().isLocal) A2UController.instance.sendNotification()
                 }
@@ -206,7 +207,7 @@ export default class Loading extends cc.Component {
                 LocalStorage.setItem(LocalStorage.BOOSTER_REVERSE, 0);
                 LocalStorage.setItem(hightScoreTour, 0);
                 // LocalStorage.setItem(LocalStorage.COUNT_PLAY_FRIEND, 0);
-                // LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
+                LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
                 // LocalStorage.setItem(LocalStorage.DAILY_COLLECT, false);
                 // LocalStorage.setItem(LocalStorage.CURRENT_DAILY_COLLECT, 1);
                 // LocalStorage.setItem(LocalStorage.CURRENT_SPIN, 0);

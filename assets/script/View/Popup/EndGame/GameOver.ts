@@ -105,8 +105,8 @@ export default class GameOver extends cc.Component {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: this.isClaimX3 ? this.amountReward * 3 : this.amountReward });
     }
     ClaimX3() {
-        var maxCoin = this.amountReward * 3;
-        var minCoin = this.amountReward;
+        let maxCoin = this.amountReward * 3;
+        let minCoin = this.amountReward;
 
         this.aniUpCoin(minCoin, maxCoin);
         this.isClaimX3 = true;

@@ -44,9 +44,11 @@ export default class GlobalEvent extends BaseEvent {
     static HIDE_LOADING: string = "GlobalEvent.HIDE_LOADING";
 
 
+    static SHOW_INVITE_FRIEND_POPUP: string = "GlobalEvent.SHOW_INVITE_FRIEND_POPUP";
+    static SHOW_VIDEO_REWARDS_POPUP: string = "GlobalEvent.SHOW_VIDEO_REWARDS_POPUP";
     static SHOW_NO_MOVE_POPUP: string = "GlobalEvent.SHOW_NO_MOVE_POPUP";
     static SHOW_GAME_OVER_POPUP: string = "GlobalEvent.SHOW_GAME_OVER_POPUP";
-    static SHOW_SETTING: string = "GlobalEvent.SHOW_SETTING";
+    static SHOW_SETTING_POPUP: string = "GlobalEvent.SHOW_SETTING_POPUP";
 
 
     static SHOW_HIDDEN_PRIZES: string = "GlobalEvent.SHOW_HIDDEN_PRIZES";
@@ -54,6 +56,9 @@ export default class GlobalEvent extends BaseEvent {
     static HIDDEN_PRIZES_MULTI_BUBBLES: string = "GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES";
 
     
+    static SHOW_GIFT: string = "GlobalEvent.SHOW_GIFT";
+    static CHECK_SHOW_GIFT: string = "GlobalEvent.CHECK_SHOW_GIFT";
+
 
     static REWARD_ADS_ON_READY: string = "GlobalEvent.rewardads.onready";
     static REWARD_ADS_ON_REWARD: string = "GlobalEvent.rewardads.onreward";

@@ -59,36 +59,9 @@ export default class Booster extends cc.Component {
     viewAdsComplete(data) {
         if (this.keyBoosterAds == null) return;
         if (data.type == RewardAds.REWARDED_BOOSTER) {
-            // switch (this.keyBoosterAds) {
-            //     case BOOSTER.rocket:
-            //         // this.updateAmountBooster(BOOSTER.rocket, 1);
-            //         game.emit("SHOW_POPUP_GIFT_PLUS_BOOSTER", BOOSTER.rocket)
-            //         FaceBook.logEvent(LogEventName.buyBoosterRocketVideo)
-            //         break;
-            //     case BOOSTER.bomb:
-            //         game.emit("SHOW_POPUP_GIFT_PLUS_BOOSTER", BOOSTER.bomb)
-            //         FaceBook.logEvent(LogEventName.buyBoosterBombVideo)
-            //         // this.updateAmountBooster(BOOSTER.bomb, 1);
-            //         break;
-            //     case BOOSTER.reverse:
-            //         game.emit("SHOW_POPUP_GIFT_PLUS_BOOSTER", BOOSTER.reverse)
-            //         FaceBook.logEvent(LogEventName.buyBoosterReverseVideo)
-            //         // this.updateAmountBooster(BOOSTER.reverse, 1);
-            //         break;
-            //     case BOOSTER.hammer:
-            //         game.emit("SHOW_POPUP_GIFT_PLUS_BOOSTER", BOOSTER.hammer)
-            //         FaceBook.logEvent(LogEventName.buyBoosterHammerVideo)
-            //         // this.updateAmountBooster(BOOSTER.hammer, 1);
-            //         break;
-            //     default:
-            //         return;
-            // }
-
             this.updateAmountBooster({ booster: this.keyBoosterAds, amount: 1 });
-
             MainData.instance().keyBooster = this.keyBoosterAds;
             this.setOpacityBoosterChoose(this.keyBoosterAds);
-            // this.tooltip.showTooltipBomb();
         }
     }
 
@@ -107,7 +80,6 @@ export default class Booster extends cc.Component {
 
 
     onClickRocket() {
-
         if (MainData.instance().isUseBooster) return;
         if (MainData.instance().keyBooster == BOOSTER.rocket) {
             this.clearBooster();

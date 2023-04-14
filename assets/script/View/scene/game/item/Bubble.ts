@@ -122,7 +122,7 @@ export default class Bubble extends cc.Component {
         let rigidBody = this.node.getComponent(cc.RigidBody);
         rigidBody.gravityScale = 50;
         if (rigidBody) {
-            var randomX = isBonus ? Utils.randomInt(0, 7) * 50 :Utils.randomInt(3, 7) * 15
+            let randomX = isBonus ? Utils.randomInt(0, 7) * 50 :Utils.randomInt(3, 7) * 15
             if (!status) randomX += 200
             else {
                 randomX *= (-1)

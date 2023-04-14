@@ -176,11 +176,39 @@ export default class BroadContainer extends cc.Component {
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: MainData.instance().keyBooster, amount: -1 });
             GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BOOSTER);
         }
-        if (MainData.instance().move <= 0) GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_NO_MOVE_POPUP);
+        this.showEndGame();
         console.log("checkEndGame");
 
-        this.checkEndGame(0, 0);
+        if (!this.checkActiveMove()) this.reloadBroad();
+
+        // this.checkEndGame(0, 0);
     }
+    showEndGame() {
+        if (MainData.instance().move <= 0) {
+            // console.log("isRunPlayer: " + MainData.instance().isRunPlayer);
+            // console.log("isOpenGift: " + MainData.instance().isOpenGift);
+            // console.log("isHiddenPrizes: " + MainData.instance().isHiddenPrizes);
+            // console.log(MainData.instance().estimateBubble + " > " + MainData.instance().realityBubble);
+
+            if (MainData.instance().isRunPlayer || MainData.instance().isOpenGift || MainData.instance().isHiddenPrizes ||
+                MainData.instance().estimateBubble > MainData.instance().realityBubble
+            ) {
+                // console.log(11111111111);
+
+                let obj = { delay: 1 }
+                cc.tween(obj)
+                    .delay(obj.delay)
+                    .call(() => { this.showEndGame() })
+                    .start();
+            } else {
+                // console.log(22222222222);
+
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_NO_MOVE_POPUP);
+            }
+
+        }
+    }
+
     collisionEnter(bubble: Bubble) {
         // console.log(this.listBubbleSelect);
         // console.log("collisionEnter row: " + bubble.row + "  col : " + bubble.col);
@@ -227,7 +255,9 @@ export default class BroadContainer extends cc.Component {
         }
         if (this.listBubbleSelect.length < 2) {
             this.clearBubbleSelected();
-            this.boardReady();
+
+            this.isPlay = false;
+            // this.boardReady();
         } else {
             this.liberate();
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD);
@@ -348,8 +378,11 @@ export default class BroadContainer extends cc.Component {
             }
             countMore[col] = count;
         }
+
         let freeColorGroup1 = amountDefaultGroupColor.groupA - existGroupColor1;
         let freeColorGroup2 = amountDefaultGroupColor.groupB - existGroupColor2;
+        // console.log("amountDefaultGroupColor.groupA: " + amountDefaultGroupColor.groupA + "  existGroupColor1: " + existGroupColor1 + "  freeColorGroup1:  " + freeColorGroup1);
+        // console.log("amountDefaultGroupColor.groupB: " + amountDefaultGroupColor.groupB + "  existGroupColor2: " + existGroupColor2 + "  freeColorGroup2:  " + freeColorGroup2);
         for (let col = 0; col < countMore.length; col++) {
             let count = countMore[col];
             let tempRow = -1;
@@ -362,6 +395,16 @@ export default class BroadContainer extends cc.Component {
                     let row = count - 1;
                     let color = 0;
                     if (amountDefaultGroupColor.groupA == TOTAL_BALL * 0.5 && Utils.randomInt(0, 1) == 0) {
+
+                        // if (freeColorGroup1 < 0) {
+                        //     color = this.getColor(1);
+                        //     freeColorGroup2--;
+                        // } else if (freeColorGroup2 < 0) {
+                        //     color = this.getColor(0);
+                        //     freeColorGroup1--;
+                        // } else {
+                        //     color = Math.floor(Math.random() * 5);
+                        // }
                         color = Math.floor(Math.random() * 5);
                     }
                     else {
@@ -375,9 +418,12 @@ export default class BroadContainer extends cc.Component {
                                 freeColorGroup2--;
                             }
                         } else if (freeColorGroup1 > 0) {
+                            console.log("Chọn only Color Group 2");
                             color = this.getColor(0);
                             freeColorGroup1--;
                         } else {
+                            console.log("Chọn only Color Group 2");
+
                             color = this.getColor(1);
                             freeColorGroup2--;
                         }
@@ -578,7 +624,7 @@ export default class BroadContainer extends cc.Component {
                 this.listBubbleSelect = this.getBubbleHammer(bubble);
                 return 0.45;
             default:
-                break;
+                return 0;
         }
     }
 
@@ -734,8 +780,28 @@ export default class BroadContainer extends cc.Component {
             .start();
     }
 
-
-
+    listStep: any[] = [[0, -1], [1, 0], [0, 1], [-1, 0]]
+    checkActiveMove(): boolean {
+        for (let r = 0; r < this.arrBubble.length; r++) {
+            const row = this.arrBubble[r];
+            for (let c = 0; c < row.length; c++) {
+                const dot = row[c];
+                for (let i = 0; i < this.listStep.length; i++) {
+                    const x = this.listStep[i][0];
+                    const y = this.listStep[i][1];
+                    var a = dot.col + x;
+                    var b = dot.row + y;
+                    a = a < 0 ? a = 0 : a > this.arrBubble[0].length - 1 ? a = this.arrBubble[0].length - 1 : a;
+                    b = b < 0 ? b = 0 : b > this.arrBubble.length - 1 ? b = this.arrBubble.length - 1 : b;
+                    if (a != dot.col || b != dot.row)
+                        if (dot.getColor() == this.arrBubble[b][a].getColor()) {
+                            return true
+                        };
+                }
+            }
+        }
+        return false
+    }
 
 
     checkEndGame(row: number, col: number, arrPath = []) {
@@ -830,20 +896,74 @@ export default class BroadContainer extends cc.Component {
 
                 if (pathBlock.length < 2) {
                     console.log("GameOVer");
+                    this.reloadBroad();
                 } else {
                     // this.indexDot = 0;
                     // this.showTut(pathBlock)
                 }
             } else {
                 console.log("GameOVer");
+                this.reloadBroad();
                 // this.gameOver.active = true;
             }
         }
     }
 
 
+    reloadBroad() {
+        console.log("reloadBroad");
 
+        for (let i = 0; i < this.arrBubble.length; i++) {
+            let row = this.arrBubble[i];
+            for (let j = 0; j < row.length; j++) {
+                let bubble = row[j];
+                let pos0 = bubble.node.getPosition();
+                let pos1 = cc.Vec2.ZERO;
+                let point2 = new cc.Vec2(-1 * Utils.randomInt(pos0.x, pos1.x), Utils.randomInt(pos0.y, pos1.y))
+                let point3 = new cc.Vec2(-1 * Utils.randomInt(pos1.x, pos0.x), Utils.randomInt(pos1.y, pos0.y))
+                bubble.node.stopAllActions()
 
+                cc.tween(bubble.node)
+                    .bezierTo(0.5, pos0, point2, pos1)
+                    .bezierTo(0.5, pos1, point3, pos0)
+                    .start();
+            }
+        }
+        let obj = { delay: 0.5 }
+        cc.tween(obj)
+            .delay(obj.delay)
+            .call(() => {
+                this.newSetUpBubble();
+            })
+            .start();
+
+    }
+
+    newSetUpBubble() {
+        let tempAmountDefaultGroupColor = this.getAmountDefaultGroupColor();
+
+        for (let i = 0; i < this.content.children.length; i++) {
+            let bubble = this.content.children[i];
+            let color = 0;
+            if (tempAmountDefaultGroupColor.groupA > 0 && tempAmountDefaultGroupColor.groupB > 0) {
+                if (Utils.randomInt(0, 1) == 0) {
+                    color = this.getColor(0);
+                    tempAmountDefaultGroupColor.groupA--;
+                }
+                else {
+                    color = this.getColor(1);
+                    tempAmountDefaultGroupColor.groupB--;
+                }
+            } else if (tempAmountDefaultGroupColor.groupA > 0) {
+                color = this.getColor(0);
+                tempAmountDefaultGroupColor.groupA--;
+            } else {
+                color = this.getColor(1);
+                tempAmountDefaultGroupColor.groupB--;
+            }
+            bubble.getComponent(Bubble).setColor(color);
+        }
+    }
 
     hPBubblesBonus(data) {
         let parent = data.parent;
@@ -858,6 +978,7 @@ export default class BroadContainer extends cc.Component {
 
 
             let bubbleScript = bubble.getComponent(Bubble);
+            bubbleScript.coefficients = 1;
             bubbleScript.setColor(color);
             bubbleScript.activeRigidBody(Utils.randomInt(0, 1) == 0, true)
         }
@@ -871,15 +992,15 @@ export default class BroadContainer extends cc.Component {
         }
     }
     randomBubblesX(coefficient: number | null) {
-        var index = 1;
-        var bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
+        let index = 1;
+        let bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
         while (bubble.coefficients > 1 && index < 100) {
-            var bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
+            let bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
             index++;
         }
         if (bubble.coefficients > 1) return false;
-        
-        var tempCoefficient = coefficient ? coefficient : Math.floor(Math.random() * 4) + 2;
+
+        let tempCoefficient = coefficient ? coefficient : Math.floor(Math.random() * 4) + 2;
         bubble.coefficients = tempCoefficient;
     }
 

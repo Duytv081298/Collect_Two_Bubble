@@ -13,7 +13,7 @@ export default class NewClass extends cc.Component {
 
     onLoad () {
         
-        var manager = cc.director.getCollisionManager();
+        let manager = cc.director.getCollisionManager();
         manager.enabled = true;
         manager.enabledDebugDraw = true;
         manager.enabledDrawBoundingBox = true;
