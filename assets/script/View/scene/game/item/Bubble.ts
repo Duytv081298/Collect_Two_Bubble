@@ -77,6 +77,8 @@ export default class Bubble extends cc.Component {
     clearAnimationSelect() {
         this.border.active = false;
         this.node.stopAllActions()
+        console.log("clearAnimationSelect");
+
         cc.tween(this.node)
             .to(0.1, { scale: 0.8 }, { easing: "sineOutIn" })
             .start();
@@ -106,22 +108,22 @@ export default class Bubble extends cc.Component {
         // itemNode.setSiblingIndex(itemNode.parent.children.length - 1);
 
         this.randomLinearVelocity(status, isBonus);
-        this.autoClear();
+        // this.autoClear();
 
     }
 
     autoClear() {
         console.log("auto clear");
-        
+        this.node.stopAllActions();
         cc.tween(this.node)
             .delay(2)
             .call(() => {
+                if (this.node.parent.name == "Bubble Die") {
+                    console.log("autoClear");
 
-                console.log("autoClear");
-
-                CreateBubble.instance().removeItem(this.node);
-                MainData.instance().realityBubble++;
-
+                    CreateBubble.instance().removeItem(this.node);
+                    MainData.instance().realityBubble++;
+                }
             })
             .start();
     }
