@@ -1,5 +1,6 @@
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
+import { PlayfabManager } from "../../../component/package/PlayfabManager";
 import MainData from "../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
@@ -7,13 +8,15 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class HomeController extends cc.Component {
 
+    protected onEnable(): void {
+    }
     onHanlderPlayGlobal() {
         // SoundManager.instance().playEffect("button");
         this.showLoading()
         FBInstant.checkCanPlayerMatchAsync()
             .then(canMatch => {
                 // FaceBook.logEvent(LogEventName.clickBtnGlobal)
-                console.log("canMatch: ", canMatch);
+                // console.log("canMatch: ", canMatch);
                 if (canMatch == true) {
                     FBInstant
                         .matchPlayerAsync("globalUser", false, true)
@@ -113,7 +116,29 @@ export default class HomeController extends cc.Component {
 
 
 
+    // reloadRanking() {
+    //     // console.log("reloadRanking");
+    //     // this.contentRanking.removeAllChildren();
+    //     PlayfabManager.install.getLeaderboardGlobal(PlayfabManager.WEEKLY).then((dataRank) => {
+    //         console.log("dataRank: ", dataRank);
+    //         for (let i = 0; i < dataRank.length; i++) {
+    //             let name: String = dataRank[i].DisplayName;
+    //             let arrName = name.split("_");
+    //             let itemRank = instantiate(this.userRanking);
+    //             itemRank.getComponent(userRanking).setUp(
+    //                 arrName[0],
+    //                 dataRank[i].StatValue,
+    //                 dataRank[i].Profile.AvatarUrl,
+    //                 dataRank[i].Position + 1,
+    //                 dataRank[i].PlayFabId
+    //             )
+    //             this.contentRanking.addChild(itemRank);
+    //         }
+    //         this.showRankBot(dataRank[dataRank.length - 1].Position + 1)
+    //     })
 
+
+    // }
 
 
     clickSetting() {

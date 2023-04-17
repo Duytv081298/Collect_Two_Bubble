@@ -38,6 +38,7 @@ export default class CreateAnimationBubble {
         anim.timeScale = 2;
         let nameAni = NAME_ANI_BUBBLE[color];
         anim.animation = nameAni;
+        anim.setAnimationCacheMode(sp.Skeleton.AnimationCacheMode.SHARED_CACHE);
         anim.setAnimation(0, nameAni, false);
         
         anim.setCompleteListener(() => {

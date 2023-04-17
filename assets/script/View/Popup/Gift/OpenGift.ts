@@ -12,6 +12,8 @@ export class OpenGift extends cc.Component {
     parentGift: cc.Node = null;
     @property(cc.Sprite)
     gift: cc.Sprite = null;
+    @property(cc.Button)
+    btnOpen: cc.Button = null;
 
     @property(cc.SpriteFrame)
     listSPGift: cc.SpriteFrame[] = [];
@@ -24,7 +26,9 @@ export class OpenGift extends cc.Component {
     start() {
     }
     show() {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CANCEL_BUBBLE_COLLECT);
         MainData.instance().isOpenGift = true;
+        this.btnOpen.interactable = false;
         // this.isAutoOpen = autoOpen;
         // SoundManager.instance().playEffect("gift_xuat hien");
 
@@ -36,7 +40,7 @@ export class OpenGift extends cc.Component {
         this.parentGift.active = false;
         this.isActive = false;
 
-        this.aniGift.clearTrack(0)
+        // this.aniGift.clearTrack(0)
         this.aniGift.setSkin("default");
         this.aniGift.setAnimation(0, "nhay ra", false);
 
@@ -44,6 +48,10 @@ export class OpenGift extends cc.Component {
 
     }
     showAnimationRung() {
+        // this.aniGift.clearTrack(0)
+        
+        this.btnOpen.interactable = true;
+        this.aniGift.setSkin("default");
         this.aniGift.setAnimation(0, "runglac", true);
         this.aniGift.setCompleteListener(() => { if (this.isAutoOpen) this.onHanlderOpenGift() })
     }
@@ -54,7 +62,8 @@ export class OpenGift extends cc.Component {
         // this.indexGift = 5
         this.gift.spriteFrame = this.listSPGift[this.indexGift]
         this.showGift();
-        // SoundManager.instance().playEffect("sfx_open_gift_reward");
+        // this.aniGift.clearTrack(0)
+        this.aniGift.setSkin("default");
         this.aniGift.setAnimation(0, "mo hop", false);
         this.aniGift.setCompleteListener(() => { })
     }
@@ -81,7 +90,7 @@ export class OpenGift extends cc.Component {
             .delay(2)
             .to(0.5, { scale: 0.6 }, { easing: "expoOut" })
             .call(() => {
-                this.clampGift();
+                this.claimGift();
                 this.activeGift(false);
                 this.node.active = false
             })
@@ -99,7 +108,7 @@ export class OpenGift extends cc.Component {
         }
     }
 
-    clampGift() {
+    claimGift() {
         switch (this.indexGift) {
             case 0:
             case 1:

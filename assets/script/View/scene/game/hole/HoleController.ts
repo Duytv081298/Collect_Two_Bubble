@@ -38,15 +38,15 @@ export default class HoleController extends cc.Component {
     }
 
     protected onEnable(): void {
-        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ANI_COIN_HOLE, this.checkAmountScore, this);
-        GlobalEvent.instance().addEventListener(GlobalEvent.HIDE_ANI_COIN_HOLE, this.hideCoin, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ANI_GOLD_HOLE, this.checkAmountScore, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.HIDE_ANI_GOLD_HOLE, this.hideCoin, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD, this.upDateAmountMove, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.START_GAME, this.reset, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
     }
     protected onDisable(): void {
-        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ANI_COIN_HOLE, this.checkAmountScore, this);
-        GlobalEvent.instance().removeEventListener(GlobalEvent.HIDE_ANI_COIN_HOLE, this.hideCoin, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ANI_GOLD_HOLE, this.checkAmountScore, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.HIDE_ANI_GOLD_HOLE, this.hideCoin, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD, this.upDateAmountMove, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.START_GAME, this.reset, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
@@ -156,7 +156,7 @@ export default class HoleController extends cc.Component {
             this.animationCoin.node.setPosition(this.listBodyHole[MainData.instance().indexHoleCoin].position);
             this.animationCoin.timeScale = this.amountMove < 5 ? 1 : 0.5;
             this.animationCoin.setSkin("default");
-            console.log("name: " + name);
+            // console.log("name: " + name);
             this.animationCoin.name = name;
             this.animationCoin.setAnimation(0, name, true);
         }

@@ -1,5 +1,6 @@
 import { GOLD_USE_BOOSTER } from "../component/constant/constant";
 import GlobalEvent from "../component/event/GlobalEvent";
+import { PlayfabManager } from "../component/package/PlayfabManager";
 import LocalStorage from "../component/storage/LocalStorage";
 import MainData from "../component/storage/MainData";
 
@@ -42,16 +43,20 @@ export default class UIController extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
     }
     updateHightScore(data) {
-        console.log("updateHightScore =========");
-        
+        // console.log("updateHightScore =========");
+
         let score = MainData.instance().score;
         let hightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
+        PlayfabManager.install.updateScoreToLeaderboardAsync(PlayfabManager.WEEKLY, score);
         if (hightScore < score) {
             LocalStorage.setItem(LocalStorage.HIGHT_SCORE, score);
+            // console.log("update hight score  playfab ");
         }
         this.hight_score_home.string = LocalStorage.getItem(LocalStorage.HIGHT_SCORE).toString();
     }
     updateScore(data) {
+        // console.log(data);
+
         let score = parseInt(data.score);
         MainData.instance().score += score;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.TWEEN_PLAYER_RANKING);
@@ -77,8 +82,8 @@ export default class UIController extends cc.Component {
             .start();
     }
     updateGold(data) {
-        console.log("update gold");
-        
+        // console.log("update gold");
+
         let gold = parseInt(data.gold);
         LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
         if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER)

@@ -64,6 +64,8 @@ export default class PopupController extends cc.Component {
         });
     }
     loadSetting() {
+        console.log("loadSetting");
+        
         cc.resources.load("prefab/setting/Setting", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
                 if (this.setting == null) {
@@ -120,13 +122,13 @@ export default class PopupController extends cc.Component {
         });
     }
     preLoadGift() {
-        cc.resources.preload("prefab/HopQua/Opent_Gift", cc.Prefab, (err) => {
+        cc.resources.preload("prefab/HopQua/Open_Gift", cc.Prefab, (err) => {
 
             if (this.gift == null || !this.gift.active) this.loadGift();
         });
     }
     loadGift() {
-        cc.resources.load("prefab/HopQua/Opent_Gift", cc.Prefab, (err, prefab: cc.Prefab) => {
+        cc.resources.load("prefab/HopQua/Open_Gift", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
                 if (this.gift == null) {
                     this.gift = cc.instantiate(prefab);

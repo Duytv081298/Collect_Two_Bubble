@@ -1,4 +1,6 @@
 import { Utils } from "../../../../component/component/Utils";
+import CreateBubble from "../../../../component/pool/CreateBubble";
+import MainData from "../../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -104,7 +106,24 @@ export default class Bubble extends cc.Component {
         // itemNode.setSiblingIndex(itemNode.parent.children.length - 1);
 
         this.randomLinearVelocity(status, isBonus);
+        this.autoClear();
 
+    }
+
+    autoClear() {
+        console.log("auto clear");
+        
+        cc.tween(this.node)
+            .delay(2)
+            .call(() => {
+
+                console.log("autoClear");
+
+                CreateBubble.instance().removeItem(this.node);
+                MainData.instance().realityBubble++;
+
+            })
+            .start();
     }
     deActiveRigidBody() {
         let rigidBody = this.node.getComponent(cc.RigidBody);
@@ -122,7 +141,7 @@ export default class Bubble extends cc.Component {
         let rigidBody = this.node.getComponent(cc.RigidBody);
         rigidBody.gravityScale = 50;
         if (rigidBody) {
-            let randomX = isBonus ? Utils.randomInt(0, 7) * 50 :Utils.randomInt(3, 7) * 15
+            let randomX = isBonus ? Utils.randomInt(0, 7) * 50 : Utils.randomInt(3, 7) * 15
             if (!status) randomX += 200
             else {
                 randomX *= (-1)

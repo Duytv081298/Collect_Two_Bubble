@@ -43,7 +43,7 @@ export default class NoMoves extends cc.Component {
     }
     show() {
         // SoundManager.instance().playEffect("end_game_continue");
-        console.log("show NoMoves");
+        // console.log("show NoMoves");
 
         this.timeDelay = maxTime;
         this.btnNoThanks.active = false;

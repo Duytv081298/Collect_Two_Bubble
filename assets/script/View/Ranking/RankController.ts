@@ -78,8 +78,6 @@ export default class RankController extends cc.Component {
 
         this.showPlayerDefault();
         CreatePlayerRank.instance().defaultAvatar = this.defaultAvatar;
-
-        // GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GAME_OVER_POPUP);
     }
 
     createDataRank() {

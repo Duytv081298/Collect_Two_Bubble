@@ -109,12 +109,16 @@ export default class FaceBook {
 
 
     static showAvatarMe(avatar: cc.Sprite) {
+        // console.log("FBInstant.player.getID(): " + FBInstant.player.getID());
+        
         if (MainData.instance().avatarMe) {
-            avatar.getComponent(cc.Sprite).spriteFrame = MainData.instance().avatarMe;
+            if (avatar) avatar.getComponent(cc.Sprite).spriteFrame = MainData.instance().avatarMe;
             return;
         }
 
         let urlImage = FaceBook.getPhoto();
+        // console.log("urlImage: " + urlImage);
+
 
         if (urlImage == "" || urlImage == null) {
         } else {
@@ -126,8 +130,10 @@ export default class FaceBook {
                     return;
                 }
                 const spriteFrame = new cc.SpriteFrame(imageAsset);
-                avatar.getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                MainData.instance().avatarMe = spriteFrame;
+                if (avatar) {
+                    avatar.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                    MainData.instance().avatarMe = spriteFrame;
+                }
             });
         }
     }

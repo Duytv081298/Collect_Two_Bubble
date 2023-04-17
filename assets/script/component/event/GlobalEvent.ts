@@ -22,6 +22,10 @@ export default class GlobalEvent extends BaseEvent {
     static UPDATE_GOLD_GAME: string = "GlobalEvent.UPDATE_GOLD_GAME";
 
 
+    static CANCEL_BUBBLE_COLLECT: string = "GlobalEvent.CANCEL_BUBBLE_COLLECT";
+
+    static ANIMATION_PLUS_MOVE: string = "GlobalEvent.ANIMATION_PLUS_MOVE";
+
 
     static SHOW_ANI_BOOSTER: string = "GlobalEvent.SHOW_ANI_BOOSTER";
     static CLEAR_BOOSTER: string = "GlobalEvent.CLEAR_BOOSTER";
@@ -34,12 +38,16 @@ export default class GlobalEvent extends BaseEvent {
     static CLEAR_BUBBLE_PROGRESS: string = "GlobalEvent.CLEAR_BUBBLE_PROGRESS";
 
     static SHOW_ANI_HOLE: string = "GlobalEvent.SHOW_ANI_HOLE";
-    static SHOW_ANI_COIN_HOLE: string = "GlobalEvent.SHOW_ANI_COIN_HOLE";
-    static HIDE_ANI_COIN_HOLE: string = "GlobalEvent.HIDE_ANI_COIN_HOLE";
+    static SHOW_CLAIM_GOLD_HOLE: string = "GlobalEvent.SHOW_CLAM_GOLD_HOLE";
+    static SHOW_ANI_GOLD_HOLE: string = "GlobalEvent.SHOW_ANI_GOLD_HOLE";
+    static HIDE_ANI_GOLD_HOLE: string = "GlobalEvent.HIDE_ANI_GOLD_HOLE";
     static UPDATE_MOVE_PROGRESS_GOLD: string = "GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD";
 
     static TWEEN_PLAYER_RANKING: string = "GlobalEvent.TWEEN_PLAYER_RANKING";
-    
+    static RELOAD_RANKING_HOME: string = "GlobalEvent.RELOAD_RANKING_HOME";
+
+
+
     static SHOW_LOADING: string = "GlobalEvent.SHOW_LOADING";
     static HIDE_LOADING: string = "GlobalEvent.HIDE_LOADING";
 
@@ -55,7 +63,7 @@ export default class GlobalEvent extends BaseEvent {
     static HIDDEN_PRIZES_BUBBLE_BONUS: string = "GlobalEvent.HIDDEN_PRIZES_BUBBLE_BONUS";
     static HIDDEN_PRIZES_MULTI_BUBBLES: string = "GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES";
 
-    
+
     static SHOW_GIFT: string = "GlobalEvent.SHOW_GIFT";
     static CHECK_SHOW_GIFT: string = "GlobalEvent.CHECK_SHOW_GIFT";
 

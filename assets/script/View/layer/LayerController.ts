@@ -11,7 +11,7 @@ export default class NewClass extends cc.Component {
     }
 
     setFit() {
-        console.log("setfix");
+        // console.log("setfix");
         
         let viewport = cc.view.getViewportRect();
         let viewportGame = this.node.getComponent(cc.Canvas).designResolution;

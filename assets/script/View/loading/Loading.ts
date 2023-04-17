@@ -13,7 +13,7 @@ const { ccclass, property } = cc._decorator;
 export default class Loading extends cc.Component {
 
     start() {
-        console.log("loading: start");
+        // console.log("loading: start");
 
         FBInstant.onPause(() => { });
         FBInstant.startGameAsync()
@@ -22,11 +22,10 @@ export default class Loading extends cc.Component {
 
         if (MainData.instance().ktFistLogin == true) {
             FBInstant.player.getSignedPlayerInfoAsync().then((result) => {
-                console.log(result.getSignature());
+                // console.log("result.getSignature: " + result.getSignature());
                 if (!MainData.instance().isLocal) PlayfabManager.install.login(result.getSignature());
             });
         } else {
-
         }
 
         let hightScoreTour = "hightScoreTour" + MainData.instance().idTour;
@@ -72,6 +71,7 @@ export default class Loading extends cc.Component {
                 }
 
                 if (data.hasOwnProperty(LocalStorage.HIGHT_SCORE) && data[LocalStorage.HIGHT_SCORE] != undefined) {
+                    // LocalStorage.setItem(LocalStorage.HIGHT_SCORE, 0);
                     LocalStorage.setItem(LocalStorage.HIGHT_SCORE, data[LocalStorage.HIGHT_SCORE])
                 } else {
                     LocalStorage.setItem(LocalStorage.HIGHT_SCORE, 0);
@@ -194,6 +194,7 @@ export default class Loading extends cc.Component {
                 }
                 this.hideLoading();
                 this.checkFistLogin();
+                this.showData();
             })
             .catch((error) => {
                 console.log("error: ", error);
@@ -216,6 +217,8 @@ export default class Loading extends cc.Component {
                 // LocalStorage.setItem(LocalStorage.DATA_GET_MORE_SPIN, {});
                 // MainData.instance().ktGenDataScore = true;
                 this.checkFistLogin();
+
+                this.showData();
             });
     }
 
@@ -263,7 +266,15 @@ export default class Loading extends cc.Component {
 
 
         // if (!MainData.instance().isLocal)A2UController.instance.sendNotification()
+
     }
+
+    showData() {
+
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_HIGHT_SCORE);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 0 });
+    }
+
 
     hideLoading() {
 

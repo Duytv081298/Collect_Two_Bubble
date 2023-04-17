@@ -38,7 +38,7 @@ var FBInstant = {
       return FBInstant.__utils.returnUserData(name);
     },
     getPhoto: function () {      
-      let name = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1662674000802571&gaming_photo_type=unified_picture&ext=1681635219&hash=AeQiGcP8RrSGos1cni0";
+      let name = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1662674000802571&gaming_photo_type=unified_picture&ext=1684289321&hash=AeQ0nYUVaYGxk8SlbeI";
       if (isFirefox)
         name = "https://platform-lookaside.fbsbx.com/platform/instantgames/profile_pic.jpg?igpid=3283919521624928&height=256&width=256&ext=1649924022&hash=AeS_vdPWY6S9jtbHufs";
       else if (isEdg)
@@ -46,7 +46,7 @@ var FBInstant = {
       return FBInstant.__utils.returnUserData(name);
     },
     getID: function () {
-      let playerId = "4403857873049086";
+      let playerId = "5945194612203632";
       if (isFirefox)
         playerId = "3283919521624928";
       else if (isEdg)
@@ -209,7 +209,7 @@ var FBInstant = {
             return playerId;
           },
           getPlayerID: function () {
-            let playerId = "4403857873049086";
+            let playerId = "5945194612203632";
             if (isFirefox)
               playerId = "3283919521624928";
             else if (isEdg)

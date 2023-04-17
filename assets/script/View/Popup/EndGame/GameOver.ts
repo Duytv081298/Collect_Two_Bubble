@@ -129,7 +129,7 @@ export default class GameOver extends cc.Component {
         }).start();
     }
     show() {
-        console.log("showEndGame------------")
+        // console.log("showEndGame------------")
         this.reset();
 
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_HIGHT_SCORE);
@@ -383,11 +383,16 @@ export default class GameOver extends cc.Component {
         }
     }
     onHandlerShare() {
+        // console.log("onHandlerShare ======");
+        
         // SoundManager.instance().playEffect("button");
         if (window["FBInstant"] == undefined) return;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
-        // this.game.showLoading();
+        // console.log("onHandlerShare +++++");
+   
         cc.resources.load(FaceBook.getImageShareFacebook(), (err, texture) => {
+            // console.log(texture);
+            
             FBInstant.shareAsync({
                 image: FaceBook.getImgBase64(texture),
                 text: FBInstant.player.getName() + " invited you to play",
@@ -398,13 +403,17 @@ export default class GameOver extends cc.Component {
                     avatar: FBInstant.player.getPhoto(),
                     name: FBInstant.player.getName()
                 },
+                intent: "SHARE",
                 switchContext: false
             }).then(() => {
+                // console.log("then");
+                
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
-                // this.game.hideLoading();
-            }).catch(() => {
-                // this.game.hideLoading();
+            }).catch((e) => {
+                // console.log(e);
+                
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+
             });
         })
     }

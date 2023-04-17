@@ -1,4 +1,5 @@
 import GlobalEvent from "../../../../component/event/GlobalEvent";
+import MainData from "../../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,7 +19,7 @@ export default class AnimationHole extends cc.Component {
         this.reset();
     }
 
-    reset(){
+    reset() {
         this.bg.active = false;
         for (let i = 0; i < this.bgAni.length; i++) {
 
@@ -34,7 +35,13 @@ export default class AnimationHole extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ANI_HOLE, this.showAni, this);
     }
     showAni(data) {
+        
         let indexHole = data.index;
+        if (MainData.instance().indexHoleCoin == indexHole) {
+            let pos = this.bgAni[indexHole].parent.convertToWorldSpaceAR(this.bgAni[indexHole].position);
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_CLAIM_GOLD_HOLE, { position: pos }); 
+        }
+
         
         let bg = this.bgAni[indexHole];
         let particle = this.holeParticle[indexHole];

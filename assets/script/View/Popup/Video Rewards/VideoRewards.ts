@@ -92,7 +92,7 @@ export class VideoRewards extends cc.Component {
         }
     }
     showTick(index: number) {
-        console.log("index: " + index);
+        // console.log("index: " + index);
 
         for (let i = 0; i < this.arrTick.length; i++) {
             var tick = this.arrTick[i];

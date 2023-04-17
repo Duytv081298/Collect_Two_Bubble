@@ -916,6 +916,10 @@ declare namespace FBInstant {
         /**
          * Indicates the intent of the share.
          */
+        intent: Intent;
+        /**
+         * Indicates the intent of the share.
+         */
         switchContext: boolean;
 
         /**

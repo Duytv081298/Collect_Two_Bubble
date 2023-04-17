@@ -30,7 +30,7 @@ export default class Test extends cc.Component {
     }
     updateGold() {
         let status = this.startCheck();
-        console.log("status: " + status);
+        // console.log("status: " + status);
 
         if (status)
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: GOLD_USE_BOOSTER });

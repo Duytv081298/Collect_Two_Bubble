@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Opent_Gift",
+    "_name": "Open_Gift",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -61,8 +61,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        320,
+        568,
         0,
         0,
         0,
@@ -1565,6 +1565,9 @@
     },
     "gift": {
       "__id__": 21
+    },
+    "btnOpen": {
+      "__id__": 8
     },
     "listSPGift": [
       {
