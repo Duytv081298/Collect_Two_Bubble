@@ -14,12 +14,15 @@ export default class GlobalEvent extends BaseEvent {
     static SWITCH_SCENES: string = "GlobalEvent.SWITCH_SCENES";
     static START_GAME: string = "GlobalEvent.START_GAME";
     static REPLAY_GAME: string = "GlobalEvent.REPLAY_GAME";
+
+    
     static CHECK_END_GAME: string = "GlobalEvent.CHECK_END_GAME";
+    static CLEAR_ALL_BUBBLE_DIE: string = "GlobalEvent.CLEAR_ALL_BUBBLE_DIE";
 
 
     static UPDATE_HIGHT_SCORE: string = "GlobalEvent.UPDATE_HIGHT_SCORE";
     static UPDATE_SCORE_GAME: string = "GlobalEvent.UPDATE_SCORE_GAME";
-    static UPDATE_MOVE_GAME: string = "GlobalEvent.UPDATE_MOVE_GAME";
+    static ANIMATION_UPDATE_MOVE: string = "GlobalEvent.ANIMATION_UPDATE_MOVE";
     static UPDATE_GOLD_GAME: string = "GlobalEvent.UPDATE_GOLD_GAME";
 
 

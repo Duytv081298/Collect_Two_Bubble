@@ -39,9 +39,11 @@ export default class BroadContainer extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES, this.hPMultiBubblesX, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.CANCEL_BUBBLE_COLLECT, this.cancel_Select, this);
 
-        GlobalEvent.instance().addEventListener(GlobalEvent.CHECK_END_GAME, this.checkEndGame, this);
+        // GlobalEvent.instance().addEventListener(GlobalEvent.CHECK_END_GAME, this.checkEndGame, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.START_GAME, this.reset, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
+
+        GlobalEvent.instance().addEventListener(GlobalEvent.CLEAR_ALL_BUBBLE_DIE, this.clearAllBubbleDie, this);
     }
     protected onDisable(): void {
         this.offEventTouch();
@@ -49,9 +51,10 @@ export default class BroadContainer extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES, this.hPMultiBubblesX, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.CANCEL_BUBBLE_COLLECT, this.cancel_Select, this);
 
-        GlobalEvent.instance().removeEventListener(GlobalEvent.CHECK_END_GAME, this.checkEndGame, this);
+        // GlobalEvent.instance().removeEventListener(GlobalEvent.CHECK_END_GAME, this.checkEndGame, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.START_GAME, this.reset, this);
-        GlobalEvent.instance().removeEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
+
+        GlobalEvent.instance().removeEventListener(GlobalEvent.CLEAR_ALL_BUBBLE_DIE, this.clearAllBubbleDie, this);
     }
 
 
@@ -175,7 +178,6 @@ export default class BroadContainer extends cc.Component {
             if (this.listColorGroup1.indexOf(i) < 0) this.listColorGroup2.push(i);
         }
     }
-
     boardReady() {
         MainData.instance().isPlay = false;
         if (MainData.instance().keyBooster != null || MainData.instance().isUseBooster) {
@@ -183,19 +185,20 @@ export default class BroadContainer extends cc.Component {
             GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BOOSTER);
         }
         if (!this.checkActiveMove()) this.reloadBroad();
-        
-        console.log("checkEndGame");
-        this.checkEndGame();
+    }
+
+    clearAllBubbleDie() {
+        console.log("clearAllBubbleDie");
+
+        this.scheduleOnce(() => { this.checkEndGame() }, 0.5)
+
+
     }
     checkEndGame() {
         if (MainData.instance().move <= 0) {
-            if (MainData.instance().isRunPlayer || MainData.instance().isOpenGift || MainData.instance().isHiddenPrizes ||
-                MainData.instance().estimateBubble > MainData.instance().realityBubble
-            ) {
-                this.scheduleOnce(() => { this.checkEndGame() }, 1);
-            } else {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_NO_MOVE_POPUP);
-            }
+            let open_Gift = cc.find("Canvas/Popup Controller/OpenGift");
+            if (open_Gift && open_Gift.active == true) return;
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_NO_MOVE_POPUP);
 
         }
     }
@@ -241,9 +244,13 @@ export default class BroadContainer extends cc.Component {
             // dem so luong move khi hien hole gold
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD);
 
-            if (this.listBubbleSelect.length >= 8 || this.isQuadrilateral)
+            if (this.listBubbleSelect.length >= 8 || this.isQuadrilateral) {
+                MainData.instance().move += 1;
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_PLUS_MOVE);
-            else GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: -1, status: false });
+            }
+            else {
+                MainData.instance().updateMove(-1);
+            }
 
             if (this.isQuadrilateral) this.listBubbleSelect = this.mergeListDotSelect();
             this.clearDot();
@@ -283,6 +290,7 @@ export default class BroadContainer extends cc.Component {
             bubble.node.parent = this.bubbleDieContainer;
             this.arrBubble[bubble.row][bubble.col] = null;
             MainData.instance().estimateBubble++;
+
             this.scheduleOnce(() => {
                 bubble.activeRigidBody(i % 2 == 0);
                 if (i == touches.length - 1) {
@@ -827,13 +835,6 @@ export default class BroadContainer extends cc.Component {
             }
         }
         this.scheduleOnce(() => { this.newSetUpBubble() }, 0.5);
-        // let obj = { delay: 0.5 }
-        // cc.tween(obj)
-        //     .delay(obj.delay)
-        //     .call(() => {
-        //         this.newSetUpBubble();
-        //     })
-        //     .start();
 
     }
 
@@ -867,12 +868,12 @@ export default class BroadContainer extends cc.Component {
         let parent = data.parent;
         MainData.instance().estimateBubble += 8;
         for (let i = 0; i < 8; i++) {
-            MainData.instance().estimateBubble++;
             let bubble = CreateBubble.instance().createItem();
 
             bubble.setPosition(-100 + i * 25, 100);
             bubble.setScale(0.8);
             bubble.setParent(parent);
+            bubble.name = "bubbleHiddenPrizes"
             bubble.active = true;
             let color = Math.floor(Math.random() * 5)
 
@@ -919,10 +920,7 @@ export default class BroadContainer extends cc.Component {
 
 
     onTouchStart(event) {
-        if (MainData.instance().move <= 0) {
-            this.checkEndGame();
-            return;
-        }
+        if (MainData.instance().move <= 0) return;
         if (MainData.instance().isPlay == true) return;
         if (MainData.instance().isOpenGift) return;
         if (MainData.instance().keyBooster != null && MainData.instance().keyBooster != BOOSTER.reverse) return;
@@ -931,10 +929,7 @@ export default class BroadContainer extends cc.Component {
         this.itemCheck.setPosition(currentTouch)
     }
     onTouchMove(event) {
-        if (MainData.instance().move <= 0) {
-            this.checkEndGame();
-            return;
-        }
+        if (MainData.instance().move <= 0) return;
         if (MainData.instance().isPlay == true) return;
         if (MainData.instance().isOpenGift) return;
         if (MainData.instance().keyBooster != null && MainData.instance().keyBooster != BOOSTER.reverse) return;
@@ -945,10 +940,7 @@ export default class BroadContainer extends cc.Component {
     onTouchEnd(event) {
         // console.log("onTouchEnd++++++");
 
-        if (MainData.instance().move <= 0) {
-            this.checkEndGame();
-            return;
-        }
+        if (MainData.instance().move <= 0) return;
         if (MainData.instance().isPlay == true) return;
         if (MainData.instance().isOpenGift) return;
         if (MainData.instance().isHandlerReverse) {

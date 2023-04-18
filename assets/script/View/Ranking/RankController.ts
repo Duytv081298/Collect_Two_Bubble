@@ -155,7 +155,7 @@ export default class RankController extends cc.Component {
             let vx = this.node.position.x - maxKc0;
 
             if (maxIndex == this.listPositionPlayer.length - 1) { //vuot qua player cuoi cung
-                cc.tween(this.node).to(0.2, { x: vx }).call(() => { }).start()
+                // cc.tween(this.node).to(0.2, { x: vx }).call(() => { }).start()
 
             } else {
 

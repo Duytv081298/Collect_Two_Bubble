@@ -3119,7 +3119,7 @@
     },
     "_enabled": true,
     "horizontal": false,
-    "vertical": false,
+    "vertical": true,
     "inertia": true,
     "brake": 0.75,
     "elastic": true,

@@ -134,6 +134,7 @@ export default class PopupController extends cc.Component {
                 if (this.gift == null) {
                     this.gift = cc.instantiate(prefab);
                     this.gift.setParent(this.node);
+                    this.gift.name = "OpenGift";
                     this.gift.active = false;
                     if (this.ktShowGift == true) {
                         this.showGift();
@@ -250,15 +251,16 @@ export default class PopupController extends cc.Component {
         }
     }
     showGift() {
-
+        if (this.noMove && this.noMove.active) return;
         if (this.gift != null) {
-
             this.hideLoading();
             if (this.gift.active == true) return;
             this.ktShowGift = false;
             this.gift.active = true;
             // this.gift.setSiblingIndex(this.node.children.length)
             this.gift.getComponent(OpenGift).show();
+            console.log(this.gift.name);
+
         } else {
             this.showLoading();
             this.ktShowGift = true;

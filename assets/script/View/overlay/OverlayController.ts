@@ -109,7 +109,7 @@ export default class NewClass extends cc.Component {
             .call(() => {
                 this.iconMove.setPosition(posStart)
                 this.iconMove.active = false;
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 1 });
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: true});
             })
             .start();
         cc.tween(this.iconMove)

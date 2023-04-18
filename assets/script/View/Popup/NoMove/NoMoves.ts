@@ -77,7 +77,7 @@ export default class NoMoves extends cc.Component {
     onHandlerNothanks() {
         // SoundManager.instance().playEffect("button"); 
         this.hide();
-        
+
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GAME_OVER_POPUP);
         // this.node.emit("SHOW_ENDGAME");
@@ -90,7 +90,7 @@ export default class NoMoves extends cc.Component {
     viewAdsComplete(data) {
         if (data.type == RewardAds.REWARDED_MOVE) {
             this.hide()
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 5 });
+            MainData.instance().updateMove(5);
         }
     }
     hide() {

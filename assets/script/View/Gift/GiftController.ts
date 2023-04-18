@@ -63,6 +63,8 @@ export class GiftController extends cc.Component {
         this.giftDefault.active = true;
         this.aniGift.node.active = false;
 
+        // MainData.instance().isOpenGift = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CANCEL_BUBBLE_COLLECT);
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GIFT);
         // this.popupController.showPopupGift();
     }

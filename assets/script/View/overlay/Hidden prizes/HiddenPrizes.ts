@@ -65,6 +65,8 @@ export default class HiddenPrizes extends cc.Component {
     start() {
 
         for (let i = 0; i < this.node.children.length; i++) {
+            let child = this.node.children[i];
+            if (child.name == "bubbleHiddenPrizes") continue
             this.node.children[i].active = false;
         }
     }
@@ -72,6 +74,8 @@ export default class HiddenPrizes extends cc.Component {
     show(data) {
         MainData.instance().isHiddenPrizes = true;
         for (let i = 0; i < this.node.children.length; i++) {
+            let child = this.node.children[i];
+            if (child.name == "bubbleHiddenPrizes") continue
             this.node.children[i].active = false;
         }
         this.spfPlayer = this.defaultAvatar;
@@ -79,7 +83,7 @@ export default class HiddenPrizes extends cc.Component {
         if (spf) this.spfPlayer = spf;
         let rd = Utils.randomInt(0, 3);
 
-        // rd = 1;
+        rd = 2;
         switch (rd) {
             case HIDDEN_PRIZES.bonus_Moves:
                 console.log("case bonus Moves");
@@ -104,6 +108,9 @@ export default class HiddenPrizes extends cc.Component {
         this.showUserBount();
     }
     hPBonusMoves() {
+
+        MainData.instance().move += 1;
+
         this.posMove.active = true;
         this.plusMove.active = true;
         let posEnd = this.posMove.getPosition()
@@ -117,7 +124,7 @@ export default class HiddenPrizes extends cc.Component {
             .call(() => {
                 this.plusMove.setPosition(posStart)
                 this.plusMove.active = false;
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 1 });
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: true });
                 MainData.instance().isHiddenPrizes = false;
             })
             .start();
