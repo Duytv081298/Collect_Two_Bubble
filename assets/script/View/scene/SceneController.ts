@@ -1,26 +1,20 @@
 import { SCENE } from "../../component/constant/constant";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import MainData from "../../component/storage/MainData";
-import GameController from "./game/GameController";
-import HomeController from "./main/HomeController";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class SceneController extends cc.Component {
 
-    @property(GameController)
-    gameController: GameController = null;
-
     @property(cc.Node)
-    bg_home: cc.Node = null;
+    gameScene: cc.Node = null;
+    homeScene: cc.Node = null;
+    ktShowHome: boolean = false;
 
-    @property(HomeController)
-    homeController: HomeController = null;
-
-    // LIFE-CYCLE CALLBACKS:
-
-
+    protected onLoad(): void {
+        this.preLoadHome();
+    }
     protected onEnable(): void {
         GlobalEvent.instance().addEventListener(GlobalEvent.SWITCH_SCENES, this.switchScene, this);
     }
@@ -32,42 +26,58 @@ export default class SceneController extends cc.Component {
         this.switchScene({ idScene: SCENE.game })
     }
     switchScene(data) {
-        let id = data.idScene
-        // console.log("id: " + id);
-        // console.log("MainData.instance().currentIdScene: " + MainData.instance().currentIdScene);
-        
-        if (id == null) {
-            this.gameController.node.active = false;
-            this.homeController.node.active = false;
-            MainData.instance().currentIdScene = id;
-            return;
-        } else if (MainData.instance().currentIdScene == id) {
+        let id = data.idScene;
+        if (MainData.instance().currentIdScene == id) {
             return;
         } else {
-// console.log(111111);
-
             switch (id) {
                 case SCENE.game:
-                    this.bg_home.active = true;
-                    this.gameController.node.active = true;
+                    this.gameScene.active = true;
                     console.log("GlobalEvent.START_GAME");
-                    
                     GlobalEvent.instance().dispatchEvent(GlobalEvent.START_GAME);
-                    this.homeController.node.active = false;
+                    if (this.homeScene) this.homeScene.active = false;
                     break;
                 case SCENE.home:
-                    this.bg_home.active = false;
-                    this.gameController.node.active = false;
-                    this.homeController.node.active = true;
+                    this.gameScene.active = false;
+                    this.showHome();
                     break;
                 default:
                     break;
             }
             MainData.instance().currentIdScene = id;
         }
-        
-        // MainData.instance().currentIdScene = id;
     }
 
-    // update (dt) {}
+    preLoadHome() {
+        cc.resources.preload("prefab/Scene Home/Home", cc.Prefab, (err) => {
+            if (this.homeScene == null || !this.homeScene.active) this.loadHome();
+        });
+    }
+    loadHome() {
+        cc.resources.load("prefab/Scene Home/Home", cc.Prefab, (err, prefab: cc.Prefab) => {
+            if (!err) {
+                if (this.homeScene == null) {
+                    this.homeScene = cc.instantiate(prefab);
+                    this.homeScene.active = this.ktShowHome;
+                    this.homeScene.setParent(this.node)
+                    if (this.ktShowHome == true) {
+                        this.showHome();
+                    }
+                }
+
+            }
+        });
+    }
+
+    showHome() {
+        if (this.homeScene != null) {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+            this.ktShowHome = false;
+            this.homeScene.active = true;
+        } else {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
+            this.ktShowHome = true;
+            this.loadHome();
+        }
+    }
 }

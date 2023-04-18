@@ -69,7 +69,7 @@ export default class NewClass extends cc.Component {
     claimGoldHole(data) {
         let position = data.position;
         // console.log(position);
-
+        this.positionGold.active = true;
         let endPosition = this.positionGold.position;
         if (!position) return;
         let pos = this.node.convertToNodeSpaceAR(position);
@@ -94,6 +94,7 @@ export default class NewClass extends cc.Component {
 
     animationPlusMove() {
         
+        this.positionMove.active = true;
         let posEnd = this.positionMove.getPosition()
         // console.log(posEnd);
         

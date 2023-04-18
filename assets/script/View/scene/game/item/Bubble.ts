@@ -33,6 +33,7 @@ export default class Bubble extends cc.Component {
 
     setData(row: number, col: number, color: number, coefficients: number = 1) {
         // console.log("setData: row: " + row + "  col: " + col + "  name " + this.node.name);
+        this.unschedule(this.sc);
         this.deActiveRigidBody();
         this.reSetData(row, col, color, coefficients);
         this.upDateUI();
@@ -77,7 +78,7 @@ export default class Bubble extends cc.Component {
     clearAnimationSelect() {
         this.border.active = false;
         this.node.stopAllActions()
-        console.log("clearAnimationSelect");
+        // console.log("clearAnimationSelect");
 
         cc.tween(this.node)
             .to(0.1, { scale: 0.8 }, { easing: "sineOutIn" })
@@ -109,23 +110,14 @@ export default class Bubble extends cc.Component {
 
         this.randomLinearVelocity(status, isBonus);
         // this.autoClear();
+        this.scheduleOnce(this.sc, 2)
 
     }
-
-    autoClear() {
-        console.log("auto clear");
-        this.node.stopAllActions();
-        cc.tween(this.node)
-            .delay(2)
-            .call(() => {
-                if (this.node.parent.name == "Bubble Die") {
-                    console.log("autoClear");
-
-                    CreateBubble.instance().removeItem(this.node);
-                    MainData.instance().realityBubble++;
-                }
-            })
-            .start();
+    sc = () => {
+        if (this.node.parent.name == "Bubble Die") {
+            CreateBubble.instance().removeItem(this.node);
+            MainData.instance().realityBubble++;
+        }
     }
     deActiveRigidBody() {
         let rigidBody = this.node.getComponent(cc.RigidBody);

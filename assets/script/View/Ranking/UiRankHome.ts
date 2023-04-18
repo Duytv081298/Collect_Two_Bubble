@@ -16,21 +16,14 @@ const { ccclass, property } = cc._decorator
 export default class UiRankHome extends cc.Component {
 
     protected onEnable(): void {
-        // GlobalEvent.instance().addEventListener(GlobalEvent.RELOAD_RANKING_HOME, this.reloadRanking, this);
-        // console.log("GlobalEvent.instance().addEventListener(GlobalEvent.RELOAD_RANKING_HOME, this.reloadRanking, this)");
         this.reloadRanking();
 
     }
     protected onDisable(): void {
-        // GlobalEvent.instance().removeEventListener(GlobalEvent.RELOAD_RANKING_HOME, this.reloadRanking, this);
-        // console.log("GlobalEvent.instance().removeEventListener(GlobalEvent.RELOAD_RANKING_HOME, this.reloadRanking, this)");
     }
 
     @property(cc.Node)
     contentRanking: cc.Node = null;
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
 
     start() {
 
@@ -38,8 +31,6 @@ export default class UiRankHome extends cc.Component {
 
 
     reloadRanking() {
-
-        // console.log("reloadRanking");
         if (PlayfabManager.install.hadLogin == false) return;
         PlayfabManager.install.getLeaderboardGlobal(PlayfabManager.WEEKLY).then((dataRank) => {
             while (this.contentRanking.childrenCount > 0) {

@@ -151,9 +151,10 @@ export default class HoleController extends cc.Component {
 
         let name = this.amountMove <= 3 ? "sangmanh" : this.amountMove <= 4 ? "sangyeu" : "sangdatat"
         if (this.amountMove == 0 || this.amountMove == 4 || this.amountMove == 5) {
+            let p = this.listBodyHole[MainData.instance().indexHoleCoin].position;
             this.animationCoin.clearTrack(0);
             this.animationCoin.node.active = true;
-            this.animationCoin.node.setPosition(this.listBodyHole[MainData.instance().indexHoleCoin].position);
+            this.animationCoin.node.setPosition(p.x , p.y + 7.5);
             this.animationCoin.timeScale = this.amountMove < 5 ? 1 : 0.5;
             this.animationCoin.setSkin("default");
             // console.log("name: " + name);

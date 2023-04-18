@@ -1,14 +1,40 @@
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../../component/package/PlayfabManager";
+import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class HomeController extends cc.Component {
+    @property(cc.Label)
+    hight_score_home: cc.Label = null;
+
+    @property(cc.Label)
+    gold_home: cc.Label = null;
 
     protected onEnable(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
+        this.updateHightScore();
+        this.updateGold();
+    }
+    protected onDisable(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
+    }
+    updateHightScore() {
+        let score = MainData.instance().score;
+        let hightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
+        PlayfabManager.install.updateScoreToLeaderboardAsync(PlayfabManager.WEEKLY, score);
+        if (hightScore < score) {
+            LocalStorage.setItem(LocalStorage.HIGHT_SCORE, score);
+        }
+        this.hight_score_home.string = LocalStorage.getItem(LocalStorage.HIGHT_SCORE).toString();
+    }
+    updateGold() {
+        this.gold_home.string = MainData.instance().goldPlayer.toString();
     }
     onHanlderPlayGlobal() {
         // SoundManager.instance().playEffect("button");
@@ -116,30 +142,6 @@ export default class HomeController extends cc.Component {
 
 
 
-    // reloadRanking() {
-    //     // console.log("reloadRanking");
-    //     // this.contentRanking.removeAllChildren();
-    //     PlayfabManager.install.getLeaderboardGlobal(PlayfabManager.WEEKLY).then((dataRank) => {
-    //         console.log("dataRank: ", dataRank);
-    //         for (let i = 0; i < dataRank.length; i++) {
-    //             let name: String = dataRank[i].DisplayName;
-    //             let arrName = name.split("_");
-    //             let itemRank = instantiate(this.userRanking);
-    //             itemRank.getComponent(userRanking).setUp(
-    //                 arrName[0],
-    //                 dataRank[i].StatValue,
-    //                 dataRank[i].Profile.AvatarUrl,
-    //                 dataRank[i].Position + 1,
-    //                 dataRank[i].PlayFabId
-    //             )
-    //             this.contentRanking.addChild(itemRank);
-    //         }
-    //         this.showRankBot(dataRank[dataRank.length - 1].Position + 1)
-    //     })
-
-
-    // }
-
 
     clickSetting() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SETTING_POPUP);
@@ -152,6 +154,10 @@ export default class HomeController extends cc.Component {
     clickVideoRewards() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP);
     }
+    clickSpin() {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SPIN);
+    }
+
     onHandlerPlayNow() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
     }

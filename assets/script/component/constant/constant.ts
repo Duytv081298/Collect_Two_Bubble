@@ -33,7 +33,7 @@ export enum HIDDEN_PRIZES {
 
 }
 export const TOTAL_BALL = 36;
-export const MAX_MOVE = 2;
+export const MAX_MOVE = 20;
 export const GOLD_DEFAULT = 300;
 export const GOLD_USE_BOOSTER = 300;
 export const MAXCOLUMNBOARD = 6;

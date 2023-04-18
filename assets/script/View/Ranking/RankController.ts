@@ -1,4 +1,5 @@
 import NameBot from "../../component/component/NameBot";
+import PlayerLocal from "../../component/component/PlayerLocal";
 import { Utils } from "../../component/component/Utils";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import FaceBook from "../../component/package/FaceBook";
@@ -34,8 +35,6 @@ export default class RankController extends cc.Component {
     idxRank: number = 0;
     idxSpeedScore = 0;
     arrOtherPlayer: any[] = [];
-
-    listNames: string[] = [];
     listPositionPlayer: cc.Vec2[] = [];
     listScorePlayer: number[] = [];
 
@@ -51,8 +50,6 @@ export default class RankController extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.TWEEN_PLAYER_RANKING, this.tweenSpinScore, this);
     }
 
-    protected onLoad(): void {
-    }
     reset() {
         this.node.stopAllActions();
         this.backScorePlay = 0;
@@ -61,16 +58,13 @@ export default class RankController extends cc.Component {
         this.idxRank = 0;
         this.idxSpeedScore = 0;
         this.arrOtherPlayer = [];
-        this.listNames = [];
         this.listPositionPlayer = [];
         this.listScorePlayer = [];
-
+        PlayerLocal.instance().clearPlayer();
         while (this.node.childrenCount > 0) {
             CreatePlayerRank.instance().removeItemRank(this.node.children[0]);
         }
         this.node.x = -widthScreen / 2;
-
-
 
         this.createDataRank();
         MainData.instance().rankMe = this.playerRank;
@@ -84,7 +78,7 @@ export default class RankController extends cc.Component {
         this.playerRank = Utils.randomInt(30, 40);   //Utils.randomInt(5, 10)  
         let score = 0;
         for (let i = 1; i < this.playerRank + 1; i++) {
-            let name = this.getNameUser();
+            let name = PlayerLocal.instance().getNamePlayerRank();
             score = score + spaceScore + Utils.randomInt(spaceScore * 2, spaceScore * 4) + Utils.randomInt(spaceScore * 4, spaceScore * 6);
             let dataPlay = {
                 name: name,
@@ -93,7 +87,6 @@ export default class RankController extends cc.Component {
                 rank: this.playerRank - i,
                 isFb: false,
             }
-            cc.resources.preload("profiles/" + name, (err) => { });
             this.arrPlayerRank.push(dataPlay);
             this.listScorePlayer.push(score)
         }
@@ -104,12 +97,8 @@ export default class RankController extends cc.Component {
         for (let i = 0; i < 5; i++) {
             this.showRankPlayer();
         }
-        this.showRankMe();
-
+        this.user.setUp(this.playerRank + 1)
     }
-
-
-
 
     showRankPlayer() {
         if (this.idxRank > this.arrPlayerRank.length - 1) return;
@@ -124,23 +113,9 @@ export default class RankController extends cc.Component {
 
         if (itemRank.x > this.node.width - 1000) this.node.width = (itemRank.x + 2000)
         if (this.arrPlayerRank[idxRankCopy].isFb == false) {
-            cc.resources.load("profiles/" + this.arrPlayerRank[idxRankCopy].avatar, cc.Texture2D, (err, avatar: cc.Texture2D) => {
-                if (!err) {
-                    const spriteFrame = new cc.SpriteFrame(avatar);
-                    itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                }
-            })
+            PlayerLocal.instance().setSprite(itemRank.getChildByName("avatar").getComponent(cc.Sprite), this.arrPlayerRank[idxRankCopy].avatar)
         } else {
-            cc.assetManager.loadRemote(this.arrPlayerRank[idxRankCopy].avatar, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
-                if (imageAsset == null) {
-                    return;
-                }
-                if (err) {
-                    return;
-                }
-                const spriteFrame = new cc.SpriteFrame(imageAsset);
-                itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
-            });
+            FaceBook.loadRemote(itemRank.getChildByName("avatar").getComponent(cc.Sprite), this.arrPlayerRank[idxRankCopy].avatar);
         }
 
         itemRank.setParent(this.node)
@@ -206,7 +181,7 @@ export default class RankController extends cc.Component {
             let maxScoreKc = scoreEnd - this.backScorePlay;
             let scoreKc = scorePlay - this.backScorePlay;
             let vx: number = this.node.position.x - ((scoreKc / maxScoreKc) * maxKc);
-            cc.tween(this.node).to(0.2, { x: vx }).call(() => { 
+            cc.tween(this.node).to(0.2, { x: vx }).call(() => {
                 MainData.instance().isRunPlayer = false;
             }).start()
         }
@@ -230,7 +205,7 @@ export default class RankController extends cc.Component {
         MainData.instance().rankMe = this.playerRank;
         MainData.instance().arrDataRank = this.arrPlayerRank;
 
-        this.showRankMe();
+        this.user.showRank(this.playerRank + 1)
 
     }
 
@@ -244,31 +219,10 @@ export default class RankController extends cc.Component {
         }
         return arrIndex;
     }
-    showRankMe() {
-        this.user.setUp(null, this.playerRank + 1)
-
-    }
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-    getNameUser() {
-        let arrName = NameBot.getArrName();
-        let name = arrName[Math.floor(Math.random() * arrName.length)];
-        while (this.listNames.indexOf(name) >= 0) {
-            name = arrName[Math.floor(Math.random() * arrName.length)]
-        }
-        return name;
-    }
 }

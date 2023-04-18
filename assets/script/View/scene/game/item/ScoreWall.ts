@@ -23,7 +23,7 @@ export default class ScoreWall extends cc.Component {
         contact.disabledOnce = true;
         if (otherCollider.node.group == "bubble") {
             MainData.instance().realityBubble++;
-            console.log("========== realityBubble: " + MainData.instance().realityBubble);
+            // console.log("========== realityBubble: " + MainData.instance().realityBubble);
             
             let bubble: cc.Node = otherCollider.node;
 
@@ -41,8 +41,6 @@ export default class ScoreWall extends cc.Component {
             }
 
             CreateBubble.instance().removeItem(bubble);
-            console.log("MainData.instance().estimateBubble: " + MainData.instance().estimateBubble);
-            console.log("MainData.instance().realityBubble: " + MainData.instance().realityBubble);
             
         }
 

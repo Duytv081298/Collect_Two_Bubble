@@ -1,4 +1,5 @@
 import RewardAds from "../../../component/ads/RewardAds";
+import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import MainData from "../../../component/storage/MainData";
 
@@ -77,7 +78,7 @@ export default class NoMoves extends cc.Component {
         // SoundManager.instance().playEffect("button"); 
         this.hide();
         
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: null });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GAME_OVER_POPUP);
         // this.node.emit("SHOW_ENDGAME");
     }

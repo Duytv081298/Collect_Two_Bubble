@@ -31,14 +31,13 @@ export default class LocalStorage {
     // static COUNT_ITEM_HAMMER: string = "countItemHammer"
     // static COUNT_ITEM_CHANGE_COLOR: string = "countItemChangeColor"
     // static DATA_SCORE_FRIENDS: string = "dataScoreFriends"
-    // static CURRENT_DATE: string = "currentDate"
+    static CURRENT_DATE: string = "currentDate"
     // static DAILY_COLLECT: string = "daily_connect";
     // static CURRENT_DAILY_COLLECT: string = "current_daily_connect";
-    // static TOTAL_COLLECT_SPIN: string = "total_collect_spin";
-    // static CURRENT_GOLD: string = "current_gold";
-    // static CURRENT_SPIN: string = "current_spin";
-    // static TIME_GET_SPIN: string = "time_get_spin";
-    // static DATA_GET_MORE_SPIN: string = "data_get_more_spin";
+    static TOTAL_COLLECT_SPIN: string = "total_collect_spin";
+    static CURRENT_SPIN: string = "current_spin";
+    static TIME_GET_SPIN: string = "time_get_spin";
+    static DATA_GET_MORE_SPIN: string = "data_get_more_spin";
     static DATA_INVITE_FRIEND: string = "data_invite_friend";
     static getItem(name: string) {
         return dataGame.get(name);
@@ -71,18 +70,21 @@ export default class LocalStorage {
         if (name == LocalStorage.BOOSTER_HAMMER) {
             MainData.instance().amountBooster[BOOSTER.hammer] = params;
         }
-        // if (name == LocalStorage.TOTAL_COLLECT_SPIN) {
-        //     MainData.instance().total_collect_spin = params;
-        // }
-        // if (name == LocalStorage.DATA_GET_MORE_SPIN) {
-        //     MainData.instance().dataGetMoreSpin = params;
-        // }
-        // if (name == LocalStorage.DATA_INVITE_FRIEND) {
-        //     MainData.instance().dataInviteFriend = params;
-        // }
-        // if (name == LocalStorage.TIME_GET_SPIN) {
-        //     MainData.instance().totalTimeGetSpin = 1800;
-        // }
+        if (name == LocalStorage.CURRENT_SPIN) {
+            MainData.instance().currentSpin = params;
+        }
+        if (name == LocalStorage.TOTAL_COLLECT_SPIN) {
+            MainData.instance().total_collect_spin = params;
+        }
+        if (name == LocalStorage.DATA_GET_MORE_SPIN) {
+            MainData.instance().dataGetMoreSpin = params;
+        }
+        if (name == LocalStorage.DATA_INVITE_FRIEND) {
+            MainData.instance().dataInviteFriend = params;
+        }
+        if (name == LocalStorage.TIME_GET_SPIN) {
+            MainData.instance().totalTimeGetSpin = 1800;
+        }
 
         dataGame.set(name, params);
         FaceBook.setDataAsync(name, params);

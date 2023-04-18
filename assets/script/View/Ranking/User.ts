@@ -13,10 +13,17 @@ export default class User extends cc.Component {
     avatar: cc.Sprite = null;
     @property(cc.SpriteFrame)
     avatarDefault: cc.SpriteFrame = null;
+    rank: number = 999;
 
-    setUp(avatar: cc.SpriteFrame, rank: number) {
-        this.avatar.spriteFrame = avatar ? avatar : this.avatarDefault;
-        this.txtRank.string = rank >= 0 ? rank.toString() : "";
+    setUp(rank: number) {
+        this.avatar.spriteFrame = this.avatarDefault;
         FaceBook.showAvatarMe(this.avatar);
+        this.showRank(rank);
+    }
+    showRank(rank: number) {
+        if (this.rank == rank) return;
+        this.rank = rank;
+        this.avatar.spriteFrame = this.avatarDefault;
+        this.txtRank.string = rank >= 0 ? rank.toString() : "";
     }
 }

@@ -1,4 +1,5 @@
 import RewardAds from "../../../component/ads/RewardAds";
+import PlayerLocal from "../../../component/component/PlayerLocal";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
@@ -244,25 +245,30 @@ export default class GameOver extends cc.Component {
                 itemRank.getChildByName("txtScore").getComponent(cc.Label).string = this.arrDataRank[i].score;
                 itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = CreatePlayerRank.instance().defaultAvatar;
                 if (this.arrDataRank[i].isFb == false) {
-                    cc.resources.preload("profiles/" + this.arrDataRank[i].avatar, (err) => {
-                        cc.resources.load("profiles/" + this.arrDataRank[i].avatar, cc.Texture2D, (err, avatar: cc.Texture2D) => {
-                            if (!err) {
-                                const spriteFrame = new cc.SpriteFrame(avatar);
-                                itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                            }
-                        })
-                    })
+                    // cc.resources.preload("profiles/" + this.arrDataRank[i].avatar, (err) => {
+                    //     cc.resources.load("profiles/" + this.arrDataRank[i].avatar, cc.Texture2D, (err, avatar: cc.Texture2D) => {
+                    //         if (!err) {
+                    //             const spriteFrame = new cc.SpriteFrame(avatar);
+                    //             itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                    //         }
+                    //     })
+                    // })
+
+
+                    PlayerLocal.instance().setSprite(itemRank.getChildByName("avatar").getComponent(cc.Sprite), this.arrDataRank[i].avatar)
                 } else {
-                    cc.assetManager.loadRemote(this.arrDataRank[i].avatar, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
-                        if (imageAsset == null) {
-                            return;
-                        }
-                        if (err) {
-                            return;
-                        }
-                        const spriteFrame = new cc.SpriteFrame(imageAsset);
-                        itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                    });
+                    // cc.assetManager.loadRemote(this.arrDataRank[i].avatar, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
+                    //     if (imageAsset == null) {
+                    //         return;
+                    //     }
+                    //     if (err) {
+                    //         return;
+                    //     }
+                    //     const spriteFrame = new cc.SpriteFrame(imageAsset);
+                    //     itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                    // });
+
+                    FaceBook.loadRemote(itemRank.getChildByName("avatar").getComponent(cc.Sprite), this.arrDataRank[i].avatar);
                 }
 
                 this.layoutRank.addChild(itemRank);
@@ -384,15 +390,15 @@ export default class GameOver extends cc.Component {
     }
     onHandlerShare() {
         // console.log("onHandlerShare ======");
-        
+
         // SoundManager.instance().playEffect("button");
         if (window["FBInstant"] == undefined) return;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
         // console.log("onHandlerShare +++++");
-   
+
         cc.resources.load(FaceBook.getImageShareFacebook(), (err, texture) => {
             // console.log(texture);
-            
+
             FBInstant.shareAsync({
                 image: FaceBook.getImgBase64(texture),
                 text: FBInstant.player.getName() + " invited you to play",
@@ -407,11 +413,11 @@ export default class GameOver extends cc.Component {
                 switchContext: false
             }).then(() => {
                 // console.log("then");
-                
+
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
             }).catch((e) => {
                 // console.log(e);
-                
+
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
 
             });

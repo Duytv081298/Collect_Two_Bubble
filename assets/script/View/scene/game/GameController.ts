@@ -12,6 +12,16 @@ export default class GameController extends cc.Component {
     @property(BroadContainer)
     broadContainer: BroadContainer = null;
 
+
+    @property(cc.Label)
+    score_game: cc.Label = null;
+
+    @property(cc.Label)
+    gold_game: cc.Label = null;
+
+    @property(cc.Label)
+    move_game: cc.Label = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
@@ -35,18 +45,16 @@ export default class GameController extends cc.Component {
 
     // update (dt) {}
     setUpEmit() {
-
-        // GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_SCORE_GAME, this.updateScore, this);
-        // GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_MOVE_GAME, this.updateMove, this);
-        // GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_SCORE_GAME, this.updateScore, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_MOVE_GAME, this.updateMove, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.START_GAME, this.reset, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
     }
     closeEmit() {
-
-        // GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_SCORE_GAME, this.updateScore, this);
-        // GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_MOVE_GAME, this.updateMove, this);
-        // GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_SCORE_GAME, this.updateScore, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_MOVE_GAME, this.updateMove, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.START_GAME, this.reset, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
     }
@@ -62,38 +70,47 @@ export default class GameController extends cc.Component {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 0 });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 0, status: true });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 0 });
-        this.broadContainer.init()
     }
-    startGame() {
-        console.log("GameController setUp: ");
-
-        this.reset();
-    }
-
+    
     clickSetting() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SETTING_POPUP);
     }
+    updateScore(data) {
+        // console.log(data);
 
-    // updateScore(data) {
-    //     let score = parseInt(data.score);
+        let score = parseInt(data.score);
+        MainData.instance().score += score;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.TWEEN_PLAYER_RANKING);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CHECK_SHOW_GIFT);
+        this.score_game.string = MainData.instance().score.toString();
+    }
+    updateMove(data) {
 
-    //     MainData.instance().score += score;
-    //     GlobalEvent.instance().dispatchEvent(GlobalEvent.TWEEN_PLAYER_RANKING);
+        let move = parseInt(data.move);
+        MainData.instance().move += move;
 
-    // }
-    // updateMove(data) {
-    //     // console.log("update move: " + data.move);
+        let status = data.status;
+        let time = 0.2;
+        cc.tween(this.move_game.node)
+            .to(time,
+                { position: new cc.Vec3(0, status ? -this.move_game.node.height : this.move_game.node.height, 0) })
+            .call(() => {
+                this.move_game.node.position = new cc.Vec3(0, status ? this.move_game.node.height : -this.move_game.node.height)
+                this.move_game.string = MainData.instance().move.toString();
+            })
+            .to(time,
+                { position: cc.Vec3.ZERO })
+            .start();
+    }
+    updateGold(data) {
+        // console.log("update gold");
 
-    //     let move = parseInt(data.move);
-    //     MainData.instance().move += move;
-    // }
-    // updateGold(data) {
-    //     let gold = parseInt(data.gold);
-    //     if (data.gold == 0) return;
-    //     LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
-    //     if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER)
-    //         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_UI_BOOSTER);
-    // }
+        let gold = parseInt(data.gold);
+        LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
+        if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER)
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_UI_BOOSTER);
+        this.gold_game.string = MainData.instance().goldPlayer.toString();
+    }
 
 
 

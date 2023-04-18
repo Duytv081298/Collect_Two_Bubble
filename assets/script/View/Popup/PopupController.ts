@@ -4,6 +4,7 @@ import GameOver from "./EndGame/GameOver";
 import { OpenGift } from "./Gift/OpenGift";
 import NoMoves from "./NoMove/NoMoves";
 import { Setting } from "./Setting/Setting";
+import { Spin } from "./Spin/Spin";
 import { VideoRewards } from "./Video Rewards/VideoRewards";
 
 const { ccclass, property } = cc._decorator;
@@ -15,6 +16,7 @@ export default class PopupController extends cc.Component {
     endGame: cc.Node = null;
     setting: cc.Node = null;
     gift: cc.Node = null;
+    spin: cc.Node = null;
     inviteFriend: cc.Node = null;
     videoRewards: cc.Node = null;
 
@@ -22,7 +24,7 @@ export default class PopupController extends cc.Component {
     ktShowEndGame: boolean = false;
     ktShowSetting: boolean = false;
     ktShowGift: boolean = false;
-
+    ktShowSpin: boolean = false;
     ktInviteFriend: boolean = false;
     ktVideoRewards: boolean = false;
     // LIFE-CYCLE CALLBACKS:
@@ -42,6 +44,7 @@ export default class PopupController extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_GAME_OVER_POPUP, this.showEndGame, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_SETTING_POPUP, this.showSetting, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_GIFT, this.showGift, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_SPIN, this.showSpin, this);
 
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_INVITE_FRIEND_POPUP, this.showInviteFriend, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP, this.showVideoRewards, this);
@@ -52,6 +55,7 @@ export default class PopupController extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_GAME_OVER_POPUP, this.showEndGame, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_SETTING_POPUP, this.showSetting, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_GIFT, this.showGift, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_SPIN, this.showSpin, this);
 
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_INVITE_FRIEND_POPUP, this.showInviteFriend, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP, this.showVideoRewards, this);
@@ -64,14 +68,12 @@ export default class PopupController extends cc.Component {
         });
     }
     loadSetting() {
-        console.log("loadSetting");
-        
         cc.resources.load("prefab/setting/Setting", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
                 if (this.setting == null) {
                     this.setting = cc.instantiate(prefab);
-                    this.setting.active = this.ktShowSetting;
                     this.setting.setParent(this.node)
+                    this.setting.active = false;
                     if (this.ktShowSetting == true) {
                         this.showSetting();
                     }
@@ -90,8 +92,8 @@ export default class PopupController extends cc.Component {
             if (!err) {
                 if (this.noMove == null) {
                     this.noMove = cc.instantiate(prefab);
-                    this.noMove.active = this.ktShowNoMoves;
                     this.noMove.setParent(this.node)
+                    this.noMove.active = false;
                     if (this.ktShowNoMoves == true) {
                         this.showNoMoves();
                     }
@@ -105,15 +107,14 @@ export default class PopupController extends cc.Component {
             if (this.endGame == null || !this.endGame.active) this.loadEndGame();
         });
     }
-
     loadEndGame() {
         cc.resources.load("prefab/EndGame/EndGame", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
                 if (this.endGame == null) {
                     this.endGame = cc.instantiate(prefab);
                     // this.endGame.on("PLAY_AGAIN", this.playAgain, this);
-                    this.endGame.active = this.ktShowEndGame;
                     this.endGame.setParent(this.node);
+                    this.endGame.active = false;
                     if (this.ktShowEndGame == true) {
                         this.showEndGame();
                     }
@@ -132,8 +133,8 @@ export default class PopupController extends cc.Component {
             if (!err) {
                 if (this.gift == null) {
                     this.gift = cc.instantiate(prefab);
-                    this.gift.active = this.ktShowGift;
                     this.gift.setParent(this.node);
+                    this.gift.active = false;
                     if (this.ktShowGift == true) {
                         this.showGift();
                     }
@@ -151,8 +152,8 @@ export default class PopupController extends cc.Component {
             if (!err) {
                 if (this.inviteFriend == null) {
                     this.inviteFriend = cc.instantiate(prefab);
-                    this.inviteFriend.active = this.ktInviteFriend;
                     this.inviteFriend.setParent(this.node);
+                    this.inviteFriend.active = false;
                     if (this.ktInviteFriend == true) {
                         this.showInviteFriend();
                     }
@@ -171,8 +172,8 @@ export default class PopupController extends cc.Component {
             if (!err) {
                 if (this.videoRewards == null) {
                     this.videoRewards = cc.instantiate(prefab);
-                    this.videoRewards.active = this.ktVideoRewards;
                     this.videoRewards.setParent(this.node);
+                    this.videoRewards.active = false;
                     if (this.ktVideoRewards == true) {
                         this.showGift();
                     }
@@ -180,6 +181,29 @@ export default class PopupController extends cc.Component {
             }
         });
     }
+    preLoadSpin() {
+        cc.resources.preload("prefab/spin/Spin", cc.Prefab, (err) => {
+
+            if (this.spin == null || !this.spin.active) this.loadSpin();
+        });
+    }
+    loadSpin() {
+        cc.resources.load("prefab/spin/Spin", cc.Prefab, (err, prefab: cc.Prefab) => {
+            if (!err) {
+                if (this.spin == null) {
+                    this.spin = cc.instantiate(prefab);
+                    this.spin.setParent(this.node);
+                    this.spin.active = false;
+                    if (this.ktShowSpin == true) {
+                        this.showSpin();
+                    }
+                }
+            }
+        });
+    }
+
+
+
     showNoMoves() {
         if (MainData.instance().isShowNoMove) return;
         if (this.noMove != null) {
@@ -187,6 +211,7 @@ export default class PopupController extends cc.Component {
             MainData.instance().isShowNoMove = true;
             this.ktShowNoMoves = false;
             this.noMove.active = true;
+            // this.noMove.setSiblingIndex(this.node.children.length)
             this.noMove.getComponent(NoMoves).show();
         } else {
             this.showLoading();
@@ -194,8 +219,6 @@ export default class PopupController extends cc.Component {
             this.loadNoMove();
         }
     }
-
-
     showEndGame() {
         // console.log("showEndGame------------")
         if (this.noMove) this.noMove.active = false;
@@ -203,7 +226,7 @@ export default class PopupController extends cc.Component {
             this.hideLoading();
             this.ktShowEndGame = false;
             this.endGame.active = true;
-            // let arrDataRank = this.arrPlayerRank.concat();
+            // this.endGame.setSiblingIndex(this.node.children.length)
             this.endGame.getComponent(GameOver).show();
         } else {
             this.showLoading();
@@ -211,12 +234,12 @@ export default class PopupController extends cc.Component {
             this.loadEndGame();
         }
     }
-
     showSetting() {
         if (this.setting != null) {
             this.hideLoading();
             this.ktShowSetting = false;
             this.setting.active = true;
+            // this.setting.setSiblingIndex(this.node.children.length)
             this.setting.getComponent(Setting).showPopup();
         } else {
             this.showLoading();
@@ -224,8 +247,6 @@ export default class PopupController extends cc.Component {
             this.loadSetting();
         }
     }
-
-
     showGift() {
 
         if (this.gift != null) {
@@ -234,6 +255,7 @@ export default class PopupController extends cc.Component {
             if (this.gift.active == true) return;
             this.ktShowGift = false;
             this.gift.active = true;
+            // this.gift.setSiblingIndex(this.node.children.length)
             this.gift.getComponent(OpenGift).show();
         } else {
             this.showLoading();
@@ -241,8 +263,6 @@ export default class PopupController extends cc.Component {
             this.loadGift();
         }
     }
-
-
     showInviteFriend() {
 
         if (this.inviteFriend != null) {
@@ -251,6 +271,7 @@ export default class PopupController extends cc.Component {
             if (this.inviteFriend.active == true) return;
             this.ktInviteFriend = false;
             this.inviteFriend.active = true;
+            // this.inviteFriend.setSiblingIndex(this.node.children.length)
         } else {
             this.showLoading();
             this.ktInviteFriend = true;
@@ -258,12 +279,12 @@ export default class PopupController extends cc.Component {
         }
     }
     showVideoRewards() {
-
         if (this.videoRewards != null) {
             this.hideLoading();
             if (this.videoRewards.active == true) return;
             this.ktVideoRewards = false;
             this.videoRewards.active = true;
+            // this.videoRewards.setSiblingIndex(this.node.children.length)
             this.videoRewards.getComponent(VideoRewards).show();
         } else {
             this.showLoading();
@@ -271,7 +292,24 @@ export default class PopupController extends cc.Component {
             this.loadVideoRewards();
         }
     }
+    showSpin() {
 
+        if (this.spin != null) {
+            this.hideLoading();
+            console.log("===========");
+            
+            if (this.spin.active == true) return;
+            console.log("popup controller show spin");
+            this.ktShowSpin = false;
+            this.spin.active = true;
+            // this.spin.setSiblingIndex(this.node.children.length)
+            this.spin.getComponent(Spin).show();
+        } else {
+            this.showLoading();
+            this.ktShowSpin = true;
+            this.loadSpin();
+        }
+    }
 
 
 

@@ -64,16 +64,18 @@ export class UserHome extends cc.Component {
         this.txtScore.string = "Score: " + score;
         this.avatar.spriteFrame = this.defaultAvatar;
         if (avatar == "" || avatar == null) return;
-        cc.assetManager.loadRemote(avatar, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
-            if (imageAsset == null) {
-                return;
-            }
-            if (err) {
-                return;
-            }
-            const spriteFrame = new cc.SpriteFrame(imageAsset);
-            this.avatar.spriteFrame = spriteFrame;
-        });
+        // cc.assetManager.loadRemote(avatar, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
+        //     if (imageAsset == null) {
+        //         return;
+        //     }
+        //     if (err) {
+        //         return;
+        //     }
+        //     const spriteFrame = new cc.SpriteFrame(imageAsset);
+        //     this.avatar.spriteFrame = spriteFrame;
+        // });
+        
+        FaceBook.loadRemote(this.avatar, avatar);
 
     }
     start() {

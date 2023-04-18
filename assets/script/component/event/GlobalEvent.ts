@@ -68,6 +68,10 @@ export default class GlobalEvent extends BaseEvent {
     static CHECK_SHOW_GIFT: string = "GlobalEvent.CHECK_SHOW_GIFT";
 
 
+
+    static SHOW_SPIN: string = "GlobalEvent.SHOW_SPIN";
+    
+
     static REWARD_ADS_ON_READY: string = "GlobalEvent.rewardads.onready";
     static REWARD_ADS_ON_REWARD: string = "GlobalEvent.rewardads.onreward";
     static REWARD_ADS_TIME_DELAY: string = "GlobalEvent.rewardads.timedelay";

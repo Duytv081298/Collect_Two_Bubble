@@ -110,32 +110,31 @@ export default class FaceBook {
 
     static showAvatarMe(avatar: cc.Sprite) {
         // console.log("FBInstant.player.getID(): " + FBInstant.player.getID());
-        
+
         if (MainData.instance().avatarMe) {
-            if (avatar) avatar.getComponent(cc.Sprite).spriteFrame = MainData.instance().avatarMe;
+            if (avatar) avatar.spriteFrame = MainData.instance().avatarMe;
             return;
         }
 
         let urlImage = FaceBook.getPhoto();
         // console.log("urlImage: " + urlImage);
-
-
         if (urlImage == "" || urlImage == null) {
         } else {
-            cc.assetManager.loadRemote(urlImage, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
-                if (imageAsset == null) {
-                    return;
-                }
-                if (err) {
-                    return;
-                }
-                const spriteFrame = new cc.SpriteFrame(imageAsset);
-                if (avatar) {
-                    avatar.getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                    MainData.instance().avatarMe = spriteFrame;
-                }
-            });
+            this.loadRemote(avatar, urlImage);
         }
+    }
+
+    static loadRemote(avatar: cc.Sprite, urlImage: string) {
+        cc.assetManager.loadRemote(urlImage, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
+            if (imageAsset == null) {
+                return;
+            }
+            if (err) {
+                return;
+            }
+            const spriteFrame = new cc.SpriteFrame(imageAsset);
+            avatar.spriteFrame = spriteFrame;
+        });
     }
 
     static shareScore(score: number) {
