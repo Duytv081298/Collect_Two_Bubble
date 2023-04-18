@@ -1,3 +1,6 @@
+import Bubble from "../../View/scene/game/item/Bubble";
+import { Utils } from "../component/Utils";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -33,6 +36,15 @@ export default class CreateConnect {
     removeItem(itemNode: cc.Node) {
         itemNode.stopAllActions();
         this.pool.put(itemNode);
+    }
+
+    createConnect(startDot: Bubble, toDot: Bubble): cc.Node {
+        let connect = this.createItem();
+        connect.position = startDot.node.position;
+        connect.width = Utils.getDistance(startDot.node.position, toDot.node.position);
+        connect.angle = Utils.getAngle(startDot, toDot);
+        connect.active = true;
+        return connect;
     }
 
     // update (dt) {}

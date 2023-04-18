@@ -205,8 +205,10 @@ export default class PopupController extends cc.Component {
 
 
     showNoMoves() {
+
         if (MainData.instance().isShowNoMove) return;
         if (this.noMove != null) {
+            console.log("showNoMoves");
             this.hideLoading();
             MainData.instance().isShowNoMove = true;
             this.ktShowNoMoves = false;
@@ -220,9 +222,9 @@ export default class PopupController extends cc.Component {
         }
     }
     showEndGame() {
-        // console.log("showEndGame------------")
         if (this.noMove) this.noMove.active = false;
         if (this.endGame != null) {
+            console.log("showEndGame")
             this.hideLoading();
             this.ktShowEndGame = false;
             this.endGame.active = true;
@@ -297,7 +299,7 @@ export default class PopupController extends cc.Component {
         if (this.spin != null) {
             this.hideLoading();
             console.log("===========");
-            
+
             if (this.spin.active == true) return;
             console.log("popup controller show spin");
             this.ktShowSpin = false;

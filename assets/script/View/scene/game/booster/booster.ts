@@ -80,6 +80,7 @@ export default class Booster extends cc.Component {
 
 
     onClickRocket() {
+        if (MainData.instance().isPlay == true) return;
         if (MainData.instance().isUseBooster) return;
         if (MainData.instance().keyBooster == BOOSTER.rocket) {
             this.clearBooster();
@@ -106,6 +107,7 @@ export default class Booster extends cc.Component {
 
     }
     onClickBomb() {
+        if (MainData.instance().isPlay == true) return;
         if (MainData.instance().isUseBooster) return;
         if (MainData.instance().keyBooster == BOOSTER.bomb) {
             this.clearBooster();
@@ -132,6 +134,7 @@ export default class Booster extends cc.Component {
         }
     }
     onClickReverse() {
+        if (MainData.instance().isPlay == true) return;
         if (MainData.instance().isUseBooster) return;
         if (MainData.instance().keyBooster == BOOSTER.reverse) {
             this.clearBooster();
@@ -157,6 +160,7 @@ export default class Booster extends cc.Component {
         }
     }
     onClickHammer() {
+        if (MainData.instance().isPlay == true) return;
         if (MainData.instance().isUseBooster) return;
         if (MainData.instance().keyBooster == BOOSTER.hammer) {
             this.clearBooster();
