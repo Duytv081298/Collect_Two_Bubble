@@ -24,24 +24,23 @@ export default class ScoreWall extends cc.Component {
         if (otherCollider.node.group == "bubble") {
             MainData.instance().realityBubble++;
             // console.log("========== realityBubble: " + MainData.instance().realityBubble);
-            
-            let bubble: cc.Node = otherCollider.node;
 
+            let bubble: cc.Node = otherCollider.node;
             let coefficients = bubble.getComponent(Bubble).coefficients;
+            CreateBubble.instance().removeItem(bubble);
+
+
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: this.score * coefficients, status: true });
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_HOLE, { index: this.index }); //show ani the hien bubble roi trung hole
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_GOLD_HOLE); // show ani the hien co the duoc tang gold
+            
 
             let score = CreateScoreBubble.instance().createItem();
             score.setParent(this.parentScoreBubble);
             score.getComponent(ScoreBubble).setUp(this.score * coefficients, this.index);
 
-            if (MainData.instance().estimateBubble <= MainData.instance().realityBubble) {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_ANI_GOLD_HOLE);
-            }
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_ANI_GOLD_HOLE);
 
-            CreateBubble.instance().removeItem(bubble);
-            
         }
 
     }
