@@ -24,13 +24,15 @@ export default class AnimationBooster extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.CLEAR_BOOSTER, this.hideAll, this);
     }
     protected onDisable(): void {
-        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ANI_BOOSTER, this.show, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ANI_BOOSTER, this.show, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.CLEAR_BOOSTER, this.hideAll, this);
     }
     loadAni() {
         cc.resources.load("spine/item-rocket/anim-tenlua", sp.SkeletonData, (err, res: sp.SkeletonData) => {
             if (!err) {
                 this.skeletonData_Rocket = res;
+                console.log("load anim-tenlua thanh cong");
+
             } else {
                 console.log(err);
             }
@@ -38,6 +40,7 @@ export default class AnimationBooster extends cc.Component {
         cc.resources.load("spine/item-bomb/item-bom", sp.SkeletonData, (err, res: sp.SkeletonData) => {
             if (!err) {
                 this.skeletonData_Bomb = res;
+                console.log("load item-bom thanh cong");
             } else {
                 console.log(err);
             }
@@ -45,6 +48,7 @@ export default class AnimationBooster extends cc.Component {
         cc.resources.load("spine/anim_reverse/swap-anim", sp.SkeletonData, (err, res: sp.SkeletonData) => {
             if (!err) {
                 this.skeletonData_Reverse = res;
+                console.log("load swap-anim thanh cong");
             } else {
                 console.log(err);
             }
@@ -52,6 +56,7 @@ export default class AnimationBooster extends cc.Component {
         cc.resources.load("spine/item_hammer/item-bua", sp.SkeletonData, (err, res: sp.SkeletonData) => {
             if (!err) {
                 this.skeletonData_Hammer = res;
+                console.log("load item-bua thanh cong");
             } else {
                 console.log(err);
             }
@@ -59,8 +64,10 @@ export default class AnimationBooster extends cc.Component {
     }
 
     hideAll() {
+        console.log("hideAll");
         for (let i = 0; i < this.node.children.length; i++) {
             this.node.children[i].active = false;
+            console.log(this.node.children[i].active);
         }
     }
 
@@ -68,29 +75,44 @@ export default class AnimationBooster extends cc.Component {
         console.log("show animation");
 
         let bubble: Bubble = data.bubble;
-        let child: cc.Node = null;
+        let child: cc.Node = this.node.children[0];
 
-        for (let i = 0; i < this.node.children.length; i++) {
-            let c = this.node.children[i];
-            if (c.active == false) {
-                child = c;
-                break;
-            }
-        }
+        // console.log(child);
+        // for (let i = 0; i < this.node.childrenCount; i++) {
+        //     let c = this.node.children[i];
+        //     console.log(this.node.children[i].active);
+        //     if (c.active == false) {
+        //         child = c;
+        //         break;
+        //     }
+        // }
+        // console.log(11111111);
+
+        if (child == null) return;
+        console.log(222222);
+
         let anim = child.getComponent(sp.Skeleton);
         if (!anim) return;
+        console.log("MainData.instance().keyBooster: " + MainData.instance().keyBooster);
+
 
         switch (MainData.instance().keyBooster) {
             case BOOSTER.rocket:
+
                 if (this.skeletonData_Rocket) {
+                    console.log("=======================");
+
+                    console.log(this.skeletonData_Rocket);
+
                     child.active = true;
                     child.setPosition(bubble.node.position);
                     anim.skeletonData = this.skeletonData_Rocket;
+                    // anim.clearTrack(0);
                     anim.timeScale = 1.5;
                     anim.defaultSkin = "default";
                     anim.animation = "anim-tenlua-cong";
                     anim.setAnimation(0, "anim-tenlua-cong", false);
-                    anim.setCompleteListener(() => { child.active = false })
+                    // anim.setCompleteListener(() => { child.active = false })
                     break;
                 } else break;
 
@@ -99,11 +121,12 @@ export default class AnimationBooster extends cc.Component {
                     child.active = true;
                     child.setPosition(bubble.node.position);
                     anim.skeletonData = this.skeletonData_Bomb;
+                    // anim.clearTrack(0);
                     anim.timeScale = 1;
                     anim.defaultSkin = "default";
                     anim.animation = "boomno";
                     anim.setAnimation(0, "boomno", false);
-                    anim.setCompleteListener(() => { child.active = false })
+                    // anim.setCompleteListener(() => { child.active = false })
                     break;
                 } else break;
 
@@ -113,11 +136,12 @@ export default class AnimationBooster extends cc.Component {
                     child.active = true;
                     child.setPosition(bubble.node.position);
                     anim.skeletonData = this.skeletonData_Reverse;
+                    anim.clearTrack(0);
                     anim.timeScale = 1;
                     anim.setSkin("default");
                     anim.animation = name;
                     anim.setAnimation(0, name, true);
-                    anim.setCompleteListener(()=>{})
+                    // anim.setCompleteListener(() => { })
                     break;
                 } else break;
 
@@ -125,11 +149,12 @@ export default class AnimationBooster extends cc.Component {
                 if (this.skeletonData_Hammer) {
                     child.setPosition(bubble.node.position);
                     anim.skeletonData = this.skeletonData_Hammer;
+                    anim.clearTrack(0);
                     anim.timeScale = 1;
                     anim.setSkin("default");
                     anim.animation = "animation";
                     anim.setAnimation(0, "animation", false);
-                    anim.setCompleteListener(() => { child.active = false })
+                    // anim.setCompleteListener(() => { child.active = false })
                     child.active = true;
                     break;
                 } else break;

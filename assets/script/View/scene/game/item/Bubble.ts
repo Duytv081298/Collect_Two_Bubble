@@ -117,14 +117,15 @@ export default class Bubble extends cc.Component {
         // this.unschedule(this.sc);
         // this.scheduleOnce(this.sc, 2)
         this.scheduleOnce(() => {
-            console.log(this.node.parent.name);
+            MainData.instance().realityBubble++;
+            // console.log(this.node.parent);
+            // let parent = this.node.parent;
+            // console.log("parent.childrenCount: " + parent.childrenCount);
+            CreateBubble.instance().removeItem(this.node);
 
-            if (this.node.parent.name == "Bubble Die" || this.node.parent.name == "Hidden prizes") {
-                MainData.instance().realityBubble++;
-                if (MainData.instance().realityBubble >= MainData.instance().estimateBubble) GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
-
-                CreateBubble.instance().removeItem(this.node);
-            }
+            // if (parent.childrenCount == 0) {
+            //     GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
+            // }
         }, 2)
 
     }

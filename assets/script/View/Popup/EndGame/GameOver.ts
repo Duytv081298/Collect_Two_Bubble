@@ -157,8 +157,10 @@ export default class GameOver extends cc.Component {
         this.removeAllPlayerRank();
         this.node.stopAllActions();
         this.layoutRank.stopAllActions();
-        if (this.itemRankMe) this.itemRankMe.stopAllActions();
         this.layoutRank.off(cc.Node.EventType.SIZE_CHANGED);
+        this.layoutRank.width = 0;
+        this.layoutRank.height = 0;
+        if (this.itemRankMe) this.itemRankMe.stopAllActions();
     }
     showRank() {
         // console.log("this.rankMe: " + this.rankMe);
@@ -260,7 +262,7 @@ export default class GameOver extends cc.Component {
         this.layoutRank.addChild(itemRank5);
 
         // console.log(this.layoutRank.children);
-        
+
 
         this.layoutRank.on(cc.Node.EventType.SIZE_CHANGED, this.sizeChangeComplete, this);
     }

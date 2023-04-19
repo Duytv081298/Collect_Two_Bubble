@@ -300,10 +300,10 @@ export default class PopupController extends cc.Component {
 
         if (this.spin != null) {
             this.hideLoading();
-            console.log("===========");
+            // console.log("===========");
 
             if (this.spin.active == true) return;
-            console.log("popup controller show spin");
+            // console.log("popup controller show spin");
             this.ktShowSpin = false;
             this.spin.active = true;
             // this.spin.setSiblingIndex(this.node.children.length)

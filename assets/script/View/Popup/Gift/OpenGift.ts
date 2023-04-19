@@ -123,7 +123,8 @@ export class OpenGift extends cc.Component {
             default:
                 break;
         }
-        if (MainData.instance().realityBubble >= MainData.instance().estimateBubble) GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
+        MainData.instance().isOpenGift = false;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
     }
 }
 

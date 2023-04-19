@@ -52,30 +52,12 @@ export default class HiddenPrizes extends cc.Component {
     @property(cc.Node)
     posMove: cc.Node = null;
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
-    protected onEnable(): void {
-        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.show, this);
-    }
-    protected onDisable(): void {
-
-        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.show, this);
-    }
-    start() {
-
-        for (let i = 0; i < this.node.children.length; i++) {
-            let child = this.node.children[i];
-            if (child.name == "bubbleHiddenPrizes") continue
-            this.node.children[i].active = false;
-        }
-    }
 
     show(data) {
+        console.log(data);
+        
         MainData.instance().isHiddenPrizes = true;
         for (let i = 0; i < this.node.children.length; i++) {
-            let child = this.node.children[i];
-            if (child.name == "bubbleHiddenPrizes") continue
             this.node.children[i].active = false;
         }
         this.spfPlayer = this.defaultAvatar;
@@ -106,6 +88,20 @@ export default class HiddenPrizes extends cc.Component {
                 return;
         }
         this.showUserBount();
+    }
+    showUserBount() {
+        console.log("showUserBount");
+
+        this.playerSp.spriteFrame = this.spfPlayer;
+        this.player.active = true;
+        this.player.setScale(cc.Vec2.ZERO);
+        this.player.opacity = 255;
+        this.player.stopAllActions();
+
+        cc.tween(this.player)
+            .to(0.4, { scale: 2 }, { easing: "backOut" })
+            .to(0.5, { scale: 4, opacity: 0 }, { easing: "cubicOut" })
+            .start()
     }
     hPBonusMoves() {
 
@@ -138,20 +134,6 @@ export default class HiddenPrizes extends cc.Component {
     }
 
 
-    showUserBount() {
-        console.log("showUserBount");
-
-        this.playerSp.spriteFrame = this.spfPlayer;
-        this.player.active = true;
-        this.player.setScale(cc.Vec2.ZERO);
-        this.player.opacity = 255;
-        this.player.stopAllActions();
-
-        cc.tween(this.player)
-            .to(0.4, { scale: 2 }, { easing: "backOut" })
-            .to(0.5, { scale: 4, opacity: 0 }, { easing: "cubicOut" })
-            .start()
-    }
     hPMultiBubbles() {
         this.giftSp.node.active = true;
         let coefficient = Utils.randomInt(2, 3)
@@ -183,6 +165,8 @@ export default class HiddenPrizes extends cc.Component {
 
     }
     hPBubblesBonus() {
+        console.log("hPBubblesBonus");
+        
         this.giftSp.node.active = true;
         this.giftSp.spriteFrame = this.spf_Bubbles_Bonus;
 

@@ -32,6 +32,7 @@ export default class GlobalEvent extends BaseEvent {
 
 
     static SHOW_ANI_BOOSTER: string = "GlobalEvent.SHOW_ANI_BOOSTER";
+    static HIDE_ANI_BOOSTER: string = "GlobalEvent.HIDE_ANI_BOOSTER";
     static CLEAR_BOOSTER: string = "GlobalEvent.CLEAR_BOOSTER";
     static UPDATE_AMOUNT_BOOSTER: string = "GlobalEvent.UPDATE_AMOUNT_BOOSTER";
     static UPDATE_UI_BOOSTER: string = "GlobalEvent.UPDATE_UI_BOOSTER";
@@ -48,7 +49,7 @@ export default class GlobalEvent extends BaseEvent {
     static UPDATE_MOVE_PROGRESS_GOLD: string = "GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD";
 
     static TWEEN_PLAYER_RANKING: string = "GlobalEvent.TWEEN_PLAYER_RANKING";
-    static RELOAD_RANKING_HOME: string = "GlobalEvent.RELOAD_RANKING_HOME";
+    // static RELOAD_RANKING_HOME: string = "GlobalEvent.RELOAD_RANKING_HOME";
 
 
 

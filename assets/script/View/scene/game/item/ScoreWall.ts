@@ -25,7 +25,9 @@ export default class ScoreWall extends cc.Component {
             MainData.instance().realityBubble++;
 
             let bubble: cc.Node = otherCollider.node;
+            // let parent = bubble.parent;
             let coefficients = bubble.getComponent(Bubble).coefficients;
+
             CreateBubble.instance().removeItem(bubble);
 
 
@@ -40,8 +42,9 @@ export default class ScoreWall extends cc.Component {
 
             GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_ANI_GOLD_HOLE);
 
-            if (MainData.instance().realityBubble >= MainData.instance().estimateBubble) GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
-
+            // console.log("parent.childrenCount: " + parent.childrenCount);
+            // if (parent.childrenCount == 0)
+            //     GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
         }
 
     }

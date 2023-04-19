@@ -39,8 +39,6 @@ export default class Test extends cc.Component {
     updateScore() {
 
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 1000 });
-
-
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_HIGHT_SCORE);
         // GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 30000 });
         // console.log(this.rankController.listScorePlayer);

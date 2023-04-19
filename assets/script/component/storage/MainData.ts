@@ -10,7 +10,7 @@ export default class MainData {
         }
         return MainData.mainData;
     }
-    isLocal: boolean = false;
+    isLocal: boolean = true;
     isTest: boolean = true;
 
     currentIdScene: SCENE = null;
@@ -99,6 +99,7 @@ export default class MainData {
     isRunPlayer: boolean = false;
     isHiddenPrizes: boolean = false;
     isOpenGift: boolean = false;
+    isUserPlay: boolean = false;
 
     isShowNoMove: boolean = false;
     isShowEndGame: boolean = false;
