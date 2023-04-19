@@ -10,7 +10,7 @@ export default class MainData {
         }
         return MainData.mainData;
     }
-    isLocal: boolean = true;
+    isLocal: boolean = false;
     isTest: boolean = true;
 
     currentIdScene: SCENE = null;
