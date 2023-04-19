@@ -1,3 +1,4 @@
+import SoundManager from "../../../component/component/SoundManager";
 import { Utils } from "../../../component/component/Utils";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import MainData from "../../../component/storage/MainData";
@@ -28,7 +29,7 @@ export class OpenGift extends cc.Component {
     show() {
         this.btnOpen.interactable = false;
         // this.isAutoOpen = autoOpen;
-        // SoundManager.instance().playEffect("gift_xuat hien");
+        SoundManager.instance().playEffect("gift_xuat hien");
 
         this.indexGift = Utils.randomInt(0, 5);
         this.indexGift = 4;
@@ -60,6 +61,7 @@ export class OpenGift extends cc.Component {
         // this.indexGift = 5
         this.gift.spriteFrame = this.listSPGift[this.indexGift]
         this.showGift();
+        SoundManager.instance().playEffect("sfx_open_gift_reward");
         // this.aniGift.clearTrack(0)
         this.aniGift.setSkin("default");
         this.aniGift.setAnimation(0, "mo hop", false);

@@ -1,3 +1,4 @@
+import SoundManager from "../../../component/component/SoundManager";
 import { GOLD_USE_BOOSTER, MAX_MOVE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import LocalStorage from "../../../component/storage/LocalStorage";
@@ -76,6 +77,7 @@ export default class GameController extends cc.Component {
     }
 
     clickSetting() {
+        SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SETTING_POPUP);
     }
     updateScore(data) {

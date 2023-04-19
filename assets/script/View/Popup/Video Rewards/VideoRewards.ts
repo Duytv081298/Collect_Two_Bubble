@@ -1,4 +1,5 @@
 import RewardAds from "../../../component/ads/RewardAds";
+import SoundManager from "../../../component/component/SoundManager";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import LocalStorage from "../../../component/storage/LocalStorage";
 
@@ -62,10 +63,12 @@ export class VideoRewards extends cc.Component {
         this.onReady();
     }
     hide() {
+        SoundManager.instance().playEffect("button");
         this.node.active = false;
     }
 
-    watchAdClick() {
+    watchAdClick() {GlobalEvent
+        SoundManager.instance().playEffect("button");
         // console.log("watchAdClick");
 
         // FaceBook.logEvent(LogEventName.videoReward)
@@ -87,13 +90,10 @@ export class VideoRewards extends cc.Component {
             LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, count_free_gift)
 
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: LIST_COIN_FREE_GIFT[count_free_gift - 1] });
-            // game.emit("COMPLETED_REWARD_FREE_GIFT")
             this.show()
         }
     }
     showTick(index: number) {
-        // console.log("index: " + index);
-
         for (let i = 0; i < this.arrTick.length; i++) {
             var tick = this.arrTick[i];
             if (i < index) tick.active = true;

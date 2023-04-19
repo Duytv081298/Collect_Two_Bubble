@@ -42,7 +42,7 @@ export default class OptimizeScrollViewEndGame extends cc.Component {
         for (let i = 0; i < childrens.length; i++) {
             const children = childrens[i];
             children.opacity = this._check_collision(children) ? 255 : 0;
-            if (i == 0 || i == 1 || i == childrens.length - 1 || i == childrens.length - 2) children.opacity = 0;
+            if (i == 0 || i == 1 || i == childrens.length - 1 || i == childrens.length - 2 || children.name == "user") children.opacity = 0;
         }
     }
 }

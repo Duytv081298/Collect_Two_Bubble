@@ -2,6 +2,7 @@ import PopupController from "../../../script/View/Popup/PopupController";
 import { Utils } from "../../../script/component/component/Utils";
 import GlobalEvent from "../../../script/component/event/GlobalEvent";
 import MainData from "../../../script/component/storage/MainData";
+import SoundManager from "../../component/component/SoundManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -53,7 +54,7 @@ export class GiftController extends cc.Component {
             this.isPlayAni = true;
         }
         if (this.amountTarget - MainData.instance().score <= 0) {
-            // SoundManager.instance().playEffect("TargetComplete");
+            SoundManager.instance().playEffect("TargetComplete");
             this.showReceiveGift();
         }
     }

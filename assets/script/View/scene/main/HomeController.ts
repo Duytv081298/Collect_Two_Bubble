@@ -1,3 +1,4 @@
+import SoundManager from "../../../component/component/SoundManager";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../../component/package/PlayfabManager";
@@ -18,7 +19,7 @@ export default class HomeController extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
         this.updateHightScore();
-        this.updateGold();
+        this.updateGold({ gold: 0 })
     }
     protected onDisable(): void {
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
@@ -33,11 +34,13 @@ export default class HomeController extends cc.Component {
         }
         this.hight_score_home.string = LocalStorage.getItem(LocalStorage.HIGHT_SCORE).toString();
     }
-    updateGold() {
+    updateGold(data) {
+        let gold = parseInt(data.gold);
+        LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
         this.gold_home.string = MainData.instance().goldPlayer.toString();
     }
     onHanlderPlayGlobal() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         this.showLoading()
         FBInstant.checkCanPlayerMatchAsync()
             .then(canMatch => {
@@ -65,7 +68,7 @@ export default class HomeController extends cc.Component {
     }
 
     onHandlerPlayWithFriends() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         this.showLoading()
         MainData.instance().dataFriendPlay = null;
         // FaceBook.logEvent(LogEventName.playFriendsHome)
@@ -144,21 +147,26 @@ export default class HomeController extends cc.Component {
 
 
     clickSetting() {
+        SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SETTING_POPUP);
     }
 
     clickInviteFriend() {
+        SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_INVITE_FRIEND_POPUP);
     }
 
     clickVideoRewards() {
+        SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP);
     }
     clickSpin() {
+        SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_SPIN);
     }
 
     onHandlerPlayNow() {
+        SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
     }
 

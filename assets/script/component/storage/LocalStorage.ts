@@ -1,9 +1,10 @@
+import SoundManager from "../component/SoundManager";
 import { BOOSTER } from "../constant/constant";
 import FaceBook from "../package/FaceBook";
 import MainData from "./MainData";
 
 const { ccclass, property } = cc._decorator;
-var dataGame: Map<string, string> = new Map();
+var dataGame: Map<string, any> = new Map();
 @ccclass
 export default class LocalStorage {
     static SOUND: string = "sound"
@@ -101,11 +102,11 @@ export default class LocalStorage {
     }
     static setMusic(isOn: boolean) {
         this.setItem(LocalStorage.MUSIC, isOn);
-        // if (isOn == false) {
-        //     SoundManager.instance().stopMusic();
-        // } else {
-        //     SoundManager.instance().playSoungBg();
-        // }
+        if (isOn == false) {
+            SoundManager.instance().stopMusic();
+        } else {
+            SoundManager.instance().playSoungBg();
+        }
     }
     static getMusic() {
         if (LocalStorage.getItem(LocalStorage.MUSIC) == undefined || LocalStorage.getItem(LocalStorage.MUSIC) == null)

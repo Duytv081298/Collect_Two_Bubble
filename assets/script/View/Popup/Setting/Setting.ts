@@ -1,3 +1,4 @@
+import SoundManager from "../../../component/component/SoundManager";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import LocalStorage from "../../../component/storage/LocalStorage";
@@ -45,34 +46,35 @@ export class Setting extends cc.Component {
         this.soundOff.active = !this.toggSound.isChecked;
     }
     onHandlerSound() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         LocalStorage.setSound(this.toggSound.isChecked);
         this.show();
     }
     onHandlerMusic() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         LocalStorage.setMusic(this.toggMusic.isChecked);
         this.show();
     }
     onHanlderClose() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         this.hide();
     }
     onHandlerMainMenu() {
-        // SoundManager.instance().playEffect("button");
+         SoundManager.instance().playEffect("button");
         // FaceBook.logEvent(LogEventName.settingGameToHome)
         this.hide()
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
     }
 
     onHandlerShowHelp() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         // FaceBook.logEvent(LogEventName.openHelp)
         // game.emit("SHOW_HELP");
         this.hide();
     }
     hide() {
         this.node.active = false;
+
     }
 }
 

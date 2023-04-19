@@ -1,3 +1,4 @@
+import SoundManager from "../../../component/component/SoundManager";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
 import LocalStorage from "../../../component/storage/LocalStorage";
@@ -12,7 +13,7 @@ export class inviteFriend extends cc.Component {
 
     }
     onHandlerInviteFriends() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         if (window["FBInstant"] == undefined) return;
 
         // FaceBook.logEvent(LogEventName.clickBtnInvite)
@@ -42,6 +43,7 @@ export class inviteFriend extends cc.Component {
             })
     }
     hide() {
+        SoundManager.instance().playEffect("button");
         this.node.active = false;
     }
 }

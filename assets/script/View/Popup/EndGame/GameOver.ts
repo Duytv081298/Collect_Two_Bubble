@@ -1,5 +1,6 @@
 import RewardAds from "../../../component/ads/RewardAds";
 import PlayerLocal from "../../../component/component/PlayerLocal";
+import SoundManager from "../../../component/component/SoundManager";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
@@ -86,7 +87,7 @@ export default class GameOver extends cc.Component {
     }
 
     showReward() {
-
+        SoundManager.instance().playEffect("button");
         // FaceBook.logEvent(LogEventName.claimx3EndGame)  
         RewardAds.instance.show(RewardAds.REWARDED_COIN)
     }
@@ -106,6 +107,7 @@ export default class GameOver extends cc.Component {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: this.isClaimX3 ? this.amountReward * 3 : this.amountReward });
     }
     ClaimX3() {
+        SoundManager.instance().playEffect("GetReward");
         let maxCoin = this.amountReward * 3;
         let minCoin = this.amountReward;
 
@@ -138,6 +140,7 @@ export default class GameOver extends cc.Component {
         this.rankMe = MainData.instance().rankMe > 0 ? MainData.instance().rankMe : 1;
         this.arrDataRank = MainData.instance().arrDataRank.concat();
         this.showRank();
+        SoundManager.instance().playEffect("ranking_win");
     }
     reset() {
         this.isClaim = false;
@@ -215,14 +218,17 @@ export default class GameOver extends cc.Component {
             }
         }
         let itemRank1 = CreatePlayerRank.instance().createItemRank();
+        itemRank1.name = "player"
         itemRank1.opacity = 0;
         let itemRank2 = CreatePlayerRank.instance().createItemRank();
+        itemRank1.name = "player"
         itemRank2.opacity = 0;
         this.layoutRank.addChild(itemRank1);
         this.layoutRank.addChild(itemRank2);
         if (rankOut == 0) {
             this.itemRankMe = cc.instantiate(this.nodeRankMe);
             this.itemRankMe.opacity = 0;
+            this.itemRankMe.name = "user"
             this.layoutRank.addChild(this.itemRankMe);
         }
         for (let i = 0; i < this.arrDataRank.length; i++) {
@@ -235,6 +241,7 @@ export default class GameOver extends cc.Component {
 
                 let itemRank = CreatePlayerRank.instance().createItemRank();
 
+                itemRank.name = "player"
                 itemRank.getComponent(RankOther).setData(this.arrDataRank[i]);
                 itemRank.scale = 1;
                 itemRank.getChildByName("txtRank").getComponent(cc.Label).string = this.arrDataRank[i].rank;
@@ -256,8 +263,10 @@ export default class GameOver extends cc.Component {
         }
         let itemRank4 = CreatePlayerRank.instance().createItemRank();
         itemRank4.opacity = 0;
+        itemRank4.name = "player"
         let itemRank5 = CreatePlayerRank.instance().createItemRank();
         itemRank5.opacity = 0;
+        itemRank5.name = "player"
         this.layoutRank.addChild(itemRank4);
         this.layoutRank.addChild(itemRank5);
 
@@ -276,13 +285,14 @@ export default class GameOver extends cc.Component {
             this.listScroll.scrollToRight(0);
         }
 
-        this.listScroll.scrollToOffset(new cc.Vec2(abc.x - 45, abc.y), 1.5);
+        this.listScroll.scrollToOffset(new cc.Vec2(abc.x - 55, abc.y), 1.5);
         cc.tween(this.node).delay(1).call(() => {
             this.itemRankMe.y = 0;
             this.itemRankMe.opacity = 0;
             cc.tween(this.itemRankMe).to(0.5, { opacity: 255 }).call(() => {
                 this.itemRankMe.getChildByName("bgRotation").active = true;
                 this.itemRankMe.getChildByName("star").active = true;
+                this.itemRankMe.name = "player"
             }).start();
 
             cc.tween(this.nodeRankMe).to(0.4, { opacity: 0 }).call(() => {
@@ -334,7 +344,7 @@ export default class GameOver extends cc.Component {
 
 
     onHandlerPlayWithFriends() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
 
         // FaceBook.logEvent(LogEventName.playFriendsEndGame)   
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
@@ -369,7 +379,7 @@ export default class GameOver extends cc.Component {
     onHandlerShare() {
         // console.log("onHandlerShare ======");
 
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         if (window["FBInstant"] == undefined) return;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
         // console.log("onHandlerShare +++++");
@@ -402,12 +412,13 @@ export default class GameOver extends cc.Component {
         })
     }
     onHandlerMainMenu() {
+        SoundManager.instance().playEffect("button");
         this.hide();
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
     }
 
     onHandlerReplay() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.REPLAY_GAME);
         this.hide();

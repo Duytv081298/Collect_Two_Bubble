@@ -1,5 +1,6 @@
 import NameBot from "../../component/component/NameBot";
 import PlayerLocal from "../../component/component/PlayerLocal";
+import SoundManager from "../../component/component/SoundManager";
 import { Utils } from "../../component/component/Utils";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import FaceBook from "../../component/package/FaceBook";
@@ -189,6 +190,8 @@ export default class RankController extends cc.Component {
         for (let i = 0; i < totalPlayerPass; i++) {
             let item: cc.Node = this.arrOtherPlayer[i];
             cc.tween(item).to(0.3, { scaleY: 1.2 }).delay(0.1).to(0.3, { scale: 0, opacity: 0, y: item.y - 65 }).call(() => {
+                
+                SoundManager.instance().playEffect("Vuot_doi_thu");
                 let sp = item.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame;
                 CreatePlayerRank.instance().removeItemRank(item);
                 if (i == totalPlayerPass - 1) GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_HIDDEN_PRIZES, { spfPlayer: sp });

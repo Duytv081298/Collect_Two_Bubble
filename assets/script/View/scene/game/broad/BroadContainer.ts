@@ -1,3 +1,4 @@
+import SoundManager from '../../../../component/component/SoundManager';
 import { Utils } from '../../../../component/component/Utils';
 import { BOOSTER, MAXCOLUMNBOARD, MAXROWBOARD, SIZE, TOTAL_BALL } from "../../../../component/constant/constant";
 import GlobalEvent from '../../../../component/event/GlobalEvent';
@@ -319,10 +320,14 @@ export default class BroadContainer extends cc.Component {
 
             bubble.nonSelect();
             bubble.node.parent = this.bubbleDieContainer;
+            bubble.node.name = touches.length < 5 ? "sfx_bubble _break1" : "sfx_bubble_break2";
             this.arrBubble[bubble.row][bubble.col] = null;
             MainData.instance().estimateBubble++;
 
-            this.scheduleOnce(() => { bubble.activeRigidBody(i % 2 == 0); }, time);
+            this.scheduleOnce(() => {
+                bubble.activeRigidBody(i % 2 == 0);
+                SoundManager.instance().playEffect("bubble_out_broad");
+            }, time);
         }
         this.scheduleOnce(() => { this.reSetUpBubble() }, time + delay)
     }
@@ -457,7 +462,9 @@ export default class BroadContainer extends cc.Component {
         }
 
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_BUBBLE_PROGRESS, { count: this.isQuadrilateral ? 8 : this.listBubbleSelect.length });
-        // SoundManager.instance().playEffect("Colloect _Bubble_" + count);
+
+        var count = this.listBubbleSelect.length - 1 <= 0 ? 0 : this.listBubbleSelect.length - 1 >= 11 ? 11 : this.listBubbleSelect.length - 1;
+        SoundManager.instance().playEffect("Colloect _Bubble_" + count);
     }
 
     pushAllBubbleColor(color: number) {
@@ -503,7 +510,9 @@ export default class BroadContainer extends cc.Component {
 
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_BUBBLE_PROGRESS, { count: this.isQuadrilateral ? 8 : this.listBubbleSelect.length });
 
-        // SoundManager.instance().playEffect("Colloect _Bubble_" + count);
+        var count = this.listBubbleSelect.length - 1 <= 0 ? 0 : this.listBubbleSelect.length - 1 >= 11 ? 11 : this.listBubbleSelect.length - 1;
+        count = this.isQuadrilateral ? 11 : count;
+        SoundManager.instance().playEffect("Colloect _Bubble_" + count);
 
     }
 
@@ -547,12 +556,17 @@ export default class BroadContainer extends cc.Component {
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
                 this.listBubbleSelect = this.getBubbleRocket(bubble);
                 console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
-
+                this.scheduleOnce(() => {
+                    SoundManager.instance().playEffect("Booster_rocket");
+                }, 0.3)
                 return 0.3;
             case BOOSTER.bomb:
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
                 this.listBubbleSelect = this.getDotBomb(bubble);
                 console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
+                this.scheduleOnce(() => {
+                    SoundManager.instance().playEffect("color_bomb")
+                }, 0.6)
                 return 0.6;
             case BOOSTER.reverse:
                 this.reverseBroad(bubble);
@@ -561,6 +575,9 @@ export default class BroadContainer extends cc.Component {
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
                 this.listBubbleSelect = this.getBubbleHammer(bubble);
                 console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
+                this.scheduleOnce(() => {
+                    SoundManager.instance().playEffect("booster_hammer");
+                }, 0.12)
                 return 0.45;
             default:
                 return 0;
@@ -669,6 +686,7 @@ export default class BroadContainer extends cc.Component {
         if (MainData.instance().isHandlerReverse) return;
 
         if (!this.bubbleReverseA) {
+            SoundManager.instance().playEffect("sfx_item_active");
             this.bubbleReverseA = bubble;
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
         }
@@ -686,6 +704,7 @@ export default class BroadContainer extends cc.Component {
     }
 
     reverse() {
+        SoundManager.instance().playEffect("booster_chance_color");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: MainData.instance().keyBooster, amount: -1 });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_ANI_BOOSTER);
         MainData.instance().isHandlerReverse = true;
@@ -922,7 +941,7 @@ export default class BroadContainer extends cc.Component {
             bubble.setPosition(-100 + i * 25, 100);
             bubble.setScale(0.8);
             bubble.setParent(this.bubbleDieContainer);
-            // bubble.name = "bubbleHiddenPrizes"
+            bubble.name = "sfx_bubble_break2";
             bubble.active = true;
             let color = Math.floor(Math.random() * 5)
 

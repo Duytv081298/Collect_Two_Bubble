@@ -1,4 +1,5 @@
 import RewardAds from "../../../../component/ads/RewardAds";
+import SoundManager from "../../../../component/component/SoundManager";
 import { BOOSTER, GOLD_USE_BOOSTER } from "../../../../component/constant/constant";
 import GlobalEvent from "../../../../component/event/GlobalEvent";
 import LocalStorage from "../../../../component/storage/LocalStorage";
@@ -92,6 +93,7 @@ export default class Booster extends cc.Component {
 
     onClickRocket() {
         if (this.checkEventGame()) return;
+        SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.rocket) {
             this.clearBooster();
             return;
@@ -118,6 +120,7 @@ export default class Booster extends cc.Component {
     }
     onClickBomb() {
         if (this.checkEventGame()) return;
+        SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.bomb) {
             this.clearBooster();
             return;
@@ -144,6 +147,7 @@ export default class Booster extends cc.Component {
     }
     onClickReverse() {
         if (this.checkEventGame()) return;
+        SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.reverse) {
             this.clearBooster();
             return;
@@ -169,6 +173,7 @@ export default class Booster extends cc.Component {
     }
     onClickHammer() {
         if (this.checkEventGame()) return;
+        SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.hammer) {
             this.clearBooster();
             return;
