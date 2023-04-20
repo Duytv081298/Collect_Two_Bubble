@@ -69,7 +69,7 @@ export class Setting extends cc.Component {
     onHandlerShowHelp() {
         SoundManager.instance().playEffect("button");
         // FaceBook.logEvent(LogEventName.openHelp)
-        // game.emit("SHOW_HELP");
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_HELP);
         this.hide();
     }
     hide() {

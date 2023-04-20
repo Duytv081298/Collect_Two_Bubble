@@ -19,6 +19,7 @@ export default class PopupController extends cc.Component {
     spin: cc.Node = null;
     inviteFriend: cc.Node = null;
     videoRewards: cc.Node = null;
+    help: cc.Node = null;
 
     ktShowNoMoves: boolean = false;
     ktShowEndGame: boolean = false;
@@ -27,6 +28,7 @@ export default class PopupController extends cc.Component {
     ktShowSpin: boolean = false;
     ktInviteFriend: boolean = false;
     ktVideoRewards: boolean = false;
+    ktHelp: boolean = false;
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
@@ -36,6 +38,7 @@ export default class PopupController extends cc.Component {
         this.preLoadGift();
         this.preLoadInviteFriends();
         this.preLoadVideoRewards();
+        this.preLoadHelp();
     }
 
     protected onEnable(): void {
@@ -45,6 +48,7 @@ export default class PopupController extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_SETTING_POPUP, this.showSetting, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_GIFT, this.showGift, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_SPIN, this.showSpin, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HELP, this.showHelp, this);
 
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_INVITE_FRIEND_POPUP, this.showInviteFriend, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP, this.showVideoRewards, this);
@@ -56,6 +60,7 @@ export default class PopupController extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_SETTING_POPUP, this.showSetting, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_GIFT, this.showGift, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_SPIN, this.showSpin, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HELP, this.showHelp, this);
 
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_INVITE_FRIEND_POPUP, this.showInviteFriend, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP, this.showVideoRewards, this);
@@ -208,6 +213,26 @@ export default class PopupController extends cc.Component {
     }
 
 
+    preLoadHelp() {
+        cc.resources.preload("prefab/help/Help", cc.Prefab, (err) => {
+
+            if (this.help == null || !this.help.active) this.loadHelp();
+        });
+    }
+    loadHelp() {
+        cc.resources.load("prefab/help/Help", cc.Prefab, (err, prefab: cc.Prefab) => {
+            if (!err) {
+                if (this.help == null) {
+                    this.help = cc.instantiate(prefab);
+                    this.help.setParent(this.node);
+                    this.help.active = false;
+                    if (this.ktHelp == true) {
+                        this.showHelp();
+                    }
+                }
+            }
+        });
+    }
 
     showNoMoves() {
 
@@ -318,7 +343,17 @@ export default class PopupController extends cc.Component {
             this.loadSpin();
         }
     }
-
+    showHelp(){
+        if (this.help != null) {
+            this.hideLoading();
+            this.ktHelp = false;
+            this.help.active = true;
+        } else {
+            this.showLoading();
+            this.ktHelp = true;
+            this.loadHelp();
+        }
+    }
 
 
     hideLoading() {

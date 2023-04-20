@@ -4,6 +4,7 @@ import { BOOSTER, GOLD_USE_BOOSTER } from "../../../../component/constant/consta
 import GlobalEvent from "../../../../component/event/GlobalEvent";
 import LocalStorage from "../../../../component/storage/LocalStorage";
 import MainData from "../../../../component/storage/MainData";
+import { Tooltip } from "../../../Tooltip/Tooltip";
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,6 +19,7 @@ export default class Booster extends cc.Component {
     bgCoin: cc.Node[] = [];
     @property(cc.Node)
     bgAds: cc.Node[] = [];
+
 
     keyBoosterAds: BOOSTER = null;
 
@@ -210,6 +212,7 @@ export default class Booster extends cc.Component {
         this.clearOpacityBooster()
     }
     setOpacityBoosterChoose(booster: BOOSTER) {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TOOLTIP)
         for (let i = 0; i < this.bgAmount.length; i++) {
             let parent = this.bgAmount[i].parent;
             parent.stopAllActions();
@@ -220,9 +223,8 @@ export default class Booster extends cc.Component {
             }
         }
     }
-
-
     clearOpacityBooster() {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_TOOLTIP)
         for (let i = 0; i < this.bgAmount.length; i++) {
             let parent = this.bgAmount[i].parent;
             parent.stopAllActions();

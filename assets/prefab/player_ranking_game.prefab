@@ -437,7 +437,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 31.42,
+      "width": 31.14,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -494,9 +494,7 @@
     "_fontSize": 28,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "d65ee1e5-7e97-490f-ad3c-2ac8cf351aa1"
-    },
+    "_N$file": null,
     "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
@@ -550,7 +548,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 77.42,
+      "width": 72.85,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -608,7 +606,7 @@
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "d65ee1e5-7e97-490f-ad3c-2ac8cf351aa1"
+      "__uuid__": "6cf638f0-079f-444e-9e5b-478bf6662aa7"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,

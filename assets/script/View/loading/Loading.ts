@@ -20,9 +20,6 @@ export default class Loading extends cc.Component {
 
         SoundManager.instance().preLoadSound();
         FBInstant.onPause(() => { });
-        FBInstant.startGameAsync()
-            .then(() => {
-            });
 
         if (MainData.instance().ktFistLogin == true) {
             FBInstant.player.getSignedPlayerInfoAsync().then((result) => {
@@ -68,8 +65,6 @@ export default class Loading extends cc.Component {
                     LocalStorage.setItem(LocalStorage.MUSIC, true);
                 }
                 if (data.hasOwnProperty(LocalStorage.IS_NEW)) {
-                    console.log(1111111);
-
                     LocalStorage.setItem(LocalStorage.IS_NEW, true);
                     // LocalStorage.setItem(LocalStorage.IS_NEW, data[LocalStorage.IS_NEW])
                 } else {
@@ -244,6 +239,9 @@ export default class Loading extends cc.Component {
 
             SoundManager.instance().playSoungBg();
 
+            FBInstant.startGameAsync()
+            .then(() => {
+            });
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
             // this.onHandlerPlayNow();
             // A2UController.instance.sendNotiDelay();

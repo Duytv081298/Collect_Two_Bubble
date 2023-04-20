@@ -7,7 +7,7 @@ import Bubble from "../scene/game/item/Bubble";
 const { ccclass, property } = cc._decorator;
 
 
-@ccclass('Tutorial')
+@ccclass
 export class Tutorial extends cc.Component {
 
 
@@ -251,6 +251,7 @@ export class Tutorial extends cc.Component {
             })
             .start();
     }
+
 
     clearHand() {
         this.isShow = false;

@@ -15,7 +15,7 @@ export default class GlobalEvent extends BaseEvent {
     static START_GAME: string = "GlobalEvent.START_GAME";
     static REPLAY_GAME: string = "GlobalEvent.REPLAY_GAME";
 
-    
+
     static CHECK_END_GAME: string = "GlobalEvent.CHECK_END_GAME";
     static CLEAR_ALL_BUBBLE_DIE: string = "GlobalEvent.CLEAR_ALL_BUBBLE_DIE";
 
@@ -62,6 +62,9 @@ export default class GlobalEvent extends BaseEvent {
     static SHOW_NO_MOVE_POPUP: string = "GlobalEvent.SHOW_NO_MOVE_POPUP";
     static SHOW_GAME_OVER_POPUP: string = "GlobalEvent.SHOW_GAME_OVER_POPUP";
     static SHOW_SETTING_POPUP: string = "GlobalEvent.SHOW_SETTING_POPUP";
+    static SHOW_HELP: string = "GlobalEvent.SHOW_HELP";
+
+
 
 
     static SHOW_HIDDEN_PRIZES: string = "GlobalEvent.SHOW_HIDDEN_PRIZES";
@@ -80,7 +83,11 @@ export default class GlobalEvent extends BaseEvent {
     static SHOW_TUTORIAL: string = "GlobalEvent.SHOW_TUTORIAL";
     static NEXT_TUTORIAL: string = "GlobalEvent.NEXT_TUTORIAL";
     static PAUSE_TUTORIAL: string = "GlobalEvent.PAUSE_TUTORIAL";
+
+
     
+    static SHOW_TOOLTIP: string = "GlobalEvent.SHOW_TOOLTIP";
+    static HIDE_TOOLTIP: string = "GlobalEvent.HIDE_TOOLTIP";
 
     static REWARD_ADS_ON_READY: string = "GlobalEvent.rewardads.onready";
     static REWARD_ADS_ON_REWARD: string = "GlobalEvent.rewardads.onreward";
