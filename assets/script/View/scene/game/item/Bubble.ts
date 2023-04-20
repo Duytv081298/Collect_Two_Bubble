@@ -15,6 +15,14 @@ export default class Bubble extends cc.Component {
     @property([cc.SpriteFrame])
     spriteFrameData: cc.SpriteFrame[] = [];
 
+    private _isTutorial: boolean = false;
+    public get isTutorial(): boolean {
+        return this._isTutorial;
+    }
+    public set isTutorial(value: boolean) {
+        this._isTutorial = value;
+    }
+
     private _coefficients: number = 1;
     public get coefficients(): number {
         return this._coefficients;
@@ -35,6 +43,7 @@ export default class Bubble extends cc.Component {
     setData(row: number, col: number, color: number, coefficients: number = 1) {
         // console.log("setData: row: " + row + "  col: " + col + "  name " + this.node.name);
         // this.unschedule(this.sc);
+        this.isTutorial = false;
         this.unscheduleAllCallbacks();
         this.deActiveRigidBody();
         this.reSetData(row, col, color, coefficients);

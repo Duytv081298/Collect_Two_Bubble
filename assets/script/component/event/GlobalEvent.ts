@@ -75,6 +75,11 @@ export default class GlobalEvent extends BaseEvent {
 
 
     static SHOW_SPIN: string = "GlobalEvent.SHOW_SPIN";
+
+
+    static SHOW_TUTORIAL: string = "GlobalEvent.SHOW_TUTORIAL";
+    static NEXT_TUTORIAL: string = "GlobalEvent.NEXT_TUTORIAL";
+    static PAUSE_TUTORIAL: string = "GlobalEvent.PAUSE_TUTORIAL";
     
 
     static REWARD_ADS_ON_READY: string = "GlobalEvent.rewardads.onready";

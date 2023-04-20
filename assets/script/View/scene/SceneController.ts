@@ -23,10 +23,14 @@ export default class SceneController extends cc.Component {
     }
 
     start() {
-        this.switchScene({ idScene: SCENE.game })
+        this.switchScene({ idScene: null })
     }
     switchScene(data) {
         let id = data.idScene;
+        if(!id){
+            this.gameScene.active = false;
+            if (this.homeScene) this.homeScene.active = false;
+        }
         if (MainData.instance().currentIdScene == id) {
             return;
         } else {

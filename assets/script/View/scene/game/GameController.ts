@@ -67,9 +67,13 @@ export default class GameController extends cc.Component {
         MainData.instance().score = 0;
         MainData.instance().move = MAX_MOVE;
 
+        MainData.instance().isPlay = false;
         MainData.instance().isRunPlayer = false;
-        MainData.instance().isOpenGift = false;
         MainData.instance().isHiddenPrizes = false;
+        MainData.instance().isOpenGift = false;
+        MainData.instance().isUserPlay = false;
+        MainData.instance().isShowNoMove = false;
+        MainData.instance().isShowEndGame = false;
 
         this.updateScore({ score: 0 })
         this.updateMove({ status: true })

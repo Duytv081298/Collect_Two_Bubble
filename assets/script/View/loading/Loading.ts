@@ -3,6 +3,7 @@ import RewardAds from "../../component/ads/RewardAds";
 import PlayerLocal from "../../component/component/PlayerLocal";
 import SoundManager from "../../component/component/SoundManager";
 import { Utils } from "../../component/component/Utils";
+import { SCENE } from "../../component/constant/constant";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../component/package/PlayfabManager";
 import LocalStorage from "../../component/storage/LocalStorage";
@@ -67,8 +68,10 @@ export default class Loading extends cc.Component {
                     LocalStorage.setItem(LocalStorage.MUSIC, true);
                 }
                 if (data.hasOwnProperty(LocalStorage.IS_NEW)) {
-                    // LocalStorage.setItem(LocalStorage.IS_NEW, true);                
-                    LocalStorage.setItem(LocalStorage.IS_NEW, data[LocalStorage.IS_NEW])
+                    console.log(1111111);
+
+                    LocalStorage.setItem(LocalStorage.IS_NEW, true);
+                    // LocalStorage.setItem(LocalStorage.IS_NEW, data[LocalStorage.IS_NEW])
                 } else {
                     LocalStorage.setItem(LocalStorage.IS_NEW, true);
                 }
@@ -240,6 +243,8 @@ export default class Loading extends cc.Component {
             }
 
             SoundManager.instance().playSoungBg();
+
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
             // this.onHandlerPlayNow();
             // A2UController.instance.sendNotiDelay();
             // new SharePictureScoreAttack(43243, () => { });
@@ -266,7 +271,7 @@ export default class Loading extends cc.Component {
         }).start();
 
 
-        // if (!MainData.instance().isLocal)A2UController.instance.sendNotification()
+        // GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL)
 
     }
 

@@ -56,6 +56,10 @@ export default class LocalStorage {
         //     if (params < 1) params = 1;
         //     MainData.instance().dailyInfo.day = params;
         // }
+        
+        if (name == LocalStorage.IS_NEW) {
+            MainData.instance().isTutorial = params;
+        }
         if (name == LocalStorage.CURRENT_GOLD) {
             MainData.instance().goldPlayer = params;
         }

@@ -30,11 +30,13 @@ export default class CreateBubble {
         itemNode.y = 0;
         itemNode.angle = 0;
         itemNode.opacity = 255;
+        itemNode.getComponent(Bubble).isTutorial = false;
         itemNode.stopAllActions();
 
         return itemNode;
     }
     removeItem(itemNode: cc.Node) {
+        itemNode.getComponent(Bubble).isTutorial = false;
         itemNode.stopAllActions();
         itemNode.off("CollisionEnter");
         // itemNode.getComponent(Bubble).deActiveRigidBody();

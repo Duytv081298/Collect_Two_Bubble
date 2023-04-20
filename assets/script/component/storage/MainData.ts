@@ -104,5 +104,8 @@ export default class MainData {
     isShowNoMove: boolean = false;
     isShowEndGame: boolean = false;
 
+    isTutorial: boolean = false;
+    indexTutorial: number = 0;
+
 
 }

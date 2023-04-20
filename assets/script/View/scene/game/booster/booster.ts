@@ -85,7 +85,8 @@ export default class Booster extends cc.Component {
             MainData.instance().isUserPlay ||
             MainData.instance().move <= 0 ||
             MainData.instance().isHiddenPrizes ||
-            MainData.instance().isUseBooster) return true;
+            MainData.instance().isUseBooster||
+            MainData.instance().isTutorial) return true;
         else return false;
 
     }

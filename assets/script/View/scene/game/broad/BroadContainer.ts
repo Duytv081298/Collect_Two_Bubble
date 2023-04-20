@@ -1,11 +1,12 @@
 import SoundManager from '../../../../component/component/SoundManager';
 import { Utils } from '../../../../component/component/Utils';
-import { BOOSTER, MAXCOLUMNBOARD, MAXROWBOARD, SIZE, TOTAL_BALL } from "../../../../component/constant/constant";
+import { BOOSTER, DEFAULT_MAP, MAXCOLUMNBOARD, MAXROWBOARD, SIZE, TOTAL_BALL } from "../../../../component/constant/constant";
 import GlobalEvent from '../../../../component/event/GlobalEvent';
 import CreateAnimationBubble from '../../../../component/pool/CreateAnimationBubble';
 import CreateBubble from '../../../../component/pool/CreateBubble';
 import CreateConnect from '../../../../component/pool/CreateConnect';
 import MainData from "../../../../component/storage/MainData";
+import { TUT } from '../../../tutorial/Tutorial';
 import Bubble from '../item/Bubble';
 // const blockSpace = [[0, -1], [1, 0], [0, 1], [-1, 0]];
 
@@ -18,16 +19,25 @@ export default class BroadContainer extends cc.Component {
     @property(cc.Node)
     content: cc.Node = null;
     @property(cc.Node)
-    connect: cc.Node = null;
+    connectContainer: cc.Node = null;
     @property(cc.Node)
     bubbleDieContainer: cc.Node = null;
     @property(cc.Node)
     aniBubbleContainer: cc.Node = null;
 
+
+    @property(cc.Node)
+    tut_connectContainer: cc.Node = null;
+    @property(cc.Node)
+    tut_aniBubbleContainer: cc.Node = null;
+
+    parentBubbleDie: cc.Node = null;
+    parentConnect: cc.Node = null;
+    parentAniBubble: cc.Node = null;
+
+
     @property(cc.Node)
     itemCheck: cc.Node = null;
-
-
     isQuadrilateral: boolean = false;
 
 
@@ -103,7 +113,8 @@ export default class BroadContainer extends cc.Component {
         MainData.instance().estimateBubble = 0;
 
         this.setUpBubble();
-
+        this.setParentTutorial();
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL)
     }
 
     // update (dt) {}
@@ -137,7 +148,7 @@ export default class BroadContainer extends cc.Component {
                 let bubble: cc.Node = CreateBubble.instance().createItem();
                 let pos: cc.Vec2 = this.getPosition(row, col);
                 //  console.log(pos);
-
+                if (MainData.instance().isTutorial) color = DEFAULT_MAP[row][col]
                 bubble.setPosition(pos);
                 bubble.setParent(this.content);
                 bubble.name = row + "_" + col;
@@ -189,6 +200,7 @@ export default class BroadContainer extends cc.Component {
             GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BOOSTER);
         }
         if (!this.checkActiveMove()) this.reloadBroad();
+        if (MainData.instance().isTutorial) GlobalEvent.instance().dispatchEvent(GlobalEvent.NEXT_TUTORIAL)
 
         this.checkEndGame()
     }
@@ -238,6 +250,7 @@ export default class BroadContainer extends cc.Component {
                 }, timeDelay);
             }
         } else {
+            if (MainData.instance().isTutorial && !bubble.isTutorial) return;
             if (this.listBubbleSelect.length == 0) {
                 this.pushBubble(bubble)
             } else {
@@ -245,6 +258,9 @@ export default class BroadContainer extends cc.Component {
                 if (bubbleCheck == null) return; // = vs bubble chon gan nhat, khong phu hop dieu kien
                 else if (bubbleCheck == true) this.cutBubble(bubble); // quay tro lai 1 bubble
                 else this.pushBubble(bubble);
+            }
+            if (MainData.instance().isTutorial && this.listBubbleSelect.length > 0) {
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.PAUSE_TUTORIAL);
             }
         }
 
@@ -262,9 +278,11 @@ export default class BroadContainer extends cc.Component {
             this.clearDot();
             return;
         }
+        if (this.checkTutorial()) return;
         if (this.listBubbleSelect.length < 2) {
             this.clearBubbleSelected();
             MainData.instance().isPlay = false;
+            return;
         } else {
             // dem so luong move khi hien hole gold
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD);
@@ -313,7 +331,7 @@ export default class BroadContainer extends cc.Component {
             }
             let aniBubble = CreateAnimationBubble.instance().createItem(bubble.getColor())
             if (aniBubble) {
-                aniBubble.setParent(this.aniBubbleContainer);
+                aniBubble.setParent(this.parentAniBubble);
                 aniBubble.setPosition(bubble.node.position);
             }
             time = Math.min(time, 0.15)
@@ -454,7 +472,7 @@ export default class BroadContainer extends cc.Component {
         if (this.listBubbleSelect.length > 1) {
             let startBubble = this.listBubbleSelect[this.listBubbleSelect.length - 2];
             let connect = CreateConnect.instance().createConnect(startBubble, bubble);
-            connect.parent = this.connect;
+            connect.setParent(this.parentConnect);
             this.listConnect.push(connect);
         }
         if (this.isQuadrilateral) {
@@ -1038,6 +1056,31 @@ export default class BroadContainer extends cc.Component {
     getPosition(row: number, col: number) {
 
         return new cc.Vec2(SIZE.beginX + SIZE.spaceX * col, SIZE.beginY - SIZE.spaceY * row);
+    }
+
+    getCountBubbleTutorial() {
+        let index = MainData.instance().indexTutorial
+        if (index > TUT.length - 1) return 0;
+        return TUT[index].length;
+    }
+    checkTutorial() {
+        if (!MainData.instance().isTutorial) return false
+        if (MainData.instance().isTutorial && this.listBubbleSelect.length < this.getCountBubbleTutorial()) {
+            this.clearBubbleSelected();
+            MainData.instance().isPlay = false;
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL)
+            return true;
+        }
+        return false
+    }
+    setParentTutorial() {
+        if (MainData.instance().isTutorial) {
+            this.parentConnect = this.tut_connectContainer;
+            this.parentAniBubble = this.tut_aniBubbleContainer;
+        } else {
+            this.parentConnect = this.connectContainer;
+            this.parentAniBubble = this.aniBubbleContainer;
+        }
     }
 
 }
