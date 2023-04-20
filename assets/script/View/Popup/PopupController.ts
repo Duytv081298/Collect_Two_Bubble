@@ -83,11 +83,15 @@ export default class PopupController extends cc.Component {
         });
     }
     preLoadNoMove() {
+        console.log("preLoadNoMove");
         cc.resources.preload("prefab/NoMove/NoMoves", cc.Prefab, (err) => {
+
+            console.log("preLoadNoMove thanh cong");
             if (this.noMove == null || !this.noMove.active) this.loadNoMove();
         });
     }
     loadNoMove() {
+        console.log("loadNoMove");
         cc.resources.load("prefab/NoMove/NoMoves", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
                 if (this.noMove == null) {
@@ -224,6 +228,7 @@ export default class PopupController extends cc.Component {
     }
     showEndGame() {
         if (this.noMove) this.noMove.active = false;
+        if (this.endGame != null && this.endGame.active) return;
         if (this.endGame != null) {
             console.log("showEndGame")
             this.hideLoading();
@@ -259,7 +264,6 @@ export default class PopupController extends cc.Component {
             this.gift.active = true;
             // this.gift.setSiblingIndex(this.node.children.length)
             this.gift.getComponent(OpenGift).show();
-            console.log(this.gift.name);
 
         } else {
             this.showLoading();

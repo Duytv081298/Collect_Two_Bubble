@@ -54,8 +54,6 @@ export default class HiddenPrizes extends cc.Component {
 
 
     show(data) {
-        console.log(data);
-        
         MainData.instance().isHiddenPrizes = true;
         for (let i = 0; i < this.node.children.length; i++) {
             this.node.children[i].active = false;
@@ -65,7 +63,7 @@ export default class HiddenPrizes extends cc.Component {
         if (spf) this.spfPlayer = spf;
         let rd = Utils.randomInt(0, 3);
 
-        rd = 2;
+        // rd = 2;
         switch (rd) {
             case HIDDEN_PRIZES.bonus_Moves:
                 console.log("case bonus Moves");

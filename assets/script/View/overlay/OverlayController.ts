@@ -54,8 +54,6 @@ export default class NewClass extends cc.Component {
     loadHiddenPrizes(data: any = null) {
         cc.resources.load("prefab/Hidden prizes/Hidden prizes", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
-                console.log("load hiddenPrizes thanh cong");
-                
                 if (this.hiddenPrizes == null) {
                     this.hiddenPrizes = cc.instantiate(prefab);
                     this.hiddenPrizes.setParent(this.node)
@@ -71,18 +69,11 @@ export default class NewClass extends cc.Component {
 
     showHiddenPrizes(data) {
         if (this.hiddenPrizes != null) {
-            console.log("show hiddenPrizes");
-            console.log(data);
-            
             GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
             MainData.instance().isHiddenPrizes = true;
             this.ktHiddenPrizes = false;
             this.hiddenPrizes.active = true;
             this.hiddenPrizes.getComponent(HiddenPrizes).show(data);
-            // console.log("this.hiddenPrizes: " + this.hiddenPrizes.active + " parent: " + this.hiddenPrizes.parent.name);
-            // console.log("this.hiddenPrizes: " + this.hiddenPrizes.x + " y: " + this.hiddenPrizes.y);
-            // console.log("this.hiddenPrizes scale: " + this.hiddenPrizes.scale );
-            // console.log("this.hiddenPrizes opacity: " + this.hiddenPrizes.opacity );
             
         } else {
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);

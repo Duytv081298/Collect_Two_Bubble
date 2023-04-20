@@ -16,13 +16,11 @@ export default class HomeController extends cc.Component {
     gold_home: cc.Label = null;
 
     protected onEnable(): void {
-        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
         this.updateHightScore();
         this.updateGold({ gold: 0 })
     }
     protected onDisable(): void {
-        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_HIGHT_SCORE, this.updateHightScore, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
     }
     updateHightScore() {

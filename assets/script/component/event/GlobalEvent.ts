@@ -20,7 +20,7 @@ export default class GlobalEvent extends BaseEvent {
     static CLEAR_ALL_BUBBLE_DIE: string = "GlobalEvent.CLEAR_ALL_BUBBLE_DIE";
 
 
-    static UPDATE_HIGHT_SCORE: string = "GlobalEvent.UPDATE_HIGHT_SCORE";
+    // static UPDATE_HIGHT_SCORE: string = "GlobalEvent.UPDATE_HIGHT_SCORE";
     static UPDATE_SCORE_GAME: string = "GlobalEvent.UPDATE_SCORE_GAME";
     static ANIMATION_UPDATE_MOVE: string = "GlobalEvent.ANIMATION_UPDATE_MOVE";
     static UPDATE_GOLD_GAME: string = "GlobalEvent.UPDATE_GOLD_GAME";

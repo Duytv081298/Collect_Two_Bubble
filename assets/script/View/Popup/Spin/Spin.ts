@@ -67,7 +67,7 @@ export class Spin extends cc.Component {
     update(deltaTime: number) {
     }
     show() {
-        console.log("Spin show");
+        // console.log("Spin show");
         this.hightLight.active = false;
         this.nextUser();
         this.updateSpin();
@@ -109,7 +109,7 @@ export class Spin extends cc.Component {
     }
 
     updateSpin() {
-        console.log("MainData.instance().currentSpin: " + MainData.instance().currentSpin);
+        // console.log("MainData.instance().currentSpin: " + MainData.instance().currentSpin);
 
         if (MainData.instance().currentSpin < 1) {
             this.txtCountSpin.string = "";

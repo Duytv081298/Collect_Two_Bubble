@@ -454,6 +454,9 @@
     "animationBubble": {
       "__uuid__": "39a34151-eb6d-4e51-80ba-73209f575090"
     },
+    "animationBooster": {
+      "__uuid__": "39a34151-eb6d-4e51-80ba-73209f575090"
+    },
     "scoreBubble": {
       "__uuid__": "ae131656-a67d-4249-8b1a-31d3e31e443a"
     },
@@ -4121,7 +4124,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
       }
     ],
     "paused": false,
@@ -4223,7 +4226,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
       }
     ],
     "paused": false,
@@ -4325,7 +4328,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
       }
     ],
     "paused": false,
@@ -4427,7 +4430,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
       }
     ],
     "paused": false,
@@ -13954,7 +13957,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
       }
     ],
     "paused": false,

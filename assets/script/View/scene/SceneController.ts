@@ -33,7 +33,6 @@ export default class SceneController extends cc.Component {
             switch (id) {
                 case SCENE.game:
                     this.gameScene.active = true;
-                    console.log("GlobalEvent.START_GAME");
                     GlobalEvent.instance().dispatchEvent(GlobalEvent.START_GAME);
                     if (this.homeScene) this.homeScene.active = false;
                     break;

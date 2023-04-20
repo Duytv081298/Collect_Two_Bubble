@@ -181,9 +181,9 @@ export default class BroadContainer extends cc.Component {
         }
     }
     boardReady() {
-        console.log("boardReady");
+        // console.log("boardReady");
 
-        console.log("boardReady content.childrenCount: " + this.content.childrenCount);
+        // console.log("boardReady content.childrenCount: " + this.content.childrenCount);
         MainData.instance().isPlay = false;
         if (MainData.instance().keyBooster != null || MainData.instance().isUseBooster) {
             GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BOOSTER);
@@ -194,17 +194,17 @@ export default class BroadContainer extends cc.Component {
     }
 
     clearAllBubbleDie() {
-        console.log("clearAllBubbleDie");
+        // console.log("clearAllBubbleDie");
         this.checkEndGame()
 
     }
     checkEndGame() {
 
         if (MainData.instance().move <= 0) {
-            console.log("MainData.instance().isHiddenPrizes: " + MainData.instance().isHiddenPrizes);
-            console.log("this.bubbleDieContainer.childrenCount: " + this.bubbleDieContainer.childrenCount);
-            console.log("MainData.instance().isPlay: " + MainData.instance().isPlay);
-            console.log("MainData.instance().isOpenGift: " + MainData.instance().isOpenGift);
+            // console.log("MainData.instance().isHiddenPrizes: " + MainData.instance().isHiddenPrizes);
+            // console.log("this.bubbleDieContainer.childrenCount: " + this.bubbleDieContainer.childrenCount);
+            // console.log("MainData.instance().isPlay: " + MainData.instance().isPlay);
+            // console.log("MainData.instance().isOpenGift: " + MainData.instance().isOpenGift);
             if (MainData.instance().isOpenGift) return;
 
             if (this.bubbleDieContainer.childrenCount > 0 || MainData.instance().isPlay || MainData.instance().isHiddenPrizes) {
@@ -216,12 +216,12 @@ export default class BroadContainer extends cc.Component {
     }
 
     collisionEnter(bubble: Bubble) {
-        console.log("collisionEnter");
+        // console.log("collisionEnter");
 
         if (MainData.instance().keyBooster != null) {
             this.itemCheck.setPosition(-100, -100)
             if (MainData.instance().keyBooster == BOOSTER.reverse) {
-                console.log("keyBooster == BOOSTER.reverse");
+                // console.log("keyBooster == BOOSTER.reverse");
 
                 this.reverseBroad(bubble);
                 MainData.instance().isUseBooster = true;
@@ -229,7 +229,7 @@ export default class BroadContainer extends cc.Component {
                 MainData.instance().isPlay = true;
                 MainData.instance().isUseBooster = true;
                 let timeDelay = this.useBooster(bubble);
-                console.log("timeDelay");
+                // console.log("timeDelay");
 
                 this.scheduleOnce(() => {
                     this.touchEnd();
@@ -252,7 +252,7 @@ export default class BroadContainer extends cc.Component {
 
     }
     touchEnd() {
-        console.log("touchEnd");
+        // console.log("touchEnd");
 
         MainData.instance().isPlay = true;
         this.hideAllConnect();
@@ -290,14 +290,14 @@ export default class BroadContainer extends cc.Component {
     }
 
     clearDot() {
-        console.log("clear dot");
+        // console.log("clear dot");
         let touches = this.listBubbleSelect.concat();
         this.clearBubbleSelected();
-        console.log("listBubbleSelect length: " + this.listBubbleSelect.length);
-        console.log("touches length: " + touches.length);
+        // console.log("listBubbleSelect length: " + this.listBubbleSelect.length);
+        // console.log("touches length: " + touches.length);
 
 
-        console.log("clearDot content.childrenCount: " + this.content.childrenCount);
+        // console.log("clearDot content.childrenCount: " + this.content.childrenCount);
         let delay = 0.07;
         let time = 0;
         for (let i = 0; i < touches.length; i++) {
@@ -332,9 +332,9 @@ export default class BroadContainer extends cc.Component {
         this.scheduleOnce(() => { this.reSetUpBubble() }, time + delay)
     }
     reSetUpBubble() {
-        console.log("reSetUpBubble");
+        // console.log("reSetUpBubble");
 
-        console.log("reSetUpBubble 0 content.childrenCount: " + this.content.childrenCount);
+        // console.log("reSetUpBubble 0 content.childrenCount: " + this.content.childrenCount);
 
         let amountDefaultGroupColor = this.getAmountDefaultGroupColor();
         let existGroupColor1: number = 0;
@@ -370,7 +370,7 @@ export default class BroadContainer extends cc.Component {
             countMore[col] = count;
         }
 
-        console.log("reSetUpBubble 1 content.childrenCount: " + this.content.childrenCount);
+        // console.log("reSetUpBubble 1 content.childrenCount: " + this.content.childrenCount);
         let freeColorGroup1 = amountDefaultGroupColor.groupA - existGroupColor1;
         let freeColorGroup2 = amountDefaultGroupColor.groupB - existGroupColor2;
 
@@ -432,13 +432,13 @@ export default class BroadContainer extends cc.Component {
             }
         }
 
-        console.log("reSetUpBubble 2 content.childrenCount: " + this.content.childrenCount);
+        // console.log("reSetUpBubble 2 content.childrenCount: " + this.content.childrenCount);
         let maxTimeDelay = Math.max(maxTime, maxTime1) + speedBall;
         this.scheduleOnce(() => { this.boardReady(); }, maxTimeDelay);
     }
 
     pushBubble(bubble: Bubble) {
-        console.log("pushBubble");
+        // console.log("pushBubble");
 
         if (!bubble || this.isQuadrilateral) return;
         for (let i = 0; i < this.listBubbleSelect.length; i++) {
@@ -495,7 +495,7 @@ export default class BroadContainer extends cc.Component {
         this.listConnect = [];
     }
     cutBubble(bubble: Bubble) {
-        console.log("cutBubble");
+        // console.log("cutBubble");
 
         // console.log("cutDot");
         let dataEnd = this.listBubbleSelect[this.listBubbleSelect.length - 1];
@@ -533,7 +533,7 @@ export default class BroadContainer extends cc.Component {
         this.listBubbleSelect = [];
     }
     checkCollect(bubble: Bubble) {
-        console.log("content.childrenCount: " + this.content.childrenCount);
+        // console.log("content.childrenCount: " + this.content.childrenCount);
 
         let curDot: Bubble = this.listBubbleSelect[this.listBubbleSelect.length - 1];
         let oldDot: Bubble = this.listBubbleSelect.length >= 2 ? this.listBubbleSelect[this.listBubbleSelect.length - 2] : null;
@@ -549,13 +549,13 @@ export default class BroadContainer extends cc.Component {
     }
 
     useBooster(bubble: Bubble): number {
-        console.log("useBooster");
+        // console.log("useBooster");
 
         switch (MainData.instance().keyBooster) {
             case BOOSTER.rocket:
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
                 this.listBubbleSelect = this.getBubbleRocket(bubble);
-                console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
+                // console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
                 this.scheduleOnce(() => {
                     SoundManager.instance().playEffect("Booster_rocket");
                 }, 0.3)
@@ -563,7 +563,7 @@ export default class BroadContainer extends cc.Component {
             case BOOSTER.bomb:
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
                 this.listBubbleSelect = this.getDotBomb(bubble);
-                console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
+                // console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
                 this.scheduleOnce(() => {
                     SoundManager.instance().playEffect("color_bomb")
                 }, 0.6)
@@ -574,7 +574,7 @@ export default class BroadContainer extends cc.Component {
             case BOOSTER.hammer:
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_ANI_BOOSTER, { bubble: bubble });
                 this.listBubbleSelect = this.getBubbleHammer(bubble);
-                console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
+                // console.log("listBubbleSelect.length: " + this.listBubbleSelect.length);
                 this.scheduleOnce(() => {
                     SoundManager.instance().playEffect("booster_hammer");
                 }, 0.12)
@@ -585,7 +585,7 @@ export default class BroadContainer extends cc.Component {
     }
 
     getBubbleRocket(bubble: Bubble): Bubble[] {
-        console.log("getBubbleRocket");
+        // console.log("getBubbleRocket");
 
         let arr = this.arrBubble.concat();
         let row = bubble.row;
@@ -648,13 +648,13 @@ export default class BroadContainer extends cc.Component {
         return listBubble;
     }
     getBubbleHammer(bubble: Bubble): Bubble[] {
-        console.log("getBubbleHammer");
+        // console.log("getBubbleHammer");
 
         bubble.isSelect = true;
         return [bubble]
     }
     getDotBomb(bubble: Bubble): Bubble[] {
-        console.log("getDotBomb");
+        // console.log("getDotBomb");
         let arr = this.arrBubble.concat();
 
         let tempListStepX: number[] = [-1, 0, 1, 0, -1, 1, 1, -1]
@@ -882,7 +882,7 @@ export default class BroadContainer extends cc.Component {
 
 
     reloadBroad() {
-        console.log("reloadBroad");
+        // console.log("reloadBroad");
 
         MainData.instance().isPlay = true;
         for (let i = 0; i < this.arrBubble.length; i++) {
@@ -1008,9 +1008,9 @@ export default class BroadContainer extends cc.Component {
     }
     onTouchEnd(event) {
         // console.log("onTouchEnd++++++");
-        console.log("move: " + MainData.instance().move + "\nisPlay: " + MainData.instance().isPlay +
-            "\nisOpenGift: " + MainData.instance().isOpenGift +
-            "\nkeyBooster: " + MainData.instance().keyBooster);
+        // console.log("move: " + MainData.instance().move + "\nisPlay: " + MainData.instance().isPlay +
+        //     "\nisOpenGift: " + MainData.instance().isOpenGift +
+        //     "\nkeyBooster: " + MainData.instance().keyBooster);
         MainData.instance().isUserPlay = false;
         if (MainData.instance().move <= 0) return;
         if (MainData.instance().isPlay) return;
@@ -1023,11 +1023,11 @@ export default class BroadContainer extends cc.Component {
         }
         if (MainData.instance().isUseBooster) return;
         if (MainData.instance().keyBooster != null) {
-            console.log("onTouchEnd true");
+            // console.log("onTouchEnd true");
             let currentTouch = event.touch.getLocation();
             this.itemCheck.setPosition(currentTouch);
         } else {
-            console.log("onTouchEnd else");
+            // console.log("onTouchEnd else");
 
             this.touchEnd();
             this.itemCheck.setPosition(-100, -100)

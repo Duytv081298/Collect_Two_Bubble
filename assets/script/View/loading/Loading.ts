@@ -271,8 +271,6 @@ export default class Loading extends cc.Component {
     }
 
     showData() {
-
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_HIGHT_SCORE);
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 0 });
     }
 

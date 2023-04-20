@@ -63,7 +63,7 @@ export default class GameController extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
     }
     reset() {
-        console.log(" GameController reset: ");
+        // console.log(" GameController reset: ");
         MainData.instance().score = 0;
         MainData.instance().move = MAX_MOVE;
 

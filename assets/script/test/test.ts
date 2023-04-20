@@ -2,6 +2,8 @@
 import RankController from "../View/Ranking/RankController";
 import { BOOSTER, GOLD_USE_BOOSTER } from "../component/constant/constant";
 import GlobalEvent from "../component/event/GlobalEvent";
+import { PlayfabManager } from "../component/package/PlayfabManager";
+import LocalStorage from "../component/storage/LocalStorage";
 import MainData from "../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
@@ -39,7 +41,12 @@ export default class Test extends cc.Component {
     updateScore() {
 
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 1000 });
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_HIGHT_SCORE);
+        let score = MainData.instance().score;
+        let hightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
+        PlayfabManager.install.updateScoreToLeaderboardAsync(PlayfabManager.WEEKLY, score);
+        if (hightScore < score) {
+            LocalStorage.setItem(LocalStorage.HIGHT_SCORE, score);
+        }
         // GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 30000 });
         // console.log(this.rankController.listScorePlayer);
 
