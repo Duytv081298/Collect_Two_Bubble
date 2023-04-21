@@ -37,12 +37,11 @@ export default class OptimizeScrollViewEndGame extends cc.Component {
         // this.node.getComponent(cc.ScrollView).content.children.forEach(v1_o => {
         //     v1_o.opacity = this._check_collision(v1_o) ? 255 : 0;
         // });
-
         let childrens = this.node.getComponent(cc.ScrollView).content.children
         for (let i = 0; i < childrens.length; i++) {
             const children = childrens[i];
             children.opacity = this._check_collision(children) ? 255 : 0;
-            if (i == 0 || i == 1 || i == childrens.length - 1 || i == childrens.length - 2 || children.name == "user") children.opacity = 0;
+            if (children.name == "opacity_0" || children.name == "user") children.opacity = 0;
         }
     }
 }

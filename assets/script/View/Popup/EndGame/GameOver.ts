@@ -65,13 +65,14 @@ export default class GameOver extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.adsReward, this);
     }
     protected onDisable(): void {
-        this.reset();
         GlobalEvent.instance().removeEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.readyAds, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.adsReward, this);
         this.unscheduleAllCallbacks();
     }
 
     removeAllPlayerRank() {
+        // console.log("removeAllPlayerRank");
+
         while (this.layoutRank.childrenCount > 0) {
             if (this.itemRankMe == this.layoutRank.children[0]) {
                 this.layoutRank.removeChild(this.layoutRank.children[0]);
@@ -81,6 +82,8 @@ export default class GameOver extends cc.Component {
             }
 
         }
+        // console.log("this.layoutRank.childrenCount: " + this.layoutRank.childrenCount);
+
     }
 
     showReward() {
@@ -129,7 +132,7 @@ export default class GameOver extends cc.Component {
         }).start();
     }
     show() {
-        console.log("showEndGame------------")
+        // console.log("showEndGame------------")
         this.reset();
 
         this.updateHightScore();
@@ -145,7 +148,7 @@ export default class GameOver extends cc.Component {
         SoundManager.instance().playEffect("ranking_win");
     }
 
-    
+
     updateHightScore() {
         let score = MainData.instance().score;
         let hightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
@@ -169,8 +172,8 @@ export default class GameOver extends cc.Component {
 
         this.nodeRankMe.active = false;
         this.nodeRankMe.stopAllActions();
-        this.removeAllPlayerRank();
         this.node.stopAllActions();
+        this.removeAllPlayerRank();
         this.layoutRank.stopAllActions();
         this.layoutRank.off(cc.Node.EventType.SIZE_CHANGED);
         this.layoutRank.width = 0;
@@ -184,6 +187,7 @@ export default class GameOver extends cc.Component {
         }
         this.txtScore.string = "0";
         this.layoutRank.stopAllActions();
+        this.layoutRank.active = false;
         this.nodeRankMe.active = true;
         this.nodeRankMe.opacity = 255;
         this.nodeRankMe.getChildByName("txtRank").getComponent(cc.Label).string = this.rankMe > 0 ? this.rankMe.toString() : "1";
@@ -200,6 +204,8 @@ export default class GameOver extends cc.Component {
         }).call(() => {
             this.txtScore.string = this.score + "";
             this.nodeRankMe.getChildByName("txtScore").getComponent(cc.Label).string = this.score + "";
+            this.sizeChangeComplete();
+            // this.layoutRank.on(cc.Node.EventType.SIZE_CHANGED, this.sizeChangeComplete, this);
         }).delay(0.5).call(() => {
             this.btnShare.node.active = true;
             this.btnHome.node.active = true;
@@ -216,14 +222,20 @@ export default class GameOver extends cc.Component {
                 }
             }
         }
+
+
         let itemRank1 = CreatePlayerRank.instance().createItemRank();
-        itemRank1.name = "player"
+        itemRank1.name = "opacity_0"
         itemRank1.opacity = 0;
         let itemRank2 = CreatePlayerRank.instance().createItemRank();
-        itemRank1.name = "player"
+        itemRank2.name = "opacity_0"
         itemRank2.opacity = 0;
+        let itemRank3 = CreatePlayerRank.instance().createItemRank();
+        itemRank3.name = "opacity_0"
+        itemRank3.opacity = 0;
         this.layoutRank.addChild(itemRank1);
         this.layoutRank.addChild(itemRank2);
+        this.layoutRank.addChild(itemRank3);
         if (rankOut == 0) {
             this.itemRankMe = cc.instantiate(this.nodeRankMe);
             this.itemRankMe.opacity = 0;
@@ -234,6 +246,7 @@ export default class GameOver extends cc.Component {
             if (rankOut > 0 && i == rankOut) {
                 this.itemRankMe = cc.instantiate(this.nodeRankMe);
                 this.itemRankMe.opacity = 0;
+                this.itemRankMe.name = "user"
                 this.layoutRank.addChild(this.itemRankMe);
             } else {
                 if (this.arrDataRank[i].rank == 0) continue;
@@ -262,44 +275,43 @@ export default class GameOver extends cc.Component {
         }
         let itemRank4 = CreatePlayerRank.instance().createItemRank();
         itemRank4.opacity = 0;
-        itemRank4.name = "player"
+        itemRank4.name = "opacity_0"
         let itemRank5 = CreatePlayerRank.instance().createItemRank();
         itemRank5.opacity = 0;
-        itemRank5.name = "player"
+        itemRank5.name = "opacity_0"
         this.layoutRank.addChild(itemRank4);
         this.layoutRank.addChild(itemRank5);
 
+
         // console.log(this.layoutRank.children);
 
-        this.scheduleOnce(() => {
-            this.autoShareScore();
-        }, 1.5)
 
-        this.layoutRank.on(cc.Node.EventType.SIZE_CHANGED, this.sizeChangeComplete, this);
+
     }
     sizeChangeComplete() {
-        // console.log("sizeChangeComplete------------", this.arrDataRank);
-        // console.log("this.layoutRank: ", this.layoutRank);
-        let abc = this.layoutRank.children[this.arrDataRank.length - this.rankMe];
+
+        this.layoutRank.active = true;
         if (this.rankMe < this.arrDataRank.length / 2) {
             this.listScroll.scrollToLeft(0);
         } else {
             this.listScroll.scrollToRight(0);
         }
 
-        this.listScroll.scrollToOffset(new cc.Vec2(abc.x - 55, abc.y), 1.5);
-        cc.tween(this.node).delay(1).call(() => {
+        this.listScroll.scrollToOffset(new cc.Vec2(this.itemRankMe.position.x - this.listScroll.node.width / 2, 0), 3);
+        cc.tween(this.node).delay(3).call(() => {
             this.itemRankMe.y = 0;
-            this.itemRankMe.opacity = 0;
-            cc.tween(this.itemRankMe).to(0.5, { opacity: 255 }).call(() => {
-                this.itemRankMe.getChildByName("bgRotation").active = true;
-                this.itemRankMe.getChildByName("star").active = true;
-                this.itemRankMe.name = "player"
-            }).start();
+            // cc.tween(this.itemRankMe).to(0.5, { opacity: 255 }).call(() => {
+            this.itemRankMe.opacity = 255;
+            this.itemRankMe.getChildByName("bgRotation").active = true;
+            this.itemRankMe.getChildByName("star").active = true;
+            this.itemRankMe.name = "player"
+            // }).start();
 
-            cc.tween(this.nodeRankMe).to(0.4, { opacity: 0 }).call(() => {
-                this.nodeRankMe.active = false;
-            }).start();
+            // cc.tween(this.nodeRankMe).to(0.5, { opacity: 0 }).call(() => {
+            this.nodeRankMe.opacity = 0;
+            this.nodeRankMe.active = false;
+            // }).start();
+            this.autoShareScore();
 
         }).start();
     }
@@ -328,11 +340,9 @@ export default class GameOver extends cc.Component {
                         }).then(() => {
                             GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
                         }).catch((error) => {
-                            console.log(error);
                             GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
                         });
                 } catch (error) {
-                    console.log(error);
 
                     GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
                 }
@@ -430,7 +440,6 @@ export default class GameOver extends cc.Component {
     }
     hide() {
         this.claimCoin();
-        this.reset();
         this.node.active = false;
     }
     activeBtnClaimX3(status: boolean) {

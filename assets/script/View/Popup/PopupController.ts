@@ -1,6 +1,7 @@
 import GlobalEvent from "../../component/event/GlobalEvent";
 import MainData from "../../component/storage/MainData";
 import GameOver from "./EndGame/GameOver";
+import { FourGift } from "./FourGift/FourGift";
 import { OpenGift } from "./Gift/OpenGift";
 import NoMoves from "./NoMove/NoMoves";
 import { Setting } from "./Setting/Setting";
@@ -17,6 +18,10 @@ export default class PopupController extends cc.Component {
     setting: cc.Node = null;
     gift: cc.Node = null;
     spin: cc.Node = null;
+    fourGift: cc.Node = null;
+    forfeitAttack: cc.Node = null;
+
+
     inviteFriend: cc.Node = null;
     videoRewards: cc.Node = null;
     help: cc.Node = null;
@@ -26,6 +31,10 @@ export default class PopupController extends cc.Component {
     ktShowSetting: boolean = false;
     ktShowGift: boolean = false;
     ktShowSpin: boolean = false;
+    ktShowFourGift: boolean = false;
+    ktShowForfeitAttack: boolean = false;
+
+
     ktInviteFriend: boolean = false;
     ktVideoRewards: boolean = false;
     ktHelp: boolean = false;
@@ -39,6 +48,8 @@ export default class PopupController extends cc.Component {
         this.preLoadInviteFriends();
         this.preLoadVideoRewards();
         this.preLoadHelp();
+        this.preLoadFourGift();
+        this.preLoadForfeitAttack()
     }
 
     protected onEnable(): void {
@@ -48,6 +59,8 @@ export default class PopupController extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_SETTING_POPUP, this.showSetting, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_GIFT, this.showGift, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_SPIN, this.showSpin, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_FOUR_GIFT, this.showFourGift, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_FORFEIT_ATTACK, this.showForfeitAttack, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HELP, this.showHelp, this);
 
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_INVITE_FRIEND_POPUP, this.showInviteFriend, this);
@@ -60,6 +73,8 @@ export default class PopupController extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_SETTING_POPUP, this.showSetting, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_GIFT, this.showGift, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_SPIN, this.showSpin, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_FOUR_GIFT, this.showFourGift, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_FORFEIT_ATTACK, this.showForfeitAttack, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HELP, this.showHelp, this);
 
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_INVITE_FRIEND_POPUP, this.showInviteFriend, this);
@@ -134,10 +149,10 @@ export default class PopupController extends cc.Component {
     preLoadGift() {
         cc.resources.preload("prefab/HopQua/Open_Gift", cc.Prefab, (err) => {
 
-            if (this.gift == null || !this.gift.active) this.loadGift();
+            if (this.gift == null || !this.gift.active) this.loadGift(null);
         });
     }
-    loadGift() {
+    loadGift(data) {
         cc.resources.load("prefab/HopQua/Open_Gift", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
                 if (this.gift == null) {
@@ -145,8 +160,8 @@ export default class PopupController extends cc.Component {
                     this.gift.setParent(this.node);
                     this.gift.name = "OpenGift";
                     this.gift.active = false;
-                    if (this.ktShowGift == true) {
-                        this.showGift();
+                    if (data) {
+                        this.showGift(data);
                     }
                 }
             }
@@ -185,7 +200,7 @@ export default class PopupController extends cc.Component {
                     this.videoRewards.setParent(this.node);
                     this.videoRewards.active = false;
                     if (this.ktVideoRewards == true) {
-                        this.showGift();
+                        this.showVideoRewards();
                     }
                 }
             }
@@ -234,6 +249,49 @@ export default class PopupController extends cc.Component {
         });
     }
 
+
+    preLoadFourGift() {
+        cc.resources.preload("prefab/FourGift/FourGift", cc.Prefab, (err) => {
+
+            if (this.fourGift == null || !this.fourGift.active) this.loadFourGift(null);
+        });
+    }
+    loadFourGift(data) {
+        cc.resources.load("prefab/FourGift/FourGift", cc.Prefab, (err, prefab: cc.Prefab) => {
+            if (!err) {
+                if (this.fourGift == null) {
+                    this.fourGift = cc.instantiate(prefab);
+                    this.fourGift.setParent(this.node);
+                    this.fourGift.active = false;
+                    if (data) {
+                        this.showFourGift(data);
+                    }
+                }
+            }
+        });
+    }
+
+
+    preLoadForfeitAttack() {
+        cc.resources.preload("prefab/Forfeit attack/Forfeit attack", cc.Prefab, (err) => {
+            if (this.forfeitAttack == null || !this.forfeitAttack.active) this.loadForfeitAttack();
+        });
+    }
+    loadForfeitAttack() {
+        console.log("loadForfeitAttack");
+        cc.resources.load("prefab/Forfeit attack/Forfeit attack", cc.Prefab, (err, prefab: cc.Prefab) => {
+            if (!err) {
+                if (this.forfeitAttack == null) {
+                    this.forfeitAttack = cc.instantiate(prefab);
+                    this.forfeitAttack.setParent(this.node);
+                    this.forfeitAttack.active = false;
+                    if (this.ktShowForfeitAttack) {
+                        this.showForfeitAttack();
+                    }
+                }
+            }
+        });
+    }
     showNoMoves() {
 
         if (MainData.instance().isShowNoMove) return;
@@ -243,7 +301,7 @@ export default class PopupController extends cc.Component {
             MainData.instance().isShowNoMove = true;
             this.ktShowNoMoves = false;
             this.noMove.active = true;
-            // this.noMove.setSiblingIndex(this.node.children.length)
+            this.noMove.setSiblingIndex(this.node.childrenCount)
             this.noMove.getComponent(NoMoves).show();
         } else {
             this.showLoading();
@@ -253,13 +311,13 @@ export default class PopupController extends cc.Component {
     }
     showEndGame() {
         if (this.noMove) this.noMove.active = false;
-        if (this.endGame != null && this.endGame.active) return;
         if (this.endGame != null) {
+            if (this.endGame.active) return;
             console.log("showEndGame")
             this.hideLoading();
             this.ktShowEndGame = false;
             this.endGame.active = true;
-            // this.endGame.setSiblingIndex(this.node.children.length)
+            this.endGame.setSiblingIndex(this.node.childrenCount)
             this.endGame.getComponent(GameOver).show();
         } else {
             this.showLoading();
@@ -272,7 +330,7 @@ export default class PopupController extends cc.Component {
             this.hideLoading();
             this.ktShowSetting = false;
             this.setting.active = true;
-            // this.setting.setSiblingIndex(this.node.children.length)
+            this.setting.setSiblingIndex(this.node.childrenCount)
             this.setting.getComponent(Setting).showPopup();
         } else {
             this.showLoading();
@@ -280,20 +338,20 @@ export default class PopupController extends cc.Component {
             this.loadSetting();
         }
     }
-    showGift() {
+    showGift(data) {
         if (this.noMove && this.noMove.active) return;
         if (this.gift != null) {
             this.hideLoading();
             if (this.gift.active == true) return;
             this.ktShowGift = false;
             this.gift.active = true;
-            // this.gift.setSiblingIndex(this.node.children.length)
-            this.gift.getComponent(OpenGift).show();
+            this.gift.setSiblingIndex(this.node.childrenCount)
+            this.gift.getComponent(OpenGift).show(data);
 
         } else {
             this.showLoading();
             this.ktShowGift = true;
-            this.loadGift();
+            this.loadGift(data);
         }
     }
     showInviteFriend() {
@@ -304,7 +362,7 @@ export default class PopupController extends cc.Component {
             if (this.inviteFriend.active == true) return;
             this.ktInviteFriend = false;
             this.inviteFriend.active = true;
-            // this.inviteFriend.setSiblingIndex(this.node.children.length)
+            this.inviteFriend.setSiblingIndex(this.node.childrenCount)
         } else {
             this.showLoading();
             this.ktInviteFriend = true;
@@ -317,7 +375,7 @@ export default class PopupController extends cc.Component {
             if (this.videoRewards.active == true) return;
             this.ktVideoRewards = false;
             this.videoRewards.active = true;
-            // this.videoRewards.setSiblingIndex(this.node.children.length)
+            this.videoRewards.setSiblingIndex(this.node.childrenCount)
             this.videoRewards.getComponent(VideoRewards).show();
         } else {
             this.showLoading();
@@ -335,6 +393,7 @@ export default class PopupController extends cc.Component {
             // console.log("popup controller show spin");
             this.ktShowSpin = false;
             this.spin.active = true;
+            this.spin.setSiblingIndex(this.node.childrenCount)
             // this.spin.setSiblingIndex(this.node.children.length)
             this.spin.getComponent(Spin).show();
         } else {
@@ -343,19 +402,47 @@ export default class PopupController extends cc.Component {
             this.loadSpin();
         }
     }
-    showHelp(){
+    showHelp() {
         if (this.help != null) {
             this.hideLoading();
             this.ktHelp = false;
             this.help.active = true;
+            this.help.setSiblingIndex(this.node.childrenCount)
         } else {
             this.showLoading();
             this.ktHelp = true;
             this.loadHelp();
         }
     }
-
-
+    showFourGift(data) {
+        if (this.fourGift != null) {
+            if (this.fourGift.active) return;
+            this.hideLoading();
+            this.ktShowFourGift = false;
+            this.fourGift.active = true;
+            this.fourGift.setSiblingIndex(this.node.childrenCount)
+            this.fourGift.getComponent(FourGift).show(data);
+        } else {
+            this.showLoading();
+            this.ktShowFourGift = true;
+            this.loadFourGift(data);
+        }
+    }
+    showForfeitAttack() {
+        // console.log(111111);
+        
+        if (this.forfeitAttack != null) {
+            if (this.forfeitAttack.active) return;
+            this.hideLoading();
+            this.ktShowForfeitAttack = false;
+            this.forfeitAttack.active = true;
+            this.forfeitAttack.setSiblingIndex(this.node.childrenCount)
+        } else {
+            this.showLoading();
+            this.ktShowForfeitAttack = true;
+            this.loadForfeitAttack();
+        }
+    }
     hideLoading() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
     }

@@ -9,7 +9,7 @@ import { Utils } from "../../component/component/Utils";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import CreateGoldHole from "../../component/pool/CreateGoldHole";
 import MainData from "../../component/storage/MainData";
-import HiddenPrizes from "./Hidden prizes/HiddenPrizes";
+import HiddenPrizes from "../Hidden prizes/HiddenPrizes";
 
 const { ccclass, property } = cc._decorator;
 
@@ -74,7 +74,7 @@ export default class NewClass extends cc.Component {
             this.ktHiddenPrizes = false;
             this.hiddenPrizes.active = true;
             this.hiddenPrizes.getComponent(HiddenPrizes).show(data);
-            
+
         } else {
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
             this.ktHiddenPrizes = true;
@@ -84,6 +84,7 @@ export default class NewClass extends cc.Component {
 
     claimGoldHole(data) {
         let position = data.position;
+        let amountGold = data.gold;
         // console.log(position);
         this.positionGold.active = true;
         let endPosition = this.positionGold.position;
@@ -98,11 +99,11 @@ export default class NewClass extends cc.Component {
         cc.tween(gold)
             .bezierTo(1,
                 pos,
-                cc.v2(Utils.randomInt(pos.x - 300 <= -320 ? -320 : pos.x - 300, pos.x + 300 >= 320 ? 320 : pos.x + 300), Utils.randomInt(pos.y + ((endPosition.y - pos.y) * 0.3), position.y + ((endPosition.y - pos.y) * 0.7))),
+                cc.v2(Utils.randomInt(pos.x - 300 <= -320 ? -320 : pos.x - 300, pos.x + 300 >= 320 ? 320 : pos.x + 300), Utils.randomInt(pos.y + ((endPosition.y - pos.y) * 0.3), pos.y + ((endPosition.y - pos.y) * 0.7))),
                 cc.v2(endPosition)
             )
             .call(() => {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 1 });
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: amountGold ? amountGold : 0 });
                 CreateGoldHole.instance().removeItem(gold);
             })
             .start();

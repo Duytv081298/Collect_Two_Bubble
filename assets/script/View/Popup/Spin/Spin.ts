@@ -1,5 +1,6 @@
 import PlayerLocal from "../../../component/component/PlayerLocal";
 import { Utils } from "../../../component/component/Utils";
+import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
 import SharePictureScoreAttack from "../../../component/share/SharePictureScoreAttack";
 import LocalStorage from "../../../component/storage/LocalStorage";
@@ -53,10 +54,14 @@ export class Spin extends cc.Component {
     countPlayFriends: number = 0;
     isFriendShow: any = null;
     onEnable() {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ATTACK, this.showAttack, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
         // game.on("UPDATE_TIME_SPIN_IN_SPIN", this.updateTimeSpin.bind(this), this);
         // game.on("ON_HANDLER_ATTACK", this.showAttack, this);
     }
     onDisable() {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ATTACK, this.showAttack, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
         // game.off("UPDATE_TIME_SPIN_IN_SPIN");
         // game.off("ON_HANDLER_ATTACK");
         // game.off("NEXT_USER_SPIN");
@@ -120,6 +125,8 @@ export class Spin extends cc.Component {
         this.setActiveGetMoreSpin();
     }
     updateTimeSpin() {
+        // console.log(MainData.instance().total_collect_spin);
+        
         if (MainData.instance().total_collect_spin <= 0) return;
         if (MainData.instance().currentSpin < 1) {
             if (!this.ktQuay) this.txtCountSpin.string = Utils.convertTimeToText(MainData.instance().totalTimeGetSpin);
@@ -139,14 +146,8 @@ export class Spin extends cc.Component {
         this.hightLight.active = false;
     }
     onHandlerWheel() {
-        // console.log("onHandlerWheel");
-        // console.log("this.ktQuay: " + this.ktQuay);
-        // console.log("MainData.instance().currentSpin: " + MainData.instance().currentSpin);
-
-
-
         if (this.ktQuay == true) return;
-        // if (MainData.instance().currentSpin == 0) return;
+        if (MainData.instance().currentSpin <= 0) return;
 
         // FaceBook.logEvent(LogEventName.playSpin)
         this.ktQuay = true;
@@ -168,8 +169,8 @@ export class Spin extends cc.Component {
         // attack 3-8: 54->73
         //steal 0-5: 74->99
 
-        
-        rd = 0;
+
+        rd = 15;
 
         let localWin = 0;
         if (rd < 15) {
@@ -208,10 +209,10 @@ export class Spin extends cc.Component {
         this.spinResult(dataResult);
 
     }
-    
+
     spinResult(data) {
         this.dataResult = data;
-        console.log("this.dataResult: ", this.dataResult);
+        // console.log("this.dataResult: ", this.dataResult);
         let degrees = this.slicePrizes.indexOf(data.value) * 36;
         this.wheel.stopAllActions()
         cc.tween(this.wheel).to(5, { angle: 360 * 5 - (degrees) }, { easing: "cubicOut" }).call(() => {
@@ -222,34 +223,31 @@ export class Spin extends cc.Component {
         }).start();
     }
     showResult() {
-        // if (this.dataResult == null) {
-        //     this.btnPlay.interactable = true;
-        //     this.ktQuay = false;
-        //     return;
-        // }
-        // if (
-        //     this.dataResult.value == "100" ||
-        //     this.dataResult.value == "200" ||
-        //     this.dataResult.value == "300" ||
-        //     this.dataResult.value == "400"
-        // ) {
-        //     this.showEffectGold(parseInt(this.dataResult.value));
-        //     this.nextUser();
-        // } else if (this.dataResult.value == "gift1" || this.dataResult.value == "gift2") {
-        //     this.showEffectGift();
-        //     this.nextUser();
-        // } else if (this.dataResult.value == "attack1" || this.dataResult.value == "attack2") {
-        //     this.showAttack();
-        // } else if (this.dataResult.value == "steal1" || this.dataResult.value == "steal2") {
-        //     this.showSteal(false);
-        // }
+        if (this.dataResult == null) {
+            this.btnPlay.interactable = true;
+            this.ktQuay = false;
+            return;
+        }
+        if (
+            this.dataResult.value == "100" ||
+            this.dataResult.value == "200" ||
+            this.dataResult.value == "300" ||
+            this.dataResult.value == "400"
+        ) {
+            this.showEffectGold(parseInt(this.dataResult.value));
+        } else if (this.dataResult.value == "gift1" || this.dataResult.value == "gift2") {
+            this.showEffectGift();
+        } else if (this.dataResult.value == "attack1" || this.dataResult.value == "attack2") {
+            this.showAttack();
+        } else if (this.dataResult.value == "steal1" || this.dataResult.value == "steal2") {
+            this.showSteal();
+        }
         this.btnPlay.interactable = true;
         this.ktQuay = false;
         this.dataResult = null;
 
     }
-    showSteal(isAttack: boolean) {
-
+    showSteal() {
         if (this.isFriendShow == null) {
             this.showChooseAChest(false)
         } else {
@@ -257,12 +255,6 @@ export class Spin extends cc.Component {
                 .createAsync(this.isFriendShow.id)
                 .then(() => {
                     this.showChooseAChest(false)
-                    // let arrStr = [
-                    //     "Can't believe your friend destroyed your reward!",
-                    //     FBInstant.player.getName() + " ruined  your prize. Devastated!",
-                    //     "Reward destroyed by " + FBInstant.player.getName() + ". Feeling betrayed.",
-                    //     FBInstant.player.getName() + "  wrecked your treasure. Heartbroken"
-                    // ]
                     new SharePictureScoreAttack(0, (dataImage) => {
                         if (dataImage == null) {
                             return;
@@ -281,12 +273,15 @@ export class Spin extends cc.Component {
                             },
                             strategy: 'IMMEDIATE'
                         }).then(() => {
+                            this.showChooseAChest(false)
                         }).catch(() => {
+                            this.showChooseAChest(false)
                         });
                     })
 
                 }).catch(() => {
                     this.showChooseAChest(false)
+                    // GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_FOUR_GIFT , {dataPlayer: this.dataPlayer, isAttack: false})
                 })
 
         }
@@ -296,12 +291,12 @@ export class Spin extends cc.Component {
     }
     showChooseAChest(isAttack: boolean) {
 
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_FOUR_GIFT, { dataPlayer: this.dataPlayer, isAttack: isAttack })
         // if (!isAttack) game.emit("OPEN_CHOOSE_A_CHEST", this.dataPlayer, isAttack);
         // else game.emit("OPEN_CHOOSE_A_CHEST", null, isAttack);
     }
     showAttack() {
         // console.log("showAttack ============");
-
         FBInstant.context
             .chooseAsync()
             .then(() => {
@@ -330,30 +325,28 @@ export class Spin extends cc.Component {
                         },
                         strategy: 'IMMEDIATE'
                     }).then(() => {
+                        this.showChooseAChest(true);
                     }).catch(() => {
+                        this.showChooseAChest(true);
                     });
-
                 })
             }).catch(() => {
+
                 this.showDialogNotAttack();
             });
     }
     showDialogNotAttack() {
         // console.log("showDialogNotAttack =========");
 
-        // game.emit("SHOW_DIALOG_ATTACK")
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_FORFEIT_ATTACK);
     }
     showEffectGift() {
-        // console.log(this.controllDialog);
-
-        // this.controllDialog.showPopupGift(true);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GIFT, { isSpin: true });
     }
     showEffectGold(value: number) {
-        // LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + value);
-        // var end = this.endCoin.parent.getComponent(UITransform).convertToWorldSpaceAR(this.endCoin.position)
-
-        // game.emit("OPEN_FLY_COIN", this.startCoin.position, end, value)
-        // game.emit("SHOW_COIN")
+        var start = this.startCoin.parent.convertToWorldSpaceAR(this.startCoin.position)
+        var end = this.endCoin.parent.convertToWorldSpaceAR(this.endCoin.position)
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CLAIM_GOLD, { start: start, end: end, gold: value });
     }
     onHandlerGetMoreSpin() {
 
@@ -370,7 +363,7 @@ export class Spin extends cc.Component {
                     this.updateSpin();
                 }
                 FaceBook.getMoreSpin(contextId);
-            }).catch(() => {
+            }).catch((e) => {
             });
     }
 
@@ -378,9 +371,8 @@ export class Spin extends cc.Component {
     setActiveGetMoreSpin() {
         var status = MainData.instance().currentSpin < 10;
         this.btnGetMore.interactable = status;
-        // this.btnGetMore.getComponent(Sprite).grayscale = !status;
-        // if (status) this.btnGetMore.getComponent(cc.Animation).play()
-        // else this.btnGetMore.getComponent(cc.Animation).stop()
+        if (status) this.btnGetMore.getComponent(cc.Animation).play()
+        else this.btnGetMore.getComponent(cc.Animation).stop()
     }
 
 

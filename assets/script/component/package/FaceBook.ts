@@ -59,7 +59,7 @@ export default class FaceBook {
             FBInstant.player.getName() + " want more spins? your help appreciated!"
         ]
 
-        cc.resources.load("image/spin/texture", (err, texture) => {
+        cc.resources.load("image/spin", (err, texture) => {
             FBInstant.updateAsync({
                 action: 'CUSTOM',
                 cta: 'Play',
@@ -87,7 +87,7 @@ export default class FaceBook {
                 FBInstant.player.getName() + " wrecked your treasure. Heartbroken"
             ]
 
-            cc.resources.load("image/spin/texture", (err, texture) => {
+            cc.resources.load("image/spin", (err, texture) => {
                 FBInstant.updateAsync({
                     action: 'CUSTOM',
                     cta: 'Play',
@@ -138,7 +138,7 @@ export default class FaceBook {
     }
 
     static shareScore(score: number) {
-        console.log("shareScore");
+        // console.log("shareScore");
         
         if (window["FBInstant"] !== undefined) {
             let arrStr = [

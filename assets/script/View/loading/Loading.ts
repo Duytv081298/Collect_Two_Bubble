@@ -41,9 +41,8 @@ export default class Loading extends cc.Component {
                 LocalStorage.BOOSTER_REVERSE,
                 LocalStorage.BOOSTER_HAMMER,
                 hightScoreTour,
-                // LocalStorage.COUNT_PLAY_FRIEND,
+                LocalStorage.COUNT_PLAY_FRIEND,
                 LocalStorage.CURRENT_DATE,
-                // LocalStorage.DATA_SCORE_FRIENDS,
                 // LocalStorage.DAILY_COLLECT,
                 // LocalStorage.CURRENT_DAILY_COLLECT,
                 LocalStorage.TOTAL_COLLECT_SPIN,
@@ -65,8 +64,8 @@ export default class Loading extends cc.Component {
                     LocalStorage.setItem(LocalStorage.MUSIC, true);
                 }
                 if (data.hasOwnProperty(LocalStorage.IS_NEW)) {
-                    LocalStorage.setItem(LocalStorage.IS_NEW, true);
-                    // LocalStorage.setItem(LocalStorage.IS_NEW, data[LocalStorage.IS_NEW])
+                    // LocalStorage.setItem(LocalStorage.IS_NEW, true);
+                    LocalStorage.setItem(LocalStorage.IS_NEW, data[LocalStorage.IS_NEW])
                 } else {
                     LocalStorage.setItem(LocalStorage.IS_NEW, true);
                 }
@@ -111,11 +110,11 @@ export default class Loading extends cc.Component {
                 } else {
                     LocalStorage.setItem(hightScoreTour, 0);
                 }
-                // if (data.hasOwnProperty(LocalStorage.COUNT_PLAY_FRIEND)) {
-                //     LocalStorage.setItem(LocalStorage.COUNT_PLAY_FRIEND, data[LocalStorage.COUNT_PLAY_FRIEND])
-                // } else {
-                //     LocalStorage.setItem(LocalStorage.COUNT_PLAY_FRIEND, 0);
-                // }
+                if (data.hasOwnProperty(LocalStorage.COUNT_PLAY_FRIEND)) {
+                    LocalStorage.setItem(LocalStorage.COUNT_PLAY_FRIEND, data[LocalStorage.COUNT_PLAY_FRIEND])
+                } else {
+                    LocalStorage.setItem(LocalStorage.COUNT_PLAY_FRIEND, 0);
+                }
 
                 // if (data.hasOwnProperty(LocalStorage.COUNT_ITEM_CHANGE_COLOR)) {
                 //     LocalStorage.setItem(LocalStorage.COUNT_ITEM_CHANGE_COLOR, data[LocalStorage.COUNT_ITEM_CHANGE_COLOR])
@@ -136,9 +135,9 @@ export default class Loading extends cc.Component {
 
 
                 if (data.hasOwnProperty(LocalStorage.TOTAL_COLLECT_SPIN)) {
-                    LocalStorage.setItem(LocalStorage.TOTAL_COLLECT_SPIN, 5);
+                    // LocalStorage.setItem(LocalStorage.TOTAL_COLLECT_SPIN, 5);
 
-                    // LocalStorage.setItem(LocalStorage.TOTAL_COLLECT_SPIN, data[LocalStorage.TOTAL_COLLECT_SPIN])
+                    LocalStorage.setItem(LocalStorage.TOTAL_COLLECT_SPIN, data[LocalStorage.TOTAL_COLLECT_SPIN])
                 } else {
                     LocalStorage.setItem(LocalStorage.TOTAL_COLLECT_SPIN, 3);
                 }
@@ -206,7 +205,7 @@ export default class Loading extends cc.Component {
                 LocalStorage.setItem(LocalStorage.BOOSTER_HAMMER, 0);
                 LocalStorage.setItem(LocalStorage.BOOSTER_REVERSE, 0);
                 LocalStorage.setItem(hightScoreTour, 0);
-                // LocalStorage.setItem(LocalStorage.COUNT_PLAY_FRIEND, 0);
+                LocalStorage.setItem(LocalStorage.COUNT_PLAY_FRIEND, 0);
                 LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, 0);
                 // LocalStorage.setItem(LocalStorage.DAILY_COLLECT, false);
                 // LocalStorage.setItem(LocalStorage.CURRENT_DAILY_COLLECT, 1);
@@ -243,6 +242,7 @@ export default class Loading extends cc.Component {
             .then(() => {
             });
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
+            // GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
             // this.onHandlerPlayNow();
             // A2UController.instance.sendNotiDelay();
             // new SharePictureScoreAttack(43243, () => { });

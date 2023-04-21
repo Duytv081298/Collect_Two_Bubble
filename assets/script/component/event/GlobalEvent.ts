@@ -70,14 +70,21 @@ export default class GlobalEvent extends BaseEvent {
     static SHOW_HIDDEN_PRIZES: string = "GlobalEvent.SHOW_HIDDEN_PRIZES";
     static HIDDEN_PRIZES_BUBBLE_BONUS: string = "GlobalEvent.HIDDEN_PRIZES_BUBBLE_BONUS";
     static HIDDEN_PRIZES_MULTI_BUBBLES: string = "GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES";
-
+    
 
     static SHOW_GIFT: string = "GlobalEvent.SHOW_GIFT";
     static CHECK_SHOW_GIFT: string = "GlobalEvent.CHECK_SHOW_GIFT";
 
 
-
+    
     static SHOW_SPIN: string = "GlobalEvent.SHOW_SPIN";
+    static SHOW_FOUR_GIFT: string = "GlobalEvent.SHOW_FOUR_GIFT";
+    static SHOW_FORFEIT_ATTACK: string = "GlobalEvent.SHOW_FORFEIT_ATTACK";
+    static SHOW_ATTACK: string = "GlobalEvent.SHOW_ATTACK";
+    static UPDATE_TIME_SPIN_IN_SPIN: string = "GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN";
+    
+    
+    static CLAIM_GOLD: string = "GlobalEvent.CLAIM_GOLD";
 
 
     static SHOW_TUTORIAL: string = "GlobalEvent.SHOW_TUTORIAL";

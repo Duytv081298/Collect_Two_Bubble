@@ -66,7 +66,7 @@ export class GiftController extends cc.Component {
 
         MainData.instance().isOpenGift = true;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.CANCEL_BUBBLE_COLLECT);
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GIFT);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GIFT, {isSpin: false});
         // this.popupController.showPopupGift();
     }
 

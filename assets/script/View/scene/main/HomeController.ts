@@ -1,4 +1,5 @@
 import SoundManager from "../../../component/component/SoundManager";
+import { Utils } from "../../../component/component/Utils";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../../component/package/PlayfabManager";
@@ -14,14 +15,18 @@ export default class HomeController extends cc.Component {
 
     @property(cc.Label)
     gold_home: cc.Label = null;
+    @property(cc.Label)
+    txtSpin: cc.Label = null;
 
     protected onEnable(): void {
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
         this.updateHightScore();
         this.updateGold({ gold: 0 })
     }
     protected onDisable(): void {
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
     }
     updateHightScore() {
         let score = MainData.instance().score;
@@ -141,7 +146,13 @@ export default class HomeController extends cc.Component {
     //         });
     // }
 
-
+    updateTimeSpin() {
+        if (MainData.instance().total_collect_spin <= 0 || MainData.instance().currentSpin > 0) {
+            this.txtSpin.string = "";
+            return;
+        }
+        this.txtSpin.string = Utils.convertTimeToText(MainData.instance().totalTimeGetSpin);
+    }
 
 
     clickSetting() {

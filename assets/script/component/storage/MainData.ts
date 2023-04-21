@@ -11,7 +11,7 @@ export default class MainData {
         return MainData.mainData;
     }
     isLocal: boolean = false;
-    isTest: boolean = true;
+    isTest: boolean = false;
 
     currentIdScene: SCENE = null;
 
@@ -48,8 +48,8 @@ export default class MainData {
 
     currentSpin: number = 0;
     total_collect_spin: number = 3;
-    // countPlayFriends: number = 0;
-    // maxCountPlayFriends: number = 5;
+    countPlayFriends: number = 0;
+    maxCountPlayFriends: number = 5;
 
 
     // ktGenDataScore: boolean = false;
@@ -78,6 +78,8 @@ export default class MainData {
 
                     // game.emit("UPDATE_TIME_SPIN_IN_MAIN")
                     // game.emit("UPDATE_TIME_SPIN_IN_SPIN")
+
+                    GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN);
                     if (this.totalTimeGetSpin == 0) {
                         let currentTime = new Date().getTime();
                         this.total_collect_spin--;

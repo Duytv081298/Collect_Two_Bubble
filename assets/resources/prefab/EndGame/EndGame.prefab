@@ -455,7 +455,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        343.859,
+        307.563,
         0,
         0,
         0,
@@ -562,7 +562,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        235.514,
+        202.034,
         0,
         0,
         0,
@@ -669,7 +669,7 @@
       "ctor": "Float64Array",
       "array": [
         -86.038,
-        180.413,
+        149.324,
         0,
         0,
         0,
@@ -779,7 +779,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        129.644,
+        98.555,
         0,
         0,
         0,
@@ -916,14 +916,14 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -160.058,
+        -161.51,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        0.8,
+        0.8,
         0
       ]
     },
@@ -982,8 +982,8 @@
     "_enabled": true,
     "_normalMaterial": null,
     "_grayMaterial": null,
-    "duration": 0.1,
-    "zoomScale": 1.2,
+    "duration": 0.8,
+    "zoomScale": 1,
     "clickEvents": [
       {
         "__id__": 27
@@ -1101,7 +1101,7 @@
       "ctor": "Float64Array",
       "array": [
         -250,
-        -2.612,
+        -12.775,
         0,
         0,
         0,
@@ -1186,7 +1186,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -2.612,
+        -12.775,
         0,
         0,
         0,
@@ -1521,7 +1521,7 @@
     "elastic": true,
     "bounceDuration": 0.23,
     "scrollEvents": [],
-    "cancelInnerEvents": true,
+    "cancelInnerEvents": false,
     "_N$content": {
       "__id__": 33
     },
@@ -1611,7 +1611,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -2.612,
+        -12.775,
         0,
         0,
         0,
@@ -3435,7 +3435,7 @@
       "ctor": "Float64Array",
       "array": [
         -44.39,
-        175.508,
+        144.419,
         0,
         0,
         0,

@@ -6,10 +6,11 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-import { Utils } from "../../../component/component/Utils";
-import { HIDDEN_PRIZES } from "../../../component/constant/constant";
-import GlobalEvent from "../../../component/event/GlobalEvent";
-import MainData from "../../../component/storage/MainData";
+import { Utils } from "../../component/component/Utils";
+import { HIDDEN_PRIZES } from "../../component/constant/constant";
+import GlobalEvent from "../../component/event/GlobalEvent";
+import MainData from "../../component/storage/MainData";
+
 
 const { ccclass, property } = cc._decorator;
 @ccclass

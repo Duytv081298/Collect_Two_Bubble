@@ -143,8 +143,8 @@ class RewardAds {
 	}
 
 	show(type: number, itemId?) {
-		// console.log("show: ", type);
-		// console.log("this.ready: ", this.ready);
+		console.log("show: ", type);
+		console.log("this.ready: ", this.ready);
 		if (this.ready) {
 			this.type = type;
 			if (!MainData.instance().isTest) {

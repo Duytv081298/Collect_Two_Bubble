@@ -25,13 +25,11 @@ export default class LocalStorage {
     // static TOOLTIP_BOMB: string = "tooltipBomb"
     // static TOOLTIP_REVERSE: string = "tooltipReverse"
     // static TOOLTIP_HAMMER: string = "tooltipHammer"
+    
 
     static COUNT_FREE_GIFT: string = "countFreeGift"
 
-    // static COUNT_PLAY_FRIEND: string = "countPlayFriend"
-    // static COUNT_ITEM_HAMMER: string = "countItemHammer"
-    // static COUNT_ITEM_CHANGE_COLOR: string = "countItemChangeColor"
-    // static DATA_SCORE_FRIENDS: string = "dataScoreFriends"
+    static COUNT_PLAY_FRIEND: string = "countPlayFriend"
     static CURRENT_DATE: string = "currentDate"
     // static DAILY_COLLECT: string = "daily_connect";
     // static CURRENT_DAILY_COLLECT: string = "current_daily_connect";
@@ -46,9 +44,9 @@ export default class LocalStorage {
 
     static setItem(name: string, params: any) {
         // console.log(name, " : ", params);
-        // if (name == LocalStorage.COUNT_PLAY_FRIEND) {
-        //     MainData.instance().countPlayFriends = params;
-        // }
+        if (name == LocalStorage.COUNT_PLAY_FRIEND) {
+            MainData.instance().countPlayFriends = params;
+        }
         // if (name == LocalStorage.DAILY_COLLECT) {
         //     MainData.instance().dailyInfo.collected = params;
         // }

@@ -31,14 +31,14 @@ export default class UiRankHome extends cc.Component {
 
 
     reloadRanking() {
-        console.log("reloadRanking");
+        // console.log("reloadRanking");
         
         if (PlayfabManager.install.hadLogin == false) return;
         PlayfabManager.install.getLeaderboardGlobal(PlayfabManager.WEEKLY).then((dataRank) => {
             while (this.contentRanking.childrenCount > 0) {
                 CreateUserRankHome.instance().removeItem(this.contentRanking.children[0]);
             }
-            console.log("dataRank: ", dataRank);
+            // console.log("dataRank: ", dataRank);
             for (let i = 0; i < dataRank.length; i++) {
                 let name: String = dataRank[i].DisplayName;
                 let arrName = name.split("_");

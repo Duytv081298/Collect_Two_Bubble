@@ -39,7 +39,7 @@ export default class AnimationHole extends cc.Component {
         let indexHole = data.index;
         if (MainData.instance().indexHoleCoin == indexHole) {
             let pos = this.bgAni[indexHole].parent.convertToWorldSpaceAR(this.bgAni[indexHole].position);
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_CLAIM_GOLD_HOLE, { position: pos }); 
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_CLAIM_GOLD_HOLE, { position: pos, gold: 1 }); 
         }
 
         

@@ -1,6 +1,8 @@
 import SoundManager from "../../../component/component/SoundManager";
 import { Utils } from "../../../component/component/Utils";
+import { BOOSTER } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
+import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
@@ -24,15 +26,17 @@ export class OpenGift extends cc.Component {
     isActive: boolean = false;
     indexGift: number = null;
     isAutoOpen: boolean = false;
+    isSpin: boolean = false;
     start() {
     }
-    show() {
+    show(data) {
+        this.isSpin = false;
+        this.isSpin = data.isSpin;
         this.btnOpen.interactable = false;
         // this.isAutoOpen = autoOpen;
         SoundManager.instance().playEffect("gift_xuat hien");
 
-        this.indexGift = Utils.randomInt(0, 5);
-        this.indexGift = 4;
+        this.indexGift = this.isSpin ? Utils.randomInt(0, 3) : Utils.randomInt(0, 5);
 
         this.node.active = true;
         this.aniGift.node.active = true;
@@ -69,7 +73,7 @@ export class OpenGift extends cc.Component {
     }
 
     showGift() {
-        let toPosCurr = this.toPos[this.indexGift].getPosition();
+        let toPosCurr = this.isSpin ? cc.Vec2.ZERO : this.toPos[this.indexGift].getPosition();
 
         let oldPost = new cc.Vec2(0, -100);
         let point2 = new cc.Vec2(-1 * Utils.randomInt(oldPost.x - 100, oldPost.x + 100), Utils.randomInt(oldPost.y + 100, toPosCurr.y - 100))
@@ -114,6 +118,7 @@ export class OpenGift extends cc.Component {
             case 1:
             case 2:
             case 3:
+                if (this.isSpin) LocalStorage.setItem(this.IdBoosterToLocalKey(this.indexGift), MainData.instance().amountBooster[this.indexGift] + 1);
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: this.indexGift, amount: 1 });
                 break;
             case 4:  // bong x4
@@ -127,6 +132,21 @@ export class OpenGift extends cc.Component {
         }
         MainData.instance().isOpenGift = false;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
+    }
+
+    IdBoosterToLocalKey(booster: BOOSTER) {
+        switch (booster) {
+            case BOOSTER.rocket:
+                return LocalStorage.BOOSTER_ROCKET;
+            case BOOSTER.bomb:
+                return LocalStorage.BOOSTER_BOMB;
+            case BOOSTER.reverse:
+                return LocalStorage.BOOSTER_REVERSE;
+            case BOOSTER.hammer:
+                return LocalStorage.BOOSTER_HAMMER;
+            default:
+                break;
+        }
     }
 }
 
