@@ -126,6 +126,8 @@ export class OpenGift extends cc.Component {
                 break;
             case 5: // bouns move
                 MainData.instance().updateMove(1);
+
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: true });
                 break;
             default:
                 break;

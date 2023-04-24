@@ -3,6 +3,7 @@ import PlayerLocal from "../../../component/component/PlayerLocal";
 import SoundManager from "../../../component/component/SoundManager";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
+import MainData from "../../../component/storage/MainData";
 import GiftLucky from "./GiftLucky";
 
 const { ccclass, property } = cc._decorator;
@@ -65,7 +66,9 @@ export class FourGift extends cc.Component {
             cc.tween(this.node)
                 .delay(0.5)
                 .call(() => {
-                    GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: this.totalCoin });
+
+                    MainData.instance().updateGold(this.totalCoin);
+                    GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_GOLD_SPIN);
                     this.node.active = false;
                 })
                 .start();
@@ -158,7 +161,8 @@ export class FourGift extends cc.Component {
 
     hide() {
         SoundManager.instance().playEffect("button");
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: this.totalCoin });
+        MainData.instance().updateGold(this.totalCoin);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_GOLD_SPIN);
         this.node.active = false;
     }
     onHandlerClaimX2() {

@@ -2,6 +2,7 @@ import RewardAds from "../../../component/ads/RewardAds";
 import SoundManager from "../../../component/component/SoundManager";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import LocalStorage from "../../../component/storage/LocalStorage";
+import MainData from "../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -89,7 +90,8 @@ export class VideoRewards extends cc.Component {
             var count_free_gift = parseInt(LocalStorage.getItem(LocalStorage.COUNT_FREE_GIFT)) + 1
             LocalStorage.setItem(LocalStorage.COUNT_FREE_GIFT, count_free_gift)
 
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: LIST_COIN_FREE_GIFT[count_free_gift - 1] });
+            MainData.instance().updateGold(LIST_COIN_FREE_GIFT[count_free_gift - 1]);
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
             this.show()
         }
     }

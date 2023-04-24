@@ -1,6 +1,6 @@
-// import A2UController from "../../component/a2u/A2UController";
+import BannerAds from "../../component/ads/BannerAds";
+import InterstitialManager from "../../component/ads/InterstitialManager";
 import RewardAds from "../../component/ads/RewardAds";
-import PlayerLocal from "../../component/component/PlayerLocal";
 import SoundManager from "../../component/component/SoundManager";
 import { Utils } from "../../component/component/Utils";
 import { SCENE } from "../../component/constant/constant";
@@ -8,7 +8,6 @@ import GlobalEvent from "../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../component/package/PlayfabManager";
 import LocalStorage from "../../component/storage/LocalStorage";
 import MainData from "../../component/storage/MainData";
-import { VideoRewards } from "../Popup/Video Rewards/VideoRewards";
 
 const { ccclass, property } = cc._decorator;
 
@@ -16,14 +15,11 @@ const { ccclass, property } = cc._decorator;
 export default class Loading extends cc.Component {
 
     start() {
-        // console.log("loading: start");
-
         SoundManager.instance().preLoadSound();
         FBInstant.onPause(() => { });
 
         if (MainData.instance().ktFistLogin == true) {
             FBInstant.player.getSignedPlayerInfoAsync().then((result) => {
-                // console.log("result.getSignature: " + result.getSignature());
                 if (!MainData.instance().isLocal) PlayfabManager.install.login(result.getSignature());
             });
         } else {
@@ -77,6 +73,7 @@ export default class Loading extends cc.Component {
                     LocalStorage.setItem(LocalStorage.HIGHT_SCORE, 0);
                 }
                 if (data.hasOwnProperty(LocalStorage.CURRENT_GOLD)) {
+                    // LocalStorage.setItem(LocalStorage.CURRENT_GOLD, 999)
                     LocalStorage.setItem(LocalStorage.CURRENT_GOLD, data[LocalStorage.CURRENT_GOLD])
                 } else {
                     LocalStorage.setItem(LocalStorage.CURRENT_GOLD, 0);
@@ -240,6 +237,10 @@ export default class Loading extends cc.Component {
 
             FBInstant.startGameAsync()
             .then(() => {
+                
+                InterstitialManager.instance.init();
+                RewardAds.instance.init();
+                BannerAds.instance.init();
             });
             GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
             // GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
@@ -274,7 +275,7 @@ export default class Loading extends cc.Component {
     }
 
     showData() {
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 0 });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
     }
 
 

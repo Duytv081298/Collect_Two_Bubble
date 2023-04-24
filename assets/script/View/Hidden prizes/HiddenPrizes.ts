@@ -165,7 +165,7 @@ export default class HiddenPrizes extends cc.Component {
     }
     hPBubblesBonus() {
         console.log("hPBubblesBonus");
-        
+
         this.giftSp.node.active = true;
         this.giftSp.spriteFrame = this.spf_Bubbles_Bonus;
 
@@ -214,7 +214,9 @@ export default class HiddenPrizes extends cc.Component {
             .call(() => {
                 this.giftSp.node.setPosition(posStart)
                 this.giftSp.node.active = false;
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 1 });
+
+                MainData.instance().updateGold(1);
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
                 MainData.instance().isHiddenPrizes = false;
             })
             .start();

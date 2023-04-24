@@ -1,4 +1,5 @@
 import SoundManager from "../../../component/component/SoundManager";
+import { Utils } from "../../../component/component/Utils";
 import { GOLD_USE_BOOSTER, MAX_MOVE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import LocalStorage from "../../../component/storage/LocalStorage";
@@ -77,7 +78,7 @@ export default class GameController extends cc.Component {
 
         this.updateScore({ score: 0 })
         this.updateMove({ status: true })
-        this.updateGold({ gold: 0 })
+        this.updateGold()
     }
 
     clickSetting() {
@@ -107,14 +108,10 @@ export default class GameController extends cc.Component {
                 { position: cc.Vec3.ZERO })
             .start();
     }
-    updateGold(data) {
-        // console.log("update gold");
-
-        let gold = parseInt(data.gold);
-        LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
+    updateGold() {
         if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER)
             GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_UI_BOOSTER);
-        this.gold_game.string = MainData.instance().goldPlayer.toString();
+        this.gold_game.string = Utils.formatCurrency2(MainData.instance().goldPlayer).toString();
     }
 
 

@@ -93,8 +93,13 @@ export default class MainData {
     }
 
     updateMove(move: number) {
-        this.move += move;
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: move >= 0 });
+        MainData.instance().move += move;
+    }
+    updateGold(gold: number){
+        LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
+    }
+    updateScore(score: number){
+        MainData.instance().score + score;
     }
 
     isPlay: boolean = false;

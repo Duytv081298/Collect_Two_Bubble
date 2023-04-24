@@ -25,7 +25,9 @@ export class inviteFriend extends cc.Component {
                 } else {
                     MainData.instance().dataInviteFriend[contextId] = 1;
                     LocalStorage.setItem(LocalStorage.DATA_INVITE_FRIEND, MainData.instance().dataInviteFriend);
-                    GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 500 });
+                    
+                    MainData.instance().updateGold(500);
+                    GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
                 }
                 cc.resources.load(FaceBook.getImageShareFacebook(), (err, texture) => {
                     FBInstant.updateAsync({

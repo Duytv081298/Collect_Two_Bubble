@@ -22,7 +22,7 @@ export default class HomeController extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
         this.updateHightScore();
-        this.updateGold({ gold: 0 })
+        this.updateGold()
     }
     protected onDisable(): void {
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
@@ -37,10 +37,8 @@ export default class HomeController extends cc.Component {
         }
         this.hight_score_home.string = LocalStorage.getItem(LocalStorage.HIGHT_SCORE).toString();
     }
-    updateGold(data) {
-        let gold = parseInt(data.gold);
-        LocalStorage.setItem(LocalStorage.CURRENT_GOLD, MainData.instance().goldPlayer + gold);
-        this.gold_home.string = MainData.instance().goldPlayer.toString();
+    updateGold() {
+        this.gold_home.string = Utils.formatCurrency2(MainData.instance().goldPlayer).toString();
     }
     onHanlderPlayGlobal() {
         SoundManager.instance().playEffect("button");

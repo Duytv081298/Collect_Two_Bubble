@@ -93,6 +93,7 @@ export default class NoMoves extends cc.Component {
         if (data.type == RewardAds.REWARDED_MOVE) {
             this.hide()
             MainData.instance().updateMove(5);
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: true });
         }
     }
     hide() {

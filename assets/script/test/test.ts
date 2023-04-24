@@ -23,36 +23,34 @@ export default class Test extends cc.Component {
         let status = this.startCheck();
         // console.log("status: " + status);
 
-        if (status){
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: BOOSTER.rocket, amount: 1 });
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: BOOSTER.bomb, amount: 1 });
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: BOOSTER.reverse, amount: 1 });
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: BOOSTER.hammer, amount: 1 });
+        if (status) {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: BOOSTER.rocket, amount: 1 });
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: BOOSTER.bomb, amount: 1 });
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: BOOSTER.reverse, amount: 1 });
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_AMOUNT_BOOSTER, { booster: BOOSTER.hammer, amount: 1 });
 
         }
     }
 
     updateMove() {
         let status = this.startCheck();
-        // console.log("status: " + status);
-
-        if (status)
+        if (!status) return
         MainData.instance().updateMove(5);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: true });
     }
     updateGold() {
         let status = this.startCheck();
-        // console.log("status: " + status);
+        if (!status) return
+        MainData.instance().updateGold(GOLD_USE_BOOSTER);
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
 
-        if (status)
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: GOLD_USE_BOOSTER });
     }
 
     updateScore() {
 
         let status = this.startCheck();
-        // console.log("status: " + status);
+        if (!status) return
 
-        if (status){
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 1000 });
         let score = MainData.instance().score;
         let hightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
@@ -61,7 +59,7 @@ export default class Test extends cc.Component {
             LocalStorage.setItem(LocalStorage.HIGHT_SCORE, score);
         }
 
-        }
+
         // GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 30000 });
         // console.log(this.rankController.listScorePlayer);
 
@@ -71,9 +69,10 @@ export default class Test extends cc.Component {
     }
 
     startCheck() {
+        if(MainData.instance().isTest) return true;
         if (this.isCheck) {
             this.amountPress++;
-            if (this.amountPress >= 20) {
+            if (this.amountPress >= 15) {
                 this.isCheck = false;
                 this.countdown = false;
                 this.amountPress = 0;

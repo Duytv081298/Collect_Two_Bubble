@@ -8,6 +8,7 @@
 import { Utils } from "../../component/component/Utils";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import CreateGoldHole from "../../component/pool/CreateGoldHole";
+import MainData from "../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
 
@@ -60,7 +61,8 @@ export default class OverlayGame extends cc.Component {
                 cc.v2(endPosition)
             )
             .call(() => {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: amountGold ? amountGold : 0 });
+                MainData.instance().updateGold(amountGold ? amountGold : 0);
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
                 CreateGoldHole.instance().removeItem(gold);
             })
             .start();

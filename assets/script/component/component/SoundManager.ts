@@ -41,7 +41,7 @@ export default class SoundManager {
             this.preloadThenCreateAudioClip("Colloect _Bubble_10");
             this.preloadThenCreateAudioClip("Colloect _Bubble_11");
             this.preloadThenCreateAudioClip("Click");              // click booster
-            // this.preloadThenCreateAudioClip("get_coin");              //nhan coin luc end game
+            this.preloadThenCreateAudioClip("get_coin");              //nhan coin luc end game
             this.preloadThenCreateAudioClip("GetReward");           //sau khi nhan x3   
 
             // this.preloadThenCreateAudioClip("lucky_spin");
@@ -55,11 +55,11 @@ export default class SoundManager {
             this.preloadThenCreateAudioClip("sfx_bubble_break2");           //ball va dap
 
 
-            // this.preloadThenCreateAudioClip("Excellent");
-            // this.preloadThenCreateAudioClip("Good");
-            // this.preloadThenCreateAudioClip("Great");
-            // this.preloadThenCreateAudioClip("incredible");
-            // this.preloadThenCreateAudioClip("perfect");
+            this.preloadThenCreateAudioClip("Excellent");
+            this.preloadThenCreateAudioClip("good");
+            this.preloadThenCreateAudioClip("Great");
+            this.preloadThenCreateAudioClip("incredible");
+            this.preloadThenCreateAudioClip("perfect");
 
 
             this.preloadThenCreateAudioClip("coin_xuat hien");
@@ -88,6 +88,7 @@ export default class SoundManager {
         //{name:string, repeat:boolean = false}
         if (LocalStorage.getSound() == "false" || LocalStorage.getSound() == false) return;
         if (name == "") return;
+        
         let clip = this.clips.get(name);
         if (clip == undefined) {
         } else {

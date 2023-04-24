@@ -1,6 +1,8 @@
+import InterstitialManager from "../../../component/ads/InterstitialManager";
 import RewardAds from "../../../component/ads/RewardAds";
 import PlayerLocal from "../../../component/component/PlayerLocal";
 import SoundManager from "../../../component/component/SoundManager";
+import { Utils } from '../../../component/component/Utils';
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
@@ -13,6 +15,7 @@ import MainData from "../../../component/storage/MainData";
 const { ccclass, property } = cc._decorator;
 const beginX: number = 0;
 const spaceX: number = 125;
+const defaultReward: number = 60;
 @ccclass
 export default class GameOver extends cc.Component {
 
@@ -28,6 +31,15 @@ export default class GameOver extends cc.Component {
     listScroll: cc.ScrollView = null;
     @property(cc.Label)
     txtScore: cc.Label = null;
+
+
+    @property(cc.Animation)
+    animationBungGold: cc.Animation = null;
+
+    @property(cc.Label)
+    txtGold: cc.Label = null;
+    endPosGold: cc.Vec3 = null;
+
     ktOnLoad: boolean = false;
     ktShow: boolean = false;
     score: number = 0;
@@ -55,7 +67,7 @@ export default class GameOver extends cc.Component {
     // aniCoin: Animation = null;
     // @property(Node)
     // nodeToCoin: Node = null;
-    amountReward: number = 60;
+    amountReward: number = defaultReward;
     isClaimX3: boolean = false;
     isClaim: boolean = false;
 
@@ -71,18 +83,13 @@ export default class GameOver extends cc.Component {
     }
 
     removeAllPlayerRank() {
-        // console.log("removeAllPlayerRank");
-
         while (this.layoutRank.childrenCount > 0) {
             if (this.itemRankMe == this.layoutRank.children[0]) {
                 this.layoutRank.removeChild(this.layoutRank.children[0]);
             } else {
-                // this.layoutRank.children[0].off("CHALLENGE", this.challengePlayer, this);       
                 CreatePlayerRank.instance().removeItemRank(this.layoutRank.children[0]);
             }
-
         }
-        // console.log("this.layoutRank.childrenCount: " + this.layoutRank.childrenCount);
 
     }
 
@@ -98,18 +105,60 @@ export default class GameOver extends cc.Component {
         if (data.type == RewardAds.REWARDED_COIN) {
             this.ClaimX3();
             this.activeBtnClaimX3(false);
+            this.claimCoin();
+
         }
+    }
+
+    playAnimationGold() {
+
+        this.animationBungGold.node.active = true;
+        this.animationBungGold.play();
+        this.animationBungGold.on(cc.Animation.EventType.FINISHED, this.onAnimationEvent, this)
+
+        let pos = this.txtGold.node.parent.convertToWorldSpaceAR(this.txtGold.node.position)
+        this.endPosGold = this.animationBungGold.node.convertToNodeSpaceAR(pos);
+    }
+    onAnimationEvent(type: cc.Animation.EventType, state: cc.AnimationState) {
+        SoundManager.instance().playEffect("get_coin");
+        for (let i = 0; i < this.animationBungGold.node.childrenCount; i++) {
+            let child = this.animationBungGold.node.children[i];
+            child.active = true;
+            this.move(child, i * 0.06);
+        }
+        cc.tween({}).delay(0.8).call(() => {
+            this.isClaim = true;
+            this.txtGold.string = Utils.formatCurrency2(MainData.instance().goldPlayer).toString()
+        }).start();
+    }
+
+    move(child: cc.Node, timePlus: number) {
+        var oldPost = new cc.Vec3(child.position.x, child.position.y, 0);
+        let point2 = new cc.Vec3(-1 * Utils.randomInt(oldPost.x, this.endPosGold.x), Utils.randomInt(oldPost.y, this.endPosGold.y))
+
+        cc.tween(child)
+            .to(0.5 + timePlus, { position: cc.Vec3.ZERO }, {
+                onUpdate: (target1: cc.Vec3, ratio: number) => {
+                    child.position = Utils.twoBezier(ratio, oldPost, point2, this.endPosGold)
+                }, easing: "backIn"
+            })
+            .call(() => {
+                child.active = false;
+                child.setPosition(cc.Vec3.ZERO);
+            })
+            .start();
     }
 
     claimCoin() {
         if (this.isClaim) return;
-        this.isClaim = true;
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: this.isClaimX3 ? this.amountReward * 3 : this.amountReward });
+        this.playAnimationGold();
+        MainData.instance().updateGold(this.amountReward)
     }
     ClaimX3() {
         SoundManager.instance().playEffect("GetReward");
         let maxCoin = this.amountReward * 3;
         let minCoin = this.amountReward;
+        this.amountReward *= 3;
 
         this.aniUpCoin(minCoin, maxCoin);
         this.isClaimX3 = true;
@@ -141,6 +190,9 @@ export default class GameOver extends cc.Component {
         this.arrDataRank = MainData.instance().arrDataRank.concat();
 
         let contextId = FBInstant.context.getID();
+        this.txtGold.string = Utils.formatCurrency2(MainData.instance().goldPlayer).toString()
+
+
         if (contextId != null) {
             FaceBook.shareScore(this.score);
         }
@@ -160,6 +212,7 @@ export default class GameOver extends cc.Component {
     reset() {
         this.isClaim = false;
         this.isClaimX3 = false;
+        this.amountReward = 60;
         this.lbReward.string = "+ " + this.amountReward;
 
         this.btnShare.node.active = false;
@@ -179,6 +232,13 @@ export default class GameOver extends cc.Component {
         this.layoutRank.width = 0;
         this.layoutRank.height = 0;
         if (this.itemRankMe) this.itemRankMe.stopAllActions();
+
+
+
+        this.animationBungGold.node.children.forEach((child: cc.Node) => {
+            child.setPosition(cc.Vec3.ZERO);
+        });
+        this.animationBungGold.node.active = false;
     }
     showRank() {
 
@@ -428,19 +488,42 @@ export default class GameOver extends cc.Component {
     }
     onHandlerMainMenu() {
         SoundManager.instance().playEffect("button");
-        this.hide();
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
+        InterstitialManager.instance.show();
+        this.claimCoin();
+        if (this.isClaim) {
+            this.node.active = false;
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
+        } else
+            cc.tween({})
+                .delay(0.6).call(() => {
+                    this.isClaim = true;
+                    this.txtGold.string = Utils.formatCurrency2(MainData.instance().goldPlayer).toString()
+                }).delay(0.5).call(() => {
+                    this.node.active = false;
+                    GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
+                }).start();
+
     }
 
     onHandlerReplay() {
         SoundManager.instance().playEffect("button");
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.REPLAY_GAME);
-        this.hide();
-    }
-    hide() {
+        InterstitialManager.instance.show();
+
         this.claimCoin();
-        this.node.active = false;
+        if (this.isClaim) {
+            this.node.active = false;
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.REPLAY_GAME);
+        } else
+            cc.tween({})
+                .delay(0.6).call(() => {
+                    this.isClaim = true;
+                    this.txtGold.string = Utils.formatCurrency2(MainData.instance().goldPlayer).toString()
+                }).delay(0.5).call(() => {
+                    this.node.active = false;
+                    GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
+                    GlobalEvent.instance().dispatchEvent(GlobalEvent.REPLAY_GAME);
+                }).start();
     }
     activeBtnClaimX3(status: boolean) {
         this.btnClaimX3.interactable = status;

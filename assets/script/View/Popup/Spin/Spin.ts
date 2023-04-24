@@ -1,4 +1,5 @@
 import PlayerLocal from "../../../component/component/PlayerLocal";
+import SoundManager from "../../../component/component/SoundManager";
 import { Utils } from "../../../component/component/Utils";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
@@ -35,10 +36,15 @@ export class Spin extends cc.Component {
     startCoin: cc.Node = null;
     @property(cc.Node)
     endCoin: cc.Node = null;
+
+    endPosGold: cc.Vec3 = null;
     @property(cc.SpriteFrame)
     defaultAvatar: cc.SpriteFrame = null;
     @property(cc.Button)
     btnGetMore: cc.Button = null;
+
+    @property(cc.Animation)
+    animationBungGold: cc.Animation = null;
 
 
     controllDialog: PopupController = null;
@@ -56,15 +62,12 @@ export class Spin extends cc.Component {
     onEnable() {
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ATTACK, this.showAttack, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
-        // game.on("UPDATE_TIME_SPIN_IN_SPIN", this.updateTimeSpin.bind(this), this);
-        // game.on("ON_HANDLER_ATTACK", this.showAttack, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.ANIMATION_GOLD_SPIN, this.playAnimationGold, this);
     }
     onDisable() {
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ATTACK, this.showAttack, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
-        // game.off("UPDATE_TIME_SPIN_IN_SPIN");
-        // game.off("ON_HANDLER_ATTACK");
-        // game.off("NEXT_USER_SPIN");
+        GlobalEvent.instance().removeEventListener(GlobalEvent.ANIMATION_GOLD_SPIN, this.playAnimationGold, this);
     }
     start() {
         this.controllDialog = this.node.parent.getComponent(PopupController);
@@ -126,7 +129,7 @@ export class Spin extends cc.Component {
     }
     updateTimeSpin() {
         // console.log(MainData.instance().total_collect_spin);
-        
+
         if (MainData.instance().total_collect_spin <= 0) return;
         if (MainData.instance().currentSpin < 1) {
             if (!this.ktQuay) this.txtCountSpin.string = Utils.convertTimeToText(MainData.instance().totalTimeGetSpin);
@@ -144,7 +147,14 @@ export class Spin extends cc.Component {
         this.ktQuay = false;
         this.btnPlay.interactable = true;
         this.hightLight.active = false;
+
+
+        this.animationBungGold.node.children.forEach((child: cc.Node) => {
+            child.setPosition(cc.Vec3.ZERO);
+        });
+        this.animationBungGold.node.active = false;
     }
+
     onHandlerWheel() {
         if (this.ktQuay == true) return;
         if (MainData.instance().currentSpin <= 0) return;
@@ -170,7 +180,7 @@ export class Spin extends cc.Component {
         //steal 0-5: 74->99
 
 
-        rd = 15;
+        // rd = 55;
 
         let localWin = 0;
         if (rd < 15) {
@@ -234,7 +244,9 @@ export class Spin extends cc.Component {
             this.dataResult.value == "300" ||
             this.dataResult.value == "400"
         ) {
-            this.showEffectGold(parseInt(this.dataResult.value));
+            MainData.instance().updateGold(parseInt(this.dataResult.value));
+            this.playAnimationGold();
+            // this.showEffectGold(parseInt(this.dataResult.value));
         } else if (this.dataResult.value == "gift1" || this.dataResult.value == "gift2") {
             this.showEffectGift();
         } else if (this.dataResult.value == "attack1" || this.dataResult.value == "attack2") {
@@ -336,17 +348,10 @@ export class Spin extends cc.Component {
             });
     }
     showDialogNotAttack() {
-        // console.log("showDialogNotAttack =========");
-
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_FORFEIT_ATTACK);
     }
     showEffectGift() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GIFT, { isSpin: true });
-    }
-    showEffectGold(value: number) {
-        var start = this.startCoin.parent.convertToWorldSpaceAR(this.startCoin.position)
-        var end = this.endCoin.parent.convertToWorldSpaceAR(this.endCoin.position)
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.CLAIM_GOLD, { start: start, end: end, gold: value });
     }
     onHandlerGetMoreSpin() {
 
@@ -374,8 +379,41 @@ export class Spin extends cc.Component {
         if (status) this.btnGetMore.getComponent(cc.Animation).play()
         else this.btnGetMore.getComponent(cc.Animation).stop()
     }
+    playAnimationGold() {
+        this.animationBungGold.node.active = true;
+        this.animationBungGold.play();
+        this.animationBungGold.on(cc.Animation.EventType.FINISHED, this.onAnimationEvent, this)
+        let pos = this.endCoin.parent.convertToWorldSpaceAR(this.endCoin.position)
+        this.endPosGold = this.animationBungGold.node.convertToNodeSpaceAR(pos);
+    }
+    onAnimationEvent(type: cc.Animation.EventType, state: cc.AnimationState) {
+        for (let i = 0; i < this.animationBungGold.node.childrenCount; i++) {
+            let child = this.animationBungGold.node.children[i];
+            child.active = true;
+            this.move(child, i * 0.06);
+        }
+        cc.tween({}).delay(0.65).call(() => {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
+            this.animationBungGold.node.active = false;
+        }).start();
+    }
 
+    move(child: cc.Node, timePlus: number) {
+        var oldPost = new cc.Vec3(child.position.x, child.position.y, 0);
+        let point2 = new cc.Vec3(-1 * Utils.randomInt(oldPost.x, this.endPosGold.x), Utils.randomInt(oldPost.y, this.endPosGold.y))
 
+        cc.tween(child)
+            .to(0.35 + timePlus, { position: cc.Vec3.ZERO }, {
+                onUpdate: (target1: cc.Vec3, ratio: number) => {
+                    child.position = Utils.twoBezier(ratio, oldPost, point2, this.endPosGold)
+                }, easing: "backIn"
+            })
+            .call(() => {
+                child.active = false;
+                child.setPosition(cc.Vec3.ZERO);
+            })
+            .start();
+    }
 }
 
 

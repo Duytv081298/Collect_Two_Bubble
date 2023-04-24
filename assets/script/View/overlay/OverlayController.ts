@@ -103,7 +103,9 @@ export default class NewClass extends cc.Component {
                 cc.v2(endPosition)
             )
             .call(() => {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: amountGold ? amountGold : 0 });
+                
+                MainData.instance().updateGold(amountGold ? amountGold : 0);
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
                 CreateGoldHole.instance().removeItem(gold);
             })
             .start();

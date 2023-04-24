@@ -87,7 +87,7 @@ export default class Booster extends cc.Component {
             MainData.instance().isUserPlay ||
             MainData.instance().move <= 0 ||
             MainData.instance().isHiddenPrizes ||
-            MainData.instance().isUseBooster||
+            MainData.instance().isUseBooster ||
             MainData.instance().isTutorial) return true;
         else return false;
 
@@ -108,7 +108,8 @@ export default class Booster extends cc.Component {
             this.setOpacityBoosterChoose(key);
         } else {
             if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER) {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: -GOLD_USE_BOOSTER });
+                MainData.instance().updateGold(-GOLD_USE_BOOSTER);
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
                 this.updateAmountBooster({ booster: key, amount: 1 });
 
                 MainData.instance().keyBooster = key;
@@ -136,7 +137,8 @@ export default class Booster extends cc.Component {
             this.setOpacityBoosterChoose(key);
         } else {
             if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER) {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: -GOLD_USE_BOOSTER });
+                MainData.instance().updateGold(-GOLD_USE_BOOSTER);
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
                 this.updateAmountBooster({ booster: key, amount: 1 });
 
                 MainData.instance().keyBooster = key;
@@ -162,7 +164,8 @@ export default class Booster extends cc.Component {
             this.setOpacityBoosterChoose(key);
         } else {
             if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER) {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: -GOLD_USE_BOOSTER });
+                MainData.instance().updateGold(-GOLD_USE_BOOSTER);
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
                 this.updateAmountBooster({ booster: key, amount: 1 });
 
                 MainData.instance().keyBooster = key;
@@ -188,7 +191,8 @@ export default class Booster extends cc.Component {
             this.setOpacityBoosterChoose(key);
         } else {
             if (MainData.instance().goldPlayer >= GOLD_USE_BOOSTER) {
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: -GOLD_USE_BOOSTER });
+                MainData.instance().updateGold(-GOLD_USE_BOOSTER);
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME);
                 this.updateAmountBooster({ booster: key, amount: 1 });
 
                 MainData.instance().keyBooster = key;
