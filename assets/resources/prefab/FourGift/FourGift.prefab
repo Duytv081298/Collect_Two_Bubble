@@ -70,8 +70,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        320,
+        568,
         0,
         0,
         0,
@@ -1386,7 +1386,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
       }
     ],
     "paused": false,
@@ -2445,7 +2445,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
       }
     ],
     "paused": false,
@@ -3504,7 +3504,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
       }
     ],
     "paused": false,
@@ -4563,7 +4563,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "051b7023-e906-4977-aee5-aaa4adfb313c"
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
       }
     ],
     "paused": false,

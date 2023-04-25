@@ -75,6 +75,7 @@ export default class LocalStorage {
         }
         if (name == LocalStorage.CURRENT_SPIN) {
             MainData.instance().currentSpin = params;
+            console.log("MainData.instance().currentSpin: ", MainData.instance().currentSpin);
         }
         if (name == LocalStorage.TOTAL_COLLECT_SPIN) {
             MainData.instance().total_collect_spin = params;

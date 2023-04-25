@@ -66,7 +66,9 @@ export class FourGift extends cc.Component {
             cc.tween(this.node)
                 .delay(0.5)
                 .call(() => {
-
+                    if(this.isAttack == false){
+                        GlobalEvent.instance().dispatchEvent(GlobalEvent.CHANGE_USER_SPIN);
+                    }
                     MainData.instance().updateGold(this.totalCoin);
                     GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_GOLD_SPIN);
                     this.node.active = false;
@@ -161,9 +163,13 @@ export class FourGift extends cc.Component {
 
     hide() {
         SoundManager.instance().playEffect("button");
+        if(this.isAttack == false){
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.CHANGE_USER_SPIN);
+        }
         MainData.instance().updateGold(this.totalCoin);
         GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_GOLD_SPIN);
         this.node.active = false;
+       
     }
     onHandlerClaimX2() {
         SoundManager.instance().playEffect("button");

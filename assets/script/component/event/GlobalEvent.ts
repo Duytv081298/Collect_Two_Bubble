@@ -85,8 +85,8 @@ export default class GlobalEvent extends BaseEvent {
     static SHOW_FORFEIT_ATTACK: string = "GlobalEvent.SHOW_FORFEIT_ATTACK";
     static SHOW_ATTACK: string = "GlobalEvent.SHOW_ATTACK";
     static UPDATE_TIME_SPIN_IN_SPIN: string = "GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN";
-    static ANIMATION_GOLD_SPIN: string = "GlobalEvent.ANIMATION_GOLD_SPIN";
-    
+    static ANIMATION_GOLD_SPIN: string = "GlobalEvent.ANIMATION_GOLD_SPIN";        
+    static CHANGE_USER_SPIN:string = "GlobalEvent.CHANGE_USER_SPIN";
     
     static CLAIM_GOLD: string = "GlobalEvent.CLAIM_GOLD";
 

@@ -63,11 +63,13 @@ export class Spin extends cc.Component {
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ATTACK, this.showAttack, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.ANIMATION_GOLD_SPIN, this.playAnimationGold, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.CHANGE_USER_SPIN, this.nextUser, this);
     }
     onDisable() {
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ATTACK, this.showAttack, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.ANIMATION_GOLD_SPIN, this.playAnimationGold, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.CHANGE_USER_SPIN, this.nextUser, this);
     }
     start() {
         this.controllDialog = this.node.parent.getComponent(PopupController);
@@ -77,6 +79,7 @@ export class Spin extends cc.Component {
     show() {
         // console.log("Spin show");
         this.hightLight.active = false;
+       // MainData.instance().currentSpin = 100;
         this.nextUser();
         this.updateSpin();
         this.reset();
@@ -85,7 +88,7 @@ export class Spin extends cc.Component {
         this.avatar.spriteFrame = this.defaultAvatar;
         var listFriends = MainData.instance().friends;
         if (listFriends.length > 0 && this.countPlayFriends < listFriends.length) {
-            var friend = listFriends[Math.floor(Math.random() * listFriends.length)]
+            var friend = listFriends[this.countPlayFriends]
             this.dataPlayer = {
                 avatar: friend.avatar,
                 name: friend.name,
@@ -160,8 +163,7 @@ export class Spin extends cc.Component {
         if (MainData.instance().currentSpin <= 0) return;
 
         // FaceBook.logEvent(LogEventName.playSpin)
-        this.ktQuay = true;
-        this.countPlayFriends++;
+        this.ktQuay = true;       
         // SoundManager.instance().playEffect("lucky_spin");
         this.hightLight.active = false;
         LocalStorage.setItem(LocalStorage.CURRENT_SPIN, MainData.instance().currentSpin - 1);
@@ -259,10 +261,12 @@ export class Spin extends cc.Component {
         this.dataResult = null;
 
     }
-    showSteal() {
+    showSteal() {     
+        
         if (this.isFriendShow == null) {
             this.showChooseAChest(false)
         } else {
+            this.countPlayFriends++;           
             FBInstant.context
                 .createAsync(this.isFriendShow.id)
                 .then(() => {
@@ -306,6 +310,7 @@ export class Spin extends cc.Component {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_FOUR_GIFT, { dataPlayer: this.dataPlayer, isAttack: isAttack })
         // if (!isAttack) game.emit("OPEN_CHOOSE_A_CHEST", this.dataPlayer, isAttack);
         // else game.emit("OPEN_CHOOSE_A_CHEST", null, isAttack);
+       
     }
     showAttack() {
         // console.log("showAttack ============");
