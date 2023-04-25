@@ -2945,7 +2945,7 @@
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "a13f2a5c-36a7-4f6d-9320-79aa3261dd0b"
+      "__uuid__": "6cf638f0-079f-444e-9e5b-478bf6662aa7"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
@@ -12400,7 +12400,9 @@
     "_fontSize": 24.9,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
+    "_N$file": {
+      "__uuid__": "6cf638f0-079f-444e-9e5b-478bf6662aa7"
+    },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
