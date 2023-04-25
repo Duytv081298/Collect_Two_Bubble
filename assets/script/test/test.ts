@@ -51,7 +51,7 @@ export default class Test extends cc.Component {
         let status = this.startCheck();
         if (!status) return
 
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 1000 });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_SCORE_GAME, { score: 10000 });
         let score = MainData.instance().score;
         let hightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
         PlayfabManager.install.updateScoreToLeaderboardAsync(PlayfabManager.WEEKLY, score);

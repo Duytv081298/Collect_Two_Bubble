@@ -114,6 +114,7 @@ export default class BroadContainer extends cc.Component {
         this.setUpBubble();
         this.setParentTutorial();
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL)
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL, { arrBubble: this.arrBubble.concat() });
     }
 
     // update (dt) {}
@@ -237,6 +238,7 @@ export default class BroadContainer extends cc.Component {
                 this.reverseBroad(bubble);
                 MainData.instance().isUseBooster = true;
             } else if (!MainData.instance().isUseBooster) {
+
                 MainData.instance().isPlay = true;
                 MainData.instance().isUseBooster = true;
                 let timeDelay = this.useBooster(bubble);
@@ -296,7 +298,7 @@ export default class BroadContainer extends cc.Component {
             }
 
             if (this.isQuadrilateral) this.listBubbleSelect = this.mergeListDotSelect();
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_CO_VU, { amount: this.listBubbleSelect.length});
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_CO_VU, { amount: this.listBubbleSelect.length });
             this.clearDot();
 
         }
@@ -485,6 +487,7 @@ export default class BroadContainer extends cc.Component {
 
         var count = this.listBubbleSelect.length - 1 <= 0 ? 0 : this.listBubbleSelect.length - 1 >= 11 ? 11 : this.listBubbleSelect.length - 1;
         SoundManager.instance().playEffect("Colloect _Bubble_" + count);
+
     }
 
     pushAllBubbleColor(color: number) {
@@ -892,9 +895,15 @@ export default class BroadContainer extends cc.Component {
 
 
     cancel_Select() {
+        MainData.instance().isPlay = false;
         this.hideAllConnect();
         this.clearBubbleSelected();
-        MainData.instance().isPlay = false;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BUBBLE_PROGRESS);
+    }
+    cancel_Select_Tut() {
+        this.hideAllConnect();
+        this.clearBubbleSelected();
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_BUBBLE_PROGRESS);
     }
 
 
@@ -908,6 +917,7 @@ export default class BroadContainer extends cc.Component {
         if (MainData.instance().isPlay) return;
         if (MainData.instance().isOpenGift) return;
         if (MainData.instance().keyBooster != null && MainData.instance().keyBooster != BOOSTER.reverse) return;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL, { arrBubble: this.arrBubble.concat() });
         this.isQuadrilateral = false;
         let currentTouch = event.touch.getLocation();
         this.itemCheck.setPosition(currentTouch)
@@ -947,6 +957,7 @@ export default class BroadContainer extends cc.Component {
             this.touchEnd();
             this.itemCheck.setPosition(-100, -100)
         }
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL, { arrBubble: this.arrBubble.concat() });
 
     }
 

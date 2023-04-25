@@ -20224,7 +20224,7 @@
         "__id__": 444
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 446
@@ -20311,8 +20311,8 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.1,
-      "y": 0.9
+      "x": 0,
+      "y": 1
     },
     "_trs": {
       "__type__": "TypedArray",
@@ -20410,7 +20410,12 @@
       "__id__": 443
     },
     "_enabled": true,
-    "hand": null,
+    "boardReal": {
+      "__id__": 97
+    },
+    "hand": {
+      "__id__": 444
+    },
     "_id": "7bjN1fzAtKVJlUZRQvBu9B"
   },
   {

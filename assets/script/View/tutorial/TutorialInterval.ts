@@ -1,66 +1,56 @@
-import LocalStorage from "../../component/storage/LocalStorage";
+import GlobalEvent from "../../component/event/GlobalEvent";
 import MainData from "../../component/storage/MainData";
+import BroadContainer from "../scene/game/broad/BroadContainer";
 import Bubble from "../scene/game/item/Bubble";
 
 
 const blockSpace = [[0, -1], [1, 0], [0, 1], [-1, 0]];
-const {ccclass, property} = cc._decorator;
+const timeDelay = 7;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class TutorialInterval extends cc.Component {
 
+    protected onEnable(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_TUTORIAL_INTERVAL, this.startTut, this);
+    }
+    protected onDisable(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_TUTORIAL_INTERVAL, this.startTut, this);
+    }
 
-
+    @property(BroadContainer)
+    boardReal: BroadContainer = null;
     @property(cc.Node)
     hand: cc.Node = null;
-
-
-
-
     arrBubble: [Bubble[]] = [[]];
+    arrPathBubble = [];
+    startTut(data) {
+        this.arrBubble = [[]];
 
-    totalClick: number = 0;
-    startTut() {
-        // console.log("startTut");
-        if (MainData.instance().isShowEndGame || MainData.instance().isShowNoMove ||
-            MainData.instance().isUseBooster || LocalStorage.getItem(LocalStorage.IS_NEW)) return;
+        if (!data) return;
 
-        // console.log("startTut ========");
+        this.arrBubble = data.arrBubble;
+
+        if (!this.arrBubble) return;
         this.clearSelect()
         this.node.stopAllActions();
         cc.tween(this.node)
-            .delay(7)
+            .delay(timeDelay)
             .call(() => {
-
-                if (MainData.instance().isShowEndGame || MainData.instance().isShowNoMove || MainData.instance().isUseBooster) return;
-                this.updateArrDot();
+                // console.log("MainData.instance().isPlay: " + MainData.instance().isPlay);
+                
+                if (MainData.instance().isShowEndGame || MainData.instance().isShowNoMove ||
+                    MainData.instance().isUseBooster || MainData.instance().isTutorial ||
+                    MainData.instance().isPlay || MainData.instance().isOpenGift || MainData.instance().isUserPlay
+                ) return;
+                this.arrPathBubble = [];
                 this.checkEndGame(0, 0);
             })
             .start();
     }
 
-    update(deltaTime: number) {
-
-    }
-    protected onEnable(): void {
-        // game.on("START_TUT_INTERVAL", this.startTut.bind(this), this);
-        this.totalClick = 0;
-    }
-    protected onDisable(): void {
-        // game.off("START_TUT_INTERVAL");
-        this.totalClick = 0;
-
-    }
-    updateArrDot() {
-        // console.log("updateArrDot");
-        // this.arrayDot = this.boardContainer.getArrayDot();
-        // this.arrPathBlock = [];
-
-    }
 
 
-
-    arrPathBubble = [];
     checkEndGame(row: number, col: number, arrPath = []) {
         let item: Bubble = null;
         if (arrPath.length == 0) {
@@ -154,8 +144,8 @@ export default class TutorialInterval extends cc.Component {
                 if (pathBlock.length < 2) {
                     // console.log("GameOVer");
                 } else {
-                    // this.indexDot = 0;
-                    // this.showTut(pathBlock)
+                    this.indexDot = 0;
+                    this.showTut(pathBlock)
                 }
             } else {
                 // console.log("GameOVer");
@@ -166,49 +156,51 @@ export default class TutorialInterval extends cc.Component {
 
 
     indexDot: number = 0;
-    showTut(arrDot: Bubble[]) {
+    showTut(arrBubble: Bubble[]) {
+        // if (this.isShow) return;
+        // this.isShow = true;
+        // MainData.instance().isTutorialInterval = true;
+        let timeDelay = this.indexDot == arrBubble.length - 2 ? 2 : 0;
+        let startBubble = arrBubble[this.indexDot];
+        let endBubble = arrBubble[this.indexDot + 1];
+        this.hand.active = true;
+        this.hand.setPosition(startBubble.node.position);
+        this.hand.stopAllActions()
 
-        // let timeDelay = this.indexDot == arrDot.length - 2 ? 1 : 0;
-        // let startDot = arrDot[this.indexDot];
-        // let endDot = arrDot[this.indexDot + 1];
-        // startDot.select();
-        // this.listDotSelect.push(startDot)
-        // this.hand.active = true;
-        // this.hand.setPosition(startDot.node.position);
-        // Tween.stopAllByTarget(this.hand)
-        // tween(this.hand)
-        //     .to(0.5, { position: endDot.node.position })
-        //     .call(() => {
-        //         this.listHighlight.push(this.boardContainer.createHighlight(startDot, endDot));
-        //         endDot.select();
-        //         this.listDotSelect.push(endDot)
+        this.boardReal.collisionEnter(startBubble)
+        // console.log("startBubble: row: " + startBubble.row + "  col: " + startBubble.col);
+        cc.tween(this.hand)
+            .to(0.5, { position: endBubble.node.position })
+            .call(() => {
+                // console.log("endBubble: row: " + endBubble.row + "  col: " + endBubble.col);
+                this.boardReal.collisionEnter(endBubble)
+                this.indexDot++;
+                if (this.indexDot < arrBubble.length - 1) {
+                    this.showTut(arrBubble)
+                }
+                if (this.indexDot == arrBubble.length - 1) {
+                    this.indexDot = 0;
+                }
 
-        //         this.indexDot++;
-        //         if (this.indexDot < arrDot.length - 1) {
-        //             this.showTut(arrDot)
-        //         }
-        //         if (this.indexDot == arrDot.length - 1) {
-        //             this.hand.active = false;
-        //             this.indexDot = 0;
-        //         }
-
-        //     })
-        //     .delay(timeDelay)
-        //     .call(() => {
-        //         if (this.indexDot == 0) {
-        //             this.clearSelect();
-        //             this.showTut(arrDot)
-        //         }
-        //     })
-        //     .start()
+            })
+            .delay(timeDelay)
+            .call(() => {
+                // console.log("index: " + this.indexDot);
+                
+                if (this.indexDot == 0) {
+                    this.clearSelect();
+                    this.showTut(arrBubble)
+                }
+            })
+            .start()
     }
 
     clearSelect() {
-
-        // this.listDotSelect = [];
         this.indexDot = 0;
         this.hand.stopAllActions()
         this.hand.active = false;
+        this.boardReal.cancel_Select_Tut();
+        // MainData.instance().isTutorialInterval = false;
     }
 
 }

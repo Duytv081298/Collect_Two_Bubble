@@ -10,8 +10,8 @@ export default class MainData {
         }
         return MainData.mainData;
     }
-    isLocal: boolean = false;
-    isTest: boolean = false;
+    isLocal: boolean = true;
+    isTest: boolean = true;
 
     currentIdScene: SCENE = null;
 
@@ -112,6 +112,7 @@ export default class MainData {
     isShowEndGame: boolean = false;
 
     isTutorial: boolean = false;
+    isTutorialInterval: boolean = false;
     indexTutorial: number = 0;
 
 

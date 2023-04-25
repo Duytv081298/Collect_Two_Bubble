@@ -94,6 +94,8 @@ export default class GlobalEvent extends BaseEvent {
     static SHOW_TUTORIAL: string = "GlobalEvent.SHOW_TUTORIAL";
     static NEXT_TUTORIAL: string = "GlobalEvent.NEXT_TUTORIAL";
     static PAUSE_TUTORIAL: string = "GlobalEvent.PAUSE_TUTORIAL";
+    static SHOW_TUTORIAL_INTERVAL: string = "GlobalEvent.SHOW_TUTORIAL_INTERVAL";
+    // static CLEAR_TUTORIAL_INTERVAL: string = "GlobalEvent.CLEAR_TUTORIAL_INTERVAL";
 
 
     
