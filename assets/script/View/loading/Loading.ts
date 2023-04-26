@@ -8,11 +8,15 @@ import GlobalEvent from "../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../component/package/PlayfabManager";
 import LocalStorage from "../../component/storage/LocalStorage";
 import MainData from "../../component/storage/MainData";
+import PopupController from "../Popup/PopupController";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Loading extends cc.Component {
+
+    @property(PopupController)
+    popupController: PopupController = null;
 
     start() {
         SoundManager.instance().preLoadSound();
@@ -242,14 +246,14 @@ export default class Loading extends cc.Component {
                 RewardAds.instance.init();
                 BannerAds.instance.init();
             });
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
-            // GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
+            //GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
             // this.onHandlerPlayNow();
             // A2UController.instance.sendNotiDelay();
             // new SharePictureScoreAttack(43243, () => { });
             // new SharePictureScore1(46548, () => { });
             // new SharePictureScore(43242, () => { });
-
+            this.popupController.preLoadBundle();
         }
         cc.tween(this.node).delay(1).call(() => {
 

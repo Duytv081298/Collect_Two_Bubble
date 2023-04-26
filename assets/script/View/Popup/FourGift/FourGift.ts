@@ -20,6 +20,8 @@ export class FourGift extends cc.Component {
     @property(cc.Label)
     txtCoin: cc.Label = null;
     @property(cc.Node)
+    iconCoin: cc.Node = null;
+    @property(cc.Node)
     nodeWinMoney: cc.Node = null;
     @property(cc.RichText)
     content: cc.RichText = null;
@@ -41,6 +43,15 @@ export class FourGift extends cc.Component {
     totalCoin: number = 0;
     isAttack: boolean = false;
     listGiftOpen: number[] = [];
+
+    protected onLoad(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_FOUR_GIFT, this.show, this);
+    }
+
+    protected onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_FOUR_GIFT, this.show, this);
+    }
+
     onEnable() {
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.readyAds, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.adsReward, this);
@@ -101,23 +112,27 @@ export class FourGift extends cc.Component {
         }
     }
     show(data) {
+        this.node.active = true;
         this.reset();
         this.isAttack = data.isAttack;
         this.dataPlayer = data.dataPlayer;
         // console.log("this.dataPlayer: ", this.dataPlayer);
-        if (this.dataPlayer) {
+        if (this.isAttack == false) {
             if (this.dataPlayer.isFb) {
                 FaceBook.loadRemote(this.avatar, this.dataPlayer.avatar);
             } else {
                 PlayerLocal.instance().setSprite(this.avatar, this.dataPlayer.avatar)
             }
+            this.txtName.node.y = 39;
             this.txtName.string = this.dataPlayer.name;
-            this.txtCoin.string = this.dataPlayer.coin;
-            this.txtCoin.node.parent.active = true;
+            this.txtCoin.string = this.dataPlayer.coin;           
+            this.iconCoin.active = true;
         } else {
             this.avatar.spriteFrame = this.avatarDefault;
+            this.txtName.node.y = 0;
             this.txtName.string = "New Friend";
-            this.txtCoin.node.parent.active = false;
+            this.iconCoin.active = false;
+            this.txtCoin.string = "";
         }
 
 

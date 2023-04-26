@@ -6349,6 +6349,9 @@
     "txtCoin": {
       "__id__": 19
     },
+    "iconCoin": {
+      "__id__": 15
+    },
     "nodeWinMoney": {
       "__id__": 147
     },

@@ -27,9 +27,19 @@ export class OpenGift extends cc.Component {
     indexGift: number = null;
     isAutoOpen: boolean = false;
     isSpin: boolean = false;
+
+    protected onLoad(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_GIFT, this.show, this);
+    }
+
+    protected onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_GIFT, this.show, this);
+    }
+
     start() {
     }
     show(data) {
+        this.node.active = true;
         this.isSpin = false;
         this.isSpin = data.isSpin;
         this.btnOpen.interactable = false;

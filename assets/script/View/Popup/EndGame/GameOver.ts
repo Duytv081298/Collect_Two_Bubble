@@ -71,6 +71,13 @@ export default class GameOver extends cc.Component {
     isClaimX3: boolean = false;
     isClaim: boolean = false;
 
+    protected onLoad(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_GAME_OVER_POPUP, this.show, this);
+    }
+    protected onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_GAME_OVER_POPUP, this.show, this);
+    }
+
     // LIFE-CYCLE CALLBACKS:
     onEnable() {
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.readyAds, this);
@@ -182,6 +189,7 @@ export default class GameOver extends cc.Component {
     }
     show() {
         // console.log("showEndGame------------")
+        this.node.active = true;
         this.reset();
 
         this.updateHightScore();

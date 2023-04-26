@@ -27,10 +27,12 @@ export default class NoMoves extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_NO_MOVE_POPUP, this.show, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.showReadyAds, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.viewAdsComplete, this);
     }
     onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_NO_MOVE_POPUP, this.show, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.showReadyAds, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.viewAdsComplete, this);
     }
@@ -46,7 +48,7 @@ export default class NoMoves extends cc.Component {
     show() {
         // SoundManager.instance().playEffect("end_game_continue");
         // console.log("show NoMoves");
-
+        this.node.active = true;
         this.timeDelay = maxTime;
         this.btnNoThanks.active = false;
         this.txtTime.string = 10 + ''

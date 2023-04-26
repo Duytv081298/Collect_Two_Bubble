@@ -26,6 +26,14 @@ export class Setting extends cc.Component {
     protected start(): void {
         // this.showPopup();
     }
+    onLoad(): void {
+        console.log("onLoad Setting");
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_SETTING_POPUP, this.show, this);
+    }
+    onDestroy(): void {
+        console.log("onDestroy Setting");
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_SETTING_POPUP, this.show, this);
+    }
     showPopup() {
         if (MainData.instance().currentIdScene == SCENE.home) {
             this.btnHome.active = false;
@@ -39,6 +47,8 @@ export class Setting extends cc.Component {
 
     }
     show() {
+        console.log("show setting");
+        this.node.active = true;
         this.musicOn.active = this.toggMusic.isChecked;
         this.musicOff.active = !this.toggMusic.isChecked;
 

@@ -9,6 +9,17 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export class inviteFriend extends cc.Component {
 
+    protected onLoad(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_INVITE_FRIEND_POPUP, this.show, this);
+    }
+    protected onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_INVITE_FRIEND_POPUP, this.show, this);
+    }
+
+    show(){
+        this.node.active = true;
+    }
+
     update(deltaTime: number) {
 
     }

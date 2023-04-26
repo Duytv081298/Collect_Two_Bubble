@@ -28,6 +28,13 @@ export class VideoRewards extends cc.Component {
     @property(cc.Node)
     arrBgGift: cc.Node[] = [];
 
+    protected onLoad(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP, this.show, this);
+    }
+    protected onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP, this.show, this);
+    }
+
     // @property(iconGift)
     // listItemCollect: iconGift[] = [];
     onEnable() {

@@ -1,12 +1,10 @@
 import PlayerLocal from "../../../component/component/PlayerLocal";
-import SoundManager from "../../../component/component/SoundManager";
 import { Utils } from "../../../component/component/Utils";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
 import SharePictureScoreAttack from "../../../component/share/SharePictureScoreAttack";
 import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
-import PopupController from "../PopupController";
 
 const { ccclass, property } = cc._decorator;
 
@@ -45,9 +43,6 @@ export class Spin extends cc.Component {
 
     @property(cc.Animation)
     animationBungGold: cc.Animation = null;
-
-
-    controllDialog: PopupController = null;
     @property
     speed: number = 500;
     // LIFE-CYCLE CALLBACKS:
@@ -59,27 +54,37 @@ export class Spin extends cc.Component {
     dataPlayer: any = null;
     countPlayFriends: number = 0;
     isFriendShow: any = null;
+    protected onLoad(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_SPIN, this.show, this);
+    }
+    protected onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_SPIN, this.show, this);
+    }
     onEnable() {
+        
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_ATTACK, this.showAttack, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.ANIMATION_GOLD_SPIN, this.playAnimationGold, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.CHANGE_USER_SPIN, this.nextUser, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_STEAL, this.showStealPlayer, this);
     }
     onDisable() {
+       
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_ATTACK, this.showAttack, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.ANIMATION_GOLD_SPIN, this.playAnimationGold, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.CHANGE_USER_SPIN, this.nextUser, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_STEAL, this.showStealPlayer, this);
     }
-    start() {
-        this.controllDialog = this.node.parent.getComponent(PopupController);
+    start() {        
     }
     update(deltaTime: number) {
     }
     show() {
-        // console.log("Spin show");
+        console.log("Spin show");
+        this.node.active = true;
         this.hightLight.active = false;
-       // MainData.instance().currentSpin = 100;
+        MainData.instance().currentSpin = 100;
         this.nextUser();
         this.updateSpin();
         this.reset();
@@ -215,6 +220,7 @@ export class Spin extends cc.Component {
                 localWin = 5;
             }
         }
+       // localWin = 0;
         let dataResult = {
             value: this.slicePrizes[localWin]
         }
@@ -289,14 +295,15 @@ export class Spin extends cc.Component {
                             },
                             strategy: 'IMMEDIATE'
                         }).then(() => {
-                            this.showChooseAChest(false)
+                            //this.showChooseAChest(false)
                         }).catch(() => {
-                            this.showChooseAChest(false)
+                           // this.showChooseAChest(false)
                         });
                     })
 
                 }).catch(() => {
-                    this.showChooseAChest(false)
+                    //this.showChooseAChest(false);
+                    this.showDialogNotAttack(false);
                     // GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_FOUR_GIFT , {dataPlayer: this.dataPlayer, isAttack: false})
                 })
 
@@ -312,10 +319,16 @@ export class Spin extends cc.Component {
         // else game.emit("OPEN_CHOOSE_A_CHEST", null, isAttack);
        
     }
+    showStealPlayer(){
+        this.showSteal();
+    }
     showAttack() {
         // console.log("showAttack ============");
         FBInstant.context
-            .chooseAsync()
+            .chooseAsync({
+                filters: ['NEW_PLAYERS_ONLY'],
+                maxSize: 2               
+            })
             .then(() => {
                 this.showChooseAChest(true);
                 let arrStr = [
@@ -342,18 +355,24 @@ export class Spin extends cc.Component {
                         },
                         strategy: 'IMMEDIATE'
                     }).then(() => {
-                        this.showChooseAChest(true);
+                       // this.showChooseAChest(true);
                     }).catch(() => {
-                        this.showChooseAChest(true);
+                        //this.showChooseAChest(true);
                     });
                 })
-            }).catch(() => {
-
-                this.showDialogNotAttack();
+            }).catch((err) => {
+                console.log("err: ", err);
+                if(err.code == "SAME_CONTEXT")
+                {
+                    this.showDialogNotAttack(true, true);
+                }else{
+                    this.showDialogNotAttack();
+                }
+                
             });
     }
-    showDialogNotAttack() {
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_FORFEIT_ATTACK);
+    showDialogNotAttack(isAttack:boolean = true, sameContext:boolean = false) {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_FORFEIT_ATTACK, {isAttack, sameContext});
     }
     showEffectGift() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GIFT, { isSpin: true });
