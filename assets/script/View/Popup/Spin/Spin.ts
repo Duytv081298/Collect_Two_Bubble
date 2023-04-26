@@ -83,6 +83,7 @@ export class Spin extends cc.Component {
     show() {
         console.log("Spin show");
         this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
         this.hightLight.active = false;
         MainData.instance().currentSpin = 100;
         this.nextUser();

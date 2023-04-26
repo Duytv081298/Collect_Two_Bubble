@@ -22,14 +22,12 @@ export default class TutorialInterval extends cc.Component {
     boardReal: BroadContainer = null;
     @property(cc.Node)
     hand: cc.Node = null;
-    arrBubble: [Bubble[]] = [[]];
+    arrBubble: Bubble[][] = [[]];
     arrPathBubble = [];
     startTut(data) {
-        this.arrBubble = [[]];
 
         if (!data) return;
 
-        this.arrBubble = data.arrBubble;
 
         if (!this.arrBubble) return;
         this.clearSelect()
@@ -43,6 +41,7 @@ export default class TutorialInterval extends cc.Component {
                     MainData.instance().isUseBooster || MainData.instance().isTutorial ||
                     MainData.instance().isPlay || MainData.instance().isOpenGift || MainData.instance().isUserPlay
                 ) return;
+                this.arrBubble = this.boardReal.arrBubble.concat();
                 this.arrPathBubble = [];
                 this.checkEndGame(0, 0);
             })

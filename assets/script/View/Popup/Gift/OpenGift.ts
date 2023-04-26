@@ -40,6 +40,7 @@ export class OpenGift extends cc.Component {
     }
     show(data) {
         this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
         this.isSpin = false;
         this.isSpin = data.isSpin;
         this.btnOpen.interactable = false;

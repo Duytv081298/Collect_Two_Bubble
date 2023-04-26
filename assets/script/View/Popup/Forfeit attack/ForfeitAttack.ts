@@ -36,6 +36,7 @@ export default class ForfeitAttack extends cc.Component {
 
     show(data:any){
         this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
         this.isAttack = data.isAttack;
         let sameContext = false;
         if(data.hasOwnProperty("sameContext")) sameContext = data.sameContext;

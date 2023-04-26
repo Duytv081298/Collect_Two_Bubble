@@ -29,9 +29,11 @@ export class VideoRewards extends cc.Component {
     arrBgGift: cc.Node[] = [];
 
     protected onLoad(): void {
+        console.log("onLoad VideoRewards: ");
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP, this.show, this);
     }
     protected onDestroy(): void {
+        console.log("onDestroy VideoRewards: ");
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_VIDEO_REWARDS_POPUP, this.show, this);
     }
 
@@ -48,6 +50,9 @@ export class VideoRewards extends cc.Component {
 
 
     show() {
+        this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+        
         let count_free_gift = parseInt(LocalStorage.getItem(LocalStorage.COUNT_FREE_GIFT));
 
         // console.log(count_free_gift);

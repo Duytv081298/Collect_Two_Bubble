@@ -190,6 +190,8 @@ export default class GameOver extends cc.Component {
     show() {
         // console.log("showEndGame------------")
         this.node.active = true;
+        MainData.instance().isShowEndGame = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
         this.reset();
 
         this.updateHightScore();

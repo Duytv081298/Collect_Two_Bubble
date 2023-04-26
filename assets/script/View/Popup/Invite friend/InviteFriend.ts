@@ -18,6 +18,7 @@ export class inviteFriend extends cc.Component {
 
     show(){
         this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
     }
 
     update(deltaTime: number) {

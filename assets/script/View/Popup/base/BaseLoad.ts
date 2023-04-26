@@ -73,7 +73,8 @@ export default class BaseLoad extends cc.Component {
 
     checkLoadBundle(dataScreen: DataScreen, data: any = null, isShow: boolean = true) {
         console.log("checkLoadBundle: ", dataScreen);
-        if (isShow == true) {
+        if (isShow == true) {            
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
             this.startLoad(dataScreen, data);
         } else {
             this.preLoad(dataScreen);

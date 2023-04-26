@@ -41,7 +41,7 @@ export default class BroadContainer extends cc.Component {
 
 
 
-    arrBubble: [Bubble[]] = [[]];
+    arrBubble: Bubble[][] = [[]];
     listBubbleSelect: Bubble[] = [];
     listBubbleSelectQuadrilateral: Bubble[] = [];
     listConnect: cc.Node[] = [];

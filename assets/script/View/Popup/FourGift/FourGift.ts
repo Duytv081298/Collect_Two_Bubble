@@ -113,6 +113,7 @@ export class FourGift extends cc.Component {
     }
     show(data) {
         this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
         this.reset();
         this.isAttack = data.isAttack;
         this.dataPlayer = data.dataPlayer;

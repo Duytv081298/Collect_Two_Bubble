@@ -49,6 +49,7 @@ export class Setting extends cc.Component {
     show() {
         console.log("show setting");
         this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
         this.musicOn.active = this.toggMusic.isChecked;
         this.musicOff.active = !this.toggMusic.isChecked;
 
