@@ -24,12 +24,7 @@ export default class TutorialInterval extends cc.Component {
     hand: cc.Node = null;
     arrBubble: Bubble[][] = [[]];
     arrPathBubble = [];
-    startTut(data) {
-
-        if (!data) return;
-
-
-        if (!this.arrBubble) return;
+    startTut() {
         this.clearSelect()
         this.node.stopAllActions();
         cc.tween(this.node)

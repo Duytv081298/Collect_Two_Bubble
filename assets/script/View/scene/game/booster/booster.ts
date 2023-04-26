@@ -95,6 +95,7 @@ export default class Booster extends cc.Component {
 
 
     onClickRocket() {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL);
         if (this.checkEventGame()) return;
         SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.rocket) {
@@ -123,6 +124,7 @@ export default class Booster extends cc.Component {
 
     }
     onClickBomb() {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL);
         if (this.checkEventGame()) return;
         SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.bomb) {
@@ -151,6 +153,7 @@ export default class Booster extends cc.Component {
         }
     }
     onClickReverse() {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL);
         if (this.checkEventGame()) return;
         SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.reverse) {
@@ -178,6 +181,7 @@ export default class Booster extends cc.Component {
         }
     }
     onClickHammer() {
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL);
         if (this.checkEventGame()) return;
         SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.hammer) {

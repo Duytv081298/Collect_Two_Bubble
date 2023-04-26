@@ -17,7 +17,16 @@ export default class HomeController extends cc.Component {
     gold_home: cc.Label = null;
     @property(cc.Label)
     txtSpin: cc.Label = null;
-
+    protected onLoad(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HOME, this.show, this);
+    }
+    protected onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HOME, this.show, this);
+    }
+    show(){
+        this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+    }
     protected onEnable(): void {
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_GOLD_GAME, this.updateGold, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_TIME_SPIN_IN_SPIN, this.updateTimeSpin, this);

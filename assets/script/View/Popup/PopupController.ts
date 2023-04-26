@@ -19,6 +19,7 @@ const forfeitAttack:DataScreen = new DataScreen("forfeitAttack", "prefab/Forfeit
 const help:DataScreen = new DataScreen("help", "prefab/help/Help", GlobalEvent.SHOW_HELP);
 const inviteFriend:DataScreen = new DataScreen("inviteFriend", "prefab/Invite friend/Invite friend", GlobalEvent.SHOW_INVITE_FRIEND_POPUP);
 const videoReward:DataScreen = new DataScreen("videoReward", "prefab/Get Rewards/Video Rewards", GlobalEvent.SHOW_VIDEO_REWARDS_POPUP);
+
 @ccclass
 export default class PopupController extends BaseLoad {   
 

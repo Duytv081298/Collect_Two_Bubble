@@ -195,6 +195,7 @@ export default class GameOver extends cc.Component {
         this.reset();
 
         this.updateHightScore();
+        
         this.score = MainData.instance().score;
         this.rankMe = MainData.instance().rankMe > 0 ? MainData.instance().rankMe : 1;
         this.arrDataRank = MainData.instance().arrDataRank.concat();

@@ -35,7 +35,7 @@ export default class LoadingUI extends cc.Component {
     // onLoad () {}
 
     start() {
-        this.hide()
+       // this.hide()
     }
 
     // update (dt) {}

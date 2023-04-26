@@ -14,6 +14,9 @@ export default class GlobalEvent extends BaseEvent {
     static SWITCH_SCENES: string = "GlobalEvent.SWITCH_SCENES";
     static START_GAME: string = "GlobalEvent.START_GAME";
     static REPLAY_GAME: string = "GlobalEvent.REPLAY_GAME";
+    static SHOW_HOME: string = "GlobalEvent.SHOW_HOME";
+    static SHOW_GAME_PLAY: string = "GlobalEvent.SHOW_GAME_PLAY";
+    static HIDE_GAME_PLAY: string = "GlobalEvent.HIDE_GAME_PLAY";
 
 
     static CHECK_END_GAME: string = "GlobalEvent.CHECK_END_GAME";

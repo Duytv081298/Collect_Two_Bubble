@@ -84,7 +84,7 @@ export default class NoMoves extends cc.Component {
         SoundManager.instance().playEffect("button"); 
         this.hide();
 
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_GAME_PLAY);
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GAME_OVER_POPUP);
         // this.node.emit("SHOW_ENDGAME");
     }

@@ -91,6 +91,7 @@ export default class BroadContainer extends cc.Component {
 
         this.unscheduleAllCallbacks();
         this.node.stopAllActions()
+        this.cancel_Select();
         this.isQuadrilateral = false;
 
         this.arrBubble = [[]];
@@ -114,7 +115,7 @@ export default class BroadContainer extends cc.Component {
         this.setUpBubble();
         this.setParentTutorial();
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL)
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL, { arrBubble: this.arrBubble.concat() });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL);
     }
 
     // update (dt) {}
@@ -917,7 +918,7 @@ export default class BroadContainer extends cc.Component {
         if (MainData.instance().isPlay) return;
         if (MainData.instance().isOpenGift) return;
         if (MainData.instance().keyBooster != null && MainData.instance().keyBooster != BOOSTER.reverse) return;
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL, { arrBubble: this.arrBubble.concat() });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL);
         this.isQuadrilateral = false;
         let currentTouch = event.touch.getLocation();
         this.itemCheck.setPosition(currentTouch)
@@ -957,7 +958,7 @@ export default class BroadContainer extends cc.Component {
             this.touchEnd();
             this.itemCheck.setPosition(-100, -100)
         }
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL, { arrBubble: this.arrBubble.concat() });
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_TUTORIAL_INTERVAL);
 
     }
 

@@ -9,6 +9,7 @@ import { PlayfabManager } from "../../component/package/PlayfabManager";
 import LocalStorage from "../../component/storage/LocalStorage";
 import MainData from "../../component/storage/MainData";
 import PopupController from "../Popup/PopupController";
+import SceneController from "../scene/SceneController";
 
 const { ccclass, property } = cc._decorator;
 
@@ -17,7 +18,9 @@ export default class Loading extends cc.Component {
 
     @property(PopupController)
     popupController: PopupController = null;
-
+    @property(SceneController)
+    sceneController: SceneController = null;
+    
     start() {
         SoundManager.instance().preLoadSound();
         FBInstant.onPause(() => { });
@@ -254,6 +257,7 @@ export default class Loading extends cc.Component {
             // new SharePictureScore1(46548, () => { });
             // new SharePictureScore(43242, () => { });
             this.popupController.preLoadBundle();
+            this.sceneController.preLoadScene();
         }
         cc.tween(this.node).delay(1).call(() => {
 

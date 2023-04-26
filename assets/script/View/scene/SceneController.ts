@@ -1,19 +1,23 @@
 import { SCENE } from "../../component/constant/constant";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import MainData from "../../component/storage/MainData";
+import BaseLoad, { DataScreen } from '../Popup/base/BaseLoad';
 
 const { ccclass, property } = cc._decorator;
-
+const home: DataScreen = new DataScreen("home", "prefab/Scene Home/Home", GlobalEvent.SHOW_HOME);
 @ccclass
-export default class SceneController extends cc.Component {
+export default class SceneController extends BaseLoad {
 
     @property(cc.Node)
     gameScene: cc.Node = null;
     homeScene: cc.Node = null;
     ktShowHome: boolean = false;
 
-    protected onLoad(): void {
-        this.preLoadHome();
+    protected onLoad(): void {       
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HOME, this.showHome, this);       
+    }
+    protected onDestroy(): void {
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HOME, this.showHome, this);
     }
     protected onEnable(): void {
         GlobalEvent.instance().addEventListener(GlobalEvent.SWITCH_SCENES, this.switchScene, this);
@@ -21,66 +25,38 @@ export default class SceneController extends cc.Component {
     protected onDisable(): void {
         GlobalEvent.instance().removeEventListener(GlobalEvent.SWITCH_SCENES, this.switchScene, this);
     }
+    hideAll(){
+        
+        console.log(" ========== hideAll SceneController");
+        for (let i = 0; i < this.node.childrenCount; i++) {
+            this.node.children[i].active = false;
+        }
+    }
 
     start() {
-        this.switchScene({ idScene: null })
+        this.hideAll();
     }
     switchScene(data) {
         let id = data.idScene;
-        if(!id){
-            this.gameScene.active = false;
-            if (this.homeScene) this.homeScene.active = false;
+        this.hideAll()
+        switch (id) {
+            case SCENE.game:
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GAME_PLAY);
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.START_GAME);
+                break;
+            case SCENE.home:
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_HOME);
+                break;
+            default:
+                break;
         }
-        if (MainData.instance().currentIdScene == id) {
-            return;
-        } else {
-            switch (id) {
-                case SCENE.game:
-                    this.gameScene.active = true;
-                    GlobalEvent.instance().dispatchEvent(GlobalEvent.START_GAME);
-                    if (this.homeScene) this.homeScene.active = false;
-                    break;
-                case SCENE.home:
-                    this.gameScene.active = false;
-                    this.showHome();
-                    break;
-                default:
-                    break;
-            }
-            MainData.instance().currentIdScene = id;
-        }
-    }
+        MainData.instance().currentIdScene = id;
 
-    preLoadHome() {
-        cc.resources.preload("prefab/Scene Home/Home", cc.Prefab, (err) => {
-            if (this.homeScene == null || !this.homeScene.active) this.loadHome();
-        });
     }
-    loadHome() {
-        cc.resources.load("prefab/Scene Home/Home", cc.Prefab, (err, prefab: cc.Prefab) => {
-            if (!err) {
-                if (this.homeScene == null) {
-                    this.homeScene = cc.instantiate(prefab);
-                    this.homeScene.active = this.ktShowHome;
-                    this.homeScene.setParent(this.node)
-                    if (this.ktShowHome == true) {
-                        this.showHome();
-                    }
-                }
-
-            }
-        });
+    preLoadScene() {
+        this.checkLoadBundle(home, null, false);
     }
-
-    showHome() {
-        if (this.homeScene != null) {
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
-            this.ktShowHome = false;
-            this.homeScene.active = true;
-        } else {
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
-            this.ktShowHome = true;
-            this.loadHome();
-        }
+    showHome(data) {
+        this.checkLoadBundle(home, data);
     }
 }

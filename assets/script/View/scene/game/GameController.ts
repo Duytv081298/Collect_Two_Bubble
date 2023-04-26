@@ -27,7 +27,10 @@ export default class GameController extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        console.log("=========== onLoad game controller");
 
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_GAME_PLAY, this.show, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.HIDE_GAME_PLAY, this.hide, this);
         let manager = cc.director.getCollisionManager();
         manager.enabled = true;
         cc.director.getPhysicsManager().enabled = true;
@@ -39,6 +42,18 @@ export default class GameController extends cc.Component {
         // manager.enabledDebugDraw = true;
         // manager.enabledDrawBoundingBox = true;
 
+    }
+    protected onDestroy(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_GAME_PLAY, this.show, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.HIDE_GAME_PLAY, this.hide, this);
+
+    }
+    show() {
+        this.node.active = true;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+    }
+    hide() {
+        this.node.active = false;
     }
     onEnable(): void {
         this.setUpEmit();
@@ -64,7 +79,7 @@ export default class GameController extends cc.Component {
         GlobalEvent.instance().removeEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
     }
     reset() {
-        // console.log(" GameController reset: ");
+        console.log(" GameController reset: ");
         MainData.instance().score = 0;
         MainData.instance().move = MAX_MOVE;
 
