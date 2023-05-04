@@ -1,7 +1,7 @@
 import SoundManager from "../../../component/component/SoundManager";
 import { Utils } from "../../../component/component/Utils";
 import { SCENE } from "../../../component/constant/constant";
-import GlobalEvent from "../../../component/event/GlobalEvent";
+import GlobalEvent from "../../../component/event/GlobalEvent"
 import { PlayfabManager } from "../../../component/package/PlayfabManager";
 import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
@@ -19,6 +19,8 @@ export default class HomeController extends cc.Component {
     txtSpin: cc.Label = null;
     protected onLoad(): void {
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HOME, this.show, this);
+
+        
     }
     protected onDestroy(): void {
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HOME, this.show, this);

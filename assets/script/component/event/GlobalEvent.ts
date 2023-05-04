@@ -52,7 +52,7 @@ export default class GlobalEvent extends BaseEvent {
     static UPDATE_MOVE_PROGRESS_GOLD: string = "GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD";
 
     static TWEEN_PLAYER_RANKING: string = "GlobalEvent.TWEEN_PLAYER_RANKING";
-    // static RELOAD_RANKING_HOME: string = "GlobalEvent.RELOAD_RANKING_HOME";
+    static RELOAD_RANKING_HOME: string = "GlobalEvent.RELOAD_RANKING_HOME";
 
 
 

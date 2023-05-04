@@ -134,6 +134,9 @@ export default class SoundManager {
 
     }
 
+    setVolum(volume: number) {
+        cc.audioEngine.setMusicVolume(volume);
+    }
     stopMusic() {
         cc.audioEngine.stopMusic();
 

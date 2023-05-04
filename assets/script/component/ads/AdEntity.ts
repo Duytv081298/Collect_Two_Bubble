@@ -1,3 +1,4 @@
+import SoundManager from "../component/SoundManager";
 
 
 class AdEntity {
@@ -114,28 +115,28 @@ class AdEntity {
     }
 
     show(itemId?) {
-        // if(typeof FBInstant === undefined) return;
-        // SoundManager.instance().setVolum(0);
-        // this.adInstance.showAsync()
-        //     .then(() => {
-        //         // reset data
-        //         SoundManager.instance().setVolum(1);
-        //         this.adInstance = null;
-        //         this.adLoaded = false;                
-        //         if(this.onShow) this.onShow(this.id, itemId);               
-        //         setTimeout(() => {
-        //             this.preload();
-        //         }, 1000);
-        //     })
-        //     .catch((error) => {
-        //         SoundManager.instance().setVolum(1);
-        //         this.adInstance = null;
-        //         this.adLoaded = false;
-        //         this.showErrorPopup(error);
-        //         setTimeout(() => {
-        //             this.preload();
-        //         }, 1000);
-        //     })
+        if(typeof FBInstant === undefined) return;
+        SoundManager.instance().setVolum(0);
+        this.adInstance.showAsync()
+            .then(() => {
+                // reset data
+                SoundManager.instance().setVolum(1);
+                this.adInstance = null;
+                this.adLoaded = false;                
+                if(this.onShow) this.onShow(this.id, itemId);               
+                setTimeout(() => {
+                    this.preload();
+                }, 1000);
+            })
+            .catch((error) => {
+                SoundManager.instance().setVolum(1);
+                this.adInstance = null;
+                this.adLoaded = false;
+                this.showErrorPopup(error);
+                setTimeout(() => {
+                    this.preload();
+                }, 1000);
+            })
     }
 
     showErrorPopup(error) {        

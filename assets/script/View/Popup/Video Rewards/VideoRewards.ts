@@ -52,7 +52,7 @@ export class VideoRewards extends cc.Component {
     show() {
         this.node.active = true;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
-        
+
         let count_free_gift = parseInt(LocalStorage.getItem(LocalStorage.COUNT_FREE_GIFT));
 
         // console.log(count_free_gift);
@@ -80,9 +80,9 @@ export class VideoRewards extends cc.Component {
         this.node.active = false;
     }
 
-    watchAdClick() {GlobalEvent
-        SoundManager.instance().playEffect("button");
+    watchAdClick() {
         // console.log("watchAdClick");
+        SoundManager.instance().playEffect("button");
 
         // FaceBook.logEvent(LogEventName.videoReward)
         RewardAds.instance.show(RewardAds.REWARDED_COIN)

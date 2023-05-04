@@ -1,3 +1,4 @@
+import GlobalEvent from "../event/GlobalEvent";
 import MainData from "../storage/MainData";
 import FaceBook from "./FaceBook";
 
@@ -26,7 +27,7 @@ export class PlayfabManager {
         if (this.hadLogin) return;
         console.log("login: ", signature);
         console.log("PlayFab.settings.titleId: " + PlayFab.settings.titleId);
-        
+
         let requestLogin = {
             TitleId: PlayFab.settings.titleId,
             FacebookInstantGamesSignature: signature,
@@ -97,10 +98,10 @@ export class PlayfabManager {
                         }
                     }
                 }
-                cc.game.emit("RELOAD_RANKING");
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.RELOAD_RANKING_HOME)
             } else {
                 console.log("PlayFab GetFriendsList err", err);
-                cc.game.emit("RELOAD_RANKING");
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.RELOAD_RANKING_HOME)
             }
         });
     }

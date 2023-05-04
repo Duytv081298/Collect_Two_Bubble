@@ -244,6 +244,7 @@ export default class Loading extends cc.Component {
 
             FBInstant.startGameAsync()
             .then(() => {
+                console.log("start _ game");
                 
                 InterstitialManager.instance.init();
                 RewardAds.instance.init();

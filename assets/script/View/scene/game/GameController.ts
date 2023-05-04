@@ -2,7 +2,6 @@ import SoundManager from "../../../component/component/SoundManager";
 import { Utils } from "../../../component/component/Utils";
 import { GOLD_USE_BOOSTER, MAX_MOVE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
-import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
 import BroadContainer from "./broad/BroadContainer";
 

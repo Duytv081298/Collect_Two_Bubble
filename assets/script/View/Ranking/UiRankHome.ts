@@ -17,9 +17,10 @@ export default class UiRankHome extends cc.Component {
 
     protected onEnable(): void {
         this.reloadRanking();
-
+        GlobalEvent.instance().addEventListener(GlobalEvent.RELOAD_RANKING_HOME, this.reloadRanking, this);
     }
     protected onDisable(): void {
+        GlobalEvent.instance().removeEventListener(GlobalEvent.RELOAD_RANKING_HOME, this.reloadRanking, this);
     }
 
     @property(cc.Node)

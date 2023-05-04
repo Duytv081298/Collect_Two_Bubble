@@ -31,8 +31,10 @@ export default class TutorialInterval extends cc.Component {
             .delay(timeDelay)
             .call(() => {
                 // console.log("MainData.instance().isPlay: " + MainData.instance().isPlay);
-                
+                console.log(MainData.instance().keyBooster != null);
+
                 if (MainData.instance().isShowEndGame || MainData.instance().isShowNoMove ||
+                MainData.instance().keyBooster != null ||
                     MainData.instance().isUseBooster || MainData.instance().isTutorial ||
                     MainData.instance().isPlay || MainData.instance().isOpenGift || MainData.instance().isUserPlay
                 ) return;
@@ -151,6 +153,7 @@ export default class TutorialInterval extends cc.Component {
 
     indexDot: number = 0;
     showTut(arrBubble: Bubble[]) {
+        if (this.indexDot == 0) this.clearSelect()
         // if (this.isShow) return;
         // this.isShow = true;
         // MainData.instance().isTutorialInterval = true;
@@ -180,7 +183,7 @@ export default class TutorialInterval extends cc.Component {
             .delay(timeDelay)
             .call(() => {
                 // console.log("index: " + this.indexDot);
-                
+
                 if (this.indexDot == 0) {
                     this.clearSelect();
                     this.showTut(arrBubble)
