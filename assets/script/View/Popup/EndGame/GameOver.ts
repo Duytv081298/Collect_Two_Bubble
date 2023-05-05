@@ -1,10 +1,13 @@
 import RewardAds from "../../../component/ads/RewardAds";
 import PlayerLocal from "../../../component/component/PlayerLocal";
+import SoundManager from "../../../component/component/SoundManager";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import FaceBook from "../../../component/package/FaceBook";
+import { PlayfabManager } from "../../../component/package/PlayfabManager";
 import CreatePlayerRank from "../../../component/pool/CreatePlayerRank";
 import RankOther from "../../../component/pool/RankOther";
+import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
 
 const { ccclass, property } = cc._decorator;
@@ -57,12 +60,6 @@ export default class GameOver extends cc.Component {
     isClaim: boolean = false;
 
     // LIFE-CYCLE CALLBACKS:
-    onLoad() {
-        this.ktOnLoad = true;
-        if (this.ktShow == true) {
-            this.show();
-        }
-    }
     onEnable() {
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.readyAds, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.adsReward, this);
@@ -71,6 +68,7 @@ export default class GameOver extends cc.Component {
         this.reset();
         GlobalEvent.instance().removeEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.readyAds, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.adsReward, this);
+        this.unscheduleAllCallbacks();
     }
 
     removeAllPlayerRank() {
@@ -86,7 +84,7 @@ export default class GameOver extends cc.Component {
     }
 
     showReward() {
-
+        SoundManager.instance().playEffect("button");
         // FaceBook.logEvent(LogEventName.claimx3EndGame)  
         RewardAds.instance.show(RewardAds.REWARDED_COIN)
     }
@@ -106,6 +104,7 @@ export default class GameOver extends cc.Component {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: this.isClaimX3 ? this.amountReward * 3 : this.amountReward });
     }
     ClaimX3() {
+        SoundManager.instance().playEffect("GetReward");
         let maxCoin = this.amountReward * 3;
         let minCoin = this.amountReward;
 
@@ -130,18 +129,30 @@ export default class GameOver extends cc.Component {
         }).start();
     }
     show() {
-        // console.log("showEndGame------------")
+        console.log("showEndGame------------")
         this.reset();
 
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_HIGHT_SCORE);
-        // let backHightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
+        this.updateHightScore();
         this.score = MainData.instance().score;
-        // if (backHightScore < this.score) {
-        //     LocalStorage.setItem(LocalStorage.HIGHT_SCORE, this.score);
-        // }
         this.rankMe = MainData.instance().rankMe > 0 ? MainData.instance().rankMe : 1;
         this.arrDataRank = MainData.instance().arrDataRank.concat();
+
+        let contextId = FBInstant.context.getID();
+        if (contextId != null) {
+            FaceBook.shareScore(this.score);
+        }
         this.showRank();
+        SoundManager.instance().playEffect("ranking_win");
+    }
+
+    
+    updateHightScore() {
+        let score = MainData.instance().score;
+        let hightScore = parseInt(LocalStorage.getItem(LocalStorage.HIGHT_SCORE));
+        PlayfabManager.install.updateScoreToLeaderboardAsync(PlayfabManager.WEEKLY, score);
+        if (hightScore < score) {
+            LocalStorage.setItem(LocalStorage.HIGHT_SCORE, score);
+        }
     }
     reset() {
         this.isClaim = false;
@@ -161,22 +172,12 @@ export default class GameOver extends cc.Component {
         this.removeAllPlayerRank();
         this.node.stopAllActions();
         this.layoutRank.stopAllActions();
-        if (this.itemRankMe) this.itemRankMe.stopAllActions();
         this.layoutRank.off(cc.Node.EventType.SIZE_CHANGED);
+        this.layoutRank.width = 0;
+        this.layoutRank.height = 0;
+        if (this.itemRankMe) this.itemRankMe.stopAllActions();
     }
     showRank() {
-        // console.log("this.rankMe: " + this.rankMe);
-
-        let contextId = FBInstant.context.getID();
-        if (contextId != null) {
-            FaceBook.shareScore(this.score);
-        }
-
-        if (this.ktOnLoad == false) {
-            this.ktShow = true;
-            return;
-        }
-        this.ktShow = false;
 
         let dataScore = {
             score: 0
@@ -216,14 +217,17 @@ export default class GameOver extends cc.Component {
             }
         }
         let itemRank1 = CreatePlayerRank.instance().createItemRank();
+        itemRank1.name = "player"
         itemRank1.opacity = 0;
         let itemRank2 = CreatePlayerRank.instance().createItemRank();
+        itemRank1.name = "player"
         itemRank2.opacity = 0;
         this.layoutRank.addChild(itemRank1);
         this.layoutRank.addChild(itemRank2);
         if (rankOut == 0) {
             this.itemRankMe = cc.instantiate(this.nodeRankMe);
             this.itemRankMe.opacity = 0;
+            this.itemRankMe.name = "user"
             this.layoutRank.addChild(this.itemRankMe);
         }
         for (let i = 0; i < this.arrDataRank.length; i++) {
@@ -233,41 +237,18 @@ export default class GameOver extends cc.Component {
                 this.layoutRank.addChild(this.itemRankMe);
             } else {
                 if (this.arrDataRank[i].rank == 0) continue;
-                // console.log(this.arrDataRank[i]);
 
                 let itemRank = CreatePlayerRank.instance().createItemRank();
-                // console.log(itemRank.getComponent(RankOther));
 
+                itemRank.name = "player"
                 itemRank.getComponent(RankOther).setData(this.arrDataRank[i]);
-                // itemRank.on("CHALLENGE", this.challengePlayer, this);
                 itemRank.scale = 1;
                 itemRank.getChildByName("txtRank").getComponent(cc.Label).string = this.arrDataRank[i].rank;
                 itemRank.getChildByName("txtScore").getComponent(cc.Label).string = this.arrDataRank[i].score;
                 itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = CreatePlayerRank.instance().defaultAvatar;
                 if (this.arrDataRank[i].isFb == false) {
-                    // cc.resources.preload("profiles/" + this.arrDataRank[i].avatar, (err) => {
-                    //     cc.resources.load("profiles/" + this.arrDataRank[i].avatar, cc.Texture2D, (err, avatar: cc.Texture2D) => {
-                    //         if (!err) {
-                    //             const spriteFrame = new cc.SpriteFrame(avatar);
-                    //             itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                    //         }
-                    //     })
-                    // })
-
-
                     PlayerLocal.instance().setSprite(itemRank.getChildByName("avatar").getComponent(cc.Sprite), this.arrDataRank[i].avatar)
                 } else {
-                    // cc.assetManager.loadRemote(this.arrDataRank[i].avatar, { ext: '.jpg' }, (err, imageAsset: cc.Texture2D) => {
-                    //     if (imageAsset == null) {
-                    //         return;
-                    //     }
-                    //     if (err) {
-                    //         return;
-                    //     }
-                    //     const spriteFrame = new cc.SpriteFrame(imageAsset);
-                    //     itemRank.getChildByName("avatar").getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                    // });
-
                     FaceBook.loadRemote(itemRank.getChildByName("avatar").getComponent(cc.Sprite), this.arrDataRank[i].avatar);
                 }
 
@@ -281,10 +262,18 @@ export default class GameOver extends cc.Component {
         }
         let itemRank4 = CreatePlayerRank.instance().createItemRank();
         itemRank4.opacity = 0;
+        itemRank4.name = "player"
         let itemRank5 = CreatePlayerRank.instance().createItemRank();
         itemRank5.opacity = 0;
+        itemRank5.name = "player"
         this.layoutRank.addChild(itemRank4);
         this.layoutRank.addChild(itemRank5);
+
+        // console.log(this.layoutRank.children);
+
+        this.scheduleOnce(() => {
+            this.autoShareScore();
+        }, 1.5)
 
         this.layoutRank.on(cc.Node.EventType.SIZE_CHANGED, this.sizeChangeComplete, this);
     }
@@ -298,27 +287,28 @@ export default class GameOver extends cc.Component {
             this.listScroll.scrollToRight(0);
         }
 
-        this.listScroll.scrollToOffset(new cc.Vec2(abc.x - 45, abc.y), 1.5);
+        this.listScroll.scrollToOffset(new cc.Vec2(abc.x - 55, abc.y), 1.5);
         cc.tween(this.node).delay(1).call(() => {
             this.itemRankMe.y = 0;
             this.itemRankMe.opacity = 0;
             cc.tween(this.itemRankMe).to(0.5, { opacity: 255 }).call(() => {
                 this.itemRankMe.getChildByName("bgRotation").active = true;
                 this.itemRankMe.getChildByName("star").active = true;
+                this.itemRankMe.name = "player"
             }).start();
 
             cc.tween(this.nodeRankMe).to(0.4, { opacity: 0 }).call(() => {
                 this.nodeRankMe.active = false;
             }).start();
 
-        }).delay(0.5).call(() => {
-            this.autoShareScore();
         }).start();
     }
     autoShareScore() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
+
         if (MainData.instance().countEndGame == 0) {
             cc.resources.load(FaceBook.getImageShareFacebook(), (err, texture) => {
+
                 let tomorrow = new Date();
                 tomorrow.setDate(tomorrow.getDate() + 1);
                 let endTime = Math.floor(tomorrow.getTime() / 1000);
@@ -337,10 +327,13 @@ export default class GameOver extends cc.Component {
                             },
                         }).then(() => {
                             GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
-                        }).catch(() => {
+                        }).catch((error) => {
+                            console.log(error);
                             GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
                         });
                 } catch (error) {
+                    console.log(error);
+
                     GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
                 }
             })
@@ -356,7 +349,7 @@ export default class GameOver extends cc.Component {
 
 
     onHandlerPlayWithFriends() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
 
         // FaceBook.logEvent(LogEventName.playFriendsEndGame)   
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
@@ -391,7 +384,7 @@ export default class GameOver extends cc.Component {
     onHandlerShare() {
         // console.log("onHandlerShare ======");
 
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         if (window["FBInstant"] == undefined) return;
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
         // console.log("onHandlerShare +++++");
@@ -424,12 +417,13 @@ export default class GameOver extends cc.Component {
         })
     }
     onHandlerMainMenu() {
+        SoundManager.instance().playEffect("button");
         this.hide();
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.home });
     }
 
     onHandlerReplay() {
-        // SoundManager.instance().playEffect("button");
+        SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.REPLAY_GAME);
         this.hide();

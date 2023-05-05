@@ -8,6 +8,8 @@
 import { Utils } from "../../component/component/Utils";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import CreateGoldHole from "../../component/pool/CreateGoldHole";
+import MainData from "../../component/storage/MainData";
+import HiddenPrizes from "./Hidden prizes/HiddenPrizes";
 
 const { ccclass, property } = cc._decorator;
 
@@ -21,12 +23,13 @@ export default class NewClass extends cc.Component {
     iconMove: cc.Node = null;
 
     hiddenPrizes: cc.Node = null
+    ktHiddenPrizes: boolean = false;
     onLoad() {
         this.preLoadHiddenPrizes();
     }
 
     protected onEnable(): void {
-        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.loadHiddenPrizes, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.showHiddenPrizes, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_CLAIM_GOLD_HOLE, this.claimGoldHole, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.ANIMATION_PLUS_MOVE, this.animationPlusMove, this);
         for (let i = 0; i < this.node.children.length; i++) {
@@ -35,7 +38,7 @@ export default class NewClass extends cc.Component {
     }
     protected onDisable(): void {
 
-        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.loadHiddenPrizes, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.showHiddenPrizes, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_CLAIM_GOLD_HOLE, this.claimGoldHole, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.ANIMATION_PLUS_MOVE, this.animationPlusMove, this);
     }
@@ -49,21 +52,34 @@ export default class NewClass extends cc.Component {
         });
     }
     loadHiddenPrizes(data: any = null) {
-        if (this.hiddenPrizes) {
-            GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.loadHiddenPrizes, this);
-            return;
-        }
-        // console.log("loadHiddenPrizes");
         cc.resources.load("prefab/Hidden prizes/Hidden prizes", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
                 if (this.hiddenPrizes == null) {
                     this.hiddenPrizes = cc.instantiate(prefab);
                     this.hiddenPrizes.setParent(this.node)
-                    this.hiddenPrizes.active = true;
-                    // if (sp) GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_HIDDEN_PRIZES, { spfPlayer: sp });
+                    this.hiddenPrizes.active = false;
+
+                    if (this.ktHiddenPrizes == true && data) {
+                        this.showHiddenPrizes(data);
+                    }
                 }
             }
         });
+    }
+
+    showHiddenPrizes(data) {
+        if (this.hiddenPrizes != null) {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+            MainData.instance().isHiddenPrizes = true;
+            this.ktHiddenPrizes = false;
+            this.hiddenPrizes.active = true;
+            this.hiddenPrizes.getComponent(HiddenPrizes).show(data);
+            
+        } else {
+            GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
+            this.ktHiddenPrizes = true;
+            this.loadHiddenPrizes(data);
+        }
     }
 
     claimGoldHole(data) {
@@ -93,11 +109,11 @@ export default class NewClass extends cc.Component {
     }
 
     animationPlusMove() {
-        
+
         this.positionMove.active = true;
         let posEnd = this.positionMove.getPosition()
         // console.log(posEnd);
-        
+
         let posStart = new cc.Vec2(0, 70);
         this.iconMove.active = true;
         this.iconMove.opacity = 0;
@@ -109,7 +125,7 @@ export default class NewClass extends cc.Component {
             .call(() => {
                 this.iconMove.setPosition(posStart)
                 this.iconMove.active = false;
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 1 });
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: true });
             })
             .start();
         cc.tween(this.iconMove)

@@ -1,4 +1,5 @@
 import { BOOSTER, SCENE } from "../constant/constant";
+import GlobalEvent from "../event/GlobalEvent";
 import LocalStorage from "./LocalStorage";
 
 export default class MainData {
@@ -9,7 +10,7 @@ export default class MainData {
         }
         return MainData.mainData;
     }
-    isLocal: boolean = false;
+    isLocal: boolean = true;
     isTest: boolean = true;
 
     currentIdScene: SCENE = null;
@@ -28,9 +29,9 @@ export default class MainData {
 
 
     indexHoleCoin: number = null;
-    
+
     rankMe: number = 0;
-    avatarMe: cc.SpriteFrame= null;
+    avatarMe: cc.SpriteFrame = null;
     arrDataRank: any[] = [];
 
     ktJoinTour: boolean = false;
@@ -44,7 +45,7 @@ export default class MainData {
     dataFriendPlay = null;
 
 
-    
+
     currentSpin: number = 0;
     total_collect_spin: number = 3;
     // countPlayFriends: number = 0;
@@ -88,9 +89,17 @@ export default class MainData {
             }, 1000)
         }
     }
+
+    updateMove(move: number) {
+        this.move += move;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: move >= 0 });
+    }
+
+    isPlay: boolean = false;
     isRunPlayer: boolean = false;
     isHiddenPrizes: boolean = false;
     isOpenGift: boolean = false;
+    isUserPlay: boolean = false;
 
     isShowNoMove: boolean = false;
     isShowEndGame: boolean = false;

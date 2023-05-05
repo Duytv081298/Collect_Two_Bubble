@@ -22,7 +22,6 @@ export default class SharePictureScore1 {
     }
 
     imgLoader(texture: string, e: string) {
-        console.log("imgLoader: ", texture);
         var self = this, image = new Image;
         image.crossOrigin = "anonymous";
         image.src = texture;
@@ -37,7 +36,6 @@ export default class SharePictureScore1 {
     }
 
     loadCallback() {
-        console.log("loadCallback");
         this.loaderCount -= 1;
         if (this.loaderCount === 0) {
             this.callback(this.makePic());

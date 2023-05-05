@@ -1,4 +1,5 @@
 import RewardAds from "../../../../component/ads/RewardAds";
+import SoundManager from "../../../../component/component/SoundManager";
 import { BOOSTER, GOLD_USE_BOOSTER } from "../../../../component/constant/constant";
 import GlobalEvent from "../../../../component/event/GlobalEvent";
 import LocalStorage from "../../../../component/storage/LocalStorage";
@@ -28,20 +29,22 @@ export default class Booster extends cc.Component {
 
     protected onEnable(): void {
         GlobalEvent.instance().addEventListener(GlobalEvent.CLEAR_BOOSTER, this.clearBooster, this);
+        GlobalEvent.instance().addEventListener(GlobalEvent.HIDE_ANI_BOOSTER, this.clearOpacityBooster, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_AMOUNT_BOOSTER, this.updateAmountBooster, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.UPDATE_UI_BOOSTER, this.updateAllUiBooster, this);
 
-        
+
         GlobalEvent.instance().addEventListener(GlobalEvent.START_GAME, this.reset, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REPLAY_GAME, this.reset, this);
 
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_READY, this.showReadyAds, this);
         GlobalEvent.instance().addEventListener(GlobalEvent.REWARD_ADS_ON_REWARD, this.viewAdsComplete, this);
-        
+
     }
     protected onDisable(): void {
 
         GlobalEvent.instance().removeEventListener(GlobalEvent.CLEAR_BOOSTER, this.clearBooster, this);
+        GlobalEvent.instance().removeEventListener(GlobalEvent.HIDE_ANI_BOOSTER, this.clearOpacityBooster, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_AMOUNT_BOOSTER, this.updateAmountBooster, this);
         GlobalEvent.instance().removeEventListener(GlobalEvent.UPDATE_UI_BOOSTER, this.updateAllUiBooster, this);
 
@@ -76,11 +79,21 @@ export default class Booster extends cc.Component {
         }
     }
 
+    checkEventGame() {
 
+        if (MainData.instance().isPlay ||
+            MainData.instance().isUserPlay ||
+            MainData.instance().move <= 0 ||
+            MainData.instance().isHiddenPrizes ||
+            MainData.instance().isUseBooster) return true;
+        else return false;
+
+    }
 
 
     onClickRocket() {
-        if (MainData.instance().isUseBooster) return;
+        if (this.checkEventGame()) return;
+        SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.rocket) {
             this.clearBooster();
             return;
@@ -106,7 +119,8 @@ export default class Booster extends cc.Component {
 
     }
     onClickBomb() {
-        if (MainData.instance().isUseBooster) return;
+        if (this.checkEventGame()) return;
+        SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.bomb) {
             this.clearBooster();
             return;
@@ -132,7 +146,8 @@ export default class Booster extends cc.Component {
         }
     }
     onClickReverse() {
-        if (MainData.instance().isUseBooster) return;
+        if (this.checkEventGame()) return;
+        SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.reverse) {
             this.clearBooster();
             return;
@@ -157,7 +172,8 @@ export default class Booster extends cc.Component {
         }
     }
     onClickHammer() {
-        if (MainData.instance().isUseBooster) return;
+        if (this.checkEventGame()) return;
+        SoundManager.instance().playEffect("Click")
         if (MainData.instance().keyBooster == BOOSTER.hammer) {
             this.clearBooster();
             return;

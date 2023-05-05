@@ -1,3 +1,4 @@
+import SoundManager from "../../../component/component/SoundManager";
 import { Utils } from "../../../component/component/Utils";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import MainData from "../../../component/storage/MainData";
@@ -26,11 +27,9 @@ export class OpenGift extends cc.Component {
     start() {
     }
     show() {
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.CANCEL_BUBBLE_COLLECT);
-        MainData.instance().isOpenGift = true;
         this.btnOpen.interactable = false;
         // this.isAutoOpen = autoOpen;
-        // SoundManager.instance().playEffect("gift_xuat hien");
+        SoundManager.instance().playEffect("gift_xuat hien");
 
         this.indexGift = Utils.randomInt(0, 5);
         this.indexGift = 4;
@@ -49,7 +48,7 @@ export class OpenGift extends cc.Component {
     }
     showAnimationRung() {
         // this.aniGift.clearTrack(0)
-        
+
         this.btnOpen.interactable = true;
         this.aniGift.setSkin("default");
         this.aniGift.setAnimation(0, "runglac", true);
@@ -62,6 +61,7 @@ export class OpenGift extends cc.Component {
         // this.indexGift = 5
         this.gift.spriteFrame = this.listSPGift[this.indexGift]
         this.showGift();
+        SoundManager.instance().playEffect("sfx_open_gift_reward");
         // this.aniGift.clearTrack(0)
         this.aniGift.setSkin("default");
         this.aniGift.setAnimation(0, "mo hop", false);
@@ -120,12 +120,13 @@ export class OpenGift extends cc.Component {
                 GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDDEN_PRIZES_MULTI_BUBBLES, { coefficient: 4 });
                 break;
             case 5: // bouns move
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 1 });
+                MainData.instance().updateMove(1);
                 break;
             default:
                 break;
         }
         MainData.instance().isOpenGift = false;
+        GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
     }
 }
 

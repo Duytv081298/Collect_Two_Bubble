@@ -1,4 +1,5 @@
 import { Utils } from "../../../../component/component/Utils";
+import GlobalEvent from "../../../../component/event/GlobalEvent";
 import CreateBubble from "../../../../component/pool/CreateBubble";
 import MainData from "../../../../component/storage/MainData";
 
@@ -33,7 +34,8 @@ export default class Bubble extends cc.Component {
 
     setData(row: number, col: number, color: number, coefficients: number = 1) {
         // console.log("setData: row: " + row + "  col: " + col + "  name " + this.node.name);
-        this.unschedule(this.sc);
+        // this.unschedule(this.sc);
+        this.unscheduleAllCallbacks();
         this.deActiveRigidBody();
         this.reSetData(row, col, color, coefficients);
         this.upDateUI();
@@ -110,14 +112,22 @@ export default class Bubble extends cc.Component {
 
         this.randomLinearVelocity(status, isBonus);
         // this.autoClear();
-        this.scheduleOnce(this.sc, 2)
 
-    }
-    sc = () => {
-        if (this.node.parent.name == "Bubble Die") {
-            CreateBubble.instance().removeItem(this.node);
+        this.unscheduleAllCallbacks();
+        // this.unschedule(this.sc);
+        // this.scheduleOnce(this.sc, 2)
+        this.scheduleOnce(() => {
             MainData.instance().realityBubble++;
-        }
+            // console.log(this.node.parent);
+            // let parent = this.node.parent;
+            // console.log("parent.childrenCount: " + parent.childrenCount);
+            CreateBubble.instance().removeItem(this.node);
+
+            // if (parent.childrenCount == 0) {
+            //     GlobalEvent.instance().dispatchEvent(GlobalEvent.CLEAR_ALL_BUBBLE_DIE);
+            // }
+        }, 2)
+
     }
     deActiveRigidBody() {
         let rigidBody = this.node.getComponent(cc.RigidBody);

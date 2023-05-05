@@ -52,22 +52,6 @@ export default class HiddenPrizes extends cc.Component {
     @property(cc.Node)
     posMove: cc.Node = null;
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
-    protected onEnable(): void {
-        GlobalEvent.instance().addEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.show, this);
-    }
-    protected onDisable(): void {
-
-        GlobalEvent.instance().removeEventListener(GlobalEvent.SHOW_HIDDEN_PRIZES, this.show, this);
-    }
-    start() {
-
-        for (let i = 0; i < this.node.children.length; i++) {
-            this.node.children[i].active = false;
-        }
-    }
 
     show(data) {
         MainData.instance().isHiddenPrizes = true;
@@ -79,7 +63,7 @@ export default class HiddenPrizes extends cc.Component {
         if (spf) this.spfPlayer = spf;
         let rd = Utils.randomInt(0, 3);
 
-        // rd = 1;
+        // rd = 2;
         switch (rd) {
             case HIDDEN_PRIZES.bonus_Moves:
                 console.log("case bonus Moves");
@@ -103,34 +87,6 @@ export default class HiddenPrizes extends cc.Component {
         }
         this.showUserBount();
     }
-    hPBonusMoves() {
-        this.posMove.active = true;
-        this.plusMove.active = true;
-        let posEnd = this.posMove.getPosition()
-        let posStart = new cc.Vec2(0, 70);
-        this.plusMove.opacity = 0;
-        this.plusMove.stopAllActions()
-        this.plusMove.setPosition(posStart)
-        cc.tween(this.plusMove)
-            .to(0.3, { scale: 2, opacity: 255 }, { easing: "cubicOut" })
-            .to(0.5, { scale: 0.3 }, { easing: "cubicIn" })
-            .call(() => {
-                this.plusMove.setPosition(posStart)
-                this.plusMove.active = false;
-                GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 1 });
-                MainData.instance().isHiddenPrizes = false;
-            })
-            .start();
-        cc.tween(this.plusMove)
-            .bezierTo(0.8,
-                posStart,
-                cc.v2(Utils.randomInt(posStart.x - 300, posStart.x + 300), Utils.randomInt(posStart.y + 200, posStart.y + 400)),
-                cc.v2(posEnd)
-            )
-            .start();
-    }
-
-
     showUserBount() {
         console.log("showUserBount");
 
@@ -145,6 +101,37 @@ export default class HiddenPrizes extends cc.Component {
             .to(0.5, { scale: 4, opacity: 0 }, { easing: "cubicOut" })
             .start()
     }
+    hPBonusMoves() {
+
+        MainData.instance().move += 1;
+
+        this.posMove.active = true;
+        this.plusMove.active = true;
+        let posEnd = this.posMove.getPosition()
+        let posStart = new cc.Vec2(0, 70);
+        this.plusMove.opacity = 0;
+        this.plusMove.stopAllActions()
+        this.plusMove.setPosition(posStart)
+        cc.tween(this.plusMove)
+            .to(0.3, { scale: 2, opacity: 255 }, { easing: "cubicOut" })
+            .to(0.5, { scale: 0.3 }, { easing: "cubicIn" })
+            .call(() => {
+                this.plusMove.setPosition(posStart)
+                this.plusMove.active = false;
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.ANIMATION_UPDATE_MOVE, { status: true });
+                MainData.instance().isHiddenPrizes = false;
+            })
+            .start();
+        cc.tween(this.plusMove)
+            .bezierTo(0.8,
+                posStart,
+                cc.v2(Utils.randomInt(posStart.x - 300, posStart.x + 300), Utils.randomInt(posStart.y + 200, posStart.y + 400)),
+                cc.v2(posEnd)
+            )
+            .start();
+    }
+
+
     hPMultiBubbles() {
         this.giftSp.node.active = true;
         let coefficient = Utils.randomInt(2, 3)
@@ -176,6 +163,8 @@ export default class HiddenPrizes extends cc.Component {
 
     }
     hPBubblesBonus() {
+        console.log("hPBubblesBonus");
+        
         this.giftSp.node.active = true;
         this.giftSp.spriteFrame = this.spf_Bubbles_Bonus;
 

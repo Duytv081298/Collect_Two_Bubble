@@ -138,6 +138,8 @@ export default class FaceBook {
     }
 
     static shareScore(score: number) {
+        console.log("shareScore");
+        
         if (window["FBInstant"] !== undefined) {
             let arrStr = [
                 FBInstant.player.getName() + " got " + score + " score. Can you beat them",

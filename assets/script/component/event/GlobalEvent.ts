@@ -15,10 +15,14 @@ export default class GlobalEvent extends BaseEvent {
     static START_GAME: string = "GlobalEvent.START_GAME";
     static REPLAY_GAME: string = "GlobalEvent.REPLAY_GAME";
 
+    
+    static CHECK_END_GAME: string = "GlobalEvent.CHECK_END_GAME";
+    static CLEAR_ALL_BUBBLE_DIE: string = "GlobalEvent.CLEAR_ALL_BUBBLE_DIE";
 
-    static UPDATE_HIGHT_SCORE: string = "GlobalEvent.UPDATE_HIGHT_SCORE";
+
+    // static UPDATE_HIGHT_SCORE: string = "GlobalEvent.UPDATE_HIGHT_SCORE";
     static UPDATE_SCORE_GAME: string = "GlobalEvent.UPDATE_SCORE_GAME";
-    static UPDATE_MOVE_GAME: string = "GlobalEvent.UPDATE_MOVE_GAME";
+    static ANIMATION_UPDATE_MOVE: string = "GlobalEvent.ANIMATION_UPDATE_MOVE";
     static UPDATE_GOLD_GAME: string = "GlobalEvent.UPDATE_GOLD_GAME";
 
 
@@ -28,6 +32,7 @@ export default class GlobalEvent extends BaseEvent {
 
 
     static SHOW_ANI_BOOSTER: string = "GlobalEvent.SHOW_ANI_BOOSTER";
+    static HIDE_ANI_BOOSTER: string = "GlobalEvent.HIDE_ANI_BOOSTER";
     static CLEAR_BOOSTER: string = "GlobalEvent.CLEAR_BOOSTER";
     static UPDATE_AMOUNT_BOOSTER: string = "GlobalEvent.UPDATE_AMOUNT_BOOSTER";
     static UPDATE_UI_BOOSTER: string = "GlobalEvent.UPDATE_UI_BOOSTER";
@@ -44,7 +49,7 @@ export default class GlobalEvent extends BaseEvent {
     static UPDATE_MOVE_PROGRESS_GOLD: string = "GlobalEvent.UPDATE_MOVE_PROGRESS_GOLD";
 
     static TWEEN_PLAYER_RANKING: string = "GlobalEvent.TWEEN_PLAYER_RANKING";
-    static RELOAD_RANKING_HOME: string = "GlobalEvent.RELOAD_RANKING_HOME";
+    // static RELOAD_RANKING_HOME: string = "GlobalEvent.RELOAD_RANKING_HOME";
 
 
 

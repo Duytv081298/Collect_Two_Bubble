@@ -1,4 +1,5 @@
 import RewardAds from "../../../component/ads/RewardAds";
+import SoundManager from "../../../component/component/SoundManager";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent";
 import MainData from "../../../component/storage/MainData";
@@ -48,6 +49,7 @@ export default class NoMoves extends cc.Component {
 
         this.timeDelay = maxTime;
         this.btnNoThanks.active = false;
+        this.txtTime.string = 10 + ''
         this.showReadyAds();
         this.beginTime();
     }
@@ -60,7 +62,8 @@ export default class NoMoves extends cc.Component {
                 this.btnNoThanks.active = true;
             }
             if (this.timeDelay % 10 == 0) {
-                // SoundManager.instance().playEffect("time");
+                this.txtTime.string = Math.round(this.timeDelay / 10) + "";
+                SoundManager.instance().playEffect("time");
             }
             if (this.timeDelay == 0) {
                 this.onHandlerNothanks();
@@ -70,27 +73,26 @@ export default class NoMoves extends cc.Component {
         }).start();
     }
     showTime() {
-        this.txtTime.string = Math.round(this.timeDelay / 10) + "";
         this.time.fillRange = 1 - (this.timeDelay / maxTime);
     }
 
     onHandlerNothanks() {
-        // SoundManager.instance().playEffect("button"); 
+        SoundManager.instance().playEffect("button"); 
         this.hide();
-        
+
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_GAME_OVER_POPUP);
         // this.node.emit("SHOW_ENDGAME");
     }
 
     onHandlerShowAds() {
-        // SoundManager.instance().playEffect("button");           
+        SoundManager.instance().playEffect("button");           
         RewardAds.instance.show(RewardAds.REWARDED_MOVE);
     }
     viewAdsComplete(data) {
         if (data.type == RewardAds.REWARDED_MOVE) {
             this.hide()
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_MOVE_GAME, { move: 5 });
+            MainData.instance().updateMove(5);
         }
     }
     hide() {

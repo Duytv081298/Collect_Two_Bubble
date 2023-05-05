@@ -83,11 +83,15 @@ export default class PopupController extends cc.Component {
         });
     }
     preLoadNoMove() {
+        console.log("preLoadNoMove");
         cc.resources.preload("prefab/NoMove/NoMoves", cc.Prefab, (err) => {
+
+            console.log("preLoadNoMove thanh cong");
             if (this.noMove == null || !this.noMove.active) this.loadNoMove();
         });
     }
     loadNoMove() {
+        console.log("loadNoMove");
         cc.resources.load("prefab/NoMove/NoMoves", cc.Prefab, (err, prefab: cc.Prefab) => {
             if (!err) {
                 if (this.noMove == null) {
@@ -134,6 +138,7 @@ export default class PopupController extends cc.Component {
                 if (this.gift == null) {
                     this.gift = cc.instantiate(prefab);
                     this.gift.setParent(this.node);
+                    this.gift.name = "OpenGift";
                     this.gift.active = false;
                     if (this.ktShowGift == true) {
                         this.showGift();
@@ -205,8 +210,10 @@ export default class PopupController extends cc.Component {
 
 
     showNoMoves() {
+
         if (MainData.instance().isShowNoMove) return;
         if (this.noMove != null) {
+            console.log("showNoMoves");
             this.hideLoading();
             MainData.instance().isShowNoMove = true;
             this.ktShowNoMoves = false;
@@ -220,9 +227,10 @@ export default class PopupController extends cc.Component {
         }
     }
     showEndGame() {
-        // console.log("showEndGame------------")
         if (this.noMove) this.noMove.active = false;
+        if (this.endGame != null && this.endGame.active) return;
         if (this.endGame != null) {
+            console.log("showEndGame")
             this.hideLoading();
             this.ktShowEndGame = false;
             this.endGame.active = true;
@@ -248,15 +256,15 @@ export default class PopupController extends cc.Component {
         }
     }
     showGift() {
-
+        if (this.noMove && this.noMove.active) return;
         if (this.gift != null) {
-
             this.hideLoading();
             if (this.gift.active == true) return;
             this.ktShowGift = false;
             this.gift.active = true;
             // this.gift.setSiblingIndex(this.node.children.length)
             this.gift.getComponent(OpenGift).show();
+
         } else {
             this.showLoading();
             this.ktShowGift = true;
@@ -296,10 +304,10 @@ export default class PopupController extends cc.Component {
 
         if (this.spin != null) {
             this.hideLoading();
-            console.log("===========");
-            
+            // console.log("===========");
+
             if (this.spin.active == true) return;
-            console.log("popup controller show spin");
+            // console.log("popup controller show spin");
             this.ktShowSpin = false;
             this.spin.active = true;
             // this.spin.setSiblingIndex(this.node.children.length)

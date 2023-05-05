@@ -1,3 +1,4 @@
+import SoundManager from "../../../../component/component/SoundManager";
 import GlobalEvent from "../../../../component/event/GlobalEvent";
 import MainData from "../../../../component/storage/MainData";
 
@@ -131,7 +132,7 @@ export default class HoleController extends cc.Component {
 
     showCoin() {
 
-        // SoundManager.instance().playEffect("coin_xuat hien");
+        SoundManager.instance().playEffect("coin_xuat hien");
         this.isActiveCoin = true;
         this.amountMove = 0;
         let indexTemp = Math.floor(Math.random() * 5)

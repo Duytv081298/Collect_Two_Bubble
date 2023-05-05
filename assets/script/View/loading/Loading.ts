@@ -1,6 +1,7 @@
 // import A2UController from "../../component/a2u/A2UController";
 import RewardAds from "../../component/ads/RewardAds";
 import PlayerLocal from "../../component/component/PlayerLocal";
+import SoundManager from "../../component/component/SoundManager";
 import { Utils } from "../../component/component/Utils";
 import GlobalEvent from "../../component/event/GlobalEvent";
 import { PlayfabManager } from "../../component/package/PlayfabManager";
@@ -16,6 +17,7 @@ export default class Loading extends cc.Component {
     start() {
         // console.log("loading: start");
 
+        SoundManager.instance().preLoadSound();
         FBInstant.onPause(() => { });
         FBInstant.startGameAsync()
             .then(() => {
@@ -237,7 +239,7 @@ export default class Loading extends cc.Component {
                 }
             }
 
-            // SoundManager.instance().playSoungBg();
+            SoundManager.instance().playSoungBg();
             // this.onHandlerPlayNow();
             // A2UController.instance.sendNotiDelay();
             // new SharePictureScoreAttack(43243, () => { });
@@ -269,8 +271,6 @@ export default class Loading extends cc.Component {
     }
 
     showData() {
-
-        GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_HIGHT_SCORE);
         GlobalEvent.instance().dispatchEvent(GlobalEvent.UPDATE_GOLD_GAME, { gold: 0 });
     }
 
