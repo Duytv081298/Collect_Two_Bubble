@@ -2,6 +2,7 @@ import SoundManager from "../../../component/component/SoundManager";
 import { Utils } from "../../../component/component/Utils";
 import { SCENE } from "../../../component/constant/constant";
 import GlobalEvent from "../../../component/event/GlobalEvent"
+import FaceBook from "../../../component/package/FaceBook";
 import { PlayfabManager } from "../../../component/package/PlayfabManager";
 import LocalStorage from "../../../component/storage/LocalStorage";
 import MainData from "../../../component/storage/MainData";
@@ -186,6 +187,7 @@ export default class HomeController extends cc.Component {
     onHandlerPlayNow() {
         SoundManager.instance().playEffect("button");
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SWITCH_SCENES, { idScene: SCENE.game });
+        FaceBook.callTutorial();
     }
 
     hideLoading() {

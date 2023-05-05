@@ -36,10 +36,10 @@ export default class MainData {
     arrDataRank: any[] = [];
 
     ktJoinTour: boolean = false;
-    // isFistJoinTour: boolean = true;
+    isFistJoinTour: boolean = true;
     ktFistLogin: boolean = true;
     countEndGame: number = 0;
-    idTour: string = "5859813670806859";
+    idTour: string = "6502228523122635";
     friends = [];
     goldPlayer: number = 0;
     idxPlayFriends: number = 0;
