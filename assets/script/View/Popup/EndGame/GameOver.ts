@@ -219,6 +219,9 @@ export default class GameOver extends cc.Component {
         if (hightScore < score) {
             LocalStorage.setItem(LocalStorage.HIGHT_SCORE, score);
         }
+
+        let hightScoreTour = "hightScoreTour"+ MainData.instance().idTour;
+        this.backHightScoreTour = parseInt(LocalStorage.getItem(hightScoreTour));
     }
     reset() {
         this.isClaim = false;
@@ -389,43 +392,60 @@ export default class GameOver extends cc.Component {
     autoShareScore() {
         GlobalEvent.instance().dispatchEvent(GlobalEvent.SHOW_LOADING);
 
-        if (MainData.instance().countEndGame == 0) {
-            cc.resources.load(FaceBook.getImageShareFacebook(), (err, texture) => {
-
-                let tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                let endTime = Math.floor(tomorrow.getTime() / 1000);
-                try {
-                    FBInstant.tournament.createAsync(
-                        {
-                            initialScore: this.score,
-                            data: {
-                            },
-                            config: {
-                                title: 'Tournament',
-                                image: FaceBook.getImgBase64(texture),
-                                sortOrder: 'HIGHER_IS_BETTER',
-                                scoreFormat: 'NUMERIC',
-                                endTime: endTime
-                            },
-                        }).then(() => {
-                            GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
-                        }).catch((error) => {
-                            GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
-                        });
-                } catch (error) {
-
+        if(MainData.instance().ktJoinTour == true){
+            if(this.backHightScoreTour < this.score){                
+                let hightScoreTour = "hightScoreTour"+ MainData.instance().idTour;
+                LocalStorage.setItem(hightScoreTour, this.score);                
+                FBInstant.tournament.shareAsync({
+                    score: this.score,
+                    data: {                   
+                    }
+                }).then(() =>{
                     GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
-                }
-            })
-        } else {
-            GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
-        }
-        MainData.instance().countEndGame++;
-        if (MainData.instance().countEndGame == 2) {
-            MainData.instance().countEndGame = 0;
-        }
-
+                }).catch(()=>{
+                    GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+                });
+            }else{
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+            }
+        }else{
+            if (MainData.instance().countEndGame == 0) {
+                cc.resources.load(FaceBook.getImageShareFacebook(), (err, texture) => {
+    
+                    let tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    let endTime = Math.floor(tomorrow.getTime() / 1000);
+                    try {
+                        FBInstant.tournament.createAsync(
+                            {
+                                initialScore: this.score,
+                                data: {
+                                },
+                                config: {
+                                    title: 'Tournament',
+                                    image: FaceBook.getImgBase64(texture),
+                                    sortOrder: 'HIGHER_IS_BETTER',
+                                    scoreFormat: 'NUMERIC',
+                                    endTime: endTime
+                                },
+                            }).then(() => {
+                                GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+                            }).catch((error) => {
+                                GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+                            });
+                    } catch (error) {
+    
+                        GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+                    }
+                })
+            } else {
+                GlobalEvent.instance().dispatchEvent(GlobalEvent.HIDE_LOADING);
+            }
+            MainData.instance().countEndGame++;
+            if (MainData.instance().countEndGame == 2) {
+                MainData.instance().countEndGame = 0;
+            }
+        }      
     }
 
 

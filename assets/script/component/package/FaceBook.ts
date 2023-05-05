@@ -209,32 +209,32 @@ export default class FaceBook {
         // }
     }
     static callTutorial() {
-        // if (window["FBInstant"] !== undefined) {
-        //     let contextId = FBInstant.context.getID();
-        //     if (contextId == null) {
-        //         try {
-        //             FBInstant.getTournamentAsync().then((tournament) => {
-        //                 // console.log("tournament: ", tournament);
-        //                 MainData.instance().ktJoinTour = true;
-        //             }).catch((err) => {
-        //                 if (MainData.instance().isFistJoinTour == true) {
-        //                     MainData.instance().isFistJoinTour = false;
-        //                     let tourID = MainData.instance().idTour;
-        //                     FBInstant.tournament
-        //                         .joinAsync(tourID)
-        //                         .then(() => {
-        //                             MainData.instance().ktJoinTour = true;
-        //                         }).catch((err) => {
-        //                             MainData.instance().ktJoinTour = false;
-        //                         });
-        //                 }
-        //             });
-        //         } catch (error) {
+        if (window["FBInstant"] !== undefined) {
+            let contextId = FBInstant.context.getID();
+            if (contextId == null) {
+                try {
+                    FBInstant.getTournamentAsync().then((tournament) => {
+                        // console.log("tournament: ", tournament);
+                        MainData.instance().ktJoinTour = true;
+                    }).catch((err) => {
+                        if (MainData.instance().isFistJoinTour == true) {
+                            MainData.instance().isFistJoinTour = false;
+                            let tourID = MainData.instance().idTour;
+                            FBInstant.tournament
+                                .joinAsync(tourID)
+                                .then(() => {
+                                    MainData.instance().ktJoinTour = true;
+                                }).catch((err) => {
+                                    MainData.instance().ktJoinTour = false;
+                                });
+                        }
+                    });
+                } catch (error) {
 
-        //         }
-        //     }
+                }
+            }
 
-        // }
+        }
     }
 
     static callSubscribeBot() {
