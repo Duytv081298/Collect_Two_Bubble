@@ -47,6 +47,8 @@ export default class BroadContainer extends cc.Component {
     listConnect: cc.Node[] = [];
     listColorGroup1: number[] = [];
     listColorGroup2: number[] = [];
+
+    colorCollect: number = null;
     // arrPathBubble = [];
 
     protected onEnable(): void {
@@ -101,6 +103,7 @@ export default class BroadContainer extends cc.Component {
         this.listColorGroup1 = [];
         this.listColorGroup2 = [];
 
+        this.colorCollect = null;
         while (this.content.childrenCount > 0) {
             CreateBubble.instance().removeItem(this.content.children[0]);
         }
@@ -165,15 +168,26 @@ export default class BroadContainer extends cc.Component {
         }
     }
     getColor(indexGroup): number {
-        return indexGroup == 0 ? this.listColorGroup1[Utils.randomInt(0, this.listColorGroup1.length - 1)] :
-            this.listColorGroup2[Utils.randomInt(0, this.listColorGroup2.length - 1)];
+
+        if (indexGroup == 0) {
+            let index = Utils.randomInt(0, this.listColorGroup1.length - 1)
+            let color = this.listColorGroup1[index]
+
+            while (color == this.colorCollect) {
+                index = Utils.randomInt(0, this.listColorGroup1.length - 1)
+                color = this.listColorGroup1[index]
+            }
+            return color;
+        } else return this.listColorGroup2[Utils.randomInt(0, this.listColorGroup2.length - 1)];
+        // return indexGroup == 0 ? this.listColorGroup1[Utils.randomInt(0, this.listColorGroup1.length - 1)] :
+        // this.listColorGroup2[Utils.randomInt(0, this.listColorGroup2.length - 1)];
     }
 
     getAmountDefaultGroupColor() {
         let score = MainData.instance().score;
         let percentage = 0;
-        if (score < 5000) percentage = 70 / 100;
-        else if (score < 15000) percentage = 60 / 100;
+        if (score < 30000) percentage = 70 / 100;
+        else if (score < 60000) percentage = 60 / 100;
         else percentage = 50 / 100;
 
         let amountGroupA = Math.floor(TOTAL_BALL * percentage);
@@ -191,6 +205,7 @@ export default class BroadContainer extends cc.Component {
         for (let i = 0; i < 5; i++) {
             if (this.listColorGroup1.indexOf(i) < 0) this.listColorGroup2.push(i);
         }
+        this.colorCollect = this.listColorGroup1[Utils.randomInt(0, this.listColorGroup1.length - 1)];
     }
     boardReady() {
         // console.log("boardReady");
@@ -255,6 +270,7 @@ export default class BroadContainer extends cc.Component {
             if (MainData.instance().isTutorial && !bubble.isTutorial) return;
             if (this.listBubbleSelect.length == 0) {
                 this.pushBubble(bubble)
+                this.colorCollect = bubble.getColor();
             } else {
                 let bubbleCheck = this.checkCollect(bubble);
                 if (bubbleCheck == null) return; // = vs bubble chon gan nhat, khong phu hop dieu kien
@@ -309,6 +325,7 @@ export default class BroadContainer extends cc.Component {
         let arr: Bubble[] = this.listBubbleSelect.concat(this.listBubbleSelectQuadrilateral);
         arr = Array.from(new Set(arr));
         this.listBubbleSelectQuadrilateral = [];
+        this.isQuadrilateral = false;
         return arr;
     }
 
@@ -462,6 +479,8 @@ export default class BroadContainer extends cc.Component {
 
     pushBubble(bubble: Bubble) {
         // console.log("pushBubble");
+        console.log("this.isQuadrilateral: " + this.isQuadrilateral);
+        
 
         if (!bubble || this.isQuadrilateral) return;
         for (let i = 0; i < this.listBubbleSelect.length; i++) {
@@ -541,6 +560,8 @@ export default class BroadContainer extends cc.Component {
     }
 
     unQuadrilateral() {
+        console.log("unQuadrilateral: ");
+        
         for (let i = 0; i < this.listBubbleSelectQuadrilateral.length; i++) {
             const bubble = this.listBubbleSelectQuadrilateral[i];
             bubble.nonSelect();
@@ -555,6 +576,7 @@ export default class BroadContainer extends cc.Component {
             bubble.nonSelect();
         }
         this.listBubbleSelect = [];
+        // this.colorCollect = null;
     }
     checkCollect(bubble: Bubble) {
         // console.log("content.childrenCount: " + this.content.childrenCount);
@@ -883,7 +905,7 @@ export default class BroadContainer extends cc.Component {
         let index = 1;
         let bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
         while (bubble.coefficients > 1 && index < 100) {
-            let bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
+            bubble = this.arrBubble[Math.floor(Math.random() * 6)][Math.floor(Math.random() * 6)]
             index++;
         }
         if (bubble.coefficients > 1) return false;

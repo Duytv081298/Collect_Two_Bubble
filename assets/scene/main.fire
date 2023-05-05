@@ -4625,7 +4625,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Connect Container",
+    "_name": "Connect Container tut",
     "_objFlags": 0,
     "_parent": {
       "__id__": 102

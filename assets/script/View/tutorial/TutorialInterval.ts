@@ -31,7 +31,7 @@ export default class TutorialInterval extends cc.Component {
             .delay(timeDelay)
             .call(() => {
                 // console.log("MainData.instance().isPlay: " + MainData.instance().isPlay);
-                console.log(MainData.instance().keyBooster != null);
+                // console.log(MainData.instance().keyBooster != null);
 
                 if (MainData.instance().isShowEndGame || MainData.instance().isShowNoMove ||
                 MainData.instance().keyBooster != null ||

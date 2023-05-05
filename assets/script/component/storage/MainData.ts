@@ -1,5 +1,6 @@
 import { BOOSTER, SCENE } from "../constant/constant";
 import GlobalEvent from "../event/GlobalEvent";
+import FaceBook from "../package/FaceBook";
 import LocalStorage from "./LocalStorage";
 
 export default class MainData {
@@ -10,8 +11,8 @@ export default class MainData {
         }
         return MainData.mainData;
     }
-    isLocal: boolean = true;
-    isTest: boolean = true;
+    isLocal: boolean = false;
+    isTest: boolean = false;
 
     currentIdScene: SCENE = null;
 
